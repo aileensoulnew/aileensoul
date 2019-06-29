@@ -169,20 +169,8 @@ class User_post_model extends CI_Model {
             $result_array[$key]['title_name'] = $this->user_model->getAnyJobTitle($value['designation'])['job_name'];
             $result_array[$key]['degree_name'] = $this->user_model->getAnyDegreename($value['current_study'])['degree_name'];
 
-            $follower_count = $this->common->getFollowerCount($value['user_id'])[0];
-            $result_array[$key]['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
-
-            $contact_count = $this->common->getContactCount($value['user_id'])[0];
-            $result_array[$key]['contact_count'] = $this->common->change_number_long_format_to_short((int)$contact_count['total']);
-
-            $post_count = $this->common->get_post_count($value['user_id']);
-            $result_array[$key]['post_count'] = $this->common->change_number_long_format_to_short((int)$post_count);
-
             if($user_id != '')
-            {                    
-                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "1"')->get()->row_array();
-                $result_array[$key]['follow_status'] = $follow_detail['status'];
-
+            {
                 $is_userContactInfo= $this->userprofile_model->userContactStatus($user_id, $value['user_id']);
                 if(isset($is_userContactInfo) && !empty($is_userContactInfo))
                 {
@@ -203,15 +191,6 @@ class User_post_model extends CI_Model {
                 $result_array[$key]['contact_status'] = '';
                 $result_array[$key]['contact_value'] = '';
                 $result_array[$key]['contact_id'] = '';
-            }
-
-            if($user_id != $value['user_id'])
-            {
-                $result_array[$key]['mutual_friend'] = $this->common->mutual_friend($user_id,$value['user_id']);
-            }
-            else
-            {
-                $result_array[$key]['mutual_friend'] = array();
             }
         }
         $ret_array['con_sugg_data'] = $result_array;
@@ -2275,7 +2254,7 @@ class User_post_model extends CI_Model {
                 $query = $this->db->get();
                 $share_data = $query->row_array();
                 $share_data['description'] = $this->common->make_links(nl2br($share_data['description']));
-                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id']);
+                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id'],$user_id);
                 $result_array[$key]['share_data'] = $share_data;
             } /*elseif ($value['post_for'] == 'profile_update') {
                 $this->db->select("upu.*")->from("user_profile_update upu");
@@ -2495,7 +2474,7 @@ class User_post_model extends CI_Model {
                 $query = $this->db->get();
                 $share_data = $query->row_array();
                 $share_data['description'] = $this->common->make_links(nl2br($share_data['description']));
-                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id']);
+                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id'],$userid_login);
                 $result_array[$key]['share_data'] = $share_data;
             }
 
@@ -2672,7 +2651,7 @@ class User_post_model extends CI_Model {
                 $result_array[$key]['user_data']['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
                 if($user_id != '')
                 {
-                    $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "2" ')->get()->row_array();
+                    $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $userid_login . ') AND follow_type = "2" ')->get()->row_array();
                     $result_array[$key]['user_data']['follow_status'] = $follow_detail['status'];
                 }
                 else
@@ -2724,7 +2703,7 @@ class User_post_model extends CI_Model {
                 $query = $this->db->get();
                 $share_data = $query->row_array();
                 $share_data['description'] = $this->common->make_links(nl2br($share_data['description']));
-                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id']);
+                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id'],$userid_login);
                 $result_array[$key]['share_data'] = $share_data;
             } elseif ($value['post_for'] == 'profile_update') {
                 $this->db->select("upu.*")->from("user_profile_update upu");
@@ -3808,7 +3787,7 @@ class User_post_model extends CI_Model {
                 $query = $this->db->get();
                 $share_data = $query->row_array();
                 $share_data['description'] = $this->common->make_links(nl2br($share_data['description']));
-                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id']);
+                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id'],$userid);
                 $searchPostData[$key]['share_data'] = $share_data;
             } 
             $this->db->select("upf.file_type,upf.filename")->from("user_post_file upf");
@@ -4331,7 +4310,7 @@ class User_post_model extends CI_Model {
                 $query = $this->db->get();
                 $share_data = $query->row_array();
                 $share_data['description'] = $this->common->make_links(nl2br($share_data['description']));
-                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id']);
+                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id'],$userid);
                 $searchPostData[$key]['share_data'] = $share_data;
             } 
             $this->db->select("upf.file_type,upf.filename")->from("user_post_file upf");
@@ -4660,7 +4639,7 @@ class User_post_model extends CI_Model {
                 $query = $this->db->get();
                 $share_data = $query->row_array();
                 $share_data['description'] = $this->common->make_links(nl2br($share_data['description']));
-                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id']);
+                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id'],$user_id);
                 $result_array[$key]['share_data'] = $share_data;
             } elseif ($value['post_for'] == 'profile_update') {
                 $this->db->select("upu.*")->from("user_profile_update upu");
@@ -4919,7 +4898,7 @@ class User_post_model extends CI_Model {
                 $query = $this->db->get();
                 $share_data = $query->row_array();
                 $share_data['description'] = $this->common->make_links(nl2br($share_data['description']));
-                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id']);
+                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id'],$userid_login);
                 $result_array[$key]['share_data'] = $share_data;
             } elseif ($value['post_for'] == 'profile_update') {
                 $this->db->select("upu.*")->from("user_profile_update upu");
@@ -5381,9 +5360,8 @@ class User_post_model extends CI_Model {
         return $user_contact;
     }
 
-    public function get_post_from_id($post_id = '') {
-        
-        $user_id = $this->session->userdata('aileenuser');
+    public function get_post_from_id($post_id = '',$user_id = '') {        
+        // $user_id = $this->session->userdata('aileenuser');
         $result_array = array();
         $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type")->from("user_post up");//UNIX_TIMESTAMP(STR_TO_DATE(up.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
         $this->db->where('up.id', $post_id);
@@ -5750,7 +5728,7 @@ class User_post_model extends CI_Model {
                 $query = $this->db->get();
                 $share_data = $query->row_array();
                 $share_data['description'] = $this->common->make_links(nl2br($share_data['description']));
-                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id']);
+                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id'],$user_id);
                 $result_array[$key]['share_data'] = $share_data;
             } elseif ($value['post_for'] == 'profile_update') {
                 $this->db->select("upu.*")->from("user_profile_update upu");

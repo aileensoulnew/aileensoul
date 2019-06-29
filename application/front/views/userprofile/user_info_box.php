@@ -45,7 +45,7 @@
                             <a class="btn-new-1 following" data-uid="<?php echo $user_info_data['user_data']['user_id'].date('his'); ?>" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus">Following</a><?php
                         }
                         else{ ?>
-                            <a ng-if="userInfo.user_data.follow_status == 0 || !userInfo.user_data.follow_status" class="btn-new-1 follow" data-uid="<?php echo $user_info_data['user_data']['user_id'].date('his'); ?>" onclick="follow_user_bus(this.id)" id="follow_btn_bus">Follow</a><?php
+                            <a class="btn-new-1 follow" data-uid="<?php echo $user_info_data['user_data']['user_id'].date('his'); ?>" onclick="follow_user_bus(this.id)" id="follow_btn_bus">Follow</a><?php
                         } ?>
 
                     </div>

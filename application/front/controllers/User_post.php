@@ -3658,7 +3658,7 @@ class User_post extends MY_Controller {
         $query = $this->db->get();
         $share_data = $query->row_array();
         $share_data['description'] = $this->common->make_links(nl2br($share_data['description']));
-        $share_data['data'] = $this->user_post_model->get_post_from_id($share_data['shared_post_id']);
+        $share_data['data'] = $this->user_post_model->get_post_from_id($share_data['shared_post_id'],$userid);
         $return_array['share_data'] = $share_data;
         
         return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
@@ -3996,7 +3996,7 @@ class User_post extends MY_Controller {
         $post_id = $this->input->post('post_id');
 
         $all_user_data = $this->user_post_model->get_contact_follower_data($user_id);        
-        $post_data = $this->user_post_model->get_post_from_id($post_id);
+        $post_data = $this->user_post_model->get_post_from_id($post_id,$user_id);
 
         if($post_data['post_data']['post_for'] == 'opportunity')
         {

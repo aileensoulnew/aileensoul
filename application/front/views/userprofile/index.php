@@ -387,6 +387,14 @@
             var user_award_upload_url = '<?php echo USER_AWARD_UPLOAD_URL; ?>';
             var user_activity_upload_url = '<?php echo USER_ACTIVITY_UPLOAD_URL; ?>';
             var user_addicourse_upload_url = '<?php echo USER_ADDICOURSE_UPLOAD_URL; ?>';
+
+            var bus_bg_main_upload_url = '<?php echo BUS_BG_MAIN_UPLOAD_URL; ?>';
+            var bus_profile_thumb_upload_url = '<?php echo BUS_PROFILE_THUMB_UPLOAD_URL; ?>';
+            var nobusimage = '<?php echo NOBUSIMAGE; ?>';
+            var user_bg_main_upload_url = '<?php echo USER_BG_MAIN_UPLOAD_URL; ?>';
+            var user_thumb_upload_url = '<?php echo USER_THUMB_UPLOAD_URL; ?>';
+            var message_url = '<?php echo MESSAGE_URL; ?>';
+            
             var app = angular.module("userProfileApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','ngValidate']);
             // var count_profile_value = '';
             // var count_profile = '';

@@ -1777,7 +1777,7 @@ Your browser does not support the audio tag.
             //Add New Post Notification Start
             if ($total['not_from'] == '9' && $total['not_type'] == '13' && $total['not_img'] == '1') {
 
-                $postDetailData = $this->user_post_model->get_post_from_id($total['not_product_id']);
+                $postDetailData = $this->user_post_model->get_post_from_id($total['not_product_id'],$userid);
                 
                 if($postDetailData['post_data']['post_for'] == 'opportunity')
                 {
@@ -3701,7 +3701,7 @@ Your browser does not support the audio tag.
             //Add New Post Notification Start
             if ($total['not_from'] == '9' && $total['not_type'] == '13' && $total['not_img'] == '1') {
 
-                $postDetailData = $this->user_post_model->get_post_from_id($total['not_product_id']);
+                $postDetailData = $this->user_post_model->get_post_from_id($total['not_product_id'],$userid);
                 
                 if($postDetailData['post_data']['post_for'] == 'opportunity')
                 {
@@ -3881,7 +3881,7 @@ Your browser does not support the audio tag.
         $ast = $this->input->post('ast'); 
         $ask = $this->input->post('ask'); 
         
-        $user_data = $this->user_model->get_user_from_cookies($user_slug,base64_decode(base64_decode($ast)),base64_decode(base64_decode($ask)));
+        $user_data = $this->user_model->get_user_from_cookies($user_slug,base64_decode(base64_decode($ast)),base64_decode(base64_decode($ask)));        
         $count = "";
         if(empty($user_data))
         {
@@ -4685,7 +4685,7 @@ Your browser does not support the audio tag.
             //Add New Post Notification Start
             if ($total['not_from'] == '9' && $total['not_type'] == '13' && $total['not_img'] == '1') {
 
-                $postDetailData = $this->user_post_model->get_post_from_id($total['not_product_id']);
+                $postDetailData = $this->user_post_model->get_post_from_id($total['not_product_id'],$userid);
                 
                 if($postDetailData['post_data']['post_for'] == 'opportunity')
                 {

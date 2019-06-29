@@ -344,6 +344,14 @@
         var live_slug = '<?php echo $this->session->userdata('aileenuser_slug'); ?>';
         var no_user_post_html = '<?php echo $no_user_post_html; ?>';
         var header_all_profile = '<?php echo $header_all_profile; ?>';
+
+        var bus_bg_main_upload_url = '<?php echo BUS_BG_MAIN_UPLOAD_URL; ?>';
+        var bus_profile_thumb_upload_url = '<?php echo BUS_PROFILE_THUMB_UPLOAD_URL; ?>';
+        var nobusimage = '<?php echo NOBUSIMAGE; ?>';
+        var user_bg_main_upload_url = '<?php echo USER_BG_MAIN_UPLOAD_URL; ?>';
+        var user_thumb_upload_url = '<?php echo USER_THUMB_UPLOAD_URL; ?>';
+        var message_url = '<?php echo MESSAGE_URL; ?>';
+        
         var app = angular.module('userOppoApp', ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize', 'ngValidate']);
         </script>
 

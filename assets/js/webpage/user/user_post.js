@@ -374,6 +374,215 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
     $scope.recentpost = [];
     $scope.$parent.title = "Aileensoul";
 
+    $scope.opp = {};
+    $scope.sim = {};
+    $scope.ask = {};
+    $scope.postData = {};
+    $scope.opp.post_for = 'opportunity';
+    $scope.sim.post_for = 'simple';
+    $scope.ask.post_for = 'question';
+    $scope.live_slug = live_slug;
+    $scope.user_id = user_id;
+    $scope.share_post_data = [];
+
+    $scope.details_in_popup = function(uid,login_user_id,utype,div_id){
+        socket.emit('get user card',uid,login_user_id,utype);
+        socket.on('get user card', (data) => {
+            var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            var all_html = '';
+            if(data.user_type.toString() == '2')
+            {
+                all_html += '<div class="bus-tooltip">';
+                    all_html += '<div class="user-tooltip">';
+                    
+                        all_html += '<div class="tooltip-cover-img">';
+                        if(data.user_data.profile_background)
+                        {
+                            all_html += '<img src="'+bus_bg_main_upload_url+data.user_data.profile_background+'">';
+                        }
+                        else
+                        {
+                            all_html += '<div class="gradient-bg" style="height: 100%"></div>';   
+                        }
+                        all_html += '</div>';
+
+                        all_html += '<div class="tooltip-user-detail">';
+                            all_html += '<div class="tooltip-user-img">';
+                            if(data.user_data.business_user_image)
+                            {
+                                all_html += '<img src="'+bus_profile_thumb_upload_url+data.user_data.business_user_image+'">';
+                            }
+                            else
+                            {
+                                all_html += '<img src="'+base_url+nobusimage+'">';
+                            }
+                            all_html += '</div>';
+                            
+                            all_html += '<div class="fw">';
+                                all_html += '<div class="tooltip-detail">';
+                                    all_html += '<h4>'+data.user_data.company_name+'</h4>';
+                                    all_html += '<p>';
+                                        if(data.user_data.industry_name){
+                                            all_html += data.user_data.industry_name;
+                                        }
+                                        else{
+                                            all_html += "Current Work";
+                                        }
+                                    all_html += '</p>';
+
+                                    all_html += '<p>';
+                                        all_html += data.user_data.city_name + (data.user_data.state_name != '' ? ',' : '') + data.user_data.state_name + (data.user_data.country_name != '' ? ',' : '') + data.user_data.country_name;
+                                    all_html += '</p>';
+                                all_html += '</div>';
+
+                                if(data.user_data.user_id != login_user_id){
+                                    all_html += '<div class="tooltip-btns follow-btn-bus-'+data.user_data.user_id+'">';
+                                        if(data.follow_status == '1'){
+                                            all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus">Following</a>';
+                                        }
+                                        else
+                                        {
+                                            all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus">Follow</a>';
+                                        }
+                                    all_html += '</div>';
+                                }
+
+                            all_html += '</div>';
+
+                        all_html += '</div>';
+                    all_html += '</div>';
+                all_html += '</div>';
+            }
+            if(data.user_type.toString() == '1')
+            {
+                all_html += '<div class="user-tooltip">';
+                    all_html += '<div class="tooltip-cover-img">';
+                        if(data.user_data.profile_background){
+                            all_html += '<img src="'+user_bg_main_upload_url+data.user_data.profile_background+'">';
+                        }
+                        else{
+                            all_html += '<div class="gradient-bg" style="height: 100%"></div>';
+                        }
+                    all_html += '</div>';
+                    all_html += '<div class="tooltip-user-detail">';
+                        all_html += '<div class="tooltip-user-img">';
+                            if(data.user_data.user_image){
+                                all_html += '<img src="'+user_thumb_upload_url+data.user_data.user_image+'">';
+                            }
+                            else
+                            {
+                                if(data.user_data.user_gender == 'M'){
+                                    all_html += '<img src="'+base_url+"assets/img/man-user.jpg"+'">';
+                                }
+                                if(data.user_data.user_gender == 'F'){
+                                    all_html += '<img src="'+base_url+"assets/img/female-user.jpg"+'">';
+                                }
+                            }
+                        all_html += '</div>';
+
+                        all_html += '<h4>'+data.user_data.fullname+'</h4>';
+                        all_html += '<p>';
+                            if(data.user_data.title_name != '' && data.user_data.degree_name == ''){
+                                all_html += (data.user_data.title_name.length > 30 ? data.user_data.title_name.substr(0,30)+'...' : data.user_data.title_name);
+                            }
+                            else if(data.user_data.title_name == '' && data.user_data.degree_name != ''){
+                                all_html += (data.user_data.degree_name.length > 30 ? data.user_data.degree_name.substr(0,30)+'...' : data.user_data.degree_name);
+                            }
+                            else{
+                                all_html += "Current Work";
+                            }
+                        all_html += '</p>';
+                        if(data.post_count != '' || data.contact_count != '' || data.follower_count != ''){
+                            all_html += '<p>';
+                                if(data.post_count != ''){
+                                    all_html += '<span><b>'+data.post_count+'</b> Posts</span>';
+                                }
+                                if(data.contact_count != ''){
+                                    all_html += '<span><b>'+data.contact_count+'</b> Contacts</span>';
+                                }
+                                if(data.follower_count != ''){
+                                    all_html += '<span><b>'+data.follower_count+'</b> Followers</span>';
+                                }
+                            all_html += '</p>';
+                        }
+                        if(data.mutual_friend.length > 0){
+                            all_html += '<ul>';
+                            data.mutual_friend.forEach(function(friends){
+                                all_html += '<li><div class="user-img">';
+                                if(friends.user_image){
+                                    all_html += '<img src="'+user_thumb_upload_url+friends.user_image+'">';
+                                }
+                                else
+                                {                        
+                                    if(friends.user_gender == 'M'){
+                                        all_html += '<img src="'+base_url+"assets/img/man-user.jpg"+'">';
+                                    }
+                                    if(friends.user_gender == 'F'){
+                                        all_html += '<img src="'+base_url+"assets/img/female-user.jpg"+'">';
+                                    }
+                                }
+                                all_html += '</div></li>';
+                            });
+
+                            all_html += '<li class="m-contacts">';
+                                if(data.mutual_friend.length == 1){
+                                    all_html += '<span><b>'+data.mutual_friend[0].fullname+'</b> is in mutual contact.</span>';
+                                }
+                                else if(data.mutual_friend.length > 1){
+                                    all_html += '<span><b>'+data.mutual_friend[0].fullname+'</b> and <b>'+parseInt(data.mutual_friend.length - 1)+'</b> more mutual contacts.</span>';
+                                }
+                            all_html += '</li>';
+                            all_html += '</ul>';
+                        }
+
+                        if(data.user_data.user_id != login_user_id){
+                            all_html += '<div class="tooltip-btns">';
+                                all_html += '<ul>';
+                                    all_html += '<li class="contact-btn-'+data.user_data.user_id+'">';
+                                        if(data.contact_value == 'new'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',pending,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Add to contact</a>';
+                                        }
+                                        else if(data.contact_value == 'confirm'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',cancel,'+data.user_data.user_id+''+times+','+times+',1" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">In Contacts</a>';
+                                        }
+                                        else if(data.contact_value == 'pending'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',cancel,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Request sent</a>';
+                                        }
+                                        else if(data.contact_value == 'cancel'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',pending,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Add to contact</a>';
+                                        }
+                                        else if(data.contact_value == 'reject'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',pending,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Add to contact</a>';
+                                        }
+                                    all_html += '</li>';
+
+                                    all_html += '<li class="follow-btn-user-'+data.user_data.user_id+'">';
+                                        if(data.follow_status == '1'){
+                                            all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus">Following</a>';
+                                        }
+                                        else
+                                        {
+                                            all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus">Follow</a>';
+                                        }
+                                    all_html += '</li>';
+
+                                    all_html += '<li>';
+                                        all_html += '<a href="'+message_url+'user/'+data.user_data.user_slug+'" class="btn-new-1" target="_blank">Message</a>';
+                                    all_html += '</li>';
+
+                                all_html += '</ul>';
+                            all_html += '</div>';
+                        }
+
+                    all_html += '</div>';
+                all_html += '</div>';
+            }
+            
+            $('#'+div_id).html(all_html);
+        });
+        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+    }
+
     $(document).on('hidden.bs.modal', function (event) {
         if($('.modal.in').length > 0)
         {
@@ -556,18 +765,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             $(this).attr('placeholder', 'Related Category');
             $(this).css('width', '100%');
         }         
-    });
-
-    $scope.opp = {};
-    $scope.sim = {};
-    $scope.ask = {};
-    $scope.postData = {};
-    $scope.opp.post_for = 'opportunity';
-    $scope.sim.post_for = 'simple';
-    $scope.ask.post_for = 'question';
-    $scope.live_slug = live_slug;
-    $scope.user_id = user_id;
-    $scope.share_post_data = [];
+    });   
 
 
     var cntImgSim = 0;
@@ -1025,7 +1223,11 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -1146,7 +1348,11 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     animation:false,
                     template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
-                        return $($(this).data('tooltip-content')).html();                        
+                        // return $($(this).data('tooltip-content')).html();
+                        var uid = $(this).data('uid');
+                        var utype = $(this).data('utype');
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
@@ -1307,7 +1513,11 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     animation:false,
                     template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
-                        return $($(this).data('tooltip-content')).html();
+                        // return $($(this).data('tooltip-content')).html();
+                        var uid = $(this).data('uid');
+                        var utype = $(this).data('utype');
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
@@ -2824,7 +3034,11 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -2907,7 +3121,11 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     animation:false,
                     template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
-                        return $($(this).data('tooltip-content')).html();
+                        // return $($(this).data('tooltip-content')).html();
+                        var uid = $(this).data('uid');
+                        var utype = $(this).data('utype');
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
@@ -2986,7 +3204,11 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     animation:false,
                     template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
-                        return $($(this).data('tooltip-content')).html();
+                        // return $($(this).data('tooltip-content')).html();
+                        var uid = $(this).data('uid');
+                        var utype = $(this).data('utype');
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
@@ -3363,7 +3585,11 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -3518,7 +3744,11 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     animation:false,
                     template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
-                        return $($(this).data('tooltip-content')).html();
+                        // return $($(this).data('tooltip-content')).html();
+                        var uid = $(this).data('uid');
+                        var utype = $(this).data('utype');
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
@@ -3606,7 +3836,11 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -4405,6 +4639,204 @@ app.controller('peopleController', function($scope, $http, $compile, $window,$lo
     $scope.perpage_record = 7;
     $scope.total_record = 0;
 
+    $scope.details_in_popup = function(uid,login_user_id,utype,div_id){
+        socket.emit('get user card',uid,login_user_id,utype);
+        socket.on('get user card', (data) => {
+            var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            var all_html = '';
+            if(data.user_type.toString() == '2')
+            {
+                all_html += '<div class="bus-tooltip">';
+                    all_html += '<div class="user-tooltip">';
+                    
+                        all_html += '<div class="tooltip-cover-img">';
+                        if(data.user_data.profile_background)
+                        {
+                            all_html += '<img src="'+bus_bg_main_upload_url+data.user_data.profile_background+'">';
+                        }
+                        else
+                        {
+                            all_html += '<div class="gradient-bg" style="height: 100%"></div>';   
+                        }
+                        all_html += '</div>';
+
+                        all_html += '<div class="tooltip-user-detail">';
+                            all_html += '<div class="tooltip-user-img">';
+                            if(data.user_data.business_user_image)
+                            {
+                                all_html += '<img src="'+bus_profile_thumb_upload_url+data.user_data.business_user_image+'">';
+                            }
+                            else
+                            {
+                                all_html += '<img src="'+base_url+nobusimage+'">';
+                            }
+                            all_html += '</div>';
+                            
+                            all_html += '<div class="fw">';
+                                all_html += '<div class="tooltip-detail">';
+                                    all_html += '<h4>'+data.user_data.company_name+'</h4>';
+                                    all_html += '<p>';
+                                        if(data.user_data.industry_name){
+                                            all_html += data.user_data.industry_name;
+                                        }
+                                        else{
+                                            all_html += "Current Work";
+                                        }
+                                    all_html += '</p>';
+
+                                    all_html += '<p>';
+                                        all_html += data.user_data.city_name + (data.user_data.state_name != '' ? ',' : '') + data.user_data.state_name + (data.user_data.country_name != '' ? ',' : '') + data.user_data.country_name;
+                                    all_html += '</p>';
+                                all_html += '</div>';
+
+                                if(data.user_data.user_id != login_user_id){
+                                    all_html += '<div class="tooltip-btns follow-btn-bus-'+data.user_data.user_id+'">';
+                                        if(data.follow_status == '1'){
+                                            all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus">Following</a>';
+                                        }
+                                        else
+                                        {
+                                            all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus">Follow</a>';
+                                        }
+                                    all_html += '</div>';
+                                }
+
+                            all_html += '</div>';
+
+                        all_html += '</div>';
+                    all_html += '</div>';
+                all_html += '</div>';
+            }
+            if(data.user_type.toString() == '1')
+            {
+                all_html += '<div class="user-tooltip">';
+                    all_html += '<div class="tooltip-cover-img">';
+                        if(data.user_data.profile_background){
+                            all_html += '<img src="'+user_bg_main_upload_url+data.user_data.profile_background+'">';
+                        }
+                        else{
+                            all_html += '<div class="gradient-bg" style="height: 100%"></div>';
+                        }
+                    all_html += '</div>';
+                    all_html += '<div class="tooltip-user-detail">';
+                        all_html += '<div class="tooltip-user-img">';
+                            if(data.user_data.user_image){
+                                all_html += '<img src="'+user_thumb_upload_url+data.user_data.user_image+'">';
+                            }
+                            else
+                            {
+                                if(data.user_data.user_gender == 'M'){
+                                    all_html += '<img src="'+base_url+"assets/img/man-user.jpg"+'">';
+                                }
+                                if(data.user_data.user_gender == 'F'){
+                                    all_html += '<img src="'+base_url+"assets/img/female-user.jpg"+'">';
+                                }
+                            }
+                        all_html += '</div>';
+
+                        all_html += '<h4>'+data.user_data.fullname+'</h4>';
+                        all_html += '<p>';
+                            if(data.user_data.title_name != '' && data.user_data.degree_name == ''){
+                                all_html += (data.user_data.title_name.length > 30 ? data.user_data.title_name.substr(0,30)+'...' : data.user_data.title_name);
+                            }
+                            else if(data.user_data.title_name == '' && data.user_data.degree_name != ''){
+                                all_html += (data.user_data.degree_name.length > 30 ? data.user_data.degree_name.substr(0,30)+'...' : data.user_data.degree_name);
+                            }
+                            else{
+                                all_html += "Current Work";
+                            }
+                        all_html += '</p>';
+                        if(data.post_count != '' || data.contact_count != '' || data.follower_count != ''){
+                            all_html += '<p>';
+                                if(data.post_count != ''){
+                                    all_html += '<span><b>'+data.post_count+'</b> Posts</span>';
+                                }
+                                if(data.contact_count != ''){
+                                    all_html += '<span><b>'+data.contact_count+'</b> Contacts</span>';
+                                }
+                                if(data.follower_count != ''){
+                                    all_html += '<span><b>'+data.follower_count+'</b> Followers</span>';
+                                }
+                            all_html += '</p>';
+                        }
+                        if(data.mutual_friend.length > 0){
+                            all_html += '<ul>';
+                            data.mutual_friend.forEach(function(friends){
+                                all_html += '<li><div class="user-img">';
+                                if(friends.user_image){
+                                    all_html += '<img src="'+user_thumb_upload_url+friends.user_image+'">';
+                                }
+                                else
+                                {                        
+                                    if(friends.user_gender == 'M'){
+                                        all_html += '<img src="'+base_url+"assets/img/man-user.jpg"+'">';
+                                    }
+                                    if(friends.user_gender == 'F'){
+                                        all_html += '<img src="'+base_url+"assets/img/female-user.jpg"+'">';
+                                    }
+                                }
+                                all_html += '</div></li>';
+                            });
+
+                            all_html += '<li class="m-contacts">';
+                                if(data.mutual_friend.length == 1){
+                                    all_html += '<span><b>'+data.mutual_friend[0].fullname+'</b> is in mutual contact.</span>';
+                                }
+                                else if(data.mutual_friend.length > 1){
+                                    all_html += '<span><b>'+data.mutual_friend[0].fullname+'</b> and <b>'+parseInt(data.mutual_friend.length - 1)+'</b> more mutual contacts.</span>';
+                                }
+                            all_html += '</li>';
+                            all_html += '</ul>';
+                        }
+
+                        if(data.user_data.user_id != login_user_id){
+                            all_html += '<div class="tooltip-btns">';
+                                all_html += '<ul>';
+                                    all_html += '<li class="contact-btn-'+data.user_data.user_id+'">';
+                                        if(data.contact_value == 'new'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',pending,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Add to contact</a>';
+                                        }
+                                        else if(data.contact_value == 'confirm'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',cancel,'+data.user_data.user_id+''+times+','+times+',1" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">In Contacts</a>';
+                                        }
+                                        else if(data.contact_value == 'pending'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',cancel,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Request sent</a>';
+                                        }
+                                        else if(data.contact_value == 'cancel'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',pending,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Add to contact</a>';
+                                        }
+                                        else if(data.contact_value == 'reject'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',pending,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Add to contact</a>';
+                                        }
+                                    all_html += '</li>';
+
+                                    all_html += '<li class="follow-btn-user-'+data.user_data.user_id+'">';
+                                        if(data.follow_status == '1'){
+                                            all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus">Following</a>';
+                                        }
+                                        else
+                                        {
+                                            all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus">Follow</a>';
+                                        }
+                                    all_html += '</li>';
+
+                                    all_html += '<li>';
+                                        all_html += '<a href="'+message_url+'user/'+data.user_data.user_slug+'" class="btn-new-1" target="_blank">Message</a>';
+                                    all_html += '</li>';
+
+                                all_html += '</ul>';
+                            all_html += '</div>';
+                        }
+
+                    all_html += '</div>';
+                all_html += '</div>';
+            }
+            
+            $('#'+div_id).html(all_html);
+        });
+        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+    }
+
     $scope.peopleData = function(pagenum) {
         if (isProcessing) {
             return;
@@ -4465,7 +4897,11 @@ app.controller('peopleController', function($scope, $http, $compile, $window,$lo
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -4575,7 +5011,11 @@ app.controller('peopleController', function($scope, $http, $compile, $window,$lo
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -4755,6 +5195,204 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
     $scope.perpage_record = 10;
     $scope.total_record = 0;
 
+    $scope.details_in_popup = function(uid,login_user_id,utype,div_id){
+        socket.emit('get user card',uid,login_user_id,utype);
+        socket.on('get user card', (data) => {
+            var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            var all_html = '';
+            if(data.user_type.toString() == '2')
+            {
+                all_html += '<div class="bus-tooltip">';
+                    all_html += '<div class="user-tooltip">';
+                    
+                        all_html += '<div class="tooltip-cover-img">';
+                        if(data.user_data.profile_background)
+                        {
+                            all_html += '<img src="'+bus_bg_main_upload_url+data.user_data.profile_background+'">';
+                        }
+                        else
+                        {
+                            all_html += '<div class="gradient-bg" style="height: 100%"></div>';   
+                        }
+                        all_html += '</div>';
+
+                        all_html += '<div class="tooltip-user-detail">';
+                            all_html += '<div class="tooltip-user-img">';
+                            if(data.user_data.business_user_image)
+                            {
+                                all_html += '<img src="'+bus_profile_thumb_upload_url+data.user_data.business_user_image+'">';
+                            }
+                            else
+                            {
+                                all_html += '<img src="'+base_url+nobusimage+'">';
+                            }
+                            all_html += '</div>';
+                            
+                            all_html += '<div class="fw">';
+                                all_html += '<div class="tooltip-detail">';
+                                    all_html += '<h4>'+data.user_data.company_name+'</h4>';
+                                    all_html += '<p>';
+                                        if(data.user_data.industry_name){
+                                            all_html += data.user_data.industry_name;
+                                        }
+                                        else{
+                                            all_html += "Current Work";
+                                        }
+                                    all_html += '</p>';
+
+                                    all_html += '<p>';
+                                        all_html += data.user_data.city_name + (data.user_data.state_name != '' ? ',' : '') + data.user_data.state_name + (data.user_data.country_name != '' ? ',' : '') + data.user_data.country_name;
+                                    all_html += '</p>';
+                                all_html += '</div>';
+
+                                if(data.user_data.user_id != login_user_id){
+                                    all_html += '<div class="tooltip-btns follow-btn-bus-'+data.user_data.user_id+'">';
+                                        if(data.follow_status == '1'){
+                                            all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus">Following</a>';
+                                        }
+                                        else
+                                        {
+                                            all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus">Follow</a>';
+                                        }
+                                    all_html += '</div>';
+                                }
+
+                            all_html += '</div>';
+
+                        all_html += '</div>';
+                    all_html += '</div>';
+                all_html += '</div>';
+            }
+            if(data.user_type.toString() == '1')
+            {
+                all_html += '<div class="user-tooltip">';
+                    all_html += '<div class="tooltip-cover-img">';
+                        if(data.user_data.profile_background){
+                            all_html += '<img src="'+user_bg_main_upload_url+data.user_data.profile_background+'">';
+                        }
+                        else{
+                            all_html += '<div class="gradient-bg" style="height: 100%"></div>';
+                        }
+                    all_html += '</div>';
+                    all_html += '<div class="tooltip-user-detail">';
+                        all_html += '<div class="tooltip-user-img">';
+                            if(data.user_data.user_image){
+                                all_html += '<img src="'+user_thumb_upload_url+data.user_data.user_image+'">';
+                            }
+                            else
+                            {
+                                if(data.user_data.user_gender == 'M'){
+                                    all_html += '<img src="'+base_url+"assets/img/man-user.jpg"+'">';
+                                }
+                                if(data.user_data.user_gender == 'F'){
+                                    all_html += '<img src="'+base_url+"assets/img/female-user.jpg"+'">';
+                                }
+                            }
+                        all_html += '</div>';
+
+                        all_html += '<h4>'+data.user_data.fullname+'</h4>';
+                        all_html += '<p>';
+                            if(data.user_data.title_name != '' && data.user_data.degree_name == ''){
+                                all_html += (data.user_data.title_name.length > 30 ? data.user_data.title_name.substr(0,30)+'...' : data.user_data.title_name);
+                            }
+                            else if(data.user_data.title_name == '' && data.user_data.degree_name != ''){
+                                all_html += (data.user_data.degree_name.length > 30 ? data.user_data.degree_name.substr(0,30)+'...' : data.user_data.degree_name);
+                            }
+                            else{
+                                all_html += "Current Work";
+                            }
+                        all_html += '</p>';
+                        if(data.post_count != '' || data.contact_count != '' || data.follower_count != ''){
+                            all_html += '<p>';
+                                if(data.post_count != ''){
+                                    all_html += '<span><b>'+data.post_count+'</b> Posts</span>';
+                                }
+                                if(data.contact_count != ''){
+                                    all_html += '<span><b>'+data.contact_count+'</b> Contacts</span>';
+                                }
+                                if(data.follower_count != ''){
+                                    all_html += '<span><b>'+data.follower_count+'</b> Followers</span>';
+                                }
+                            all_html += '</p>';
+                        }
+                        if(data.mutual_friend.length > 0){
+                            all_html += '<ul>';
+                            data.mutual_friend.forEach(function(friends){
+                                all_html += '<li><div class="user-img">';
+                                if(friends.user_image){
+                                    all_html += '<img src="'+user_thumb_upload_url+friends.user_image+'">';
+                                }
+                                else
+                                {                        
+                                    if(friends.user_gender == 'M'){
+                                        all_html += '<img src="'+base_url+"assets/img/man-user.jpg"+'">';
+                                    }
+                                    if(friends.user_gender == 'F'){
+                                        all_html += '<img src="'+base_url+"assets/img/female-user.jpg"+'">';
+                                    }
+                                }
+                                all_html += '</div></li>';
+                            });
+
+                            all_html += '<li class="m-contacts">';
+                                if(data.mutual_friend.length == 1){
+                                    all_html += '<span><b>'+data.mutual_friend[0].fullname+'</b> is in mutual contact.</span>';
+                                }
+                                else if(data.mutual_friend.length > 1){
+                                    all_html += '<span><b>'+data.mutual_friend[0].fullname+'</b> and <b>'+parseInt(data.mutual_friend.length - 1)+'</b> more mutual contacts.</span>';
+                                }
+                            all_html += '</li>';
+                            all_html += '</ul>';
+                        }
+
+                        if(data.user_data.user_id != login_user_id){
+                            all_html += '<div class="tooltip-btns">';
+                                all_html += '<ul>';
+                                    all_html += '<li class="contact-btn-'+data.user_data.user_id+'">';
+                                        if(data.contact_value == 'new'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',pending,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Add to contact</a>';
+                                        }
+                                        else if(data.contact_value == 'confirm'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',cancel,'+data.user_data.user_id+''+times+','+times+',1" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">In Contacts</a>';
+                                        }
+                                        else if(data.contact_value == 'pending'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',cancel,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Request sent</a>';
+                                        }
+                                        else if(data.contact_value == 'cancel'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',pending,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Add to contact</a>';
+                                        }
+                                        else if(data.contact_value == 'reject'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',pending,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Add to contact</a>';
+                                        }
+                                    all_html += '</li>';
+
+                                    all_html += '<li class="follow-btn-user-'+data.user_data.user_id+'">';
+                                        if(data.follow_status == '1'){
+                                            all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus">Following</a>';
+                                        }
+                                        else
+                                        {
+                                            all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus">Follow</a>';
+                                        }
+                                    all_html += '</li>';
+
+                                    all_html += '<li>';
+                                        all_html += '<a href="'+message_url+'user/'+data.user_data.user_slug+'" class="btn-new-1" target="_blank">Message</a>';
+                                    all_html += '</li>';
+
+                                all_html += '</ul>';
+                            all_html += '</div>';
+                        }
+
+                    all_html += '</div>';
+                all_html += '</div>';
+            }
+            
+            $('#'+div_id).html(all_html);
+        });
+        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+    }
+
     $scope.postsData = function(pagenum) {
         if (isProcessing) {
             return;
@@ -4827,7 +5465,11 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -4953,7 +5595,11 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -5368,7 +6014,11 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -5446,7 +6096,11 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                     animation:false,
                     template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
-                        return $($(this).data('tooltip-content')).html();                        
+                        // return $($(this).data('tooltip-content')).html();
+                        var uid = $(this).data('uid');
+                        var utype = $(this).data('utype');
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
@@ -5521,7 +6175,11 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                     animation:false,
                     template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
-                        return $($(this).data('tooltip-content')).html();                        
+                        // return $($(this).data('tooltip-content')).html();
+                        var uid = $(this).data('uid');
+                        var utype = $(this).data('utype');
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
@@ -5768,7 +6426,11 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                             animation:false,
                             template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                             content: function () {
-                                return $($(this).data('tooltip-content')).html();                        
+                                // return $($(this).data('tooltip-content')).html();
+                                var uid = $(this).data('uid');
+                                var utype = $(this).data('utype');
+                                var div_id =  "tmp-id-" + $.now();
+                                return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                                 // return $('#popover-content').html();
                             },
                             placement: function (context, element) {
@@ -5881,7 +6543,11 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                             animation:false,
                             template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                             content: function () {
-                                return $($(this).data('tooltip-content')).html();                        
+                                // return $($(this).data('tooltip-content')).html();
+                                var uid = $(this).data('uid');
+                                var utype = $(this).data('utype');
+                                var div_id =  "tmp-id-" + $.now();
+                                return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);Z
                                 // return $('#popover-content').html();
                             },
                             placement: function (context, element) {
@@ -6034,7 +6700,11 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                     animation:false,
                     template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
-                        return $($(this).data('tooltip-content')).html();                        
+                        // return $($(this).data('tooltip-content')).html();
+                        var uid = $(this).data('uid');
+                        var utype = $(this).data('utype');
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
@@ -6120,7 +6790,11 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -6416,6 +7090,204 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
     $scope.perpage_record = 10;
     $scope.total_record = 0;
 
+    $scope.details_in_popup = function(uid,login_user_id,utype,div_id){
+        socket.emit('get user card',uid,login_user_id,utype);
+        socket.on('get user card', (data) => {
+            var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            var all_html = '';
+            if(data.user_type.toString() == '2')
+            {
+                all_html += '<div class="bus-tooltip">';
+                    all_html += '<div class="user-tooltip">';
+                    
+                        all_html += '<div class="tooltip-cover-img">';
+                        if(data.user_data.profile_background)
+                        {
+                            all_html += '<img src="'+bus_bg_main_upload_url+data.user_data.profile_background+'">';
+                        }
+                        else
+                        {
+                            all_html += '<div class="gradient-bg" style="height: 100%"></div>';   
+                        }
+                        all_html += '</div>';
+
+                        all_html += '<div class="tooltip-user-detail">';
+                            all_html += '<div class="tooltip-user-img">';
+                            if(data.user_data.business_user_image)
+                            {
+                                all_html += '<img src="'+bus_profile_thumb_upload_url+data.user_data.business_user_image+'">';
+                            }
+                            else
+                            {
+                                all_html += '<img src="'+base_url+nobusimage+'">';
+                            }
+                            all_html += '</div>';
+                            
+                            all_html += '<div class="fw">';
+                                all_html += '<div class="tooltip-detail">';
+                                    all_html += '<h4>'+data.user_data.company_name+'</h4>';
+                                    all_html += '<p>';
+                                        if(data.user_data.industry_name){
+                                            all_html += data.user_data.industry_name;
+                                        }
+                                        else{
+                                            all_html += "Current Work";
+                                        }
+                                    all_html += '</p>';
+
+                                    all_html += '<p>';
+                                        all_html += data.user_data.city_name + (data.user_data.state_name != '' ? ',' : '') + data.user_data.state_name + (data.user_data.country_name != '' ? ',' : '') + data.user_data.country_name;
+                                    all_html += '</p>';
+                                all_html += '</div>';
+
+                                if(data.user_data.user_id != login_user_id){
+                                    all_html += '<div class="tooltip-btns follow-btn-bus-'+data.user_data.user_id+'">';
+                                        if(data.follow_status == '1'){
+                                            all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus">Following</a>';
+                                        }
+                                        else
+                                        {
+                                            all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus">Follow</a>';
+                                        }
+                                    all_html += '</div>';
+                                }
+
+                            all_html += '</div>';
+
+                        all_html += '</div>';
+                    all_html += '</div>';
+                all_html += '</div>';
+            }
+            if(data.user_type.toString() == '1')
+            {
+                all_html += '<div class="user-tooltip">';
+                    all_html += '<div class="tooltip-cover-img">';
+                        if(data.user_data.profile_background){
+                            all_html += '<img src="'+user_bg_main_upload_url+data.user_data.profile_background+'">';
+                        }
+                        else{
+                            all_html += '<div class="gradient-bg" style="height: 100%"></div>';
+                        }
+                    all_html += '</div>';
+                    all_html += '<div class="tooltip-user-detail">';
+                        all_html += '<div class="tooltip-user-img">';
+                            if(data.user_data.user_image){
+                                all_html += '<img src="'+user_thumb_upload_url+data.user_data.user_image+'">';
+                            }
+                            else
+                            {
+                                if(data.user_data.user_gender == 'M'){
+                                    all_html += '<img src="'+base_url+"assets/img/man-user.jpg"+'">';
+                                }
+                                if(data.user_data.user_gender == 'F'){
+                                    all_html += '<img src="'+base_url+"assets/img/female-user.jpg"+'">';
+                                }
+                            }
+                        all_html += '</div>';
+
+                        all_html += '<h4>'+data.user_data.fullname+'</h4>';
+                        all_html += '<p>';
+                            if(data.user_data.title_name != '' && data.user_data.degree_name == ''){
+                                all_html += (data.user_data.title_name.length > 30 ? data.user_data.title_name.substr(0,30)+'...' : data.user_data.title_name);
+                            }
+                            else if(data.user_data.title_name == '' && data.user_data.degree_name != ''){
+                                all_html += (data.user_data.degree_name.length > 30 ? data.user_data.degree_name.substr(0,30)+'...' : data.user_data.degree_name);
+                            }
+                            else{
+                                all_html += "Current Work";
+                            }
+                        all_html += '</p>';
+                        if(data.post_count != '' || data.contact_count != '' || data.follower_count != ''){
+                            all_html += '<p>';
+                                if(data.post_count != ''){
+                                    all_html += '<span><b>'+data.post_count+'</b> Posts</span>';
+                                }
+                                if(data.contact_count != ''){
+                                    all_html += '<span><b>'+data.contact_count+'</b> Contacts</span>';
+                                }
+                                if(data.follower_count != ''){
+                                    all_html += '<span><b>'+data.follower_count+'</b> Followers</span>';
+                                }
+                            all_html += '</p>';
+                        }
+                        if(data.mutual_friend.length > 0){
+                            all_html += '<ul>';
+                            data.mutual_friend.forEach(function(friends){
+                                all_html += '<li><div class="user-img">';
+                                if(friends.user_image){
+                                    all_html += '<img src="'+user_thumb_upload_url+friends.user_image+'">';
+                                }
+                                else
+                                {                        
+                                    if(friends.user_gender == 'M'){
+                                        all_html += '<img src="'+base_url+"assets/img/man-user.jpg"+'">';
+                                    }
+                                    if(friends.user_gender == 'F'){
+                                        all_html += '<img src="'+base_url+"assets/img/female-user.jpg"+'">';
+                                    }
+                                }
+                                all_html += '</div></li>';
+                            });
+
+                            all_html += '<li class="m-contacts">';
+                                if(data.mutual_friend.length == 1){
+                                    all_html += '<span><b>'+data.mutual_friend[0].fullname+'</b> is in mutual contact.</span>';
+                                }
+                                else if(data.mutual_friend.length > 1){
+                                    all_html += '<span><b>'+data.mutual_friend[0].fullname+'</b> and <b>'+parseInt(data.mutual_friend.length - 1)+'</b> more mutual contacts.</span>';
+                                }
+                            all_html += '</li>';
+                            all_html += '</ul>';
+                        }
+
+                        if(data.user_data.user_id != login_user_id){
+                            all_html += '<div class="tooltip-btns">';
+                                all_html += '<ul>';
+                                    all_html += '<li class="contact-btn-'+data.user_data.user_id+'">';
+                                        if(data.contact_value == 'new'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',pending,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Add to contact</a>';
+                                        }
+                                        else if(data.contact_value == 'confirm'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',cancel,'+data.user_data.user_id+''+times+','+times+',1" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">In Contacts</a>';
+                                        }
+                                        else if(data.contact_value == 'pending'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',cancel,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Request sent</a>';
+                                        }
+                                        else if(data.contact_value == 'cancel'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',pending,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Add to contact</a>';
+                                        }
+                                        else if(data.contact_value == 'reject'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',pending,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Add to contact</a>';
+                                        }
+                                    all_html += '</li>';
+
+                                    all_html += '<li class="follow-btn-user-'+data.user_data.user_id+'">';
+                                        if(data.follow_status == '1'){
+                                            all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus">Following</a>';
+                                        }
+                                        else
+                                        {
+                                            all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus">Follow</a>';
+                                        }
+                                    all_html += '</li>';
+
+                                    all_html += '<li>';
+                                        all_html += '<a href="'+message_url+'user/'+data.user_data.user_slug+'" class="btn-new-1" target="_blank">Message</a>';
+                                    all_html += '</li>';
+
+                                all_html += '</ul>';
+                            all_html += '</div>';
+                        }
+
+                    all_html += '</div>';
+                all_html += '</div>';
+            }
+            
+            $('#'+div_id).html(all_html);
+        });
+        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+    }
+
     $scope.opportunityData = function(pagenum) {
         if (isProcessing) {
             return;
@@ -6493,7 +7365,11 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -6623,7 +7499,11 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -7081,7 +7961,11 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -7159,7 +8043,11 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                     animation:false,
                     template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
-                        return $($(this).data('tooltip-content')).html();                        
+                        // return $($(this).data('tooltip-content')).html();
+                        var uid = $(this).data('uid');
+                        var utype = $(this).data('utype');
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
@@ -7234,7 +8122,11 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                     animation:false,
                     template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
-                        return $($(this).data('tooltip-content')).html();                        
+                        // return $($(this).data('tooltip-content')).html();
+                        var uid = $(this).data('uid');
+                        var utype = $(this).data('utype');
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
@@ -7482,7 +8374,11 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                             animation:false,
                             template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                             content: function () {
-                                return $($(this).data('tooltip-content')).html();                        
+                                // return $($(this).data('tooltip-content')).html();
+                                var uid = $(this).data('uid');
+                                var utype = $(this).data('utype');
+                                var div_id =  "tmp-id-" + $.now();
+                                return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                                 // return $('#popover-content').html();
                             },
                             placement: function (context, element) {
@@ -7596,7 +8492,11 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                             animation:false,
                             template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                             content: function () {
-                                return $($(this).data('tooltip-content')).html();                        
+                                // return $($(this).data('tooltip-content')).html();
+                                var uid = $(this).data('uid');
+                                var utype = $(this).data('utype');
+                                var div_id =  "tmp-id-" + $.now();
+                                return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);            
                                 // return $('#popover-content').html();
                             },
                             placement: function (context, element) {
@@ -7747,7 +8647,11 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                     animation:false,
                     template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
-                        return $($(this).data('tooltip-content')).html();                        
+                        // return $($(this).data('tooltip-content')).html();
+                        var uid = $(this).data('uid');
+                        var utype = $(this).data('utype');
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
@@ -7833,7 +8737,11 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -8116,6 +9024,204 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
     $scope.perpage_record = 10;
     $scope.total_record = 0;
 
+    $scope.details_in_popup = function(uid,login_user_id,utype,div_id){
+        socket.emit('get user card',uid,login_user_id,utype);
+        socket.on('get user card', (data) => {
+            var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            var all_html = '';
+            if(data.user_type.toString() == '2')
+            {
+                all_html += '<div class="bus-tooltip">';
+                    all_html += '<div class="user-tooltip">';
+                    
+                        all_html += '<div class="tooltip-cover-img">';
+                        if(data.user_data.profile_background)
+                        {
+                            all_html += '<img src="'+bus_bg_main_upload_url+data.user_data.profile_background+'">';
+                        }
+                        else
+                        {
+                            all_html += '<div class="gradient-bg" style="height: 100%"></div>';   
+                        }
+                        all_html += '</div>';
+
+                        all_html += '<div class="tooltip-user-detail">';
+                            all_html += '<div class="tooltip-user-img">';
+                            if(data.user_data.business_user_image)
+                            {
+                                all_html += '<img src="'+bus_profile_thumb_upload_url+data.user_data.business_user_image+'">';
+                            }
+                            else
+                            {
+                                all_html += '<img src="'+base_url+nobusimage+'">';
+                            }
+                            all_html += '</div>';
+                            
+                            all_html += '<div class="fw">';
+                                all_html += '<div class="tooltip-detail">';
+                                    all_html += '<h4>'+data.user_data.company_name+'</h4>';
+                                    all_html += '<p>';
+                                        if(data.user_data.industry_name){
+                                            all_html += data.user_data.industry_name;
+                                        }
+                                        else{
+                                            all_html += "Current Work";
+                                        }
+                                    all_html += '</p>';
+
+                                    all_html += '<p>';
+                                        all_html += data.user_data.city_name + (data.user_data.state_name != '' ? ',' : '') + data.user_data.state_name + (data.user_data.country_name != '' ? ',' : '') + data.user_data.country_name;
+                                    all_html += '</p>';
+                                all_html += '</div>';
+
+                                if(data.user_data.user_id != login_user_id){
+                                    all_html += '<div class="tooltip-btns follow-btn-bus-'+data.user_data.user_id+'">';
+                                        if(data.follow_status == '1'){
+                                            all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus">Following</a>';
+                                        }
+                                        else
+                                        {
+                                            all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus">Follow</a>';
+                                        }
+                                    all_html += '</div>';
+                                }
+
+                            all_html += '</div>';
+
+                        all_html += '</div>';
+                    all_html += '</div>';
+                all_html += '</div>';
+            }
+            if(data.user_type.toString() == '1')
+            {
+                all_html += '<div class="user-tooltip">';
+                    all_html += '<div class="tooltip-cover-img">';
+                        if(data.user_data.profile_background){
+                            all_html += '<img src="'+user_bg_main_upload_url+data.user_data.profile_background+'">';
+                        }
+                        else{
+                            all_html += '<div class="gradient-bg" style="height: 100%"></div>';
+                        }
+                    all_html += '</div>';
+                    all_html += '<div class="tooltip-user-detail">';
+                        all_html += '<div class="tooltip-user-img">';
+                            if(data.user_data.user_image){
+                                all_html += '<img src="'+user_thumb_upload_url+data.user_data.user_image+'">';
+                            }
+                            else
+                            {
+                                if(data.user_data.user_gender == 'M'){
+                                    all_html += '<img src="'+base_url+"assets/img/man-user.jpg"+'">';
+                                }
+                                if(data.user_data.user_gender == 'F'){
+                                    all_html += '<img src="'+base_url+"assets/img/female-user.jpg"+'">';
+                                }
+                            }
+                        all_html += '</div>';
+
+                        all_html += '<h4>'+data.user_data.fullname+'</h4>';
+                        all_html += '<p>';
+                            if(data.user_data.title_name != '' && data.user_data.degree_name == ''){
+                                all_html += (data.user_data.title_name.length > 30 ? data.user_data.title_name.substr(0,30)+'...' : data.user_data.title_name);
+                            }
+                            else if(data.user_data.title_name == '' && data.user_data.degree_name != ''){
+                                all_html += (data.user_data.degree_name.length > 30 ? data.user_data.degree_name.substr(0,30)+'...' : data.user_data.degree_name);
+                            }
+                            else{
+                                all_html += "Current Work";
+                            }
+                        all_html += '</p>';
+                        if(data.post_count != '' || data.contact_count != '' || data.follower_count != ''){
+                            all_html += '<p>';
+                                if(data.post_count != ''){
+                                    all_html += '<span><b>'+data.post_count+'</b> Posts</span>';
+                                }
+                                if(data.contact_count != ''){
+                                    all_html += '<span><b>'+data.contact_count+'</b> Contacts</span>';
+                                }
+                                if(data.follower_count != ''){
+                                    all_html += '<span><b>'+data.follower_count+'</b> Followers</span>';
+                                }
+                            all_html += '</p>';
+                        }
+                        if(data.mutual_friend.length > 0){
+                            all_html += '<ul>';
+                            data.mutual_friend.forEach(function(friends){
+                                all_html += '<li><div class="user-img">';
+                                if(friends.user_image){
+                                    all_html += '<img src="'+user_thumb_upload_url+friends.user_image+'">';
+                                }
+                                else
+                                {                        
+                                    if(friends.user_gender == 'M'){
+                                        all_html += '<img src="'+base_url+"assets/img/man-user.jpg"+'">';
+                                    }
+                                    if(friends.user_gender == 'F'){
+                                        all_html += '<img src="'+base_url+"assets/img/female-user.jpg"+'">';
+                                    }
+                                }
+                                all_html += '</div></li>';
+                            });
+
+                            all_html += '<li class="m-contacts">';
+                                if(data.mutual_friend.length == 1){
+                                    all_html += '<span><b>'+data.mutual_friend[0].fullname+'</b> is in mutual contact.</span>';
+                                }
+                                else if(data.mutual_friend.length > 1){
+                                    all_html += '<span><b>'+data.mutual_friend[0].fullname+'</b> and <b>'+parseInt(data.mutual_friend.length - 1)+'</b> more mutual contacts.</span>';
+                                }
+                            all_html += '</li>';
+                            all_html += '</ul>';
+                        }
+
+                        if(data.user_data.user_id != login_user_id){
+                            all_html += '<div class="tooltip-btns">';
+                                all_html += '<ul>';
+                                    all_html += '<li class="contact-btn-'+data.user_data.user_id+'">';
+                                        if(data.contact_value == 'new'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',pending,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Add to contact</a>';
+                                        }
+                                        else if(data.contact_value == 'confirm'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',cancel,'+data.user_data.user_id+''+times+','+times+',1" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">In Contacts</a>';
+                                        }
+                                        else if(data.contact_value == 'pending'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',cancel,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Request sent</a>';
+                                        }
+                                        else if(data.contact_value == 'cancel'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',pending,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Add to contact</a>';
+                                        }
+                                        else if(data.contact_value == 'reject'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',pending,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Add to contact</a>';
+                                        }
+                                    all_html += '</li>';
+
+                                    all_html += '<li class="follow-btn-user-'+data.user_data.user_id+'">';
+                                        if(data.follow_status == '1'){
+                                            all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus">Following</a>';
+                                        }
+                                        else
+                                        {
+                                            all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus">Follow</a>';
+                                        }
+                                    all_html += '</li>';
+
+                                    all_html += '<li>';
+                                        all_html += '<a href="'+message_url+'user/'+data.user_data.user_slug+'" class="btn-new-1" target="_blank">Message</a>';
+                                    all_html += '</li>';
+
+                                all_html += '</ul>';
+                            all_html += '</div>';
+                        }
+
+                    all_html += '</div>';
+                all_html += '</div>';
+            }
+            
+            $('#'+div_id).html(all_html);
+        });
+        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+    }
+
     $scope.articleData = function(pagenum) {
         if (isProcessing) {
             return;
@@ -8195,7 +9301,11 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -8317,7 +9427,11 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -8739,7 +9853,11 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -8818,7 +9936,11 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                     animation:false,
                     template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
-                        return $($(this).data('tooltip-content')).html();                        
+                        // return $($(this).data('tooltip-content')).html();
+                        var uid = $(this).data('uid');
+                        var utype = $(this).data('utype');
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
@@ -8893,7 +10015,11 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                     animation:false,
                     template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
-                        return $($(this).data('tooltip-content')).html();                        
+                        // return $($(this).data('tooltip-content')).html();
+                        var uid = $(this).data('uid');
+                        var utype = $(this).data('utype');
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
@@ -9202,7 +10328,11 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -9354,7 +10484,11 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                     animation:false,
                     template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
-                        return $($(this).data('tooltip-content')).html();                        
+                        // return $($(this).data('tooltip-content')).html();
+                        var uid = $(this).data('uid');
+                        var utype = $(this).data('utype');
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
@@ -9439,7 +10573,11 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -9735,6 +10873,204 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
     $scope.perpage_record = 10;
     $scope.total_record = 0;
 
+    $scope.details_in_popup = function(uid,login_user_id,utype,div_id){
+        socket.emit('get user card',uid,login_user_id,utype);
+        socket.on('get user card', (data) => {
+            var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            var all_html = '';
+            if(data.user_type.toString() == '2')
+            {
+                all_html += '<div class="bus-tooltip">';
+                    all_html += '<div class="user-tooltip">';
+                    
+                        all_html += '<div class="tooltip-cover-img">';
+                        if(data.user_data.profile_background)
+                        {
+                            all_html += '<img src="'+bus_bg_main_upload_url+data.user_data.profile_background+'">';
+                        }
+                        else
+                        {
+                            all_html += '<div class="gradient-bg" style="height: 100%"></div>';   
+                        }
+                        all_html += '</div>';
+
+                        all_html += '<div class="tooltip-user-detail">';
+                            all_html += '<div class="tooltip-user-img">';
+                            if(data.user_data.business_user_image)
+                            {
+                                all_html += '<img src="'+bus_profile_thumb_upload_url+data.user_data.business_user_image+'">';
+                            }
+                            else
+                            {
+                                all_html += '<img src="'+base_url+nobusimage+'">';
+                            }
+                            all_html += '</div>';
+                            
+                            all_html += '<div class="fw">';
+                                all_html += '<div class="tooltip-detail">';
+                                    all_html += '<h4>'+data.user_data.company_name+'</h4>';
+                                    all_html += '<p>';
+                                        if(data.user_data.industry_name){
+                                            all_html += data.user_data.industry_name;
+                                        }
+                                        else{
+                                            all_html += "Current Work";
+                                        }
+                                    all_html += '</p>';
+
+                                    all_html += '<p>';
+                                        all_html += data.user_data.city_name + (data.user_data.state_name != '' ? ',' : '') + data.user_data.state_name + (data.user_data.country_name != '' ? ',' : '') + data.user_data.country_name;
+                                    all_html += '</p>';
+                                all_html += '</div>';
+
+                                if(data.user_data.user_id != login_user_id){
+                                    all_html += '<div class="tooltip-btns follow-btn-bus-'+data.user_data.user_id+'">';
+                                        if(data.follow_status == '1'){
+                                            all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus">Following</a>';
+                                        }
+                                        else
+                                        {
+                                            all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus">Follow</a>';
+                                        }
+                                    all_html += '</div>';
+                                }
+
+                            all_html += '</div>';
+
+                        all_html += '</div>';
+                    all_html += '</div>';
+                all_html += '</div>';
+            }
+            if(data.user_type.toString() == '1')
+            {
+                all_html += '<div class="user-tooltip">';
+                    all_html += '<div class="tooltip-cover-img">';
+                        if(data.user_data.profile_background){
+                            all_html += '<img src="'+user_bg_main_upload_url+data.user_data.profile_background+'">';
+                        }
+                        else{
+                            all_html += '<div class="gradient-bg" style="height: 100%"></div>';
+                        }
+                    all_html += '</div>';
+                    all_html += '<div class="tooltip-user-detail">';
+                        all_html += '<div class="tooltip-user-img">';
+                            if(data.user_data.user_image){
+                                all_html += '<img src="'+user_thumb_upload_url+data.user_data.user_image+'">';
+                            }
+                            else
+                            {
+                                if(data.user_data.user_gender == 'M'){
+                                    all_html += '<img src="'+base_url+"assets/img/man-user.jpg"+'">';
+                                }
+                                if(data.user_data.user_gender == 'F'){
+                                    all_html += '<img src="'+base_url+"assets/img/female-user.jpg"+'">';
+                                }
+                            }
+                        all_html += '</div>';
+
+                        all_html += '<h4>'+data.user_data.fullname+'</h4>';
+                        all_html += '<p>';
+                            if(data.user_data.title_name != '' && data.user_data.degree_name == ''){
+                                all_html += (data.user_data.title_name.length > 30 ? data.user_data.title_name.substr(0,30)+'...' : data.user_data.title_name);
+                            }
+                            else if(data.user_data.title_name == '' && data.user_data.degree_name != ''){
+                                all_html += (data.user_data.degree_name.length > 30 ? data.user_data.degree_name.substr(0,30)+'...' : data.user_data.degree_name);
+                            }
+                            else{
+                                all_html += "Current Work";
+                            }
+                        all_html += '</p>';
+                        if(data.post_count != '' || data.contact_count != '' || data.follower_count != ''){
+                            all_html += '<p>';
+                                if(data.post_count != ''){
+                                    all_html += '<span><b>'+data.post_count+'</b> Posts</span>';
+                                }
+                                if(data.contact_count != ''){
+                                    all_html += '<span><b>'+data.contact_count+'</b> Contacts</span>';
+                                }
+                                if(data.follower_count != ''){
+                                    all_html += '<span><b>'+data.follower_count+'</b> Followers</span>';
+                                }
+                            all_html += '</p>';
+                        }
+                        if(data.mutual_friend.length > 0){
+                            all_html += '<ul>';
+                            data.mutual_friend.forEach(function(friends){
+                                all_html += '<li><div class="user-img">';
+                                if(friends.user_image){
+                                    all_html += '<img src="'+user_thumb_upload_url+friends.user_image+'">';
+                                }
+                                else
+                                {                        
+                                    if(friends.user_gender == 'M'){
+                                        all_html += '<img src="'+base_url+"assets/img/man-user.jpg"+'">';
+                                    }
+                                    if(friends.user_gender == 'F'){
+                                        all_html += '<img src="'+base_url+"assets/img/female-user.jpg"+'">';
+                                    }
+                                }
+                                all_html += '</div></li>';
+                            });
+
+                            all_html += '<li class="m-contacts">';
+                                if(data.mutual_friend.length == 1){
+                                    all_html += '<span><b>'+data.mutual_friend[0].fullname+'</b> is in mutual contact.</span>';
+                                }
+                                else if(data.mutual_friend.length > 1){
+                                    all_html += '<span><b>'+data.mutual_friend[0].fullname+'</b> and <b>'+parseInt(data.mutual_friend.length - 1)+'</b> more mutual contacts.</span>';
+                                }
+                            all_html += '</li>';
+                            all_html += '</ul>';
+                        }
+
+                        if(data.user_data.user_id != login_user_id){
+                            all_html += '<div class="tooltip-btns">';
+                                all_html += '<ul>';
+                                    all_html += '<li class="contact-btn-'+data.user_data.user_id+'">';
+                                        if(data.contact_value == 'new'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',pending,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Add to contact</a>';
+                                        }
+                                        else if(data.contact_value == 'confirm'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',cancel,'+data.user_data.user_id+''+times+','+times+',1" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">In Contacts</a>';
+                                        }
+                                        else if(data.contact_value == 'pending'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',cancel,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Request sent</a>';
+                                        }
+                                        else if(data.contact_value == 'cancel'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',pending,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Add to contact</a>';
+                                        }
+                                        else if(data.contact_value == 'reject'){
+                                            all_html += '<a class="btn-new-1" data-param="'+data.contact_id+''+times+',pending,'+data.user_data.user_id+''+times+','+times+',0" onclick="contact(this.id);" id="contact_btn_'+data.user_data.user_id+'">Add to contact</a>';
+                                        }
+                                    all_html += '</li>';
+
+                                    all_html += '<li class="follow-btn-user-'+data.user_data.user_id+'">';
+                                        if(data.follow_status == '1'){
+                                            all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus">Following</a>';
+                                        }
+                                        else
+                                        {
+                                            all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus">Follow</a>';
+                                        }
+                                    all_html += '</li>';
+
+                                    all_html += '<li>';
+                                        all_html += '<a href="'+message_url+'user/'+data.user_data.user_slug+'" class="btn-new-1" target="_blank">Message</a>';
+                                    all_html += '</li>';
+
+                                all_html += '</ul>';
+                            all_html += '</div>';
+                        }
+
+                    all_html += '</div>';
+                all_html += '</div>';
+            }
+            
+            $('#'+div_id).html(all_html);
+        });
+        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+    }
+
     $scope.questionData = function(pagenum) {
         if (isProcessing) {
             return;
@@ -9780,7 +11116,11 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -9872,7 +11212,11 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -10293,7 +11637,11 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -10372,7 +11720,11 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                     animation:false,
                     template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
-                        return $($(this).data('tooltip-content')).html();                        
+                        // return $($(this).data('tooltip-content')).html();
+                        var uid = $(this).data('uid');
+                        var utype = $(this).data('utype');
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
@@ -10447,7 +11799,11 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                     animation:false,
                     template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
-                        return $($(this).data('tooltip-content')).html();                        
+                        // return $($(this).data('tooltip-content')).html();
+                        var uid = $(this).data('uid');
+                        var utype = $(this).data('utype');
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
@@ -10755,7 +12111,11 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                             animation:false,
                             template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                             content: function () {
-                                return $($(this).data('tooltip-content')).html();                        
+                                // return $($(this).data('tooltip-content')).html();
+                                var uid = $(this).data('uid');
+                                var utype = $(this).data('utype');
+                                var div_id =  "tmp-id-" + $.now();
+                                return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                                 // return $('#popover-content').html();
                             },
                             placement: function (context, element) {
@@ -10901,7 +12261,11 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                     animation:false,
                     template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                     content: function () {
-                        return $($(this).data('tooltip-content')).html();                        
+                        // return $($(this).data('tooltip-content')).html();
+                        var uid = $(this).data('uid');
+                        var utype = $(this).data('utype');
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
@@ -10993,7 +12357,11 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -11286,6 +12654,80 @@ app.controller('businessController', function($scope, $http, $compile, $window,$
     $scope.perpage_record = 10;
     $scope.total_record = 0;
 
+    $scope.details_in_popup = function(uid,login_user_id,utype,div_id){
+        socket.emit('get user card',uid,login_user_id,utype);
+        socket.on('get user card', (data) => {
+            var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            var all_html = '';
+            if(data.user_type.toString() == '2')
+            {
+                all_html += '<div class="bus-tooltip">';
+                    all_html += '<div class="user-tooltip">';
+                    
+                        all_html += '<div class="tooltip-cover-img">';
+                        if(data.user_data.profile_background)
+                        {
+                            all_html += '<img src="'+bus_bg_main_upload_url+data.user_data.profile_background+'">';
+                        }
+                        else
+                        {
+                            all_html += '<div class="gradient-bg" style="height: 100%"></div>';   
+                        }
+                        all_html += '</div>';
+
+                        all_html += '<div class="tooltip-user-detail">';
+                            all_html += '<div class="tooltip-user-img">';
+                            if(data.user_data.business_user_image)
+                            {
+                                all_html += '<img src="'+bus_profile_thumb_upload_url+data.user_data.business_user_image+'">';
+                            }
+                            else
+                            {
+                                all_html += '<img src="'+base_url+nobusimage+'">';
+                            }
+                            all_html += '</div>';
+                            
+                            all_html += '<div class="fw">';
+                                all_html += '<div class="tooltip-detail">';
+                                    all_html += '<h4>'+data.user_data.company_name+'</h4>';
+                                    all_html += '<p>';
+                                        if(data.user_data.industry_name){
+                                            all_html += data.user_data.industry_name;
+                                        }
+                                        else{
+                                            all_html += "Current Work";
+                                        }
+                                    all_html += '</p>';
+
+                                    all_html += '<p>';
+                                        all_html += data.user_data.city_name + (data.user_data.state_name != '' ? ',' : '') + data.user_data.state_name + (data.user_data.country_name != '' ? ',' : '') + data.user_data.country_name;
+                                    all_html += '</p>';
+                                all_html += '</div>';
+
+                                if(data.user_data.user_id != login_user_id){
+                                    all_html += '<div class="tooltip-btns follow-btn-bus-'+data.user_data.user_id+'">';
+                                        if(data.follow_status == '1'){
+                                            all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus">Following</a>';
+                                        }
+                                        else
+                                        {
+                                            all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus">Follow</a>';
+                                        }
+                                    all_html += '</div>';
+                                }
+
+                            all_html += '</div>';
+
+                        all_html += '</div>';
+                    all_html += '</div>';
+                all_html += '</div>';
+            }
+            
+            $('#'+div_id).html(all_html);
+        });
+        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+    }
+
     $scope.businessData = function(pagenum) {
         if (isProcessing) {
             return;
@@ -11328,7 +12770,11 @@ app.controller('businessController', function($scope, $http, $compile, $window,$
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -11421,7 +12867,11 @@ app.controller('businessController', function($scope, $http, $compile, $window,$
                         animation:false,
                         template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
                         content: function () {
-                            return $($(this).data('tooltip-content')).html();                        
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
                             // return $('#popover-content').html();
                         },
                         placement: function (context, element) {
@@ -11660,7 +13110,6 @@ function contact(elid)
         data: 'contact_id='+id+'&status='+status+'&to_id='+to_id+'&indexCon='+indexCon+'&elid='+elid,
         dataType:"JSON",
         success: function (data) {
-            console.log(data);
             $(".contact-btn-"+to_id.slice(0, -6)).attr('style','pointer-events:all;');
             setTimeout(function(){
                 $(".contact-btn-"+to_id.slice(0, -6)).html(data.button);

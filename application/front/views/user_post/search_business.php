@@ -60,36 +60,6 @@
 </div>
 <div class="middle-section">
     <div ng-if="business_data.length != 0" ng-repeat="business in business_data" ng-init="busIndex=$index">
-        <div id="tooltip_content_bus_{{busIndex}}" class="tooltip_templates">
-            <div class="bus-tooltip">
-                <div class="user-tooltip">
-                    <div class="tooltip-cover-img">
-                        <img ng-if="business.profile_background" ng-src="<?php echo BUS_BG_MAIN_UPLOAD_URL ?>{{business.profile_background}}">
-                        <div ng-if="business.profile_background == null || business.profile_background == ''" class="gradient-bg" style="height: 100%"></div>
-                    </div>
-                    <div class="tooltip-user-detail">
-                        <div class="tooltip-user-img">
-                            <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{business.business_user_image}}" ng-if="business.business_user_image">
-                            <img ng-if="!business.business_user_image" ng-src="<?php echo base_url(NOBUSIMAGE); ?>">
-                        </div>
-                        <div class="fw">
-                            <div class="tooltip-detail">
-                                <h4 ng-bind="business.company_name"></h4>
-                                <p ng-if="business.industry_name != null" ng-bind="business.industry_name"></p> 
-                                <p ng-if="!business.industry_name">CURRENT WORK</p>
-                                <p>{{business.city_name}}{{business.city_name != '' ? ',' : ''}}{{business.state_name}}{{business.state_name != '' ? ',' : ''}}{{business.country_name}}</p>
-                            </div>
-                            
-                            <div class="tooltip-btns follow-btn-bus-{{business.user_id}}">
-                                <a ng-if="business.follow_status == 1" class="btn-new-1 following" data-uid="{{business.user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus_{{business.user_id}}">Following</a>
-
-                                <a ng-if="business.follow_status == 0 || !business.follow_status" class="btn-new-1 follow" data-uid="{{business.user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user_bus(this.id)" id="follow_btn_bus_{{business.user_id}}">Follow</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="all-job-box search-business">
             <div class="search-business-top">
                 <div class="bus-cover no-cover-upload">
@@ -98,11 +68,11 @@
                 </div>
                 <div class="all-job-top bus-search-top">
                     <div class="post-img">
-                        <a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-if="business.business_user_image" target="_self" data-toggle="popover" data-tooltip-content="#tooltip_content_bus_{{busIndex}}"><img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{business.business_user_image}}" on-error-src="<?php echo BASEURL.NOBUSIMAGE ?>"></a>
-                        <a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-if="!business.business_user_image" target="_self" data-toggle="popover" data-tooltip-content="#tooltip_content_bus_{{busIndex}}"><img ng-src="<?php echo BASEURL.NOBUSIMAGE ?>" on-error-src="<?php echo BASEURL.NOBUSIMAGE ?>"></a>
+                        <a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-if="business.business_user_image" target="_self" data-toggle="popover" data-uid="{{business.user_id}}" data-utype="2"><img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{business.business_user_image}}" on-error-src="<?php echo BASEURL.NOBUSIMAGE ?>"></a>
+                        <a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-if="!business.business_user_image" target="_self" data-toggle="popover" data-uid="{{business.user_id}}" data-utype="2"><img ng-src="<?php echo BASEURL.NOBUSIMAGE ?>" on-error-src="<?php echo BASEURL.NOBUSIMAGE ?>"></a>
                     </div>
                     <div class="job-top-detail">
-                        <h5><a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-bind="business.company_name" target="_self" data-toggle="popover" data-tooltip-content="#tooltip_content_bus_{{busIndex}}"></a></h5>
+                        <h5><a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-bind="business.company_name" target="_self" data-toggle="popover" data-uid="{{business.user_id}}" data-utype="2"></a></h5>
                         <h5 class="bus-ind" ng-if="business.industry_name"><a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-bind="business.industry_name" target="_self"></a></h5>
                         <h5 class="bus-ind" ng-if="!business.industry_name"><a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-bind="business.other_industrial" target="_self"></a></h5>
                     </div>
