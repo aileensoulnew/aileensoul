@@ -3625,13 +3625,14 @@ tags-input .tags .tag-item {font-size: 12px;}
 
 /*** end search new page  ***/
 /*** hashtag page  ***/
-.hashtag-popup{width: 800px; border-radius: 20px; -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2); box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2); margin: 95px auto 0;}
+.hashtag-popup{max-width: 800px; border-radius: 20px; -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2); box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2); margin: 95px auto 0;}
 .hashtag-popup .popup-top{padding: 10px 15px; border-bottom: 1px solid #d2d2d2;}
 .hashtag-popup .popup-top h1{font-size: 18px; font-weight: bold; padding-top: 5px;}
 .hashtag-popup .popup-top .hash-search input{border:0; border-bottom: 1px solid #d2d2d2; border-radius: 0; padding: 0;font-size: 16px; height: 26px;}
 .hashtag-list{width: 100%; float: left; max-height: 404px; overflow: overlay;}
 .hashtag-list ul{width: 100%; float: left; padding: 0; display: inline-block; text-align: center; margin-bottom: 0;}
 .hashtag-list ul li{list-style-type: none; width: 25%; float: left;}
+.hashtag-list ul li:nth-child(4n+0) .hash-box{border-right: 0;}
 .hash-box-top{width: 100%; height: 100px; background: #7b7b7b; padding: 15px;}
 .hash-box-top .hash-round{width: 70px; height: 70px; background: #fff; border:1px solid #7b7b7b; text-align: center; border-radius: 100%; margin: 0 auto; font-size: 25px; font-weight: bold; padding: 24px 0;}
 .hash-search{position: relative;}
@@ -3643,6 +3644,16 @@ tags-input .tags .tag-item {font-size: 12px;}
 .hash-box .hash-detail .hash-follow{font-size: 14px;}
 .hash-box .hash-detail .btn-new-1{font-size: 14px; padding: 4px 20px; margin: 5px 0 0; cursor: pointer; width: 100px; color: #9c9999; border-color: #d2d2d2;}
 .hash-box-bottom{padding: 15px; width: 100%; float: left; border-top:1px solid #d2d2d2; margin-top: -1px;}
+.hash-tag-listing .listing-top{padding: 10px 15px; border-bottom: 1px solid #d2d2d2;}
+.hash-tag-listing .listing-top h1{font-size: 24px;}
+.hash-tag-listing .listing-top input{font-size: 24px; border:0; border-bottom: 1px solid #d2d2d2; border-radius: 0; padding: 0;font-size: 16px; height: 26px;}
+.hash-tag-listing .hashtag-list{max-height: inherit;}
+.hash-detail-box{padding: 10px 15px; width: 100%; float: left;} 
+.hash-detail-box .hash-detail-left{border:2px solid #d2d2d2; font-weight: bold; width: 72px; height: 72px; text-align: center; border-radius: 100%; font-size: 20px; float: left; padding: 23px 0px;}
+.hash-detail{width: 85%; float: left; padding-left: 15px;}
+.hash-detail h4{margin: 0; font-size: 16px; font-weight: bold;}
+.hash-detail p{font-size: 14px;}
+.hash-detail .btn-new-1{font-size: 14px; padding: 3px 10px; margin: 3px 0 0; cursor: pointer; width: 100px; color: #9c9999; border-color: #d2d2d2;}
 
 /*** end hashtag page  ***/
 .error{color: #ff0000;}
@@ -3947,7 +3958,9 @@ tags-input .tags{padding: 0;}
   .sugg-list ul.first-pending-req li{float: left; border:0 !important; border-radius: 0; margin: 0;}
   .sugg-list ul.first-pending-req li:nth-child(even){border-right: 0 !important;}
   .sugg-list ul.first-pending-req li:nth-child(odd){border-right: 1px solid #d2d2d2 !important;}
-
+  .hash-tag-listing .hashtag-list ul li{width: 33.33%;}
+  .hash-tag-listing .hashtag-list ul li:nth-child(4n+0) .hash-box{border-right: 1px solid #d2d2d2;}
+  .hash-tag-listing .hashtag-list ul li:nth-child(3n+0) .hash-box{border-right: 0;}
 }
 @media screen and (max-width: 1024px) {
 
@@ -4835,7 +4848,17 @@ tags-input .tags{padding: 0;}
   .like-popup .modal-dialog{padding: 0; margin: 0;}
   .like-popup .modal-content{width: 100%; min-height: 100vh; border:0px; border-radius: 0;}
   .like-popup-scroll{max-height: inherit;}
-
+  .hashtag-list ul li{width: 33.3333%}
+  .hashtag-popup{box-shadow: none;}
+  .hashtag-popup .popup-top h1{font-size: 16px;}
+  .hash-box-top .hash-round{width: 50px; height: 50px; font-size: 18px; padding: 14px 0;}
+  .hash-box-top{height: 80px;}
+  .hash-box .hash-detail .hash-name{font-size: 15px;}
+  .hash-box .hash-detail .hash-follow{font-size: 13px;}
+  .hashtag-list ul li:nth-child(4n+0) .hash-box{border-right: 1px solid #d2d2d2;}
+  .hashtag-list ul li:nth-child(3n+0) .hash-box{border-right: 0;}
+  .hash-box-bottom{padding: 10px 15px;}
+  .hash-tag-listing .listing-top h1{font-size: 20px;}
 }
 @media screen and (max-width: 639px) {
   .hidden-639{display:none;}
@@ -5428,7 +5451,14 @@ tags-input .tags{padding: 0;}
   .bus-search-top .bus-follow .btn-new-1 {font-size: 13px; padding: 4px 15px; width: 92px;}
   .search-profiles .profile-btns .btn-new-1.follow, .search-profiles .profile-btns .btn-new-1.following {font-size: 13px; margin: 3px 0; padding: 7px 15px; width: 92px;}
   .custom-user-btn a.btn-new-1{font-size: 13px; width: 92px;}
-
+  .hashtag-list ul li{width: 50%;}
+  .hash-box .hash-detail .btn-new-1{font-size: 13px; padding: 6px 15px; width: 92px;}
+  .hash-box .hash-detail .hash-name{font-size: 14px;}
+  .hashtag-list ul li:nth-child(3n+0) .hash-box{border-right: 1px solid #d2d2d2;}
+  .hashtag-list ul li:nth-child(2n+0) .hash-box{border-right: 0;}
+  .hash-tag-listing .hashtag-list ul li{width: 50%;}
+  .hash-tag-listing .hashtag-list ul li:nth-child(3n+0) .hash-box{border-right: 1px solid #d2d2d2;}
+  .hash-tag-listing .hashtag-list ul li:nth-child(2n+0) .hash-box{border-right: 0;}
 }
 @media screen and (max-width: 359px) {
   .main-banner{max-height:170px;}
