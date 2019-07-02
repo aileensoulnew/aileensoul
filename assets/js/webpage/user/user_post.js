@@ -480,12 +480,13 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                             }
                         all_html += '</div>';
 
-                        all_html += '<h4>'+data.user_data.fullname+'</h4>';
+                        // all_html += '<h4>'+data.user_data.fullname+'</h4>';
+                        all_html += '<h4><a href="'+base_url+data.user_data.user_slug+'" target="_self">'+data.user_data.fullname+'</a></h4>';
                         all_html += '<p>';
-                            if(data.user_data.title_name != '' && data.user_data.degree_name == ''){
+                            if(data.user_data.title_name && !data.user_data.degree_name){
                                 all_html += (data.user_data.title_name.length > 30 ? data.user_data.title_name.substr(0,30)+'...' : data.user_data.title_name);
                             }
-                            else if(data.user_data.title_name == '' && data.user_data.degree_name != ''){
+                            else if(!data.user_data.title_name && data.user_data.degree_name){
                                 all_html += (data.user_data.degree_name.length > 30 ? data.user_data.degree_name.substr(0,30)+'...' : data.user_data.degree_name);
                             }
                             else{
@@ -4734,12 +4735,13 @@ app.controller('peopleController', function($scope, $http, $compile, $window,$lo
                             }
                         all_html += '</div>';
 
-                        all_html += '<h4>'+data.user_data.fullname+'</h4>';
+                        // all_html += '<h4>'+data.user_data.fullname+'</h4>';
+                        all_html += '<h4><a href="'+base_url+data.user_data.user_slug+'" target="_self">'+data.user_data.fullname+'</a></h4>';
                         all_html += '<p>';
-                            if(data.user_data.title_name != '' && data.user_data.degree_name == ''){
+                            if(data.user_data.title_name && !data.user_data.degree_name){
                                 all_html += (data.user_data.title_name.length > 30 ? data.user_data.title_name.substr(0,30)+'...' : data.user_data.title_name);
                             }
-                            else if(data.user_data.title_name == '' && data.user_data.degree_name != ''){
+                            else if(!data.user_data.title_name && data.user_data.degree_name){
                                 all_html += (data.user_data.degree_name.length > 30 ? data.user_data.degree_name.substr(0,30)+'...' : data.user_data.degree_name);
                             }
                             else{
@@ -5290,12 +5292,13 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                             }
                         all_html += '</div>';
 
-                        all_html += '<h4>'+data.user_data.fullname+'</h4>';
+                        // all_html += '<h4>'+data.user_data.fullname+'</h4>';
+                        all_html += '<h4><a href="'+base_url+data.user_data.user_slug+'" target="_self">'+data.user_data.fullname+'</a></h4>';
                         all_html += '<p>';
-                            if(data.user_data.title_name != '' && data.user_data.degree_name == ''){
+                            if(data.user_data.title_name && !data.user_data.degree_name){
                                 all_html += (data.user_data.title_name.length > 30 ? data.user_data.title_name.substr(0,30)+'...' : data.user_data.title_name);
                             }
-                            else if(data.user_data.title_name == '' && data.user_data.degree_name != ''){
+                            else if(!data.user_data.title_name && data.user_data.degree_name){
                                 all_html += (data.user_data.degree_name.length > 30 ? data.user_data.degree_name.substr(0,30)+'...' : data.user_data.degree_name);
                             }
                             else{
@@ -7185,12 +7188,13 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                             }
                         all_html += '</div>';
 
-                        all_html += '<h4>'+data.user_data.fullname+'</h4>';
+                        // all_html += '<h4>'+data.user_data.fullname+'</h4>';
+                        all_html += '<h4><a href="'+base_url+data.user_data.user_slug+'" target="_self">'+data.user_data.fullname+'</a></h4>';
                         all_html += '<p>';
-                            if(data.user_data.title_name != '' && data.user_data.degree_name == ''){
+                            if(data.user_data.title_name && !data.user_data.degree_name){
                                 all_html += (data.user_data.title_name.length > 30 ? data.user_data.title_name.substr(0,30)+'...' : data.user_data.title_name);
                             }
-                            else if(data.user_data.title_name == '' && data.user_data.degree_name != ''){
+                            else if(!data.user_data.title_name && data.user_data.degree_name){
                                 all_html += (data.user_data.degree_name.length > 30 ? data.user_data.degree_name.substr(0,30)+'...' : data.user_data.degree_name);
                             }
                             else{
@@ -9119,12 +9123,13 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                             }
                         all_html += '</div>';
 
-                        all_html += '<h4>'+data.user_data.fullname+'</h4>';
+                        // all_html += '<h4>'+data.user_data.fullname+'</h4>';
+                        all_html += '<h4><a href="'+base_url+data.user_data.user_slug+'" target="_self">'+data.user_data.fullname+'</a></h4>';
                         all_html += '<p>';
-                            if(data.user_data.title_name != '' && data.user_data.degree_name == ''){
+                            if(data.user_data.title_name && !data.user_data.degree_name){
                                 all_html += (data.user_data.title_name.length > 30 ? data.user_data.title_name.substr(0,30)+'...' : data.user_data.title_name);
                             }
-                            else if(data.user_data.title_name == '' && data.user_data.degree_name != ''){
+                            else if(!data.user_data.title_name && data.user_data.degree_name){
                                 all_html += (data.user_data.degree_name.length > 30 ? data.user_data.degree_name.substr(0,30)+'...' : data.user_data.degree_name);
                             }
                             else{
@@ -10968,12 +10973,13 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                             }
                         all_html += '</div>';
 
-                        all_html += '<h4>'+data.user_data.fullname+'</h4>';
+                        // all_html += '<h4>'+data.user_data.fullname+'</h4>';
+                        all_html += '<h4><a href="'+base_url+data.user_data.user_slug+'" target="_self">'+data.user_data.fullname+'</a></h4>';
                         all_html += '<p>';
-                            if(data.user_data.title_name != '' && data.user_data.degree_name == ''){
+                            if(data.user_data.title_name && !data.user_data.degree_name){
                                 all_html += (data.user_data.title_name.length > 30 ? data.user_data.title_name.substr(0,30)+'...' : data.user_data.title_name);
                             }
-                            else if(data.user_data.title_name == '' && data.user_data.degree_name != ''){
+                            else if(!data.user_data.title_name && data.user_data.degree_name){
                                 all_html += (data.user_data.degree_name.length > 30 ? data.user_data.degree_name.substr(0,30)+'...' : data.user_data.degree_name);
                             }
                             else{
