@@ -109,7 +109,7 @@ class Userprofile_model extends CI_Model {
         $new_follow_array = array();
         foreach ($result_array as $key=>$value) {
             $condition = "((uf.follow_from = '" . $login_user_id . "' AND uf.follow_to = '" . $value['user_id'] . "'))";
-            $this->db->select("uf.id as follow_user_id")->from("user_follow uf");
+            $this->db->select("uf.id as follow_user_id,uf.status as follow_status")->from("user_follow uf");
             $this->db->where('uf.status', '1');
             $this->db->where('uf.follow_type', '1');
             $this->db->where($condition);
@@ -120,6 +120,7 @@ class Userprofile_model extends CI_Model {
                 $result['follow_user_id'] = 
             }*/
             $result_array[$key]['follow_user_id'] = $result_query[0]['follow_user_id'];
+            $result_array[$key]['follow_status'] = $result_query[0]['follow_status'];
 
             // array_push($new_follow_array, $result);
         }        

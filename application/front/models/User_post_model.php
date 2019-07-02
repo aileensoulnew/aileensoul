@@ -410,15 +410,6 @@ class User_post_model extends CI_Model {
             $post_comment_data[$key]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value['comment_id']);
             $post_comment_data[$key]['postCommentLikeCount'] = $this->postCommentLikeCount($value['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value['comment_id']);
 
-            $follower_count = $this->common->getFollowerCount($value['commented_user_id'])[0];
-            $post_comment_data[$key]['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
-
-            $contact_count = $this->common->getContactCount($value['commented_user_id'])[0];
-            $post_comment_data[$key]['contact_count'] = $this->common->change_number_long_format_to_short((int)$contact_count['total']);
-
-            $post_count = $this->common->get_post_count($value['commented_user_id']);
-            $post_comment_data[$key]['post_count'] = $this->common->change_number_long_format_to_short((int)$post_count);
-
             $post_comment_data[$key]['comment_reply_data'] = $this->post_comment_reply_data($post_id,$value['comment_id'],$user_id);
         }
         return $post_comment_data;
@@ -447,16 +438,7 @@ class User_post_model extends CI_Model {
             $post_comment_data[$key]['comment_time_string'] = $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($post_comment_data[$key]['created_date'])));
             $post_comment_data[$key]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value['comment_id']);
             $post_comment_data[$key]['postCommentLikeCount'] = $this->postCommentLikeCount($value['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value['comment_id']);
-
-            $follower_count = $this->common->getFollowerCount($value['commented_user_id'])[0];
-            $post_comment_data[$key]['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
-
-            $contact_count = $this->common->getContactCount($value['commented_user_id'])[0];
-            $post_comment_data[$key]['contact_count'] = $this->common->change_number_long_format_to_short((int)$contact_count['total']);
-
-            $post_count = $this->common->get_post_count($value['commented_user_id']);
-            $post_comment_data[$key]['post_count'] = $this->common->change_number_long_format_to_short((int)$post_count);            
-
+            
             $post_comment_data[$key]['comment_reply_data'] = $this->post_comment_reply_data($post_id,$value['comment_id'],$user_id);
         }
         return $post_comment_data;
@@ -2181,16 +2163,7 @@ class User_post_model extends CI_Model {
                 $result_array[$key]['post_like_data'] = $postLikeUsername;
             }
             $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
-            $result_array[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id'],$user_id);
-
-            /*foreach ($postCommentData as $key1 => $value1) {
-                $result_array[$key]['post_comment_data'][$key1]['is_userlikePostComment'] = $this->is_userlikePostComment($user_id, $value1['comment_id']);
-                $result_array[$key]['post_comment_data'][$key1]['postCommentLikeCount'] = $this->postCommentLikeCount($value1['comment_id']) == '0' ? '' : $this->postCommentLikeCount($value1['comment_id']);
-            }*/
-
-            /*$result_array[$key]['page_data']['page'] = $page;
-            $result_array[$key]['page_data']['total_record'] = $this->userPostCount($user_id);
-            $result_array[$key]['page_data']['perpage_record'] = $limit;*/
+            $result_array[$key]['post_comment_data'] = $postCommentData = $this->postCommentData($value['id'],$user_id);            
         }
        // echo '<pre>';
        // print_r($result_array);
@@ -5299,11 +5272,6 @@ class User_post_model extends CI_Model {
             $result_array[$key]['profile_background'] = $img_data->profile_background;
             $result_array[$key]['title_name'] = $this->user_model->getAnyJobTitle($value['designation'])['job_name'];
             $result_array[$key]['degree_name'] = $this->user_model->getAnyDegreename($value['current_study'])['degree_name'];
-
-            $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "1"')->get()->row_array();
-            $result_array[$key]['follow_from'] = $follow_detail['follow_from'];
-            $result_array[$key]['follow_to'] = $follow_detail['follow_to'];
-            $result_array[$key]['follow_status'] = $follow_detail['status'];
 
             $is_userContactInfo= $this->userprofile_model->userContactStatus($user_id, $value['user_id']);
             if(isset($is_userContactInfo) && !empty($is_userContactInfo))
