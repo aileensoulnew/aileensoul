@@ -451,108 +451,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                     </div>
                                 </div>
 
-                                <div ng-if="postData.length != 0" ng-repeat="post in postData" ng-init="postIndex=$index">
-                                    <div id="tooltip_content_{{postIndex}}" class="tooltip_templates">
-                                        <div class="bus-tooltip" ng-if="post.post_data.user_type == '2'">
-                                            <div class="user-tooltip">
-                                                <div class="tooltip-cover-img">
-                                                    <img ng-src="<?php echo BUS_BG_MAIN_UPLOAD_URL ?>{{post.user_data.profile_background}}" ng-if="post.user_data.profile_background">
-                                                    <div ng-if="!post.user_data.profile_background" class="gradient-bg" style="height: 100%"></div>
-                                                </div>
-                                                <div class="tooltip-user-detail">
-                                                    <div class="tooltip-user-img">
-                                                        <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{post.user_data.business_user_image}}" ng-if="post.user_data.business_user_image">                                
-                                                        <img ng-if="!post.user_data.business_user_image" ng-src="<?php echo base_url(NOBUSIMAGE); ?>">
-                                                    </div>
-                                                    <div class="fw">
-                                                        <div class="tooltip-detail">
-                                                            <h4 ng-bind="post.user_data.company_name"></h4>
-                                                            <p ng-if="post.user_data.industry_name != null" ng-bind="post.user_data.industry_name"></p> 
-                                                            <p ng-if="!post.user_data.industry_name">CURRENT WORK</p>
-                                                            <p>{{post.user_data.city_name}}{{post.user_data.city_name != '' ? ',' : ''}}{{post.user_data.state_name}}{{post.user_data.state_name != '' ? ',' : ''}}{{post.user_data.country_name}}</p>
-                                                        </div>
-                                                        
-                                                        <div class="tooltip-btns follow-btn-bus-{{post.user_data.user_id}}" ng-if="post.user_data.user_id != user_id">
-                                                            <a ng-if="post.user_data.follow_status == 1" class="btn-new-1 following" data-uid="{{post.user_data.user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus_{{post.post_data.id}}">Following</a>
-
-                                                            <a ng-if="post.user_data.follow_status == 0 || !post.user_data.follow_status" class="btn-new-1 follow" data-uid="{{post.user_data.user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user_bus(this.id)" id="follow_btn_bus_{{post.post_data.id}}">Follow</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="user-tooltip" ng-if="post.post_data.user_type == '1'">
-                                            <div class="tooltip-cover-img">
-                                                <img ng-if="post.user_data.profile_background != null && post.user_data.profile_background != ''" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL; ?>{{post.user_data.profile_background}}">
-                                                <div ng-if="post.user_data.profile_background == null || post.user_data.profile_background == ''" class="gradient-bg" style="height: 100%"></div>
-                                            </div>
-                                            <div class="tooltip-user-detail">
-                                                <div class="tooltip-user-img">
-                                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.user_data.user_image != ''">
-
-                                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-
-                                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-
-                                                </div>
-                                                
-                                                <h4 ng-bind="post.user_data.fullname"></h4>
-
-                                                <p ng-if="post.user_data.title_name != null" ng-bind="post.user_data.title_name"></p>
-                                                <p ng-if="post.user_data.title_name == null" ng-bind="post.user_data.degree_name"></p>
-                                                <p ng-if="post.user_data.title_name == null && post.user_data.degree_name == null">CURRENT WORK</p>
-
-                                                <p ng-if="post.user_data.post_count != '' || post.user_data.contact_count != '' || post.user_data.follower_count != ''">
-                                                    <span ng-if="post.user_data.post_count != ''"><b>{{post.user_data.post_count}}</b> Posts</span>
-                                                    <span ng-if="post.user_data.contact_count != ''"><b>{{post.user_data.contact_count}}</b> Contacts</span>
-                                                    <span ng-if="post.user_data.follower_count != ''"><b>{{post.user_data.follower_count}}</b> Followers</span>
-                                                </p>
-
-                                                <ul class="" ng-if="post.mutual_friend.length > 0">
-                                                    <li ng-repeat="_friend in post.mutual_friend | limitTo:2">
-                                                        <div class="user-img">
-                                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{_friend.user_image}}" ng-if="_friend.user_image != ''">
-
-                                                            <img ng-if="_friend.user_image == '' && _friend.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-
-                                                            <img ng-if="_friend.user_image == '' && _friend.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-                                                        </div>
-                                                    </li>                            
-                                                    <li class="m-contacts">
-                                                        <span ng-if="post.mutual_friend.length == 1">
-                                                            <b>{{post.mutual_friend[0].fullname}}</b> is in mutual contact.
-                                                        </span>
-                                                        <span ng-if="post.mutual_friend.length > 1">
-                                                            <b>{{post.mutual_friend[0].fullname}}</b>{{post.mutual_friend.length - 1 > 0 ? ' and ' : ''}}<b>{{post.mutual_friend.length - 1}}</b> more mutual contacts.
-                                                        </span>
-                                                    </li>
-                                                </ul>
-                                                <div class="tooltip-btns" ng-if="post.user_data.user_id != user_id">
-                                                    <ul>
-                                                        <li class="contact-btn-{{post.user_data.user_id}}">
-                                                            <a class="btn-new-1" ng-if="post.user_data.contact_value == 'new'" data-param="{{post.user_data.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ post.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{post.post_data.id}}">Add to contact</a>
-                                                            
-                                                            <a class="btn-new-1" ng-if="post.user_data.contact_value == 'confirm'" data-param="{{post.user_data.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ post.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},1" onclick="contact(this.id);" id="contact_btn_{{post.post_data.id}}">In Contacts</a>
-                                                            
-                                                            <a class="btn-new-1" ng-if="post.user_data.contact_value == 'pending'" data-param="{{post.user_data.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ post.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{post.post_data.id}}">Request sent</a>
-                                                            
-                                                            <a class="btn-new-1" ng-if="post.user_data.contact_value == 'cancel'" data-param="{{post.user_data.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ post.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{post.post_data.id}}">Add to contact</a>
-                                                            
-                                                            <a class="btn-new-1" ng-if="post.user_data.contact_value == 'reject'" data-param="{{post.user_data.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ post.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{post.post_data.id}}">Add to contact</a>
-                                                        </li>
-                                                        <li class="follow-btn-user-{{post.user_data.user_id}}">
-                                                            <a ng-if="post.user_data.follow_status == 1" class="btn-new-1 following" data-uid="{{post.user_data.user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user(this.id)" id="follow_btn_{{post.post_data.id}}">Following</a>
-
-                                                            <a ng-if="post.user_data.follow_status == 0 || !post.user_data.follow_status" class="btn-new-1 follow" data-uid="{{post.user_data.user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user(this.id)" id="follow_btn_{{post.post_data.id}}">Follow</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="<?php echo MESSAGE_URL; ?>user/{{post.user_data.user_slug}}" class="btn-new-1" target="_blank">Message</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div ng-if="postData.length != 0" ng-repeat="post in postData" ng-init="postIndex=$index">                                    
                                     <div id="main-post-{{post.post_data.id}}" class="all-post-box" ng-class="post.post_data.post_for == 'article' ? 'article-post' : ''">
                                         <!--<input type="hidden" name="post_index" class="post_index" ng-class="post_index" ng-model="post_index" ng-value="{{$index + 1}}">-->
                                         <input type="hidden" name="page_number" class="page_number" ng-class="page_number" ng-model="post.page_number" ng-value="{{post.page_data.page}}">
@@ -562,7 +461,7 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                         <div class="all-post-top">
                                             <div class="post-head" ng-class="post.question_data.is_anonymously == '1' ? 'anonymous-que' : ''">
                                                 <div class="post-img" ng-if="post.post_data.post_for == 'question'">
-                                                    <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self" ng-if="post.question_data.is_anonymously == '0'" data-toggle="popover" data-tooltip-content="#tooltip_content_{{postIndex}}">
+                                                    <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self" ng-if="post.question_data.is_anonymously == '0'" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}">
                                                         <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{post.user_data.business_user_image}}" ng-if="post.user_data.business_user_image != '' && post.question_data.is_anonymously == '0'">
                                                         <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.business_user_image == ''" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
                                                     </a>
@@ -571,13 +470,13 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                 </div>
                                                                 
                                                 <div class="post-img" ng-if="post.post_data.post_for != 'question' && post.user_data.business_user_image">
-                                                    <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self" data-toggle="popover" data-tooltip-content="#tooltip_content_{{postIndex}}">
+                                                    <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}">
                                                         <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL; ?>{{post.user_data.business_user_image}}">
                                                     </a>
                                                 </div>
 
                                                 <div class="post-img no-profile-pic" ng-if="post.post_data.post_for != 'question' && !post.user_data.business_user_image">
-                                                    <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self" data-toggle="popover" data-tooltip-content="#tooltip_content_{{postIndex}}">
+                                                    <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}">
                                                         <img ng-src="<?php echo base_url(NOBUSIMAGE); ?>">
                                                     </a>
                                                 </div>
@@ -586,11 +485,11 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                     <div class="fw" ng-if="post.post_data.post_for == 'question'">
                                                         <a href="javascript:void(0)" class="post-name" ng-if="post.question_data.is_anonymously == '1'">Anonymous</a>
                                                         <span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
-                                                        <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.question_data.is_anonymously == '0'" data-toggle="popover" data-tooltip-content="#tooltip_content_{{postIndex}}"></a><span class="post-time">{{post.post_data.time_string}}</span>
+                                                        <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.question_data.is_anonymously == '0'" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a><span class="post-time">{{post.post_data.time_string}}</span>
                                                     </div>
                                                                     
                                                     <div class="fw" ng-if="post.post_data.post_for != 'question'">
-                                                        <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" data-toggle="popover" data-tooltip-content="#tooltip_content_{{postIndex}}"></a><span class="post-time">{{post.post_data.time_string}}</span>
+                                                        <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a><span class="post-time">{{post.post_data.time_string}}</span>
                                                     </div>
                                                                     
                                                     <div class="fw" ng-if="post.post_data.post_for == 'question'">
@@ -740,376 +639,275 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                     <span ng-bind="post.share_data.description" id="share-desc-{{post.post_data.id}}"></span>
                                                 </p>
 
-                                                <div id="share-post-detail-{{post.post_data.id}}" ng-if="post.share_data" class="all-post-box">
-                                                    <div id="tooltip_content_share_{{postIndex}}" class="tooltip_templates">
-                                                        <div class="bus-tooltip" ng-if="post.share_data.data.post_data.user_type == '2'">
-                                                            <div class="user-tooltip">
-                                                                <div class="tooltip-cover-img">
-                                                                    <img ng-src="<?php echo BUS_BG_MAIN_UPLOAD_URL ?>{{post.share_data.data.user_data.profile_background}}">
-                                                                    <div ng-if="post.share_data.data.user_data.profile_background == null || post.share_data.data.user_data.profile_background == ''" class="gradient-bg" style="height: 100%"></div>
-                                                                </div>
-                                                                <div class="tooltip-user-detail">
-                                                                    <div class="tooltip-user-img">
-                                                                        <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{post.share_data.data.user_data.business_user_image}}" ng-if="post.share_data.data.user_data.business_user_image">                                
-                                                                        <img ng-if="!post.share_data.data.user_data.business_user_image" ng-src="<?php echo base_url(NOBUSIMAGE); ?>">
-                                                                    </div>
-                                                                    <div class="fw">
-                                                                        <div class="tooltip-detail">
-                                                                            <h4 ng-bind="post.share_data.data.user_data.company_name"></h4>
-                                                                            <p ng-if="post.share_data.data.user_data.industry_name != null" ng-bind="post.share_data.data.user_data.industry_name"></p> 
-                                                                            <p ng-if="!post.share_data.data.user_data.industry_name">CURRENT WORK</p>
-                                                                            <p>{{post.share_data.data.user_data.city_name}}{{post.share_data.data.user_data.city_name != '' ? ',' : ''}}{{post.share_data.data.user_data.state_name}}{{post.share_data.data.user_data.state_name != '' ? ',' : ''}}{{post.share_data.data.user_data.country_name}}</p>
-                                                                        </div>
-                                                                        
-                                                                        <div class="tooltip-btns follow-btn-bus-{{post.share_data.data.user_data.user_id}}">
-                                                                            <a ng-if="post.share_data.data.user_data.follow_status == 1" class="btn-new-1 following" data-uid="{{post.share_data.data.user_data.user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus_{{post.share_data.data.post_data.id}}">Following</a>
+                                                <div id="share-post-detail-{{post.post_data.id}}" ng-if="post.share_data" class="all-post-box">   
+                                                    <div class="all-post-top">
+                                                        <div class="post-head">
+                                                            <div class="post-img" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.post_data.post_for == 'question'">
+                                                                <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" target="_self" ng-if="post.share_data.data.question_data.is_anonymously == '0'" data-toggle="popover" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}">
+                                                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.share_data.data.user_data.user_image}}" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image != '' && post.share_data.data.question_data.is_anonymously == '0'">
+                                                                    <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image == '' && post.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                                    <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image == '' && post.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                                </a>
+                                                                                
+                                                                <span class="no-img-post"  ng-if="post.share_data.data.user_data.user_image == '' || post.share_data.data.question_data.is_anonymously == '1'">A</span>
+                                                            </div>
 
-                                                                            <a ng-if="post.share_data.data.user_data.follow_status == 0 || !post.share_data.data.user_data.follow_status" class="btn-new-1 follow" data-uid="{{post.share_data.data.user_data.user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user_bus(this.id)" id="follow_btn_bus_{{post.share_data.data.post_data.id}}">Follow</a>
-                                                                        </div>
+                                                            <div class="post-img" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.post_data.post_for != 'question' && post.share_data.data.user_data.user_image != ''">
+                                                                <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" target="_self" data-toggle="popover" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}">
+                                                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.share_data.data.user_data.user_image}}">
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="post-img no-profile-pic" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.post_data.post_for != 'question' && post.share_data.data.user_data.user_image == ''">
+                                                                <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" target="_self" data-toggle="popover" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}">
+                                                                    <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                                    <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="post-img" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.post_data.post_for == 'question'">
+                                                                <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" target="_self" ng-if="post.share_data.data.question_data.is_anonymously == '0'" data-toggle="popover" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}">
+                                                                    <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{post.share_data.data.user_data.business_user_image}}" ng-if="post.share_data.data.user_data.business_user_image && post.share_data.data.question_data.is_anonymously == '0'">
+                                                                    <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="!post.share_data.data.user_data.business_user_image" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
+                                                                </a>
+                                                                                
+                                                                <span class="no-img-post"  ng-if="!post.share_data.data.user_data.business_user_image || post.share_data.data.question_data.is_anonymously == '1'">A</span>
+                                                            </div>
+                                                                            
+                                                            <div class="post-img" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.post_data.post_for != 'question' && post.share_data.data.user_data.business_user_image">
+                                                                <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" target="_self" data-toggle="popover" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}">
+                                                                    <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL; ?>{{post.share_data.data.user_data.business_user_image}}">
+                                                                </a>
+                                                            </div>
+                                                                            
+                                                            <div class="post-img no-profile-pic" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.post_data.post_for != 'question' && !post.share_data.data.user_data.business_user_image">
+                                                                <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" target="_self" data-toggle="popover" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}">
+                                                                    <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="post-detail">
+                                                                <div class="fw" ng-if="post.share_data.data.post_data.post_for == 'question'">
+                                                                    <a href="javascript:void(0)" class="post-name" ng-if="post.share_data.data.question_data.is_anonymously == '1'">Anonymous</a>
+                                                                    <span class="post-time" ng-if="post.share_data.data.question_data.is_anonymously == '1'"></span>
+                                                                    <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.fullname" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.question_data.is_anonymously == '0'" data-toggle="popover" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}"></a>
+                                                                    <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.company_name" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.question_data.is_anonymously == '0'" data-toggle="popover" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}"></a>
+                                                                    <!-- <span class="post-time">{{post.share_data.data.post_data.time_string}}</span> -->
+                                                                </div>
+                                                                                
+                                                                <div class="fw" ng-if="post.share_data.data.post_data.post_for != 'question'">
+                                                                    <a ng-if="post.share_data.data.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.fullname" data-toggle="popover" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}"></a>
+                                                                    <a ng-if="post.share_data.data.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.company_name" data-toggle="popover" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}"></a>
+                                                                    <!-- <span class="post-time">{{post.share_data.data.post_data.time_string}}</span> -->
+                                                                </div>
+
+                                                                <div class="fw" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.post_data.post_for == 'question'">
+                                                                    <span class="post-designation" ng-if="post.share_data.data.user_data.title_name != null && post.share_data.data.question_data.is_anonymously == '0'" ng-bind="post.share_data.data.user_data.title_name"></span>
+                                                                    <span class="post-designation" ng-if="post.share_data.data.user_data.title_name == null && post.share_data.data.question_data.is_anonymously == '0'" ng-bind="post.share_data.data.user_data.degree_name"></span>
+                                                                    <span class="post-designation" ng-if="post.share_data.data.user_data.title_name == null && post.share_data.data.user_data.degree_name == null && post.share_data.data.question_data.is_anonymously == '0'">CURRENT WORK</span>
+                                                                </div>
+                                                                <div class="fw" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.post_data.post_for != 'question'">
+                                                                    <span class="post-designation" ng-if="post.share_data.data.user_data.title_name != null" ng-bind="post.share_data.data.user_data.title_name"></span>
+                                                                    <span class="post-designation" ng-if="post.share_data.data.user_data.title_name == null" ng-bind="post.share_data.data.user_data.degree_name"></span>
+                                                                    <span class="post-designation" ng-if="post.share_data.data.user_data.title_name == null && post.share_data.data.user_data.degree_name == null">CURRENT WORK</span>
+                                                                </div>
+
+                                                                <div class="fw" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.post_data.post_for == 'question'">
+                                                                    <span class="post-designation" ng-if="post.share_data.data.user_data.industry_name != null && post.share_data.data.question_data.is_anonymously == '0'" ng-bind="post.share_data.data.user_data.industry_name"></span> 
+                                                                    <span class="post-designation" ng-if="!post.share_data.data.user_data.industry_name && post.share_data.data.question_data.is_anonymously == '0'">CURRENT WORK</span>
+                                                                </div>
+                                                                <div class="fw" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.post_data.post_for != 'question'">
+                                                                    <span class="post-designation" ng-if="post.share_data.data.user_data.industry_name" ng-bind="post.share_data.data.user_data.industry_name"></span> 
+                                                                    <span class="post-designation" ng-if="!post.share_data.data.user_data.industry_name">CURRENT WORK</span>
+                                                                </div>
+
+                                                            </div>            
+                                                        </div>
+                                                        <div class="post-discription" ng-if="post.share_data.data.post_data.post_for == 'opportunity'">
+                                                           
+                                                            <div id="post-opp-detail-{{post.share_data.data.post_data.id}}">
+                                                                <div class="post-title opp-title-cus">
+                                                                    <p ng-if="post.share_data.data.opportunity_data.opptitle"><b>Title of Opportunity:</b><h1 ng-bind="post.share_data.data.opportunity_data.opptitle" id="opp-title-{{post.share_data.data.post_data.id}}"></h1></p>
+                                                                </div>
+                                                                <h5 class="post-title">
+                                                                    <p ng-if="post.share_data.data.opportunity_data.opportunity_for"><b>Opportunity for:</b><span ng-bind="post.share_data.data.opportunity_data.opportunity_for" id="opp-post-opportunity-for-{{post.share_data.data.post_data.id}}"></span></p>
+                                                                    <p ng-if="post.share_data.data.opportunity_data.location"><b>Location:</b><span ng-bind="post.share_data.data.opportunity_data.location" id="opp-post-location-{{post.share_data.data.post_data.id}}"></span></p>
+                                                                    <p ng-if="post.share_data.data.opportunity_data.field"><b>Field:</b><span ng-bind="post.share_data.data.opportunity_data.field" id="opp-post-field-{{post.share_data.data.post_data.id}}"></span></p>
+                                                                    <p ng-if="!post.share_data.data.opportunity_data.field || post.share_data.data.opportunity_data.field == 0"><b>Field:</b><span ng-bind="post.share_data.data.opportunity_data.other_field" id="opp-post-field-{{post.share_data.data.post_data.id}}"></span></p>
+                                                                    <p ng-if="post.share_data.data.opportunity_data.hashtag" class="hashtag-grd"><b>Hashtags:</b>
+                                                                        <span>
+                                                                            <span class="post-hash-tag" id="opp-post-hashtag-{{post.share_data.data.post_data.id}}" ng-repeat="hashtag in post.share_data.data.opportunity_data.hashtag.split(' ')">{{hashtag}}</span>
+                                                                        </span>
+                                                                    </p>                                            
+                                                                    <p ng-if="post.share_data.data.opportunity_data.company_name"><b>Company Name:</b><span ng-bind="post.share_data.data.opportunity_data.company_name" id="opp-post-company-{{post.share_data.data.post_data.id}}"></span></p>
+                                                                </h5>
+                                                                <div class="post-des-detail" ng-if="post.share_data.data.opportunity_data.opportunity">
+                                                                    <div id="opp-post-opportunity-{{post.share_data.data.post_data.id}}" ng-class="post.share_data.data.opportunity_data.opportunity.length > 250 ? 'view-more-expand' : ''">
+                                                                        <b>Opportunity:</b>
+                                                                        <span ng-bind-html="post.share_data.data.opportunity_data.opportunity"></span>
+                                                                        <a id="remove-view-more{{post.share_data.data.post_data.id}}" ng-if="post.share_data.data.opportunity_data.opportunity.length > 250" ng-click="removeViewMore('opp-post-opportunity-'+post.share_data.data.post_data.id,'remove-view-more'+post.share_data.data.post_data.id);" class="read-more-post">.... Read More</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="user-tooltip" ng-if="post.share_data.data.post_data.user_type == '1'">
-                                                            <div class="tooltip-cover-img">
-                                                                <img ng-if="post.share_data.data.user_data.profile_background != null && post.share_data.data.user_data.profile_background != ''" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL; ?>{{post.share_data.data.user_data.profile_background}}">
-                                                                <div ng-if="post.share_data.data.user_data.profile_background == null || post.share_data.data.user_data.profile_background == ''" class="gradient-bg" style="height: 100%"></div>
-                                                            </div>
-                                                            <div class="tooltip-user-detail">
-                                                                <div class="tooltip-user-img">
-                                                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.share_data.data.user_data.user_image}}" ng-if="post.share_data.data.user_data.user_image != ''">
-
-                                                                    <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.user_data.user_image == '' && post.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-
-                                                                    <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.user_data.user_image == '' && post.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-
-                                                                </div>
-                                                                
-                                                                <h4 ng-bind="post.share_data.data.user_data.fullname"></h4>
-
-                                                                <p ng-if="post.share_data.data.user_data.title_name != null" ng-bind="post.share_data.data.user_data.title_name"></p>
-                                                                <p ng-if="post.share_data.data.user_data.title_name == null" ng-bind="post.share_data.data.user_data.degree_name"></p>
-                                                                <p ng-if="post.share_data.data.user_data.title_name == null && post.share_data.data.user_data.degree_name == null">CURRENT WORK</p>
-
-                                                                <p ng-if="post.share_data.data.user_data.post_count != '' || post.share_data.data.user_data.contact_count != '' || post.share_data.data.user_data.follower_count != ''">
-                                                                    <span ng-if="post.share_data.data.user_data.post_count != ''"><b>{{post.share_data.data.user_data.post_count}}</b> Posts</span>
-                                                                    <span ng-if="post.share_data.data.user_data.contact_count != ''"><b>{{post.share_data.data.user_data.contact_count}}</b> Contacts</span>
-                                                                    <span ng-if="post.share_data.data.user_data.follower_count != ''"><b>{{post.share_data.data.user_data.follower_count}}</b> Followers</span>
-                                                                </p>
-
-                                                                <ul class="" ng-if="post.share_data.data.mutual_friend.length > 0">
-                                                                    <li ng-repeat="_friend in post.share_data.data.mutual_friend | limitTo:2">
-                                                                        <div class="user-img">
-                                                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{_friend.user_image}}" ng-if="_friend.user_image != ''">
-
-                                                                            <img ng-if="_friend.user_image == '' && _friend.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-
-                                                                            <img ng-if="_friend.user_image == '' && _friend.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-                                                                        </div>
-                                                                    </li>                            
-                                                                    <li class="m-contacts">
-                                                                        <span ng-if="post.share_data.data.mutual_friend.length == 1">
-                                                                            <b>{{post.share_data.data.mutual_friend[0].fullname}}</b> is in mutual contact.
-                                                                        </span>
-                                                                        <span ng-if="post.share_data.data.mutual_friend.length > 1">
-                                                                            <b>{{post.share_data.data.mutual_friend[0].fullname}}</b>{{post.share_data.data.mutual_friend.length - 1 > 0 ? ' and ' : ''}}<b>{{post.share_data.data.mutual_friend.length - 1}}</b> more mutual contacts.
-                                                                        </span>
-                                                                    </li>
-                                                                </ul>
-                                                                <div class="tooltip-btns" ng-if="post.share_data.data.user_data.user_id != user_id">
-                                                                    <ul>
-                                                                        <li class="contact-btn-{{post.share_data.data.user_data.user_id}}">
-                                                                            <a class="btn-new-1" ng-if="post.share_data.data.user_data.contact_value == 'new'" data-param="{{post.share_data.data.user_data.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ post.share_data.data.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{post.share_data.data.post_data.id}}">Add to contact</a>
-                                                                            
-                                                                            <a class="btn-new-1" ng-if="post.share_data.data.user_data.contact_value == 'confirm'" data-param="{{post.share_data.data.user_data.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ post.share_data.data.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},1" onclick="contact(this.id);" id="contact_btn_{{post.share_data.data.post_data.id}}">In Contacts</a>
-                                                                            
-                                                                            <a class="btn-new-1" ng-if="post.share_data.data.user_data.contact_value == 'pending'" data-param="{{post.share_data.data.user_data.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ post.share_data.data.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{post.share_data.data.post_data.id}}">Request sent</a>
-                                                                            
-                                                                            <a class="btn-new-1" ng-if="post.share_data.data.user_data.contact_value == 'cancel'" data-param="{{post.share_data.data.user_data.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ post.share_data.data.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{post.share_data.data.post_data.id}}">Add to contact</a>
-                                                                            
-                                                                            <a class="btn-new-1" ng-if="post.share_data.data.user_data.contact_value == 'reject'" data-param="{{post.share_data.data.user_data.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ post.share_data.data.user_data.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{post.share_data.data.post_data.id}}">Add to contact</a>
-                                                                        </li>
-                                                                        <li class="follow-btn-user-{{post.share_data.data.user_data.user_id}}">
-                                                                            <a ng-if="post.share_data.data.user_data.follow_status == 1" class="btn-new-1 following" data-uid="{{post.share_data.data.user_data.user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user(this.id)" id="follow_btn_{{post.share_data.data.post_data.id}}">Following</a>
-
-                                                                            <a ng-if="post.share_data.data.user_data.follow_status == 0 || !post.share_data.data.user_data.follow_status" class="btn-new-1 follow" data-uid="{{post.share_data.data.user_data.user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user(this.id)" id="follow_btn_{{post.share_data.data.post_data.id}}">Follow</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="<?php echo MESSAGE_URL; ?>user/{{post.share_data.data.user_data.user_slug}}" class="btn-new-1" target="_blank">Message</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                        <div class="all-post-top">
-                                                            <div class="post-head">
-                                                                <div class="post-img" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.post_data.post_for == 'question'">
-                                                                    <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" target="_self" ng-if="post.share_data.data.question_data.is_anonymously == '0'" data-toggle="popover" data-tooltip-content="#tooltip_content_share_{{postIndex}}">
-                                                                        <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.share_data.data.user_data.user_image}}" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image != '' && post.share_data.data.question_data.is_anonymously == '0'">
-                                                                        <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image == '' && post.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                                                        <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image == '' && post.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-                                                                    </a>
-                                                                                    
-                                                                    <span class="no-img-post"  ng-if="post.share_data.data.user_data.user_image == '' || post.share_data.data.question_data.is_anonymously == '1'">A</span>
-                                                                </div>
-
-                                                                <div class="post-img" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.post_data.post_for != 'question' && post.share_data.data.user_data.user_image != ''">
-                                                                    <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" target="_self" data-toggle="popover" data-tooltip-content="#tooltip_content_share_{{postIndex}}">
-                                                                        <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.share_data.data.user_data.user_image}}">
-                                                                    </a>
-                                                                </div>
-
-                                                                <div class="post-img no-profile-pic" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.post_data.post_for != 'question' && post.share_data.data.user_data.user_image == ''">
-                                                                    <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" target="_self" data-toggle="popover" data-tooltip-content="#tooltip_content_share_{{postIndex}}">
-                                                                        <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                                                        <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-                                                                    </a>
-                                                                </div>
-
-                                                                <div class="post-img" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.post_data.post_for == 'question'">
-                                                                    <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" target="_self" ng-if="post.share_data.data.question_data.is_anonymously == '0'" data-toggle="popover" data-tooltip-content="#tooltip_content_share_{{postIndex}}">
-                                                                        <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{post.share_data.data.user_data.business_user_image}}" ng-if="post.share_data.data.user_data.business_user_image && post.share_data.data.question_data.is_anonymously == '0'">
-                                                                        <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="!post.share_data.data.user_data.business_user_image" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
-                                                                    </a>
-                                                                                    
-                                                                    <span class="no-img-post"  ng-if="!post.share_data.data.user_data.business_user_image || post.share_data.data.question_data.is_anonymously == '1'">A</span>
-                                                                </div>
-                                                                                
-                                                                <div class="post-img" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.post_data.post_for != 'question' && post.share_data.data.user_data.business_user_image">
-                                                                    <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" target="_self" data-toggle="popover" data-tooltip-content="#tooltip_content_share_{{postIndex}}">
-                                                                        <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL; ?>{{post.share_data.data.user_data.business_user_image}}">
-                                                                    </a>
-                                                                </div>
-                                                                                
-                                                                <div class="post-img no-profile-pic" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.post_data.post_for != 'question' && !post.share_data.data.user_data.business_user_image">
-                                                                    <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" target="_self" data-toggle="popover" data-tooltip-content="#tooltip_content_share_{{postIndex}}">
-                                                                        <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
-                                                                    </a>
-                                                                </div>
-
-                                                                <div class="post-detail">
-                                                                    <div class="fw" ng-if="post.share_data.data.post_data.post_for == 'question'">
-                                                                        <a href="javascript:void(0)" class="post-name" ng-if="post.share_data.data.question_data.is_anonymously == '1'">Anonymous</a>
-                                                                        <span class="post-time" ng-if="post.share_data.data.question_data.is_anonymously == '1'"></span>
-                                                                        <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.fullname" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.question_data.is_anonymously == '0'" data-toggle="popover" data-tooltip-content="#tooltip_content_share_{{postIndex}}"></a>
-                                                                        <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.company_name" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.question_data.is_anonymously == '0'" data-toggle="popover" data-tooltip-content="#tooltip_content_share_{{postIndex}}"></a>
-                                                                        <!-- <span class="post-time">{{post.share_data.data.post_data.time_string}}</span> -->
-                                                                    </div>
-                                                                                    
-                                                                    <div class="fw" ng-if="post.share_data.data.post_data.post_for != 'question'">
-                                                                        <a ng-if="post.share_data.data.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.fullname" data-toggle="popover" data-tooltip-content="#tooltip_content_share_{{postIndex}}"></a>
-                                                                        <a ng-if="post.share_data.data.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.company_name" data-toggle="popover" data-tooltip-content="#tooltip_content_share_{{postIndex}}"></a>
-                                                                        <!-- <span class="post-time">{{post.share_data.data.post_data.time_string}}</span> -->
-                                                                    </div>
-
-                                                                    <div class="fw" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.post_data.post_for == 'question'">
-                                                                        <span class="post-designation" ng-if="post.share_data.data.user_data.title_name != null && post.share_data.data.question_data.is_anonymously == '0'" ng-bind="post.share_data.data.user_data.title_name"></span>
-                                                                        <span class="post-designation" ng-if="post.share_data.data.user_data.title_name == null && post.share_data.data.question_data.is_anonymously == '0'" ng-bind="post.share_data.data.user_data.degree_name"></span>
-                                                                        <span class="post-designation" ng-if="post.share_data.data.user_data.title_name == null && post.share_data.data.user_data.degree_name == null && post.share_data.data.question_data.is_anonymously == '0'">CURRENT WORK</span>
-                                                                    </div>
-                                                                    <div class="fw" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.post_data.post_for != 'question'">
-                                                                        <span class="post-designation" ng-if="post.share_data.data.user_data.title_name != null" ng-bind="post.share_data.data.user_data.title_name"></span>
-                                                                        <span class="post-designation" ng-if="post.share_data.data.user_data.title_name == null" ng-bind="post.share_data.data.user_data.degree_name"></span>
-                                                                        <span class="post-designation" ng-if="post.share_data.data.user_data.title_name == null && post.share_data.data.user_data.degree_name == null">CURRENT WORK</span>
-                                                                    </div>
-
-                                                                    <div class="fw" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.post_data.post_for == 'question'">
-                                                                        <span class="post-designation" ng-if="post.share_data.data.user_data.industry_name != null && post.share_data.data.question_data.is_anonymously == '0'" ng-bind="post.share_data.data.user_data.industry_name"></span> 
-                                                                        <span class="post-designation" ng-if="!post.share_data.data.user_data.industry_name && post.share_data.data.question_data.is_anonymously == '0'">CURRENT WORK</span>
-                                                                    </div>
-                                                                    <div class="fw" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.post_data.post_for != 'question'">
-                                                                        <span class="post-designation" ng-if="post.share_data.data.user_data.industry_name" ng-bind="post.share_data.data.user_data.industry_name"></span> 
-                                                                        <span class="post-designation" ng-if="!post.share_data.data.user_data.industry_name">CURRENT WORK</span>
-                                                                    </div>
-
-                                                                </div>            
-                                                            </div>
-                                                            <div class="post-discription" ng-if="post.share_data.data.post_data.post_for == 'opportunity'">
-                                                               
-                                                                <div id="post-opp-detail-{{post.share_data.data.post_data.id}}">
-                                                                    <div class="post-title opp-title-cus">
-                                                                        <p ng-if="post.share_data.data.opportunity_data.opptitle"><b>Title of Opportunity:</b><h1 ng-bind="post.share_data.data.opportunity_data.opptitle" id="opp-title-{{post.share_data.data.post_data.id}}"></h1></p>
-                                                                    </div>
-                                                                    <h5 class="post-title">
-                                                                        <p ng-if="post.share_data.data.opportunity_data.opportunity_for"><b>Opportunity for:</b><span ng-bind="post.share_data.data.opportunity_data.opportunity_for" id="opp-post-opportunity-for-{{post.share_data.data.post_data.id}}"></span></p>
-                                                                        <p ng-if="post.share_data.data.opportunity_data.location"><b>Location:</b><span ng-bind="post.share_data.data.opportunity_data.location" id="opp-post-location-{{post.share_data.data.post_data.id}}"></span></p>
-                                                                        <p ng-if="post.share_data.data.opportunity_data.field"><b>Field:</b><span ng-bind="post.share_data.data.opportunity_data.field" id="opp-post-field-{{post.share_data.data.post_data.id}}"></span></p>
-                                                                        <p ng-if="!post.share_data.data.opportunity_data.field || post.share_data.data.opportunity_data.field == 0"><b>Field:</b><span ng-bind="post.share_data.data.opportunity_data.other_field" id="opp-post-field-{{post.share_data.data.post_data.id}}"></span></p>
-                                                                        <p ng-if="post.share_data.data.opportunity_data.hashtag" class="hashtag-grd"><b>Hashtags:</b>
-                                                                            <span>
-                                                                                <span class="post-hash-tag" id="opp-post-hashtag-{{post.share_data.data.post_data.id}}" ng-repeat="hashtag in post.share_data.data.opportunity_data.hashtag.split(' ')">{{hashtag}}</span>
-                                                                            </span>
-                                                                        </p>                                            
-                                                                        <p ng-if="post.share_data.data.opportunity_data.company_name"><b>Company Name:</b><span ng-bind="post.share_data.data.opportunity_data.company_name" id="opp-post-company-{{post.share_data.data.post_data.id}}"></span></p>
-                                                                    </h5>
-                                                                    <div class="post-des-detail" ng-if="post.share_data.data.opportunity_data.opportunity">
-                                                                        <div id="opp-post-opportunity-{{post.share_data.data.post_data.id}}" ng-class="post.share_data.data.opportunity_data.opportunity.length > 250 ? 'view-more-expand' : ''">
-                                                                            <b>Opportunity:</b>
-                                                                            <span ng-bind-html="post.share_data.data.opportunity_data.opportunity"></span>
-                                                                            <a id="remove-view-more{{post.share_data.data.post_data.id}}" ng-if="post.share_data.data.opportunity_data.opportunity.length > 250" ng-click="removeViewMore('opp-post-opportunity-'+post.share_data.data.post_data.id,'remove-view-more'+post.share_data.data.post_data.id);" class="read-more-post">.... Read More</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="post-discription" ng-if="post.share_data.data.post_data.post_for == 'simple'">
-                                                                <p ng-if="post.share_data.data.simple_data.sim_title"><b>Title:</b> <span ng-bind="post.share_data.data.simple_data.sim_title" id="opp-title-{{post.share_data.data.post_data.id}}"></span></p>
-                                                                <p ng-if="post.share_data.data.simple_data.hashtag" class="hashtag-grd">
-                                                                    <b>Hashtags:</b>
-                                                                    <span>
-                                                                        <span class="post-hash-tag" id="sim-post-hashtag-{{post.share_data.data.post_data.id}}" ng-repeat="hashtag in post.share_data.data.simple_data.hashtag.split(' ')">{{hashtag}}</span>
-                                                                    </span>
-                                                                </p>
-                                                                <div ng-init="limit = 250; moreShown = false">
-                                                                    <span ng-if="post.share_data.data.simple_data.description != ''" id="simple-post-description-{{post.share_data.data.post_data.id}}" ng-bind-html="post.share_data.data.simple_data.description" ng-class="post.share_data.data.simple_data.description.length > 250 ? 'view-more-expand' : ''">
-                                                                    </span>
-                                                                    <a id="remove-view-more{{post.share_data.data.post_data.id}}" ng-if="post.share_data.data.simple_data.description.length > 250" ng-click="removeViewMore('simple-post-description-'+post.share_data.data.post_data.id,'remove-view-more'+post.share_data.data.post_data.id);" class="read-more-post">.... Read More</a>                                        
-                                                                </div>                                    
-                                                            </div>
-                                                            <div class="post-discription" ng-if="post.share_data.data.post_data.post_for == 'article'">
-                                                                <p ng-if="post.share_data.data.article_data.hashtag" class="hashtag-grd">
-                                                                    <span>
-                                                                        <span class="post-hash-tag" id="opp-post-hashtag-{{post.share_data.data.post_data.id}}" ng-repeat="hashtag in post.share_data.data.article_data.hashtag.split(' ')">{{hashtag}}</span>
-                                                                    </span>
-                                                                </p>
-                                                            </div>
-                                                            <div class="post-images article-post-cus" ng-if="post.share_data.data.post_data.post_for == 'article'">
-                                                                <div class="one-img" ng-class="post.share_data.data.article_data.article_featured_image == '' ? 'article-default-featured' : ''">
-                                                                    <a href="<?php echo base_url(); ?>article/{{post.share_data.data.article_data.article_slug}}" target="_self">
-                                                                        <img ng-src="<?php echo base_url().$this->config->item('article_featured_upload_path'); ?>{{post.share_data.data.article_data.article_featured_image}}" alt="{{post.share_data.data.article_data.article_title}}" ng-if="post.share_data.data.article_data.article_featured_image != ''">
-
-                                                                        <img ng-src="<?php echo base_url('assets/img/art-default.jpg'); ?>{{post.share_data.data.article_data.article_featured_image}}" alt="{{post.share_data.data.article_data.article_title}}" ng-if="post.share_data.data.article_data.article_featured_image == ''">
-                                                                        <div class="article-post-text">
-                                                                            <h3>{{post.share_data.data.article_data.article_title}}</h3>
-                                                                            <p>{{post.share_data.data.post_data.user_type == '1' ? post.share_data.data.user_data.fullname : post.share_data.data.user_data.company_name}}'s Article on Aileensoul</p>
-                                                                        </div>
-                                                                    </a>                            
-                                                                </div>
-                                                            </div>
-                                                            <div class="post-discription" ng-if="post.share_data.data.post_data.post_for == 'profile_update'">
-                                                                <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{post.share_data.data.profile_update.data_value}}" ng-click="openModal2('myModalCoverPicShare'+post.share_data.data.post_data.id);">
-                                                            </div>
-                                                            <div class="post-discription" ng-if="post.share_data.data.post_data.post_for == 'cover_update'">
-                                                                <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{post.share_data.data.cover_update.data_value}}" ng-if="post.share_data.data.cover_update.data_value != ''" ng-click="openModal2('myModalCoverPicShare'+post.share_data.data.post_data.id);">
-                                                            </div>
-                                                            <div ng-if="post.share_data.data.post_data.post_for == 'profile_update' || post.share_data.data.post_data.post_for == 'cover_update'" id="myModalCoverPicShare{{post.share_data.data.post_data.id}}" tabindex="-1" role="dialog"  class="modal modal2" style="display: none;">
-                                                                <button type="button" class="modal-close" data-dismiss="modal" ng-click="closeModalShare('myModalCoverPicShare'+post.share_data.data.post_data.id)">×</button>
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;">
-                                                                            <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
-                                                                        </div>
-                                                                        <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
-                                                                        <div class="mySlides mySlides2{{post.share_data.data.post_data.id}}">
-                                                                            <div class="numbertext"></div>
-                                                                            <div class="slider_img_p" ng-if="post.share_data.data.post_data.post_for == 'cover_update'">
-                                                                                <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{post.share_data.data.cover_update.data_value}}" alt="Cover Image" id="cover{{post.share_data.data.post_data.id}}">
-                                                                            </div>
-                                                                            <div class="slider_img_p" ng-if="post.share_data.data.post_data.post_for == 'profile_update'">
-                                                                                <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{post.share_data.data.profile_update.data_value}}" alt="Profile Image" id="cover{{post.share_data.data.post_data.id}}">
-                                                                            </div>
-                                                                        </div>                                
-                                                                    </div>
-                                                                    <div class="caption-container">
-                                                                        <p id="caption"></p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="post-discription" ng-if="post.share_data.data.post_data.post_for == 'question'">
-                                                                <div id="ask-que-{{post.share_data.data.post_data.id}}" class="post-des-detail">
-                                                                    <h5 class="post-title">
-                                                                        <div ng-if="post.share_data.data.question_data.question"><b>Question:</b><span ng-bind="post.share_data.data.question_data.question" id="ask-post-question-{{post.share_data.data.post_data.id}}"></span></div>                                        
-                                                                        <div class="post-des-detail" ng-if="post.share_data.data.question_data.description">
-                                                                            <div id="ask-que-desc-{{post.share_data.data.post_data.id}}" ng-class="post.share_data.data.question_data.description.length > 250 ? 'view-more-expand' : ''">
-                                                                                <b>Description:</b>
-                                                                                <span ng-bind-html="post.share_data.data.question_data.description"></span>
-                                                                                <a id="remove-view-more{{post.share_data.data.post_data.id}}" ng-if="post.share_data.data.question_data.description.length > 250" ng-click="removeViewMore('ask-que-desc-'+post.share_data.data.post_data.id,'remove-view-more'+post.share_data.data.post_data.id);" class="read-more-post">.... Read More</a>
-                                                                            </div>                                            
-                                                                        </div>
-                                                                        <p ng-if="post.share_data.data.question_data.link"><b>Link:</b><span ng-bind="post.share_data.data.question_data.link" id="ask-post-link-{{post.share_data.data.post_data.id}}"></span></p>
-                                                                        <p ng-if="post.share_data.data.question_data.category"><b>Category:</b><span ng-bind="post.share_data.data.question_data.category" id="ask-post-category-{{post.share_data.data.post_data.id}}"></span></p>
-                                                                        <p ng-if="post.share_data.data.question_data.hashtag"><b>Hashtag:</b><span ng-bind="post.share_data.data.question_data.hashtag" class="post-hash-tag" id="ask-post-hashtag-{{post.post_data.id}}"></span></p>
-                                                                        <p ng-if="post.share_data.data.question_data.field"><b>Field:</b><span ng-bind="post.share_data.data.question_data.field" id="ask-post-field-{{post.share_data.data.post_data.id}}"></span></p>
-                                                                    </h5>
-                                                                    <div class="post-des-detail" ng-if="post.share_data.data.opportunity_data.opportunity"><b>Opportunity:</b><span ng-bind="post.share_data.data.opportunity_data.opportunity"></span></div>
-                                                                </div>                                    
-                                                            </div>
-                                                            <div class="post-images" ng-if="post.share_data.data.post_data.total_post_files == '1'">
-                                                                <div class="one-img" ng-repeat="post_file in post.share_data.data.post_file_data" ng-init="$last ? loadMediaElement() : false">
-                                                                    <a href="javascript:void(0);" ng-if="post_file.file_type == 'image'">
-                                                                        <img ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)">
-                                                                    </a>
-                                                                    <span ng-if="post_file.file_type == 'video'"> 
-                                                                        <video controls width = "100%" height = "350" preload="metadata" ng-attr-poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}jpg">
-                                                                            <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}#t=0.1" type="application/x-mpegURL">
-                                                                        </video>
-                                                                        <!--<video controls ng-attr-poster="" class="mejs__player" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></video>-->
-                                                                    </span>
-                                                                    <span  ng-if="post_file.file_type == 'audio'">
-                                                                        <div class = "audio_main_div">
-                                                                            <div class = "audio_img">
-                                                                                <img src = "<?php echo base_url('assets/images/music-icon.png?ver=' . time()) ?>" alt="music-icon.png">
-                                                                            </div>
-                                                                            <div class = "audio_source">
-                                                                                <audio id = "audio_player" width = "100%" height = "40" controls>
-                                                                                    <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="audio/mp3">
-                                                                                    Your browser does not support the audio tag.
-                                                                                </audio>
-                                                                            </div>
-                                                                        </div>
-                                                                        <!--<audio controls ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></audio>-->
-                                                                    </span>
-                                                                    <a ng-href="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" target="_blank" title="Click Here" ng-if="post_file.file_type == 'pdf'"><img ng-src="<?php echo base_url('assets/images/PDF.jpg?ver=' . time()) ?>"></a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="post-images" ng-if="post.share_data.data.post_data.total_post_files == '2'">
-                                                                <div class="two-img" ng-repeat="post_file in post.share_data.data.post_file_data">
-                                                                    <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"  ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)"></a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="post-images" ng-if="post.share_data.data.post_data.total_post_files == '3'">
-                                                                <span ng-repeat="post_file in post.share_data.data.post_file_data">
-                                                                    <div class="three-img-top" ng-if="$index == '0'">
-                                                                        <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)"></a>
-                                                                    </div>
-                                                                    <div class="two-img" ng-if="$index == '1'">
-                                                                        <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)"></a>
-                                                                    </div>
-                                                                    <div class="two-img" ng-if="$index == '2'">
-                                                                        <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)"></a>
-                                                                    </div>
+                                                        <div class="post-discription" ng-if="post.share_data.data.post_data.post_for == 'simple'">
+                                                            <p ng-if="post.share_data.data.simple_data.sim_title"><b>Title:</b> <span ng-bind="post.share_data.data.simple_data.sim_title" id="opp-title-{{post.share_data.data.post_data.id}}"></span></p>
+                                                            <p ng-if="post.share_data.data.simple_data.hashtag" class="hashtag-grd">
+                                                                <b>Hashtags:</b>
+                                                                <span>
+                                                                    <span class="post-hash-tag" id="sim-post-hashtag-{{post.share_data.data.post_data.id}}" ng-repeat="hashtag in post.share_data.data.simple_data.hashtag.split(' ')">{{hashtag}}</span>
                                                                 </span>
-                                                            </div>
-                                                            <div class="post-images four-img" ng-if="post.share_data.data.post_data.total_post_files >= '4'">
-                                                                <div class="two-img" ng-repeat="post_file in post.share_data.data.post_file_data| limitTo:4">
-                                                                    <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)"></a>
-                                                                    <div class="view-more-img" ng-if="$index == 3 && post.share_data.data.post_data.total_post_files > 4">
-                                                                        <span><a href="javascript:void(0);" ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)">View All ({{post.share_data.data.post_data.total_post_files - 4}})</a></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div id="myModalShare{{post.share_data.data.post_data.id}}" class="modal modal2" tabindex="-1" role="dialog" style="display: none;">
-                                                                <button type="button" class="modal-close" ng-click="closeModalShare('myModalShare'+post.share_data.data.post_data.id)">×</button>
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
-                                                                        </div>
-                                                                        <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
-                                                                        <div class="mySlides mySlides2{{post.share_data.data.post_data.id}}" ng-repeat="_photoData in post.share_data.data.post_file_data">
-                                                                            <div class="numbertext">{{$index + 1}} / {{post.share_data.data.post_data.total_post_files}}</div>
-                                                                            <div class="slider_img_p">
-                                                                                <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
-                                                                            </div>
-                                                                        </div>                                
-                                                                    </div>
-                                                                    <div class="caption-container">
-                                                                        <p id="caption"></p>
-                                                                    </div>
-                                                                </div> 
-                                                                <a ng-if="post.share_data.data.post_file_data.length > 1" class="prev" style="left:0px;" ng-click="plusSlides2(-1,post.share_data.data.post_data.id)">&#10094;</a>
-                                                                <a ng-if="post.share_data.data.post_file_data.length > 1" class="next" ng-click="plusSlides2(1,post.share_data.data.post_data.id)">&#10095;</a>
+                                                            </p>
+                                                            <div ng-init="limit = 250; moreShown = false">
+                                                                <span ng-if="post.share_data.data.simple_data.description != ''" id="simple-post-description-{{post.share_data.data.post_data.id}}" ng-bind-html="post.share_data.data.simple_data.description" ng-class="post.share_data.data.simple_data.description.length > 250 ? 'view-more-expand' : ''">
+                                                                </span>
+                                                                <a id="remove-view-more{{post.share_data.data.post_data.id}}" ng-if="post.share_data.data.simple_data.description.length > 250" ng-click="removeViewMore('simple-post-description-'+post.share_data.data.post_data.id,'remove-view-more'+post.share_data.data.post_data.id);" class="read-more-post">.... Read More</a>                                        
                                                             </div>                                    
                                                         </div>
+                                                        <div class="post-discription" ng-if="post.share_data.data.post_data.post_for == 'article'">
+                                                            <p ng-if="post.share_data.data.article_data.hashtag" class="hashtag-grd">
+                                                                <span>
+                                                                    <span class="post-hash-tag" id="opp-post-hashtag-{{post.share_data.data.post_data.id}}" ng-repeat="hashtag in post.share_data.data.article_data.hashtag.split(' ')">{{hashtag}}</span>
+                                                                </span>
+                                                            </p>
+                                                        </div>
+                                                        <div class="post-images article-post-cus" ng-if="post.share_data.data.post_data.post_for == 'article'">
+                                                            <div class="one-img" ng-class="post.share_data.data.article_data.article_featured_image == '' ? 'article-default-featured' : ''">
+                                                                <a href="<?php echo base_url(); ?>article/{{post.share_data.data.article_data.article_slug}}" target="_self">
+                                                                    <img ng-src="<?php echo base_url().$this->config->item('article_featured_upload_path'); ?>{{post.share_data.data.article_data.article_featured_image}}" alt="{{post.share_data.data.article_data.article_title}}" ng-if="post.share_data.data.article_data.article_featured_image != ''">
+
+                                                                    <img ng-src="<?php echo base_url('assets/img/art-default.jpg'); ?>{{post.share_data.data.article_data.article_featured_image}}" alt="{{post.share_data.data.article_data.article_title}}" ng-if="post.share_data.data.article_data.article_featured_image == ''">
+                                                                    <div class="article-post-text">
+                                                                        <h3>{{post.share_data.data.article_data.article_title}}</h3>
+                                                                        <p>{{post.share_data.data.post_data.user_type == '1' ? post.share_data.data.user_data.fullname : post.share_data.data.user_data.company_name}}'s Article on Aileensoul</p>
+                                                                    </div>
+                                                                </a>                            
+                                                            </div>
+                                                        </div>
+                                                        <div class="post-discription" ng-if="post.share_data.data.post_data.post_for == 'profile_update'">
+                                                            <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{post.share_data.data.profile_update.data_value}}" ng-click="openModal2('myModalCoverPicShare'+post.share_data.data.post_data.id);">
+                                                        </div>
+                                                        <div class="post-discription" ng-if="post.share_data.data.post_data.post_for == 'cover_update'">
+                                                            <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{post.share_data.data.cover_update.data_value}}" ng-if="post.share_data.data.cover_update.data_value != ''" ng-click="openModal2('myModalCoverPicShare'+post.share_data.data.post_data.id);">
+                                                        </div>
+                                                        <div ng-if="post.share_data.data.post_data.post_for == 'profile_update' || post.share_data.data.post_data.post_for == 'cover_update'" id="myModalCoverPicShare{{post.share_data.data.post_data.id}}" tabindex="-1" role="dialog"  class="modal modal2" style="display: none;">
+                                                            <button type="button" class="modal-close" data-dismiss="modal" ng-click="closeModalShare('myModalCoverPicShare'+post.share_data.data.post_data.id)">×</button>
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;">
+                                                                        <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                                                                    </div>
+                                                                    <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
+                                                                    <div class="mySlides mySlides2{{post.share_data.data.post_data.id}}">
+                                                                        <div class="numbertext"></div>
+                                                                        <div class="slider_img_p" ng-if="post.share_data.data.post_data.post_for == 'cover_update'">
+                                                                            <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{post.share_data.data.cover_update.data_value}}" alt="Cover Image" id="cover{{post.share_data.data.post_data.id}}">
+                                                                        </div>
+                                                                        <div class="slider_img_p" ng-if="post.share_data.data.post_data.post_for == 'profile_update'">
+                                                                            <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{post.share_data.data.profile_update.data_value}}" alt="Profile Image" id="cover{{post.share_data.data.post_data.id}}">
+                                                                        </div>
+                                                                    </div>                                
+                                                                </div>
+                                                                <div class="caption-container">
+                                                                    <p id="caption"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="post-discription" ng-if="post.share_data.data.post_data.post_for == 'question'">
+                                                            <div id="ask-que-{{post.share_data.data.post_data.id}}" class="post-des-detail">
+                                                                <h5 class="post-title">
+                                                                    <div ng-if="post.share_data.data.question_data.question"><b>Question:</b><span ng-bind="post.share_data.data.question_data.question" id="ask-post-question-{{post.share_data.data.post_data.id}}"></span></div>                                        
+                                                                    <div class="post-des-detail" ng-if="post.share_data.data.question_data.description">
+                                                                        <div id="ask-que-desc-{{post.share_data.data.post_data.id}}" ng-class="post.share_data.data.question_data.description.length > 250 ? 'view-more-expand' : ''">
+                                                                            <b>Description:</b>
+                                                                            <span ng-bind-html="post.share_data.data.question_data.description"></span>
+                                                                            <a id="remove-view-more{{post.share_data.data.post_data.id}}" ng-if="post.share_data.data.question_data.description.length > 250" ng-click="removeViewMore('ask-que-desc-'+post.share_data.data.post_data.id,'remove-view-more'+post.share_data.data.post_data.id);" class="read-more-post">.... Read More</a>
+                                                                        </div>                                            
+                                                                    </div>
+                                                                    <p ng-if="post.share_data.data.question_data.link"><b>Link:</b><span ng-bind="post.share_data.data.question_data.link" id="ask-post-link-{{post.share_data.data.post_data.id}}"></span></p>
+                                                                    <p ng-if="post.share_data.data.question_data.category"><b>Category:</b><span ng-bind="post.share_data.data.question_data.category" id="ask-post-category-{{post.share_data.data.post_data.id}}"></span></p>
+                                                                    <p ng-if="post.share_data.data.question_data.hashtag"><b>Hashtag:</b><span ng-bind="post.share_data.data.question_data.hashtag" class="post-hash-tag" id="ask-post-hashtag-{{post.post_data.id}}"></span></p>
+                                                                    <p ng-if="post.share_data.data.question_data.field"><b>Field:</b><span ng-bind="post.share_data.data.question_data.field" id="ask-post-field-{{post.share_data.data.post_data.id}}"></span></p>
+                                                                </h5>
+                                                                <div class="post-des-detail" ng-if="post.share_data.data.opportunity_data.opportunity"><b>Opportunity:</b><span ng-bind="post.share_data.data.opportunity_data.opportunity"></span></div>
+                                                            </div>                                    
+                                                        </div>
+                                                        <div class="post-images" ng-if="post.share_data.data.post_data.total_post_files == '1'">
+                                                            <div class="one-img" ng-repeat="post_file in post.share_data.data.post_file_data" ng-init="$last ? loadMediaElement() : false">
+                                                                <a href="javascript:void(0);" ng-if="post_file.file_type == 'image'">
+                                                                    <img ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{post_file.filename}}" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)">
+                                                                </a>
+                                                                <span ng-if="post_file.file_type == 'video'"> 
+                                                                    <video controls width = "100%" height = "350" preload="metadata" ng-attr-poster="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{ post_file.filename | removeLastCharacter }}jpg">
+                                                                        <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}#t=0.1" type="application/x-mpegURL">
+                                                                    </video>
+                                                                    <!--<video controls ng-attr-poster="" class="mejs__player" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></video>-->
+                                                                </span>
+                                                                <span  ng-if="post_file.file_type == 'audio'">
+                                                                    <div class = "audio_main_div">
+                                                                        <div class = "audio_img">
+                                                                            <img src = "<?php echo base_url('assets/images/music-icon.png?ver=' . time()) ?>" alt="music-icon.png">
+                                                                        </div>
+                                                                        <div class = "audio_source">
+                                                                            <audio id = "audio_player" width = "100%" height = "40" controls>
+                                                                                <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" type="audio/mp3">
+                                                                                Your browser does not support the audio tag.
+                                                                            </audio>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--<audio controls ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}"></audio>-->
+                                                                </span>
+                                                                <a ng-href="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{post_file.filename}}" target="_blank" title="Click Here" ng-if="post_file.file_type == 'pdf'"><img ng-src="<?php echo base_url('assets/images/PDF.jpg?ver=' . time()) ?>"></a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="post-images" ng-if="post.share_data.data.post_data.total_post_files == '2'">
+                                                            <div class="two-img" ng-repeat="post_file in post.share_data.data.post_file_data">
+                                                                <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}"  ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)"></a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="post-images" ng-if="post.share_data.data.post_data.total_post_files == '3'">
+                                                            <span ng-repeat="post_file in post.share_data.data.post_file_data">
+                                                                <div class="three-img-top" ng-if="$index == '0'">
+                                                                    <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)"></a>
+                                                                </div>
+                                                                <div class="two-img" ng-if="$index == '1'">
+                                                                    <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)"></a>
+                                                                </div>
+                                                                <div class="two-img" ng-if="$index == '2'">
+                                                                    <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)"></a>
+                                                                </div>
+                                                            </span>
+                                                        </div>
+                                                        <div class="post-images four-img" ng-if="post.share_data.data.post_data.total_post_files >= '4'">
+                                                            <div class="two-img" ng-repeat="post_file in post.share_data.data.post_file_data| limitTo:4">
+                                                                <a href="javascript:void(0);"><img ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{post_file.filename}}" ng-if="post_file.file_type == 'image'" alt="{{post_file.filename}}" ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)"></a>
+                                                                <div class="view-more-img" ng-if="$index == 3 && post.share_data.data.post_data.total_post_files > 4">
+                                                                    <span><a href="javascript:void(0);" ng-click="openModal2('myModalShare'+post.share_data.data.post_data.id);currentSlide2($index + 1,'myModalShare'+post.share_data.data.post_data.id)">View All ({{post.share_data.data.post_data.total_post_files - 4}})</a></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="myModalShare{{post.share_data.data.post_data.id}}" class="modal modal2" tabindex="-1" role="dialog" style="display: none;">
+                                                            <button type="button" class="modal-close" ng-click="closeModalShare('myModalShare'+post.share_data.data.post_data.id)">×</button>
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div id="all_image_loader" class="fw post_loader all_image_loader" style="text-align: center;display: none;position: absolute;top: 50%;z-index: 9;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                                                                    </div>
+                                                                    <!-- <span class="close2 cursor" ng-click="closeModal()">&times;</span> -->
+                                                                    <div class="mySlides mySlides2{{post.share_data.data.post_data.id}}" ng-repeat="_photoData in post.share_data.data.post_file_data">
+                                                                        <div class="numbertext">{{$index + 1}} / {{post.share_data.data.post_data.total_post_files}}</div>
+                                                                        <div class="slider_img_p">
+                                                                            <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
+                                                                        </div>
+                                                                    </div>                                
+                                                                </div>
+                                                                <div class="caption-container">
+                                                                    <p id="caption"></p>
+                                                                </div>
+                                                            </div> 
+                                                            <a ng-if="post.share_data.data.post_file_data.length > 1" class="prev" style="left:0px;" ng-click="plusSlides2(-1,post.share_data.data.post_data.id)">&#10094;</a>
+                                                            <a ng-if="post.share_data.data.post_file_data.length > 1" class="next" ng-click="plusSlides2(1,post.share_data.data.post_data.id)">&#10095;</a>
+                                                        </div>                                    
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="post-images" ng-if="post.post_data.total_post_files == '1'">
@@ -1246,94 +1044,21 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                         <div class="all-post-bottom comment-for-post-{{post.post_data.id}}">
                                             <div class="comment-box">
                                                 <div class="post-comment" nf-if="post.post_comment_data.length > 0" ng-repeat="comment in post.post_comment_data" ng-init="commentIndex=$index">
-                                                    <div id="comment_tooltip_content_{{post.post_data.id}}_{{commentIndex}}" class="tooltip_templates">
-                                                        <div class="user-tooltip">
-                                                            <div class="tooltip-cover-img">
-                                                                <img ng-if="comment.profile_background != null && comment.profile_background != ''" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL; ?>{{comment.profile_background}}">                                        
-                                                                <div ng-if="comment.profile_background == null || comment.profile_background == ''" class="gradient-bg" style="height: 100%"></div>
-                                                            </div>
-                                                            <div class="tooltip-user-detail">
-                                                                <div class="tooltip-user-img">
-                                                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{comment.user_image}}" ng-if="comment.user_image != ''">
-
-                                                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="comment.user_image == '' && comment.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-
-                                                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="comment.user_image == '' && comment.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-
-                                                                </div>
-
-                                                                <h4 ng-bind="comment.username"></h4>
-
-                                                                <p ng-if="comment.title_name != null" ng-bind="comment.title_name"></p>
-                                                                <p ng-if="comment.title_name == null" ng-bind="comment.degree_name"></p>
-                                                                <p ng-if="comment.title_name == null && comment.degree_name == null">CURRENT WORK</p>                                        
-
-                                                                <p ng-if="comment.post_count != '' || comment.contact_count != '' || comment.follower_count != ''">
-                                                                    <span ng-if="comment.post_count != ''"><b>{{comment.post_count}}</b> Posts</span>
-                                                                    <span ng-if="comment.contact_count != ''"><b>{{comment.contact_count}}</b> Contacts</span>
-                                                                    <span ng-if="comment.follower_count != ''"><b>{{comment.follower_count}}</b> Followers</span>
-                                                                </p>
-
-                                                                <ul class="" ng-if="comment.mutual_friend.length > 0">
-                                                                    <li ng-if="user_id != comment.commented_user_id" ng-repeat="_friend in comment.mutual_friend | limitTo:2">
-                                                                        <div class="user-img">
-                                                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{_friend.user_image}}" ng-if="_friend.user_image != ''">
-
-                                                                            <img ng-if="_friend.user_image == '' && _friend.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-
-                                                                            <img ng-if="_friend.user_image == '' && _friend.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-                                                                        </div>
-                                                                    </li>                            
-                                                                    <li ng-if="user_id != comment.commented_user_id" class="m-contacts">
-                                                                        <span ng-if="comment.mutual_friend.length == 1">
-                                                                            <b>{{comment.mutual_friend[0].fullname}}</b> is in mutual contact.
-                                                                        </span>
-                                                                        <span ng-if="comment.mutual_friend.length > 1">
-                                                                            <b>{{comment.mutual_friend[0].fullname}}</b>{{comment.mutual_friend.length - 1 > 0 ? ' and ' : ''}}<b>{{comment.mutual_friend.length - 1}}</b> more mutual contacts.
-                                                                        </span>
-                                                                    </li>
-                                                                </ul>
-                                                                <div class="tooltip-btns" ng-if="user_id != comment.commented_user_id">
-                                                                    <ul>
-                                                                        <li class="contact-btn-{{comment.commented_user_id}}">
-                                                                            <a class="btn-new-1" ng-if="comment.contact_value == 'new'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ comment.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">Add to contact</a>
-                                                                            
-                                                                            <a class="btn-new-1" ng-if="comment.contact_value == 'confirm'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ comment.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},1" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">In Contacts</a>
-                                                                            
-                                                                            <a class="btn-new-1" ng-if="comment.contact_value == 'pending'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ comment.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">Request sent</a>
-                                                                            
-                                                                            <a class="btn-new-1" ng-if="comment.contact_value == 'cancel'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ comment.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">Add to contact</a>
-                                                                            
-                                                                            <a class="btn-new-1" ng-if="comment.contact_value == 'reject'" data-param="{{comment.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ comment.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{comment.comment_id}}">Add to contact</a>
-                                                                        </li>
-                                                                        <li class="follow-btn-user-{{comment.commented_user_id}}">
-                                                                            <a ng-if="comment.follow_status == 1" class="btn-new-1 following" data-uid="{{comment.commented_user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user(this.id)" id="follow_btn_{{comment.comment_id}}">Following</a>
-
-                                                                            <a ng-if="comment.follow_status == 0 || !comment.follow_status" class="btn-new-1 follow" data-uid="{{comment.commented_user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user(this.id)" id="follow_btn_{{comment.comment_id}}">Follow</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="<?php echo MESSAGE_URL; ?>user/{{comment.user_slug}}" class="btn-new-1" target="_blank">Message</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="post-img">
                                                         <div ng-if="comment.user_image != ''">
-                                                            <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" data-toggle="popover" data-tooltip-content="#comment_tooltip_content_{{post.post_data.id}}_{{commentIndex}}">
+                                                            <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" data-toggle="popover" data-uid="{{comment.commented_user_id}}" data-utype="1">
                                                                 <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{comment.user_image}}">
                                                             </a>
                                                         </div>
                                                         <div class="post-img" ng-if="comment.user_image == ''">
-                                                            <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" data-toggle="popover" data-tooltip-content="#comment_tooltip_content_{{post.post_data.id}}_{{commentIndex}}">
+                                                            <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" data-toggle="popover" data-uid="{{comment.commented_user_id}}" data-utype="1">
                                                                 <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                                                 <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                                             </a>
                                                         </div>
                                                     </div>
                                                     <div class="comment-dis">
-                                                        <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" ng-bind="comment.username" data-toggle="popover" data-tooltip-content="#comment_tooltip_content_{{post.post_data.id}}_{{commentIndex}}"></a></div>
+                                                        <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" ng-bind="comment.username" data-toggle="popover" data-uid="{{comment.commented_user_id}}" data-utype="1"></a></div>
                                                         <div class="comment-dis-inner" id="comment-dis-inner-{{comment.comment_id}}">
                                                             <p dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{comment.comment}}" dd-text-collapse-cond="true">{{comment.comment}}</p>
                                                         </div>
@@ -1371,95 +1096,22 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                                         </ul>
                                                     </div>
 
-                                                    <div class="post-comment reply-comment" nf-if="comment.comment_reply_data.length > 0" ng-repeat="commentreply in comment.comment_reply_data" ng-init="commentReplyIndex=$index">
-                                                        <div id="comment_reply_tooltip_content_{{commentIndex}}_{{commentReplyIndex}}" class="tooltip_templates">
-                                                            <div class="user-tooltip">
-                                                                <div class="tooltip-cover-img">
-                                                                    <img ng-if="commentreply.profile_background != null && commentreply.profile_background != ''" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL; ?>{{commentreply.profile_background}}">                                        
-                                                                    <div ng-if="commentreply.profile_background == null || commentreply.profile_background == ''" class="gradient-bg" style="height: 100%"></div>
-                                                                </div>
-                                                                <div class="tooltip-user-detail">
-                                                                    <div class="tooltip-user-img">
-                                                                        <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{commentreply.user_image}}" ng-if="commentreply.user_image != ''">
-
-                                                                        <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="commentreply.user_image == '' && commentreply.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-
-                                                                        <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="commentreply.user_image == '' && commentreply.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-
-                                                                    </div>
-
-                                                                    <h4 ng-bind="commentreply.username"></h4>
-
-                                                                    <p ng-if="commentreply.title_name != null" ng-bind="commentreply.title_name"></p>
-                                                                    <p ng-if="commentreply.title_name == null" ng-bind="commentreply.degree_name"></p>
-                                                                    <p ng-if="commentreply.title_name == null && commentreply.degree_name == null">CURRENT WORK</p>                                        
-
-                                                                    <p ng-if="commentreply.post_count != '' || commentreply.contact_count != '' || commentreply.follower_count != ''">
-                                                                        <span ng-if="commentreply.post_count != ''"><b>{{commentreply.post_count}}</b> Posts</span>
-                                                                        <span ng-if="commentreply.contact_count != ''"><b>{{commentreply.contact_count}}</b> Contacts</span>
-                                                                        <span ng-if="commentreply.follower_count != ''"><b>{{commentreply.follower_count}}</b> Followers</span>
-                                                                    </p>
-
-                                                                    <ul class="" ng-if="commentreply.mutual_friend.length > 0">
-                                                                        <li ng-if="user_id != commentreply.commented_user_id" ng-repeat="_friend in commentreply.mutual_friend | limitTo:2">
-                                                                            <div class="user-img">
-                                                                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{_friend.user_image}}" ng-if="_friend.user_image != ''">
-
-                                                                                <img ng-if="_friend.user_image == '' && _friend.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-
-                                                                                <img ng-if="_friend.user_image == '' && _friend.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-                                                                            </div>
-                                                                        </li>                            
-                                                                        <li ng-if="user_id != commentreply.commented_user_id" class="m-contacts">
-                                                                            <span ng-if="commentreply.mutual_friend.length == 1">
-                                                                                <b>{{commentreply.mutual_friend[0].fullname}}</b> is in mutual contact.
-                                                                            </span>
-                                                                            <span ng-if="commentreply.mutual_friend.length > 1">
-                                                                                <b>{{commentreply.mutual_friend[0].fullname}}</b>{{commentreply.mutual_friend.length - 1 > 0 ? ' and ' : ''}}<b>{{commentreply.mutual_friend.length - 1}}</b> more mutual contacts.
-                                                                            </span>
-                                                                        </li>
-                                                                    </ul>
-                                                                    <div class="tooltip-btns" ng-if="user_id != commentreply.commented_user_id">
-                                                                        <ul>
-                                                                            <li class="contact-btn-{{commentreply.commented_user_id}}">
-                                                                                <a class="btn-new-1" ng-if="commentreply.contact_value == 'new'" data-param="{{commentreply.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ commentreply.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{commentreply.comment_id}}">Add to contact</a>
-                                                                                
-                                                                                <a class="btn-new-1" ng-if="commentreply.contact_value == 'confirm'" data-param="{{commentreply.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ commentreply.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},1" onclick="contact(this.id);" id="contact_btn_{{commentreply.comment_id}}">In Contacts</a>
-                                                                                
-                                                                                <a class="btn-new-1" ng-if="commentreply.contact_value == 'pending'" data-param="{{commentreply.contact_id}}{{ today | date : 'hhmmss'}},cancel,{{ commentreply.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{commentreply.comment_id}}">Request sent</a>
-                                                                                
-                                                                                <a class="btn-new-1" ng-if="commentreply.contact_value == 'cancel'" data-param="{{commentreply.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ commentreply.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{commentreply.comment_id}}">Add to contact</a>
-                                                                                
-                                                                                <a class="btn-new-1" ng-if="commentreply.contact_value == 'reject'" data-param="{{commentreply.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ commentreply.commented_user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_btn_{{commentreply.comment_id}}">Add to contact</a>
-                                                                            </li>
-                                                                            <li class="follow-btn-user-{{commentreply.commented_user_id}}">
-                                                                                <a ng-if="commentreply.follow_status == 1" class="btn-new-1 following" data-uid="{{commentreply.commented_user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user(this.id)" id="follow_btn_{{commentreply.comment_id}}">Following</a>
-
-                                                                                <a ng-if="commentreply.follow_status == 0 || !commentreply.follow_status" class="btn-new-1 follow" data-uid="{{commentreply.commented_user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user(this.id)" id="follow_btn_{{commentreply.comment_id}}">Follow</a>
-                                                                            </li>
-                                                                            <li>
-                                                                                <a href="<?php echo MESSAGE_URL; ?>user/{{commentreply.user_slug}}" class="btn-new-1" target="_blank">Message</a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    <div class="post-comment reply-comment" nf-if="comment.comment_reply_data.length > 0" ng-repeat="commentreply in comment.comment_reply_data" ng-init="commentReplyIndex=$index">           
                                                         <div class="post-img">
                                                             <div ng-if="commentreply.user_image != ''">
-                                                                <a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self" data-toggle="popover" data-tooltip-content="#comment_reply_tooltip_content_{{commentIndex}}_{{commentReplyIndex}}">
+                                                                <a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self" data-toggle="popover" data-uid="{{commentreply.commented_user_id}}" data-utype="1">
                                                                     <img ng-class="commentreply.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{commentreply.user_image}}">
                                                                 </a>
                                                             </div>
                                                             <div class="post-img" ng-if="commentreply.user_image == ''">
-                                                                <a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self" data-toggle="popover" data-tooltip-content="#comment_reply_tooltip_content_{{commentIndex}}_{{commentReplyIndex}}">
+                                                                <a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self" data-toggle="popover" data-uid="{{commentreply.commented_user_id}}" data-utype="1">
                                                                     <img ng-class="commentreply.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" commentreply.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                                                     <img ng-class="commentreply.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" commentreply.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                                                 </a>
                                                             </div>
                                                         </div>
                                                         <div class="comment-dis">
-                                                            <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self" ng-bind="commentreply.username" data-toggle="popover" data-tooltip-content="#comment_reply_tooltip_content_{{commentIndex}}_{{commentReplyIndex}}"></a></div>
+                                                            <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self" ng-bind="commentreply.username" data-toggle="popover" data-uid="{{commentreply.commented_user_id}}" data-utype="1"></a></div>
                                                             <div class="comment-dis-inner" id="comment-reply-dis-inner-{{commentreply.comment_id}}">
                                                                 <p dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{commentreply.comment}}" dd-text-collapse-cond="true">{{commentreply.comment}}</p>
                                                             </div>
@@ -2882,15 +2534,15 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                                             </div>
                                         </div>
                                     </div>
-                                    <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image != ''" data-toggle="popover" data-tooltip-content="#like_tooltip_content_{{$index}}">
+                                    <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image != ''" data-toggle="popover" data-toggle="popover" data-uid="{{userlist.user_id}}" data-utype="1">
                                         <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{userlist.user_image}}">
                                     </a>
-                                    <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image == '' || userlist.user_image == null" data-toggle="popover" data-tooltip-content="#like_tooltip_content_{{$index}}">
+                                    <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image == '' || userlist.user_image == null" data-toggle="popover" data-toggle="popover" data-uid="{{userlist.user_id}}" data-utype="1">
                                         <img ng-if="userlist.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                         <img ng-if="userlist.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                     </a>
                                     <div class="like-detail">
-                                        <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}" data-toggle="popover" data-tooltip-content="#like_tooltip_content_{{$index}}">{{(userlist.user_id == '<?php echo $user_id; ?>' ? 'You' : userlist.fullname)}}</a></h4>
+                                        <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}" data-toggle="popover" data-toggle="popover" data-uid="{{userlist.user_id}}" data-utype="1">{{(userlist.user_id == '<?php echo $user_id; ?>' ? 'You' : userlist.fullname)}}</a></h4>
                                         <p ng-if="(userlist.title_name == null) && (userlist.degree_name != null)">{{userlist.degree_name}}</p>
                                         <p ng-if="(userlist.title_name != null) && (userlist.degree_name == null)">{{userlist.title_name}}</p>
                                         <p ng-if="(userlist.title_name == null) && (userlist.degree_name == null)">Current work</p>
@@ -3080,6 +2732,13 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
             // var company_name = '<?php echo $login_user_data->company_name; ?>';
             var business_user_story_upload_url = '<?php echo BUSINESS_USER_STORY_UPLOAD_URL; ?>';
             
+            var bus_bg_main_upload_url = '<?php echo BUS_BG_MAIN_UPLOAD_URL; ?>';
+            var bus_profile_thumb_upload_url = '<?php echo BUS_PROFILE_THUMB_UPLOAD_URL; ?>';
+            var nobusimage = '<?php echo NOBUSIMAGE; ?>';
+            var user_bg_main_upload_url = '<?php echo USER_BG_MAIN_UPLOAD_URL; ?>';
+            var user_thumb_upload_url = '<?php echo USER_THUMB_UPLOAD_URL; ?>';
+            var message_url = '<?php echo MESSAGE_URL; ?>';
+
             var from_user_id = '<?php echo $login_user_data['user_id']; ?>';
             var to_user_id = '<?php echo $business_data[0]['user_id']; ?>';
             

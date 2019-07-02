@@ -116,39 +116,9 @@
                         </h3>
                     </div>					
                     <div ng-if="businessList.length != 0" ng-repeat="business in businessList" ng-init="busIndex=$index">
-                        <?php if($usre_id){ ?>
-                        <div id="tooltip_content_bus_{{busIndex}}" class="tooltip_templates">
-                            <div class="bus-tooltip">
-                                <div class="user-tooltip">
-                                    <div class="tooltip-cover-img">
-                                        <img ng-if="business.profile_background" ng-src="<?php echo BUS_BG_MAIN_UPLOAD_URL ?>{{business.profile_background}}">
-                                        <div ng-if="business.profile_background == null || business.profile_background == ''" class="gradient-bg" style="height: 100%"></div>
-                                    </div>
-                                    <div class="tooltip-user-detail">
-                                        <div class="tooltip-user-img">
-                                            <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{business.business_user_image}}" ng-if="business.business_user_image">
-                                            <img ng-if="!business.business_user_image" ng-src="<?php echo base_url(NOBUSIMAGE); ?>">
-                                        </div>
-                                        <div class="fw">
-                                            <div class="tooltip-detail">
-                                                <h4 ng-bind="business.company_name"></h4>
-                                                <p ng-if="business.industry_name != null" ng-bind="business.industry_name"></p> 
-                                                <p ng-if="!business.industry_name">CURRENT WORK</p>
-
-                                                <p>{{business.city ? business.city + ', ' : business.other_city + ', '}}{{business.state_name}}{{business.state_name != '' ? ',' : ''}}{{business.country}}</p>
-                                            </div>
-                                            
-                                            <div class="tooltip-btns follow-btn-bus-{{business.user_id}}">
-                                                <a ng-if="business.follow_status == 1" class="btn-new-1 following" data-uid="{{business.user_id}}{{ today | date : 'hhmmss'}}" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus_{{business.user_id}}">Following</a>
-
-                                                <a ng-if="business.follow_status == 0 || !business.follow_status" class="btn-new-1 follow" data-uid="{{business.user_id}}{{ today| date : 'hhmmss'}}" onclick="follow_user_bus(this.id)" id="follow_btn_bus_{{business.user_id}}">Follow</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <?php } ?>
+                        <?php if($usre_id){ 
+                            $popover = 'data-toggle="popover" data-uid="{{business.user_id}}" data-utype="2"';
+                         } ?>
                         <div class="all-job-box search-business">
                             <div class="search-business-top">
                                 <div class="bus-cover no-cover-upload">
@@ -157,11 +127,11 @@
                                 </div>
                                 <div class="all-job-top">
                                     <div class="post-img">
-                                        <a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-if="business.business_user_image" data-toggle="popover" data-tooltip-content="#tooltip_content_bus_{{busIndex}}"><img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{business.business_user_image}}" on-error-src="<?php echo BASEURL.NOBUSIMAGE ?>"></a>
-                                        <a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-if="!business.business_user_image" data-toggle="popover" data-tooltip-content="#tooltip_content_bus_{{busIndex}}"><img ng-src="<?php echo BASEURL.NOBUSIMAGE ?>" on-error-src="<?php echo BASEURL.NOBUSIMAGE ?>"></a>
+                                        <a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-if="business.business_user_image" <?php echo $popover; ?>><img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{business.business_user_image}}" on-error-src="<?php echo BASEURL.NOBUSIMAGE ?>"></a>
+                                        <a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-if="!business.business_user_image" <?php echo $popover; ?>><img ng-src="<?php echo BASEURL.NOBUSIMAGE ?>" on-error-src="<?php echo BASEURL.NOBUSIMAGE ?>"></a>
                                     </div>
                                     <div class="job-top-detail">
-                                        <h5><a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-bind="business.company_name" data-toggle="popover" data-tooltip-content="#tooltip_content_bus_{{busIndex}}"></a></h5>
+                                        <h5><a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-bind="business.company_name" <?php echo $popover; ?>></a></h5>
                                         <h5 ng-if="business.industry_name"><a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-bind="business.industry_name"></a></h5>
                                         <h5 ng-if="!business.industry_name"><a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-bind="business.other_industrial"></a></h5>
                                     </div>
@@ -317,6 +287,14 @@
             var category_id = '<?php echo $category_id; ?>';
             var q = '<?php echo $q; ?>';
             var l = '<?php echo $l; ?>';
+
+            var bus_bg_main_upload_url = '<?php echo BUS_BG_MAIN_UPLOAD_URL; ?>';
+            var bus_profile_thumb_upload_url = '<?php echo BUS_PROFILE_THUMB_UPLOAD_URL; ?>';
+            var nobusimage = '<?php echo NOBUSIMAGE; ?>';
+            var user_bg_main_upload_url = '<?php echo USER_BG_MAIN_UPLOAD_URL; ?>';
+            var user_thumb_upload_url = '<?php echo USER_THUMB_UPLOAD_URL; ?>';
+            var message_url = '<?php echo MESSAGE_URL; ?>';
+            
             var app = angular.module('businessSearchListApp', ['ui.bootstrap']);
             $(".tags").val(q);
             $(".searchplace").val(l);

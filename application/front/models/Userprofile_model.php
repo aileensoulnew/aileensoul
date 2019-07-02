@@ -64,29 +64,6 @@ class Userprofile_model extends CI_Model {
                 $result_array[$key]['contact_detail']['contact_value'] = 'new';
                 $result_array[$key]['contact_detail']['contact_id'] = $is_userContactInfo['id'];   
             }
-
-            $follower_count = $this->common->getFollowerCount($value['user_id'])[0];
-            $result_array[$key]['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
-
-            $contact_count = $this->common->getContactCount($value['user_id'])[0];
-            $result_array[$key]['contact_count'] = $this->common->change_number_long_format_to_short((int)$contact_count['total']);
-
-            $post_count = $this->common->get_post_count($value['user_id']);
-            $result_array[$key]['post_count'] = $this->common->change_number_long_format_to_short((int)$post_count);
-
-            $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $login_user_id . ') AND follow_type = "1"')->get()->row_array();
-            $result_array[$key]['follow_from'] = $follow_detail['follow_from'];
-            $result_array[$key]['follow_to'] = $follow_detail['follow_to'];
-            $result_array[$key]['follow_status'] = $follow_detail['status'];
-
-            if($login_user_id != $value['user_id'])
-            {
-                $result_array[$key]['mutual_friend'] = $this->common->mutual_friend($login_user_id,$value['user_id']);
-            }
-            else
-            {
-                $result_array[$key]['mutual_friend'] = array();
-            }
         }
 
         $data = array(
@@ -143,43 +120,6 @@ class Userprofile_model extends CI_Model {
                 $result['follow_user_id'] = 
             }*/
             $result_array[$key]['follow_user_id'] = $result_query[0]['follow_user_id'];
-
-            $follower_count = $this->common->getFollowerCount($value['user_id'])[0];
-            $result_array[$key]['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
-
-            $contact_count = $this->common->getContactCount($value['user_id'])[0];
-            $result_array[$key]['contact_count'] = $this->common->change_number_long_format_to_short((int)$contact_count['total']);
-
-            $post_count = $this->common->get_post_count($value['user_id']);
-            $result_array[$key]['post_count'] = $this->common->change_number_long_format_to_short((int)$post_count);
-
-            $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $login_user_id . ') AND follow_type = "1"')->get()->row_array();
-            $result_array[$key]['follow_from'] = $follow_detail['follow_from'];
-            $result_array[$key]['follow_to'] = $follow_detail['follow_to'];
-            $result_array[$key]['follow_status'] = $follow_detail['status'];
-
-            if($login_user_id != $value['user_id'])
-            {
-                $result_array[$key]['mutual_friend'] = $this->common->mutual_friend($login_user_id,$value['user_id']);
-            }
-            else
-            {
-                $result_array[$key]['mutual_friend'] = array();
-            }
-
-            $is_userContactInfo= $this->userprofile_model->userContactStatus($login_user_id, $value['user_id']);
-            if(isset($is_userContactInfo) && !empty($is_userContactInfo))
-            {
-                $result_array[$key]['contact_status'] = 1;
-                $result_array[$key]['contact_value'] = $is_userContactInfo['status'];
-                $result_array[$key]['contact_id'] = $is_userContactInfo['id'];
-            }
-            else
-            {
-                $result_array[$key]['contact_status'] = 0;
-                $result_array[$key]['contact_value'] = 'new';
-                $result_array[$key]['contact_id'] = $is_userContactInfo['id'];   
-            }
 
             // array_push($new_follow_array, $result);
         }        
@@ -246,53 +186,10 @@ class Userprofile_model extends CI_Model {
                     $result_array[$key]["follow_status"] = 0;
                 }
 
-                if($value['follow_type'] == 1)
-                {                    
-                    $follower_count = $this->common->getFollowerCount($value['user_id'])[0];
-                    $result_array[$key]['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
-
-                    $contact_count = $this->common->getContactCount($value['user_id'])[0];
-                    $result_array[$key]['contact_count'] = $this->common->change_number_long_format_to_short((int)$contact_count['total']);
-
-                    $post_count = $this->common->get_post_count($value['user_id']);
-                    $result_array[$key]['post_count'] = $this->common->change_number_long_format_to_short((int)$post_count);
-
-                    $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $login_user_id . ') AND follow_type = "1"')->get()->row_array();
-                    $result_array[$key]['follow_from'] = $follow_detail['follow_from'];
-                    $result_array[$key]['follow_to'] = $follow_detail['follow_to'];
-                    $result_array[$key]['follow_status'] = $follow_detail['status'];
-
-                    if($login_user_id != $value['user_id'])
-                    {
-                        $result_array[$key]['mutual_friend'] = $this->common->mutual_friend($login_user_id,$value['user_id']);
-                    }
-                    else
-                    {
-                        $result_array[$key]['mutual_friend'] = array();
-                    }
-
-                    $is_userContactInfo= $this->userprofile_model->userContactStatus($login_user_id, $value['user_id']);
-                    if(isset($is_userContactInfo) && !empty($is_userContactInfo))
-                    {
-                        $result_array[$key]['contact_status'] = 1;
-                        $result_array[$key]['contact_value'] = $is_userContactInfo['status'];
-                        $result_array[$key]['contact_id'] = $is_userContactInfo['id'];
-                    }
-                    else
-                    {
-                        $result_array[$key]['contact_status'] = 0;
-                        $result_array[$key]['contact_value'] = 'new';
-                        $result_array[$key]['contact_id'] = $is_userContactInfo['id'];   
-                    }
-                }
-
             }
             if($value['follow_type'] == 2)
             {
                 $result_array[$key]["business_data"] = $this->get_business_data_from_user_id($value['user_id']);
-
-                $follower_count = $this->business_model->getFollowerCount($value['user_id'])[0];
-                $result_array[$key]['user_data']['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
                 if($user_id != '')
                 {
                     $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "2" ')->get()->row_array();
@@ -726,42 +623,6 @@ class Userprofile_model extends CI_Model {
                 $query = $this->db->get();
                 $user_data = $query->row_array();
                 $result_array[$key]['user_data'] = $user_data;
-
-                $follower_count = $this->common->getFollowerCount($value['user_id'])[0];
-                $result_array[$key]['user_data']['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
-
-                $contact_count = $this->common->getContactCount($value['user_id'])[0];
-                $result_array[$key]['user_data']['contact_count'] = $this->common->change_number_long_format_to_short((int)$contact_count['total']);
-
-                $post_count = $this->common->get_post_count($value['user_id']);
-                $result_array[$key]['user_data']['post_count'] = $this->common->change_number_long_format_to_short((int)$post_count);
-
-                if($user_id != '')
-                {                    
-                    $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "1"')->get()->row_array();
-                    $result_array[$key]['user_data']['follow_status'] = $follow_detail['status'];
-
-                    $is_userContactInfo= $this->userprofile_model->userContactStatus($user_id, $value['user_id']);
-                    if(isset($is_userContactInfo) && !empty($is_userContactInfo))
-                    {
-                        $result_array[$key]['user_data']['contact_status'] = 1;
-                        $result_array[$key]['user_data']['contact_value'] = $is_userContactInfo['status'];
-                        $result_array[$key]['user_data']['contact_id'] = $is_userContactInfo['id'];
-                    }
-                    else
-                    {
-                        $result_array[$key]['user_data']['contact_status'] = 0;
-                        $result_array[$key]['user_data']['contact_value'] = 'new';
-                        $result_array[$key]['user_data']['contact_id'] = $is_userContactInfo['id'];   
-                    }
-                }
-                else
-                {
-                    $result_array[$key]['user_data']['follow_status'] = '';
-                    $result_array[$key]['user_data']['contact_status'] = '';
-                    $result_array[$key]['user_data']['contact_value'] = '';
-                    $result_array[$key]['user_data']['contact_id'] = '';
-                }
             }
             else
             {
@@ -781,18 +642,6 @@ class Userprofile_model extends CI_Model {
                 $query = $this->db->get();
                 $user_data = $query->row_array();
                 $result_array[$key]['user_data'] = $user_data;
-
-                $follower_count = $this->business_model->getFollowerCount($value['user_id'])[0];
-                $result_array[$key]['user_data']['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
-                if($user_id != '')
-                {
-                    $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "2" ')->get()->row_array();
-                    $result_array[$key]['user_data']['follow_status'] = $follow_detail['status'];
-                }
-                else
-                {
-                    $result_array[$key]['user_data']['follow_status'] = '';
-                }
             }
 
             $this->db->select("uaq.*,IF(uaq.category != '',GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field,IF(uaq.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag")->from("user_ask_question uaq, ailee_tags t, ailee_hashtag ht");
@@ -831,15 +680,6 @@ class Userprofile_model extends CI_Model {
             
 
             $result_array[$key]['post_comment_data'] = $postCommentData;
-
-            if($user_id != $value['user_id'])
-            {
-                $result_array[$key]['mutual_friend'] = $this->common->mutual_friend($user_id,$value['user_id']);
-            }
-            else
-            {
-                $result_array[$key]['mutual_friend'] = array();
-            }
 
             $result_array[$key]['page_data']['page'] = $page;
             $result_array[$key]['page_data']['total_record'] = $this->userPostCount($user_id);
@@ -893,45 +733,7 @@ class Userprofile_model extends CI_Model {
             $this->db->where('u.user_id', $value['user_id']);
             $query = $this->db->get();
             $user_data = $query->row_array();
-            $result_array[$key]['user_data'] = $user_data;
-
-            $follower_count = $this->common->getFollowerCount($value['user_id'])[0];
-            $result_array[$key]['user_data']['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
-
-            $contact_count = $this->common->getContactCount($value['user_id'])[0];
-            $result_array[$key]['user_data']['contact_count'] = $this->common->change_number_long_format_to_short((int)$contact_count['total']);
-
-            $post_count = $this->common->get_post_count($value['user_id']);
-            $result_array[$key]['user_data']['post_count'] = $this->common->change_number_long_format_to_short((int)$post_count);
-
-            if($userid_login != '' && $userid_login != $value['user_id'] )
-            {
-                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $userid_login . ') AND follow_type = "1"')->get()->row_array();
-
-                $result_array[$key]['user_data']['follow_status'] = $follow_detail['status'];
-
-                $is_userContactInfo = $this->userprofile_model->userContactStatus($userid_login, $value['user_id']);
-
-                if(isset($is_userContactInfo) && !empty($is_userContactInfo))
-                {
-                    $result_array[$key]['user_data']['contact_status'] = 1;
-                    $result_array[$key]['user_data']['contact_value'] = $is_userContactInfo['status'];
-                    $result_array[$key]['user_data']['contact_id'] = $is_userContactInfo['id'];
-                }
-                else
-                {
-                    $result_array[$key]['user_data']['contact_status'] = 0;
-                    $result_array[$key]['user_data']['contact_value'] = 'new';
-                    $result_array[$key]['user_data']['contact_id'] = $is_userContactInfo['id'];   
-                }
-            }
-            else
-            {
-                $result_array[$key]['user_data']['follow_status'] = '';
-                $result_array[$key]['user_data']['contact_status'] = '';
-                $result_array[$key]['user_data']['contact_value'] = '';
-                $result_array[$key]['user_data']['contact_id'] = '';
-            }
+            $result_array[$key]['user_data'] = $user_data;            
 
             $this->db->select("uaq.*,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category,it.industry_name as field,IF(uaq.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) as hashtag")->from("user_ask_question uaq, ailee_tags t,ailee_hashtag ht");
             $this->db->join('industry_type it', 'it.industry_id = uaq.field', 'left');
@@ -975,15 +777,6 @@ class Userprofile_model extends CI_Model {
             $result_array[$key]['post_comment_count'] = $this->postCommentCount($value['id']);
             $postCommentData = $this->user_post_model->postCommentCount($value['id']);            
             
-            if($userid_login != $value['user_id'])
-            {
-                $result_array[$key]['mutual_friend'] = $this->common->mutual_friend($userid_login,$value['user_id']);
-            }
-            else
-            {
-                $result_array[$key]['mutual_friend'] = array();
-            }
-
             // $result_array[$key]['post_comment_data'] = $postCommentData;
 
             $result_array[$key]['page_data']['page'] = $page;

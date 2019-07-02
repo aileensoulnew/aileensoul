@@ -19,6 +19,7 @@ app.controller('businessSearchListController', function ($scope, $http,$compile,
     $scope.categorysearch = '';
     $scope.locationsearch = '';
     $scope.business = {};
+    $scope.user_id = user_id;
     pagenum = 1;
     var search_data_url = '';
     var isProcessing = false;
@@ -26,7 +27,11 @@ app.controller('businessSearchListController', function ($scope, $http,$compile,
     $scope.details_in_popup = function(uid,login_user_id,utype,div_id){
         socket.emit('get user card',uid,login_user_id,utype);
         socket.on('get user card', (data) => {
-            var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            // var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            var hh = $scope.today.getHours() < 10 ? '0'+$scope.today.getHours() : $scope.today.getHours();
+            var mm = $scope.today.getMinutes() < 10 ? '0'+$scope.today.getMinutes() : $scope.today.getMinutes();
+            var ss = $scope.today.getSeconds() < 10 ? '0'+$scope.today.getSeconds() : $scope.today.getSeconds();
+            var times = hh+''+mm+''+ss;
             var all_html = '';
             if(data.user_type.toString() == '2')
             {

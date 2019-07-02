@@ -388,7 +388,11 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
     $scope.details_in_popup = function(uid,login_user_id,utype,div_id){
         socket.emit('get user card',uid,login_user_id,utype);
         socket.on('get user card', (data) => {
-            var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            var hh = $scope.today.getHours() < 10 ? '0'+$scope.today.getHours() : $scope.today.getHours();
+            var mm = $scope.today.getMinutes() < 10 ? '0'+$scope.today.getMinutes() : $scope.today.getMinutes();
+            var ss = $scope.today.getSeconds() < 10 ? '0'+$scope.today.getSeconds() : $scope.today.getSeconds();
+
+            var times = hh+''+mm+''+ss;
             var all_html = '';
             if(data.user_type.toString() == '2')
             {
@@ -4643,7 +4647,10 @@ app.controller('peopleController', function($scope, $http, $compile, $window,$lo
     $scope.details_in_popup = function(uid,login_user_id,utype,div_id){
         socket.emit('get user card',uid,login_user_id,utype);
         socket.on('get user card', (data) => {
-            var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            var hh = $scope.today.getHours() < 10 ? '0'+$scope.today.getHours() : $scope.today.getHours();
+            var mm = $scope.today.getMinutes() < 10 ? '0'+$scope.today.getMinutes() : $scope.today.getMinutes();
+            var ss = $scope.today.getSeconds() < 10 ? '0'+$scope.today.getSeconds() : $scope.today.getSeconds();
+            var times = hh+''+mm+''+ss;
             var all_html = '';
             if(data.user_type.toString() == '2')
             {
@@ -5200,7 +5207,12 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
     $scope.details_in_popup = function(uid,login_user_id,utype,div_id){
         socket.emit('get user card',uid,login_user_id,utype);
         socket.on('get user card', (data) => {
-            var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            //var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            var hh = $scope.today.getHours() < 10 ? '0'+$scope.today.getHours() : $scope.today.getHours();
+            var mm = $scope.today.getMinutes() < 10 ? '0'+$scope.today.getMinutes() : $scope.today.getMinutes();
+            var ss = $scope.today.getSeconds() < 10 ? '0'+$scope.today.getSeconds() : $scope.today.getSeconds();
+            var times = hh+''+mm+''+ss;
+
             var all_html = '';
             if(data.user_type.toString() == '2')
             {
@@ -7096,7 +7108,11 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
     $scope.details_in_popup = function(uid,login_user_id,utype,div_id){
         socket.emit('get user card',uid,login_user_id,utype);
         socket.on('get user card', (data) => {
-            var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            // var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            var hh = $scope.today.getHours() < 10 ? '0'+$scope.today.getHours() : $scope.today.getHours();
+            var mm = $scope.today.getMinutes() < 10 ? '0'+$scope.today.getMinutes() : $scope.today.getMinutes();
+            var ss = $scope.today.getSeconds() < 10 ? '0'+$scope.today.getSeconds() : $scope.today.getSeconds();
+            var times = hh+''+mm+''+ss;
             var all_html = '';
             if(data.user_type.toString() == '2')
             {
@@ -9031,7 +9047,11 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
     $scope.details_in_popup = function(uid,login_user_id,utype,div_id){
         socket.emit('get user card',uid,login_user_id,utype);
         socket.on('get user card', (data) => {
-            var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            // var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            var hh = $scope.today.getHours() < 10 ? '0'+$scope.today.getHours() : $scope.today.getHours();
+            var mm = $scope.today.getMinutes() < 10 ? '0'+$scope.today.getMinutes() : $scope.today.getMinutes();
+            var ss = $scope.today.getSeconds() < 10 ? '0'+$scope.today.getSeconds() : $scope.today.getSeconds();
+            var times = hh+''+mm+''+ss;
             var all_html = '';
             if(data.user_type.toString() == '2')
             {
@@ -10881,7 +10901,11 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
     $scope.details_in_popup = function(uid,login_user_id,utype,div_id){
         socket.emit('get user card',uid,login_user_id,utype);
         socket.on('get user card', (data) => {
-            var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            // var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            var hh = $scope.today.getHours() < 10 ? '0'+$scope.today.getHours() : $scope.today.getHours();
+            var mm = $scope.today.getMinutes() < 10 ? '0'+$scope.today.getMinutes() : $scope.today.getMinutes();
+            var ss = $scope.today.getSeconds() < 10 ? '0'+$scope.today.getSeconds() : $scope.today.getSeconds();
+            var times = hh+''+mm+''+ss;
             var all_html = '';
             if(data.user_type.toString() == '2')
             {
@@ -12663,7 +12687,11 @@ app.controller('businessController', function($scope, $http, $compile, $window,$
     $scope.details_in_popup = function(uid,login_user_id,utype,div_id){
         socket.emit('get user card',uid,login_user_id,utype);
         socket.on('get user card', (data) => {
-            var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            // var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            var hh = $scope.today.getHours() < 10 ? '0'+$scope.today.getHours() : $scope.today.getHours();
+            var mm = $scope.today.getMinutes() < 10 ? '0'+$scope.today.getMinutes() : $scope.today.getMinutes();
+            var ss = $scope.today.getSeconds() < 10 ? '0'+$scope.today.getSeconds() : $scope.today.getSeconds();
+            var times = hh+''+mm+''+ss;
             var all_html = '';
             if(data.user_type.toString() == '2')
             {

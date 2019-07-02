@@ -30,7 +30,8 @@ var isProcessing = false;
 function details_in_popup(uid,login_user_id,utype,div_id){
         socket.emit('get user card',uid,login_user_id,utype);
         socket.on('get user card', (data) => {
-            var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
+            var today = new Date();
+            var times = today.getHours()+''+today.getMinutes()+''+today.getSeconds();
             var all_html = '';
             if(data.user_type.toString() == '2')
             {
@@ -274,7 +275,7 @@ function business_followers(slug_id, pagenum)
                         var uid = $(this).data('uid');
                         var utype = $(this).data('utype');
                         var div_id =  "tmp-id-" + $.now();
-                        return details_in_popup(uid,$scope.user_id,utype,div_id);
+                        return details_in_popup(uid,user_id,utype,div_id);
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
