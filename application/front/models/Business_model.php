@@ -215,20 +215,7 @@ class Business_model extends CI_Model {
         }
         // echo $sql;exit;
         $query = $this->db->query($sql);
-        $result_array = $query->result_array();
-        foreach ($result_array as $key => $value) {
-            if($user_id != '')
-            {
-                $follower_count = $this->business_model->getFollowerCount($value['user_id'])[0];
-                $result_array[$key]['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
-                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "2" ')->get()->row_array();
-                $result_array[$key]['follow_status'] = $follow_detail['status'];
-            }
-            else
-            {
-                $result_array[$key]['follow_status'] = '';
-            }
-        }
+        $result_array = $query->result_array();       
 
         $query2 = $this->db->query($tot_sql);
         $total_record = $query2->num_rows();
@@ -558,9 +545,7 @@ class Business_model extends CI_Model {
         if ($start < 0)
             $start = 0;
         $sql = "SELECT bp.business_user_image, bp.profile_background, bp.other_industrial, 
-        IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug,
-            bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, ct.city_name as city, 
-            cr.country_name as country 
+        IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug, bp.company_name, bp.country, bp.city, bp.details, bp.contact_website, it.industry_name, ct.city_name as city, cr.country_name as country , bp.user_id
             FROM ailee_business_profile bp 
             LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal 
             LEFT JOIN ailee_cities ct ON ct.city_id = bp.city 

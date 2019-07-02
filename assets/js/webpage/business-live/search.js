@@ -27,6 +27,7 @@ app.controller('businessSearchListController', function ($scope, $http,$compile,
     $scope.details_in_popup = function(uid,login_user_id,utype,div_id){
         socket.emit('get user card',uid,login_user_id,utype);
         socket.on('get user card', (data) => {
+            console.log(data);
             // var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
             var hh = $scope.today.getHours() < 10 ? '0'+$scope.today.getHours() : $scope.today.getHours();
             var mm = $scope.today.getMinutes() < 10 ? '0'+$scope.today.getMinutes() : $scope.today.getMinutes();

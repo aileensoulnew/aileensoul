@@ -116,7 +116,9 @@
                         </h3>
                     </div>					
                     <div ng-if="businessList.length != 0" ng-repeat="business in businessList" ng-init="busIndex=$index">
-                        <?php if($usre_id){ 
+                        <?php
+                        $popover = '';
+                        if($usre_id){ 
                             $popover = 'data-toggle="popover" data-uid="{{business.user_id}}" data-utype="2"';
                          } ?>
                         <div class="all-job-box search-business">
