@@ -144,11 +144,14 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
                         all_html += '</div>';
                     all_html += '</div>';
                 }
-                // console.log(data);
+
+                setTimeout(function(){
                 $('#'+div_id).html(all_html);
+                },1000);
+                // console.log(data);
             }
         });
-        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
+        return '<div id="'+ div_id +'"><div class="user-tooltip" style="    background: transparent; box-shadow: none;"><div class="fw text-center" style="padding-top:10px;min-height:255px"></div></div></div>';
     }
 
     var isProcessing = false;

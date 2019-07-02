@@ -15,6 +15,9 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>">
         <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
         <!-- <script src="<?php //echo base_url('assets/js/jquery-3.2.1.min.js') ?>"></script> -->
+        <style type="text/css">
+            .popover.cus-tooltip{background: transparent;}
+        </style>
     	<?php $this->load->view('adsense'); ?>
     </head>
     <body class="contact-request body-loader">
