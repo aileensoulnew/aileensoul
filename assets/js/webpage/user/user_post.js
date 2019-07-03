@@ -1290,6 +1290,8 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
 
     getUserPost(pg);
     var isProcessing = false;
+
+    var is_scolled = false;
     function getUserPost(pg,fl_addpost) {
 
         $('#loader').show();
@@ -1403,7 +1405,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                         }
                     }, 100);
                 });
-
+                auto_load_feed();
             },1000);
         }, function (error) {
             setTimeout(function(){
@@ -1414,6 +1416,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
 
     $(window).on('scroll', function () {
         if (($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) && $location.url().substr(1) == '') {
+            is_scolled = true;
             // isLoadingData = true;
             var page = $scope.page;//$(".page_number:last").val();
             var total_record = $scope.total_record;//$(".total_record").val();
@@ -1432,6 +1435,18 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             }
         }
     });
+    function auto_load_feed()
+    {
+        if($scope.page == 5)
+        {
+            is_scolled = true;
+        }
+        if(is_scolled == false)
+        {
+            var pagenum = parseInt($scope.page) + 1;
+            getUserPostLoadMore(pagenum);
+        }
+    }
 
     function getUserPostLoadMore(pg) {
        
@@ -1571,6 +1586,10 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
 
                 // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             },1000);
+            if(is_scolled == false)
+            {
+                auto_load_feed();
+            }
         }, function (error) {
             setTimeout(function(){
                 isProcessing = false;
