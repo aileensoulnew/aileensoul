@@ -666,6 +666,7 @@ class Business_profile extends MY_Controller {
             $total_record = count($userlist1);
         }
 
+        $this->data['page'] = $page;
         $this->data['total_record'] = $total_record;
         $this->data['offset'] = $offset;
         $this->data['perpage'] = $limit;

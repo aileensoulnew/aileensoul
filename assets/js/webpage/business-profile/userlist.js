@@ -46,9 +46,10 @@ function details_in_popup(uid,login_user_id,utype,div_id){
         socket.on('get user card', (data) => {
             if(data.login_user_id == login_user_id){
                 // var times = $scope.today.getHours()+''+$scope.today.getMinutes()+''+$scope.today.getSeconds();
-                var hh = $scope.today.getHours() < 10 ? '0'+$scope.today.getHours() : $scope.today.getHours();
-                var mm = $scope.today.getMinutes() < 10 ? '0'+$scope.today.getMinutes() : $scope.today.getMinutes();
-                var ss = $scope.today.getSeconds() < 10 ? '0'+$scope.today.getSeconds() : $scope.today.getSeconds();
+                var today = new Date();
+                var hh = today.getHours() < 10 ? '0'+today.getHours() : today.getHours();
+                var mm = today.getMinutes() < 10 ? '0'+today.getMinutes() : today.getMinutes();
+                var ss = today.getSeconds() < 10 ? '0'+today.getSeconds() : today.getSeconds();
                 var times = hh+''+mm+''+ss;
                 var all_html = '';
                 if(data.user_type.toString() == '2')
@@ -99,11 +100,11 @@ function details_in_popup(uid,login_user_id,utype,div_id){
                                     if(data.user_data.user_id != login_user_id){
                                         all_html += '<div class="tooltip-btns follow-btn-bus-'+data.user_data.user_id+'">';
                                             if(data.follow_status == '1'){
-                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus">Following</a>';
+                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Following</a>';
                                             }
                                             else
                                             {
-                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus">Follow</a>';
+                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Follow</a>';
                                             }
                                         all_html += '</div>';
                                     }
@@ -219,11 +220,11 @@ function details_in_popup(uid,login_user_id,utype,div_id){
 
                                         all_html += '<li class="follow-btn-user-'+data.user_data.user_id+'">';
                                             if(data.follow_status == '1'){
-                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus">Following</a>';
+                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Following</a>';
                                             }
                                             else
                                             {
-                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus">Follow</a>';
+                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Follow</a>';
                                             }
                                         all_html += '</li>';
 
@@ -251,9 +252,10 @@ $(document).ready(function () {
     $(window).scroll(function () {
         if ($(window).scrollTop() >= ($(document).height() - $(window).height())*0.7){
 
-            var page = $(".page_number:last").val();
+            var page = $(".page_number:last").val() == undefined || $(".page_number:last").val() == ''? 0 : $(".page_number:last").val();
             var total_record = $(".total_record").val();
             var perpage_record = $(".perpage_record").val();
+
             if (parseInt(perpage_record) <= parseInt(total_record)) {
                 var available_page = total_record / perpage_record;
                 available_page = parseInt(available_page, 10);
@@ -263,7 +265,7 @@ $(document).ready(function () {
                 }
                 //if ($(".page_number:last").val() <= $(".total_record").val()) {
                 if (parseInt(page) <= parseInt(available_page)) {
-                    var pagenum = parseInt($(".page_number:last").val()) + 1;
+                    var pagenum = parseInt(page) + 1;
                     business_userlist(pagenum);
                 }
             }
@@ -272,13 +274,9 @@ $(document).ready(function () {
 });
 var isProcessing = false;
 var userAjax;
+var fail_count = 0;
 function business_userlist(pagenum, from = "") {
     if (isProcessing) {
-        /*
-         *This won't go past this condition while
-         *isProcessing is true.
-         *You could even display a message.
-         **/
         return;
     }
 
@@ -305,6 +303,7 @@ function business_userlist(pagenum, from = "") {
             $('.loader').remove();
         },
         success: function (data) {
+            fail_count = 0;
             if(from == "filter"){
                 $('.contact-frnd-post').html("");
             }
@@ -328,7 +327,7 @@ function business_userlist(pagenum, from = "") {
                         var uid = $(this).data('uid');
                         var utype = $(this).data('utype');
                         var div_id =  "tmp-id-" + $.now();
-                        return details_in_popup(uid,$scope.user_id,utype,div_id);
+                        return details_in_popup(uid,user_id,utype,div_id);
                         // return $('#popover-content').html();
                     },
                     placement: function (context, element) {
@@ -374,6 +373,18 @@ function business_userlist(pagenum, from = "") {
                 });
             },500);
             isProcessing = false;
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                isProcessing = false;
+                if(fail_count == 2)
+                {
+                    fail_count = 0;
+                    pagenum = pagenum + 1;
+                }
+                fail_count = fail_count + 1;
+                business_userlist(pagenum);
+            },500);
         }
     });
 }
@@ -456,6 +467,7 @@ function follow_user_bus(id)
 {
     var uid = $("#"+id).data('uid').toString();
     $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $(".follow-btn-bus-" + uid.slice(0, -6) + ' a').html('Following');
     $.ajax({
         url: base_url + "userprofile_page/business_follow_tooltip",        
         type: "POST",
@@ -472,6 +484,7 @@ function follow_user_bus(id)
 function unfollow_user_bus(id) {
     var uid = $("#"+id).data('uid').toString();
     $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $(".follow-btn-bus-" + uid.slice(0, -6) + ' a').html('Follow');
     $.ajax({
         url: base_url + "userprofile_page/business_unfollow_tooltip",        
         type: "POST",

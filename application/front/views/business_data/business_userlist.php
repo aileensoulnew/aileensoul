@@ -80,8 +80,10 @@
                                             <h3>Business list</h3>
                                             
                                             <div class="contact-frnd-post">
-											<div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="Loader" /></div>
                                                 <!-- AJAX DATA... -->
+                                            </div>
+                                            <div class="fw" id="loader" style="text-align:center;">
+                                                <img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="Loader" />
                                             </div>
                                            
                                             <div class="col-md-1">
@@ -212,6 +214,14 @@
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
             var title = '<?php echo $title; ?>';
             var header_all_profile = '<?php echo $header_all_profile; ?>';
+
+            var bus_bg_main_upload_url = '<?php echo BUS_BG_MAIN_UPLOAD_URL; ?>';
+            var bus_profile_thumb_upload_url = '<?php echo BUS_PROFILE_THUMB_UPLOAD_URL; ?>';
+            var nobusimage = '<?php echo NOBUSIMAGE; ?>';
+            var user_bg_main_upload_url = '<?php echo USER_BG_MAIN_UPLOAD_URL; ?>';
+            var user_thumb_upload_url = '<?php echo USER_THUMB_UPLOAD_URL; ?>';
+            var message_url = '<?php echo MESSAGE_URL; ?>';
+
             var app = angular.module('userListApp', ['ui.bootstrap']);
         </script>
         <script src="<?php echo SOCKETSERVER; ?>/socket.io/socket.io.js"></script>

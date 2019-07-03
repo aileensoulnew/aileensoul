@@ -69,7 +69,7 @@ foreach ($userlist as $index=>$user) { ?>
                                 <div class="follow-img">
                                     <?php
                                     if ($user['business_user_image'] != '') { ?>
-                                        <a href="<?php echo base_url('company/' . $user['business_slug']) ;?>" data-toggle="popover" data-tooltip-content="#tooltip_content_<?php echo $index;?>">
+                                        <a href="<?php echo base_url('company/' . $user['business_slug']) ;?>" data-toggle="popover" data-uid="<?php echo $user['user_id'];?>" data-utype="2">
                                         <?php
                                         if (IMAGEPATHFROM == 'upload') {
                                             if (!file_exists($this->config->item('bus_profile_thumb_upload_path') . $user['business_user_image'])) {
@@ -82,7 +82,7 @@ foreach ($userlist as $index=>$user) { ?>
                                         }
                                         echo '</a>';
                                     } else { ?>
-                                        <a href="<?php echo base_url('company/' . $user['business_slug']);?>" data-toggle="popover" data-tooltip-content="#tooltip_content_<?php echo $index;?>"><img  src="<?php echo base_url(NOBUSIMAGE);?>" alt="NOBUSIMAGE"></a>
+                                        <a href="<?php echo base_url('company/' . $user['business_slug']);?>" data-toggle="popover" data-uid="<?php echo $user['user_id'];?>" data-utype="2"><img  src="<?php echo base_url(NOBUSIMAGE);?>" alt="NOBUSIMAGE"></a>
                                     <?php
                                     } ?>
                                 </div>
@@ -90,7 +90,7 @@ foreach ($userlist as $index=>$user) { ?>
                             <li class="folle_text">
                                 <div class="">
                                     <div class="follow-li-text " style="padding: 0;">
-                                        <a href="<?php echo base_url('company/' . $user['business_slug']);?>" data-toggle="popover" data-tooltip-content="#tooltip_content_<?php echo $index;?>"> <?php echo $user['company_name'];?>
+                                        <a href="<?php echo base_url('company/' . $user['business_slug']);?>" data-toggle="popover" data-uid="<?php echo $user['user_id'];?>" data-utype="2"> <?php echo $user['company_name'];?>
                                         </a>
                                     </div>
                                     <div><?php

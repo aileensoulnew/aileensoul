@@ -319,8 +319,6 @@ class Business_model extends CI_Model {
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
         foreach ($result_array as $key => $value) {
-            $follower_count = $this->business_model->getFollowerCount($value['user_id'])[0];
-            $result_array[$key]['follower_count'] = $this->common->change_number_long_format_to_short((int)$follower_count['total']);
             if($user_id != '')
             {
                 $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "2" ')->get()->row_array();
