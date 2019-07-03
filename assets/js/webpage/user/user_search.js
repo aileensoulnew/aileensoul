@@ -389,11 +389,11 @@ app.controller('searchController', function($scope, $http, $compile) {
                                     if(data.user_data.user_id != login_user_id){
                                         all_html += '<div class="tooltip-btns follow-btn-bus-'+data.user_data.user_id+'">';
                                             if(data.follow_status == '1'){
-                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus">Following</a>';
+                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Following</a>';
                                             }
                                             else
                                             {
-                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus">Follow</a>';
+                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Follow</a>';
                                             }
                                         all_html += '</div>';
                                     }
@@ -510,11 +510,11 @@ app.controller('searchController', function($scope, $http, $compile) {
 
                                         all_html += '<li class="follow-btn-user-'+data.user_data.user_id+'">';
                                             if(data.follow_status == '1'){
-                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus">Following</a>';
+                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus'+data.user_data.user_id+''+data.user_data.user_id+'">Following</a>';
                                             }
                                             else
                                             {
-                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus">Follow</a>';
+                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus'+data.user_data.user_id+''+data.user_data.user_id+'">Follow</a>';
                                             }
                                         all_html += '</li>';
 
@@ -2302,11 +2302,11 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                                     if(data.user_data.user_id != login_user_id){
                                         all_html += '<div class="tooltip-btns follow-btn-bus-'+data.user_data.user_id+'">';
                                             if(data.follow_status == '1'){
-                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus">Following</a>';
+                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus'+data.user_data.user_id+''+data.user_data.user_id+'">Following</a>';
                                             }
                                             else
                                             {
-                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus">Follow</a>';
+                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus'+data.user_data.user_id+''+data.user_data.user_id+'">Follow</a>';
                                             }
                                         all_html += '</div>';
                                     }
@@ -2423,11 +2423,11 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
 
                                         all_html += '<li class="follow-btn-user-'+data.user_data.user_id+'">';
                                             if(data.follow_status == '1'){
-                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus">Following</a>';
+                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Following</a>';
                                             }
                                             else
                                             {
-                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus">Follow</a>';
+                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Follow</a>';
                                             }
                                         all_html += '</li>';
 
@@ -4345,11 +4345,11 @@ app.controller('peopleController', function($scope, $http, $compile, $window, $l
                                     if(data.user_data.user_id != login_user_id){
                                         all_html += '<div class="tooltip-btns follow-btn-bus-'+data.user_data.user_id+'">';
                                             if(data.follow_status == '1'){
-                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus">Following</a>';
+                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Following</a>';
                                             }
                                             else
                                             {
-                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus">Follow</a>';
+                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Follow</a>';
                                             }
                                         all_html += '</div>';
                                     }
@@ -4466,11 +4466,11 @@ app.controller('peopleController', function($scope, $http, $compile, $window, $l
 
                                         all_html += '<li class="follow-btn-user-'+data.user_data.user_id+'">';
                                             if(data.follow_status == '1'){
-                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus">Following</a>';
+                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Following</a>';
                                             }
                                             else
                                             {
-                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus">Follow</a>';
+                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Follow</a>';
                                             }
                                         all_html += '</li>';
 
@@ -5012,11 +5012,11 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
                                     if(data.user_data.user_id != login_user_id){
                                         all_html += '<div class="tooltip-btns follow-btn-bus-'+data.user_data.user_id+'">';
                                             if(data.follow_status == '1'){
-                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus">Following</a>';
+                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Following</a>';
                                             }
                                             else
                                             {
-                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus">Follow</a>';
+                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Follow</a>';
                                             }
                                         all_html += '</div>';
                                     }
@@ -5133,11 +5133,11 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
 
                                         all_html += '<li class="follow-btn-user-'+data.user_data.user_id+'">';
                                             if(data.follow_status == '1'){
-                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus">Following</a>';
+                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Following</a>';
                                             }
                                             else
                                             {
-                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus">Follow</a>';
+                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Follow</a>';
                                             }
                                         all_html += '</li>';
 
@@ -6903,11 +6903,11 @@ app.controller('businessController', function($scope, $http, $compile, $window, 
                                     if(data.user_data.user_id != login_user_id){
                                         all_html += '<div class="tooltip-btns follow-btn-bus-'+data.user_data.user_id+'">';
                                             if(data.follow_status == '1'){
-                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus">Following</a>';
+                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Following</a>';
                                             }
                                             else
                                             {
-                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus">Follow</a>';
+                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Follow</a>';
                                             }
                                         all_html += '</div>';
                                     }
@@ -7024,11 +7024,11 @@ app.controller('businessController', function($scope, $http, $compile, $window, 
 
                                         all_html += '<li class="follow-btn-user-'+data.user_data.user_id+'">';
                                             if(data.follow_status == '1'){
-                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus">Following</a>';
+                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Following</a>';
                                             }
                                             else
                                             {
-                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus">Follow</a>';
+                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Follow</a>';
                                             }
                                         all_html += '</li>';
 
@@ -7467,11 +7467,11 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
                                     if(data.user_data.user_id != login_user_id){
                                         all_html += '<div class="tooltip-btns follow-btn-bus-'+data.user_data.user_id+'">';
                                             if(data.follow_status == '1'){
-                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus">Following</a>';
+                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Following</a>';
                                             }
                                             else
                                             {
-                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus">Follow</a>';
+                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Follow</a>';
                                             }
                                         all_html += '</div>';
                                     }
@@ -7588,11 +7588,11 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
 
                                         all_html += '<li class="follow-btn-user-'+data.user_data.user_id+'">';
                                             if(data.follow_status == '1'){
-                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus">Following</a>';
+                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Following</a>';
                                             }
                                             else
                                             {
-                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus">Follow</a>';
+                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Follow</a>';
                                             }
                                         all_html += '</li>';
 
@@ -9356,11 +9356,11 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
                                     if(data.user_data.user_id != login_user_id){
                                         all_html += '<div class="tooltip-btns follow-btn-bus-'+data.user_data.user_id+'">';
                                             if(data.follow_status == '1'){
-                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus">Following</a>';
+                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user_bus(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Following</a>';
                                             }
                                             else
                                             {
-                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus">Follow</a>';
+                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user_bus(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Follow</a>';
                                             }
                                         all_html += '</div>';
                                     }
@@ -9477,11 +9477,11 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
 
                                         all_html += '<li class="follow-btn-user-'+data.user_data.user_id+'">';
                                             if(data.follow_status == '1'){
-                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus">Following</a>';
+                                                all_html += '<a class="btn-new-1 following" data-uid="'+data.user_data.user_id+''+times+'" onclick="unfollow_user(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Following</a>';
                                             }
                                             else
                                             {
-                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus">Follow</a>';
+                                                all_html += '<a class="btn-new-1 follow" data-uid="'+data.user_data.user_id+''+times+'" onclick="follow_user(this.id)" id="follow_btn_bus'+data.user_data.user_id+'">Follow</a>';
                                             }
                                         all_html += '</li>';
 
@@ -11133,6 +11133,7 @@ function follow_user(id)
 {
     var uid = $("#"+id).data('uid').toString();
     $(".follow-btn-user-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $(".follow-btn-user-" + uid.slice(0, -6) + ' a').html('Following');
     $.ajax({
         url: base_url + "userprofile_page/follow_user_tooltip",        
         type: "POST",
@@ -11154,6 +11155,7 @@ function follow_user(id)
 function unfollow_user(id) {
     var uid = $("#"+id).data('uid').toString();
     $(".follow-btn-user-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $(".follow-btn-user-" + uid.slice(0, -6) + ' a').html('Follow');
     $.ajax({
         url: base_url + "userprofile_page/unfollow_user_tooltip",        
         type: "POST",
@@ -11176,6 +11178,7 @@ function follow_user_bus(id)
 {
     var uid = $("#"+id).data('uid').toString();
     $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $(".follow-btn-bus-" + uid.slice(0, -6) + ' a').html('Following');
     $.ajax({
         url: base_url + "userprofile_page/business_follow_tooltip",        
         type: "POST",
@@ -11197,6 +11200,7 @@ function follow_user_bus(id)
 function unfollow_user_bus(id) {
     var uid = $("#"+id).data('uid').toString();
     $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $(".follow-btn-bus-" + uid.slice(0, -6) + ' a').html('Follow');
     $.ajax({
         url: base_url + "userprofile_page/business_unfollow_tooltip",        
         type: "POST",

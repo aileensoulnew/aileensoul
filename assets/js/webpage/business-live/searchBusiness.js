@@ -139,6 +139,7 @@ function follow_user_bus(id)
 {
     var uid = $("#"+id).data('uid').toString();
     $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $(".follow-btn-bus-" + uid.slice(0, -6) + ' a').html('Following');
     $.ajax({
         url: base_url + "userprofile_page/business_follow_tooltip",        
         type: "POST",
@@ -155,6 +156,7 @@ function follow_user_bus(id)
 function unfollow_user_bus(id) {
     var uid = $("#"+id).data('uid').toString();
     $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $(".follow-btn-bus-" + uid.slice(0, -6) + ' a').html('Follow');
     $.ajax({
         url: base_url + "userprofile_page/business_unfollow_tooltip",        
         type: "POST",

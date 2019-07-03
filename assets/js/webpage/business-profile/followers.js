@@ -585,6 +585,7 @@ function follow_user(id)
 {
     var uid = $("#"+id).data('uid').toString();
     $(".follow-btn-user-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $(".follow-btn-user-" + uid.slice(0, -6) + ' a').html('Following');
     $.ajax({
         url: base_url + "userprofile_page/follow_user_tooltip",        
         type: "POST",
@@ -606,6 +607,7 @@ function follow_user(id)
 function unfollow_user(id) {
     var uid = $("#"+id).data('uid').toString();
     $(".follow-btn-user-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $(".follow-btn-user-" + uid.slice(0, -6) + ' a').html('Follow');
     $.ajax({
         url: base_url + "userprofile_page/unfollow_user_tooltip",        
         type: "POST",

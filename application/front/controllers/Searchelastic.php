@@ -1112,7 +1112,7 @@ class Searchelastic extends MY_Controller {
 
         foreach ($searchBusinessData as $key => $value) {            
             $searchBusinessDataMain[$key] = $value['_source'];
-            $searchBusinessDataMain[$key]['user_id'] = $value['_id'];
+            // $searchBusinessDataMain[$key]['user_id'] = $value['_id'];
 
             if($user_id != '')
             {
@@ -3328,7 +3328,7 @@ class Searchelastic extends MY_Controller {
 
         foreach ($searchBusinessData as $key => $value) {            
             $searchBusinessDataMain[$key] = $value['_source'];
-            $searchBusinessDataMain[$key]['user_id'] = $value['_id'];
+            // $searchBusinessDataMain[$key]['user_id'] = $value['_id'];
 
             if($user_id != '')
             {

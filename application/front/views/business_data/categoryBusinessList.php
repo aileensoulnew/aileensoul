@@ -107,7 +107,7 @@
                                         </div>
                                         <div class="all-job-top">
                                             <div class="post-img">
-                                                <a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>" data-toggle="popover" <?php echo $popover; ?>>
+                                                <a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>" <?php echo $popover; ?>>
                                                     <?php if($_businessList['business_user_image'] != ""){ ?>
                                                         <img src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL.$_businessList['business_user_image'] ?>">
                                                     <?php }
@@ -119,7 +119,7 @@
                                             </div>
                                             <div class="job-top-detail">
                                                 <h5>
-                                                    <a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>" data-toggle="popover" <?php echo $popover; ?>>
+                                                    <a href="<?php echo base_url().'company/'.$_businessList['business_slug']; ?>" <?php echo $popover; ?>>
                                                         <?php echo $_businessList['company_name']; ?>
                                                     </a>
                                                 </h5>
