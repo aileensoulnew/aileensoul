@@ -299,10 +299,10 @@ tags-input .host{/*position:inherit; height:inherit;*/}
 .user-tooltip .tooltip-user-detail ul li:first-child{margin-left: 0;}
 .user-tooltip .tooltip-user-detail ul li .user-img{width: 22px; height: 22px; border-radius: 100%;border:1px solid #d2d2d2;}
 .user-tooltip .tooltip-user-detail ul li .user-img img{border-radius: 100%; width: 100%; height: 100%; margin-top: -2px;}
-.user-tooltip .tooltip-user-detail ul li.m-contacts{font-size: 13px; color: #7b7b7b; margin-left: 0;}
+.user-tooltip .tooltip-user-detail ul li.m-contacts{font-size: 13px; color: #7b7b7b; margin-left: 5px;}
 .user-tooltip .tooltip-user-detail ul li.m-contacts span b{max-width: 100px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; line-height: 1; /*display: table-cell;*/}
 .user-tooltip .tooltip-user-detail .tooltip-btns{padding-top: 5px; width: 100%; float: left;}
-.user-tooltip .tooltip-user-detail .tooltip-btns .btn-new-1{font-size: 14px; color: #7b7b7b; border-color: #d2d2d2;     padding: 4px 20px !important; font-weight: normal; cursor: pointer; margin: 0 5px;}
+.user-tooltip .tooltip-user-detail .tooltip-btns .btn-new-1{font-size: 14px; color: #7b7b7b; border-color: #d2d2d2;     padding: 4px 20px !important; font-weight: normal; cursor: pointer; margin: 0 5px; width: auto; line-height: inherit;}
 .user-tooltip .tooltip-user-detail .tooltip-btns .btn-new-1:hover{text-decoration: none;}
 .post-discription .user-tooltip .tooltip-user-detail .tooltip-btns .btn-new-1{background:inherit; -webkit-text-fill-color:inherit; -webkit-background-clip: inherit;}
 .post-discription .user-tooltip .tooltip-user-detail .tooltip-btns .btn-new-1:hover{background: -webkit-linear-gradient(top,  rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
