@@ -707,7 +707,7 @@ if($browser == "Firefox")
     function Notificationheader() {
         if($('.notification_data_in').is(':visible') == false)
         {
-            getNotification();
+            // getNotification();
             notheader();
         }
     }
@@ -751,7 +751,16 @@ if($browser == "Firefox")
                 success: function (data) {
                     $("#not_loader").hide();
                     $('.' + 'notification_data_in').html(data.notification);
-                    $('#seenot').html(data.seeall);               
+                    $('#seenot').html(data.seeall);
+                    if(parseInt(data.not_count) > 0)
+                    {
+                        $(".noti_count").html(data.not_count);
+                    }
+                    else
+                    {
+                        $(".noti_count").hide();
+                        $(".noti_count").html("");
+                    }               
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
                     setTimeout(function(){

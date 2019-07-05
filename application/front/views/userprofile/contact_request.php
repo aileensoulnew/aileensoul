@@ -48,7 +48,7 @@
 												</a>
 											</div>
 											<div class="user-pr-img">
-												<a href="<?php echo base_url();?>{{contact.user_slug}}" target="_self" data-toggle="popover" data-uid="{{contact.from_id}}" data-utype="1">
+												<a href="<?php echo base_url();?>{{contact.user_slug}}" target="_self">
 													<img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{contact.user_image}}" ng-if="contact.user_image">                                                
                                                     <img ng-if="!contact.user_image && contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                                     <img ng-if="!contact.user_image && contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
@@ -56,7 +56,7 @@
 											</div>                                            
                                             <div class="user-info-text text-center">
                                                 <p>
-                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" target="_self" data-toggle="popover" data-uid="{{contact.from_id}}" data-utype="1">
+                                                    <a href="<?php echo base_url(); ?>{{contact.user_slug}}" target="_self">
                                                     	<span title="{{contact.fullname| capitalize}}" class="user-name main_data_cq" ng-bind="contact.fullname | capitalize"></span>
                                                     </a>
                                                 </p>
@@ -192,13 +192,6 @@
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
             var item = '<?php echo $this->uri->segment(1); ?>';
             var header_all_profile = '<?php echo $header_all_profile; ?>';
-
-            var bus_bg_main_upload_url = '<?php echo BUS_BG_MAIN_UPLOAD_URL; ?>';
-            var bus_profile_thumb_upload_url = '<?php echo BUS_PROFILE_THUMB_UPLOAD_URL; ?>';
-            var nobusimage = '<?php echo NOBUSIMAGE; ?>';
-            var user_bg_main_upload_url = '<?php echo USER_BG_MAIN_UPLOAD_URL; ?>';
-            var user_thumb_upload_url = '<?php echo USER_THUMB_UPLOAD_URL; ?>';
-            var message_url = '<?php echo MESSAGE_URL; ?>';
 
             var app = angular.module("contactRequestApp", ['ngRoute', 'ui.bootstrap', 'ngSanitize']);
         </script>

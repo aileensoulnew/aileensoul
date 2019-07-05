@@ -3634,9 +3634,9 @@
                             </a>
                             <div class="like-detail">
                                 <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}" target="_self" data-toggle="popover" data-uid="{{userlist.user_id}}" data-utype="1">{{(userlist.user_id == '<?php echo $user_id; ?>' ? 'You' : userlist.fullname)}}</a></h4>
-                                <p ng-if="(userlist.title_name == null) && (userlist.degree_name != null)">{{userlist.degree_name}}</p>
-                                <p ng-if="(userlist.title_name != null) && (userlist.degree_name == null)">{{userlist.title_name}}</p>
-                                <p ng-if="(userlist.title_name == null) && (userlist.degree_name == null)">Current work</p>
+                                <p ng-if="!userlist.title_name && userlist.degree_name">{{userlist.degree_name}}</p>
+                                <p ng-if="userlist.title_name && !userlist.degree_name">{{userlist.title_name}}</p>
+                                <p ng-if="!userlist.title_name && !userlist.degree_name">Current work</p>
                             </div>
                         </li>
                         <li id="like_loader" style="text-align: center;display: none; text-align: center; padding: 0;">

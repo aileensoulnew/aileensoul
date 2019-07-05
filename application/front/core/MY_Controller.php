@@ -7,25 +7,9 @@ class MY_Controller extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-
-
-        //    $this->output->cache(1);
-        //$this->output->enable_profiler(TRUE);
-//COMMENT BY KHYATI 02/12/2017 START
-//        $segment_check = $this->uri->segment(2);
-//
-//        $segment_dynamicpost = substr($segment_check, 0, strrpos($segment_check, "-"));
-//
-//        if ($segment_dynamicpost) {
-//
-//            $segment2 = $segment_dynamicpost;
-//        } else {
-//            $segment2 = $this->uri->segment(2);
-//        }
-//COMMENT BY KHYATI 02/12/2017 START
         $segment2 = $this->uri->segment(2);
         $segjobloc = "";
-//        jobs live link start
+       // jobs live link start
         $jobs = array('0' => 'jobs');
         $jobin = explode('-', $this->uri->segment(1));
         $jobsearchresult = array_intersect((array) $jobs, (array) $jobin);
@@ -34,7 +18,7 @@ class MY_Controller extends CI_Controller {
             $segjobloc = $this->uri->segment(1);
         }
         //jobs live link end
-//freelancer search live link start
+        // freelancer search live link start
         $segfreelancerloc = "";
         $projects = array('0' => 'project');
         $projectin = explode('-', $this->uri->segment(1));
@@ -44,7 +28,7 @@ class MY_Controller extends CI_Controller {
             $segfreelancerloc = $this->uri->segment(1);
         }
 
-//freelancer search live link end  
+        //freelancer search live link end  
         $segment2_names = array('search', 'dashboard', 'details', 'execute_search', 'ajax_user_search', 'ajax_job_search', 'ajax_freelancer_hire_search', 'ajax_freelancer_post_search', 'recruiter_search_candidate', 'business_search', 'ajax_business_user_login_search', 'post', 'ajax_rec_post', 'jobpost', 'project', 'postlocation', $segjobloc, $segfreelancerloc, 'add-post', 'ajax_data', 'get_skill', 'get_degree', 'add-projects', 'profile', 'registration', 'business-information', 'contact-information', 'description', 'image', 'business_registration', 'freelancer-details', 'resume', 'employer-details', 'hire_login', 'rec_check_login','other_filed_live','other_industry_live',
             'artistCategory','otherCategoryCount','gettoploactionofartist','artist');
 

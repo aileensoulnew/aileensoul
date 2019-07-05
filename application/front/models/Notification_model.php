@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 class Notification_model extends CI_Model {
     public function get_notification($user_id)
     {
-        $sql = "SELECT * FROM `ailee_notification` WHERE not_to_id = '".$user_id."' ORDER BY not_created_date DESC LIMIT 10";
+        $sql = "SELECT n.*,nd.not_title_name ,nd.not_desc ,nd.not_image ,nd.not_url FROM ailee_notification as n JOIN ailee_notification_detail as nd ON nd.not_id = n.not_id  WHERE n.not_to_id = '".$user_id."' ORDER BY n.not_created_date DESC LIMIT 10";
         $query = $this->db->query($sql);
         $result_array = $query->result_array();   
         return $result_array;
@@ -14,7 +14,7 @@ class Notification_model extends CI_Model {
 
     public function get_notification_ajax($user_id,$limit = '10',$offset = '0')
     {
-        $sql = "SELECT * FROM `ailee_notification` WHERE not_to_id = '".$user_id."' ORDER BY not_created_date DESC";
+        $sql = "SELECT n.*,nd.not_title_name ,nd.not_desc ,nd.not_image ,nd.not_url FROM ailee_notification as n JOIN ailee_notification_detail as nd ON nd.not_id = n.not_id  WHERE n.not_to_id = '".$user_id."' ORDER BY n.not_created_date DESC";
         if($limit != '') {
             $sql .= " LIMIT $offset,$limit";
         }

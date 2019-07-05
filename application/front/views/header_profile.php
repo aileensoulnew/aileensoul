@@ -783,7 +783,7 @@ if($first_segment == "")
     function Notificationheader() {
         if($('.notification_data_in').is(':visible') == false)
         {
-            getNotification();
+            // getNotification();
             notheader();
         }
     }
@@ -832,6 +832,15 @@ if($first_segment == "")
                     $('.notification_data_in').show();
                     $('.notification_data_in').html(data.notification);
                     $('#seenot').html(data.seeall);
+                    if(parseInt(data.not_count) > 0)
+                    {
+                        $(".noti_count").html(data.not_count);
+                    }
+                    else
+                    {
+                        $(".noti_count").hide();
+                        $(".noti_count").html("");
+                    }
                    
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
