@@ -1,7 +1,7 @@
 function post_like(post_id,user_id) {
     $('#post-like-' + post_id).attr("style","pointer-events:none");
     $.ajax({
-        url: base_url + "article/likePost",
+        url: base_url + "user_post/likePost",
         type: "POST",
         data: {"post_id": post_id},
         dataType: 'json',
@@ -150,7 +150,7 @@ function editPostComment(comment_id, post_id) {
     $(".new-comment-"+post_id).hide();
 }
 
-function cancelPostComment(comment_id, post_id) {        
+function cancelPostComment(comment_id, post_id) {
     $('#edit-comment-' + comment_id).hide();        
     $('#comment-dis-inner-' + comment_id).show();
     $('#edit-comment-li-' + comment_id).show();
@@ -228,7 +228,7 @@ function sendComment(post_id) {
     $("#send_comment").attr("style","pointer-events:none;");
 
         $.ajax({
-            url: base_url + 'article/postCommentInsert',
+            url: base_url + 'user_post/postCommentInsert',
             type: "POST",
             data: {"post_id": post_id,"comment":comment},
             dataType: 'json',

@@ -823,6 +823,19 @@ class Business_profile extends MY_Controller {
                         $img = base_url('uploads/nobusimage.jpg');   
                     }
 
+                    $data_not = array(
+                        'not_id'            => $insert_id,
+                        'not_title_name'    => ucwords($loginBusinessUserData->company_name),
+                        'not_desc'          => 'Started following you in business profile.',
+                        'not_image'         => $img,
+                        'not_url'           => base_url('company/'.$loginBusinessUserData->business_slug),
+                        'user_id'           => $userid,
+                        'user_type'         => '2',
+                        'status'            => '1',
+                        'created_date'      => date('Y-m-d H:i:s')
+                    );
+                    $this->common->insert_data_getid($data_not, 'notification_detail');
+
 
                     $email_html = '';
                     $email_html .= '<table cellpadding="0" cellspacing="0">
@@ -924,6 +937,19 @@ class Business_profile extends MY_Controller {
                 {
                     $img = base_url('uploads/nobusimage.jpg');   
                 }
+
+                $data_not = array(
+                    'not_id'            => $insert_id,
+                    'not_title_name'    => ucwords($loginBusinessUserData->company_name),
+                    'not_desc'          => 'Started following you in business profile.',
+                    'not_image'         => $img,
+                    'not_url'           => base_url('company/'.$loginBusinessUserData->business_slug),
+                    'user_id'           => $userid,
+                    'user_type'         => '2',
+                    'status'            => '1',
+                    'created_date'      => date('Y-m-d H:i:s')
+                );
+                $this->common->insert_data_getid($data_not, 'notification_detail');
 
                 $email_html = '';
                 $email_html .= '<table cellpadding="0" cellspacing="0">
@@ -1208,6 +1234,20 @@ class Business_profile extends MY_Controller {
                     {
                         $img = base_url('uploads/nobusimage.jpg');   
                     }
+
+                    $data_not = array(
+                        'not_id'            => $insert_id,
+                        'not_title_name'    => ucwords($loginBusinessUserData->company_name),
+                        'not_desc'          => 'Started following you in business profile.',
+                        'not_image'         => $img,
+                        'not_url'           => base_url('company/'.$loginBusinessUserData->business_slug),
+                        'user_id'           => $userid,
+                        'user_type'         => '2',
+                        'status'            => '1',
+                        'created_date'      => date('Y-m-d H:i:s')
+                    );
+                    $this->common->insert_data_getid($data_not, 'notification_detail');
+
                     $email_html = '';
                     $email_html .= '<table cellpadding="0" cellspacing="0">
                                     <tr>
@@ -1294,6 +1334,20 @@ class Business_profile extends MY_Controller {
                 {
                     $img = base_url('uploads/nobusimage.jpg');   
                 }
+
+                $data_not = array(
+                    'not_id'            => $insert_id,
+                    'not_title_name'    => ucwords($loginBusinessUserData->company_name),
+                    'not_desc'          => 'Started following you in business profile.',
+                    'not_image'         => $img,
+                    'not_url'           => base_url('company/'.$loginBusinessUserData->business_slug),
+                    'user_id'           => $userid,
+                    'user_type'         => '2',
+                    'status'            => '1',
+                    'created_date'      => date('Y-m-d H:i:s')
+                );
+                $this->common->insert_data_getid($data_not, 'notification_detail');
+
                 $email_html = '';
                 $email_html .= '<table cellpadding="0" cellspacing="0">
                                 <tr>
@@ -1635,6 +1689,20 @@ class Business_profile extends MY_Controller {
                     {
                         $img = base_url('uploads/nobusimage.jpg');   
                     }
+
+                    $data_not = array(
+                        'not_id'            => $insert_id,
+                        'not_title_name'    => ucwords($loginBusinessUserData->company_name),
+                        'not_desc'          => 'Started following you in business profile.',
+                        'not_image'         => $img,
+                        'not_url'           => base_url('company/'.$loginBusinessUserData->business_slug),
+                        'user_id'           => $userid,
+                        'user_type'         => '2',
+                        'status'            => '1',
+                        'created_date'      => date('Y-m-d H:i:s')
+                    );
+                    $this->common->insert_data_getid($data_not, 'notification_detail');
+
                     $email_html = '';
                     $email_html .= '<table cellpadding="0" cellspacing="0">
                                     <tr>
@@ -1725,6 +1793,19 @@ class Business_profile extends MY_Controller {
                     $img = base_url('uploads/nobusimage.jpg');   
                 }
 
+                $data_not = array(
+                    'not_id'            => $insert_id,
+                    'not_title_name'    => ucwords($loginBusinessUserData->company_name),
+                    'not_desc'          => 'Started following you in business profile.',
+                    'not_image'         => $img,
+                    'not_url'           => base_url('company/'.$loginBusinessUserData->business_slug),
+                    'user_id'           => $userid,
+                    'user_type'         => '2',
+                    'status'            => '1',
+                    'created_date'      => date('Y-m-d H:i:s')
+                );
+                $this->common->insert_data_getid($data_not, 'notification_detail');
+                
                 $email_html = '';
                 $email_html .= '<table cellpadding="0" cellspacing="0">
                                 <tr>
@@ -2512,6 +2593,19 @@ class Business_profile extends MY_Controller {
                             $img = base_url('uploads/nobusimage.jpg');   
                         }
 
+                        $data = array(
+                            'not_id'            => $insert_id,
+                            'not_title_name'    => ucwords($businessUser->company_name),
+                            'not_desc'          => 'Likes your post`s comment in business profile.',
+                            'not_image'         => $img,
+                            'not_url'           => base_url($url),
+                            'user_id'           => $userid,
+                            'user_type'         => '2',
+                            'status'            => '1',
+                            'created_date'      => date('Y-m-d H:i:s'),
+                        );
+                        $this->common->insert_data_getid($data, 'notification_detail');
+
                         $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $businessprofiledata[0]['user_id']))->row()->contact_email;
                         $email_html = '';
                         $email_html .= '<table cellpadding="0" cellspacing="0">
@@ -2679,6 +2773,19 @@ class Business_profile extends MY_Controller {
                         {
                             $img = base_url('uploads/nobusimage.jpg');   
                         }
+
+                        $data = array(
+                            'not_id'            => $insert_id,
+                            'not_title_name'    => ucwords($businessUser->company_name),
+                            'not_desc'          => 'Likes your post`s comment in business profile.',
+                            'not_image'         => $img,
+                            'not_url'           => base_url($url),
+                            'user_id'           => $userid,
+                            'user_type'         => '2',
+                            'status'            => '1',
+                            'created_date'      => date('Y-m-d H:i:s'),
+                        );
+                        $this->common->insert_data_getid($data, 'notification_detail');
 
                         $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $businessprofiledata[0]['user_id']))->row()->contact_email;
                         $email_html = '';
@@ -3157,6 +3264,19 @@ class Business_profile extends MY_Controller {
                             $img = base_url('uploads/nobusimage.jpg');   
                         }
 
+                        $data = array(
+                            'not_id'            => $insert_id,
+                            'not_title_name'    => ucwords($businessLoginUser->company_name),
+                            'not_desc'          => 'Likes your post in business profile.',
+                            'not_image'         => $img,
+                            'not_url'           => base_url($url),
+                            'user_id'           => $userid,
+                            'user_type'         => '2',
+                            'status'            => '1',
+                            'created_date'      => date('Y-m-d H:i:s'),
+                        );
+                        $this->common->insert_data_getid($data, 'notification_detail');
+
                         $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $businessprofiledata[0]['user_id']))->row()->contact_email;
                         $email_html = '';
                         $email_html .= '<table cellpadding="0" cellspacing="0">
@@ -3429,6 +3549,19 @@ class Business_profile extends MY_Controller {
                     $img = base_url('uploads/nobusimage.jpg');   
                 }
 
+                $data = array(
+                    'not_id'            => $insert_id_notification,
+                    'not_title_name'    => ucwords($businessLoginUser->company_name),
+                    'not_desc'          => 'Commented on your post in business profile.',
+                    'not_image'         => $img,
+                    'not_url'           => base_url($url),
+                    'user_id'           => $userid,
+                    'user_type'         => '2',
+                    'status'            => '1',
+                    'created_date'      => date('Y-m-d H:i:s'),
+                );
+                $this->common->insert_data_getid($data, 'notification_detail');
+
                 $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $busdatacomment[0]['user_id']))->row()->contact_email;
                 $email_html = '';
                 $email_html .= '<table cellpadding="0" cellspacing="0">
@@ -3662,6 +3795,19 @@ class Business_profile extends MY_Controller {
                 {
                     $img = base_url('uploads/nobusimage.jpg');   
                 }
+
+                $data = array(
+                    'not_id'            => $insert_id_notification,
+                    'not_title_name'    => ucwords($businessLoginUser->company_name),
+                    'not_desc'          => 'Commented on your post in business profile.',
+                    'not_image'         => $img,
+                    'not_url'           => base_url($url),
+                    'user_id'           => $userid,
+                    'user_type'         => '2',
+                    'status'            => '1',
+                    'created_date'      => date('Y-m-d H:i:s'),
+                );
+                $this->common->insert_data_getid($data, 'notification_detail');
 
                 $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $busdatacomment[0]['user_id']))->row()->contact_email;
                 $email_html = '';
@@ -4105,6 +4251,19 @@ class Business_profile extends MY_Controller {
                         $img = base_url('uploads/nobusimage.jpg');   
                     }
 
+                    $data = array(
+                        'not_id'            => $insert_id,
+                        'not_title_name'    => ucwords($businessUser->company_name),
+                        'not_desc'          => 'Likes your photo in business profile.',
+                        'not_image'         => $img,
+                        'not_url'           => base_url($url),
+                        'user_id'           => $userid,
+                        'user_type'         => '2',
+                        'status'            => '1',
+                        'created_date'      => date('Y-m-d H:i:s'),
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+
                     $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $likepostid[0]['user_id']))->row()->contact_email;
                     $email_html = '';
                     $email_html .= '<table cellpadding="0" cellspacing="0">
@@ -4352,6 +4511,19 @@ class Business_profile extends MY_Controller {
                                 $img = base_url('uploads/nobusimage.jpg');   
                             }
 
+                            $data = array(
+                                'not_id'            => $insert_id,
+                                'not_title_name'    => ucwords($businessUser->company_name),
+                                'not_desc'          => 'Likes your photo in business profile.',
+                                'not_image'         => $img,
+                                'not_url'           => base_url($url),
+                                'user_id'           => $userid,
+                                'user_type'         => '2',
+                                'status'            => '1',
+                                'created_date'      => date('Y-m-d H:i:s'),
+                            );
+                            $this->common->insert_data_getid($data, 'notification_detail');
+
                             $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $likepostid[0]['user_id']))->row()->contact_email;
                             $email_html = '';
                             $email_html .= '<table cellpadding="0" cellspacing="0">
@@ -4521,6 +4693,19 @@ class Business_profile extends MY_Controller {
                 {
                     $img = base_url('uploads/nobusimage.jpg');   
                 }
+
+                $data = array(
+                    'not_id'            => $insert_id_notification,
+                    'not_title_name'    => ucwords($businessUser->company_name),
+                    'not_desc'          => 'Commented on your photo in business profile.',
+                    'not_image'         => $img,
+                    'not_url'           => base_url($url),
+                    'user_id'           => $userid,
+                    'user_type'         => '2',
+                    'status'            => '1',
+                    'created_date'      => date('Y-m-d H:i:s'),
+                );
+                $this->common->insert_data_getid($data, 'notification_detail');
 
                 $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $buspostid[0]['user_id']))->row()->contact_email;
                 $email_html = '';
@@ -4765,6 +4950,19 @@ class Business_profile extends MY_Controller {
                 {
                     $img = base_url('uploads/nobusimage.jpg');   
                 }
+
+                $data = array(
+                    'not_id'            => $insert_id_notification,
+                    'not_title_name'    => ucwords($businessUser->company_name),
+                    'not_desc'          => 'Commented on your photo in business profile.',
+                    'not_image'         => $img,
+                    'not_url'           => base_url($url),
+                    'user_id'           => $userid,
+                    'user_type'         => '2',
+                    'status'            => '1',
+                    'created_date'      => date('Y-m-d H:i:s'),
+                );
+                $this->common->insert_data_getid($data, 'notification_detail');
 
                 $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $buspostid[0]['user_id']))->row()->contact_email;
                 $email_html = '';
@@ -5022,6 +5220,19 @@ class Business_profile extends MY_Controller {
                         $img = base_url('uploads/nobusimage.jpg');   
                     }
 
+                    $data = array(
+                        'not_id'            => $insert_id,
+                        'not_title_name'    => ucwords($businessUser->company_name),
+                        'not_desc'          => 'Likes your photos comment in business profile.',
+                        'not_image'         => $img,
+                        'not_url'           => base_url($url),
+                        'user_id'           => $userid
+                        'user_type'         => '2',
+                        'status'            => '1',
+                        'created_date'      => date('Y-m-d H:i:s'),
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+
                     $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $busimglike[0]['user_id']))->row()->contact_email;
                     $email_html = '';
                     $email_html .= '<table cellpadding="0" cellspacing="0">
@@ -5174,6 +5385,19 @@ class Business_profile extends MY_Controller {
                                 $img = base_url('uploads/nobusimage.jpg');   
                             }
 
+                            $data = array(
+                                'not_id'            => $insert_id,
+                                'not_title_name'    => ucwords($businessUser->company_name),
+                                'not_desc'          => 'Likes your photos comment in business profile.',
+                                'not_image'         => $img,
+                                'not_url'           => base_url($url),
+                                'user_id'           => $userid
+                                'user_type'         => '2',
+                                'status'            => '1',
+                                'created_date'      => date('Y-m-d H:i:s'),
+                            );
+                            $this->common->insert_data_getid($data, 'notification_detail');
+
                             $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $busimglike[0]['user_id']))->row()->contact_email;
                             $email_html = '';
                             $email_html .= '<table cellpadding="0" cellspacing="0">
@@ -5306,6 +5530,19 @@ class Business_profile extends MY_Controller {
                     }
 
                     $url = 'company/'.$businessUser->business_slug.'/post/'.$buslikeimg[0]['post_id'];
+
+                    $data = array(
+                        'not_id'            => $insert_id,
+                        'not_title_name'    => ucwords($businessUser->company_name),
+                        'not_desc'          => 'Likes your photos comment in business profile.',
+                        'not_image'         => $img,
+                        'not_url'           => base_url($url),
+                        'user_id'           => $userid
+                        'user_type'         => '2',
+                        'status'            => '1',
+                        'created_date'      => date('Y-m-d H:i:s'),
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
 
                     $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $busimglike[0]['user_id']))->row()->contact_email;
                     $email_html = '';
@@ -5453,6 +5690,19 @@ class Business_profile extends MY_Controller {
                             {
                                 $img = base_url('uploads/nobusimage.jpg');   
                             }
+
+                            $data = array(
+                                'not_id'            => $insert_id,
+                                'not_title_name'    => ucwords($businessUser->company_name),
+                                'not_desc'          => 'Likes your photos comment in business profile.',
+                                'not_image'         => $img,
+                                'not_url'           => base_url($url),
+                                'user_id'           => $userid
+                                'user_type'         => '2',
+                                'status'            => '1',
+                                'created_date'      => date('Y-m-d H:i:s'),
+                            );
+                            $this->common->insert_data_getid($data, 'notification_detail');
 
                             $to_email_id = $this->db->select('contact_email')->get_where('business_profile', array('user_id' => $busimglike[0]['user_id']))->row()->contact_email;
                             $email_html = '';

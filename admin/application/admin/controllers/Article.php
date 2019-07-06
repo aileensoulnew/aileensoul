@@ -156,6 +156,19 @@ class Article extends CI_Controller {
         );
         $insert_id = $this->common->insert_data_getid($dataFollow, 'notification');
 
+        $img_url = base_url('assets/img/user.jpg');
+        $data = array(
+            'not_id'            => $insert_id,
+            'not_title_name'    => 'Admin',
+            'not_desc'          => 'has beed approved your article :<br><b>'.$article_data['article_title'].'</b>.',
+            'not_image'         => $img_url,
+            'not_url'           => SITEURL.'article/'.$article_slug,
+            'user_id'           => '0',
+            'user_type'         => '0',
+            'status'            => '1',
+            'created_date'      => date('Y-m-d H:i:s')
+        );
+        $this->common->insert_data_getid($data, 'notification_detail');
 
         $email_user = '';
         $email_user .= '<table  width="100%" cellpadding="0" cellspacing="0" style="font-family:arial;font-size:13px;">
@@ -221,6 +234,20 @@ class Article extends CI_Controller {
             'not_active' => '1'
         );
         $insert_id = $this->common->insert_data_getid($dataFollow, 'notification');
+
+        $img_url = base_url('assets/img/user.jpg');
+        $data = array(
+            'not_id'            => $insert_id,
+            'not_title_name'    => 'Admin',
+            'not_desc'          => 'has rejected your article:<br><b>'.$article_data['article_title'].'</b>.',
+            'not_image'         => $img_url,
+            'not_url'           => 'javascript:void(0);',
+            'user_id'           => '0',
+            'user_type'         => '0',
+            'status'            => '1',
+            'created_date'      => date('Y-m-d H:i:s'),
+        );
+        $this->common->insert_data_getid($data, 'notification_detail');
         
         echo 'Rejected';
 

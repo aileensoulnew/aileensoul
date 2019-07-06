@@ -703,6 +703,19 @@ class Userprofile_page extends MY_Controller {
                             }
                         }
 
+                        $data = array(
+                            'not_id'            => $insert_id,
+                            'not_title_name'    => ucwords($login_userdata['first_name']." ".$login_userdata['last_name']),
+                            'not_desc'          => 'Started following you.',
+                            'not_image'         => $login_user_img,
+                            'not_url'           => base_url($login_userdata['user_slug']),
+                            'user_id'           => $userid,
+                            'user_type'         => '1',
+                            'status'            => '1',
+                            'created_date'      => date('Y-m-d H:i:s')
+                        );
+                        $this->common->insert_data_getid($data, 'notification_detail');
+
                         $email_html = '';
                         $email_html .= '<table cellpadding="0" cellspacing="0">
                                         <tr>
@@ -820,6 +833,19 @@ class Userprofile_page extends MY_Controller {
                                 $login_user_img = base_url('assets/img/female-user.jpg');
                             }
                         }
+
+                        $data = array(
+                            'not_id'            => $insert_id,
+                            'not_title_name'    => ucwords($login_userdata['first_name']." ".$login_userdata['last_name']),
+                            'not_desc'          => 'Started following you.',
+                            'not_image'         => $login_user_img,
+                            'not_url'           => base_url($login_userdata['user_slug']),
+                            'user_id'           => $userid,
+                            'user_type'         => '1',
+                            'status'            => '1',
+                            'created_date'      => date('Y-m-d H:i:s')
+                        );
+                        $this->common->insert_data_getid($data, 'notification_detail');
 
                         $email_html = '';
                         $email_html .= '<table cellpadding="0" cellspacing="0">
@@ -3104,8 +3130,8 @@ class Userprofile_page extends MY_Controller {
             $insert_id = $this->common->update_data($data, 'user_follow', 'id', $follow['id']);
             $send_noti_mail = 0;
             //   $response = $status;
-            $id = $id.date('his');
-            $html = '<a data-uid="'. $id .'" class="btn-new-1 following"  onclick="unfollow_user(this.id)" id="'.$ele_id.'">Following</a>';
+            $uid = $id.date('his');
+            $html = '<a data-uid="'. $uid .'" class="btn-new-1 following"  onclick="unfollow_user(this.id)" id="'.$ele_id.'">Following</a>';
         } else {
             $data = array(
                 'status' => '1',
@@ -3117,8 +3143,8 @@ class Userprofile_page extends MY_Controller {
             $insert_id = $this->common->insert_data($data, 'user_follow');
             $send_noti_mail = 1;
             // $response = $status;
-            $id = $id.date('his');
-            $html = '<a data-uid="'. $id .'" class="btn-new-1 following"  onclick="unfollow_user(this.id)" id="'.$ele_id.'">Following</a>';
+            $uid = $id.date('his');
+            $html = '<a data-uid="'. $uid .'" class="btn-new-1 following"  onclick="unfollow_user(this.id)" id="'.$ele_id.'">Following</a>';
         }
 
         if($send_noti_mail == 1)
@@ -3227,8 +3253,8 @@ class Userprofile_page extends MY_Controller {
             $data = array('status' => '0','modify_date' => date("Y-m-d h:i:s"));
             $insert_id = $this->common->update_data($data, 'user_follow', 'id', $follow['id']);
             //   $response = $status;
-            $id = $id.date('his');
-            $html = '<a class="btn-new-1 follow" data-uid="' . $id . '" onclick="follow_user(this.id)" id="'.$ele_id.'">Follow</a>';
+            $uid = $id.date('his');
+            $html = '<a class="btn-new-1 follow" data-uid="' . $uid . '" onclick="follow_user(this.id)" id="'.$ele_id.'">Follow</a>';
         } else {
             $data = array(
                 'status' => '0',
@@ -3239,8 +3265,8 @@ class Userprofile_page extends MY_Controller {
             );
             $insert_id = $this->common->insert_data($data, 'user_follow');
             // $response = $status;
-            $id = $id.date('his');
-            $html = '<a class="btn-new-1 follow" data-uid="' . $id . '" onclick="follow_user(this.id)" id="'.$ele_id.'">Follow</a>';
+            $uid = $id.date('his');
+            $html = '<a class="btn-new-1 follow" data-uid="' . $uid . '" onclick="follow_user(this.id)" id="'.$ele_id.'">Follow</a>';
         }
 
 
@@ -3261,8 +3287,8 @@ class Userprofile_page extends MY_Controller {
             $this->db->where($where);
             $updatdata = $this->db->update('user_follow', $data);
             $send_noti_mail = 0;
-            $id = $id.date('his');
-            $html = '<a data-uid="'. $id .'" class="btn-new-1 following"  onclick="unfollow_user_bus(this.id)" id="'.$ele_id.'">Following</a>';
+            $uid = $id.date('his');
+            $html = '<a data-uid="'. $uid .'" class="btn-new-1 following"  onclick="unfollow_user_bus(this.id)" id="'.$ele_id.'">Following</a>';
         } else {
             $data = array(
                 'status' => '1',
@@ -3274,8 +3300,8 @@ class Userprofile_page extends MY_Controller {
             );
             $insert_id = $this->common->insert_data($data, 'user_follow');
             $send_noti_mail = 1;
-            $id = $id.date('his');
-            $html = '<a data-uid="'. $id .'" class="btn-new-1 following"  onclick="unfollow_user_bus(this.id)" id="'.$ele_id.'">Following</a>';
+            $uid = $id.date('his');
+            $html = '<a data-uid="'. $uid .'" class="btn-new-1 following"  onclick="unfollow_user_bus(this.id)" id="'.$ele_id.'">Following</a>';
         }
 
         if($send_noti_mail == 1)
@@ -3386,8 +3412,8 @@ class Userprofile_page extends MY_Controller {
             $this->db->where($where);
             $updatdata = $this->db->update('user_follow', $data);
 
-            $id = $id.date('his');
-            $html = '<a class="btn-new-1 follow" data-uid="' . $id . '" onclick="follow_user_bus(this.id)" id="'.$ele_id.'">Follow</a>';
+            $uid = $id.date('his');
+            $html = '<a class="btn-new-1 follow" data-uid="' . $uid . '" onclick="follow_user_bus(this.id)" id="'.$ele_id.'">Follow</a>';
         } else {
             $data = array(
                 'status' => 0,
@@ -3399,8 +3425,8 @@ class Userprofile_page extends MY_Controller {
             );
             $insert_id = $this->common->insert_data($data, 'user_follow');
             
-            $id = $id.date('his');
-            $html = '<a class="btn-new-1 follow" data-uid="' . $id . '" onclick="follow_user_bus(this.id)" id="'.$ele_id.'">Follow</a>';
+            $uid = $id.date('his');
+            $html = '<a class="btn-new-1 follow" data-uid="' . $uid . '" onclick="follow_user_bus(this.id)" id="'.$ele_id.'">Follow</a>';
         }
         echo $html;
     }

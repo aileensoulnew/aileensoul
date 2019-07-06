@@ -2165,9 +2165,7 @@
                          data-ad-layout-key="-6r+eg+1e-3d+36"
                          data-ad-client="ca-pub-6060111582812113"
                          data-ad-slot="6296725909"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
+                                             
                     <?php //$this->load->view('infeed_add'); ?>
                 </div>
             </div>

@@ -391,6 +391,19 @@ class User_post extends MY_Controller {
                             }
                         }
 
+                        $data = array(
+                            'not_id'            => $insert_id,
+                            'not_title_name'    => ucwords($login_userdata['first_name']." ".$login_userdata['last_name']),
+                            'not_desc'          => 'commented on your post.',
+                            'not_image'         => $login_user_img,
+                            'not_url'           => $url,
+                            'user_id'           => $userid,
+                            'user_type'         => '1',
+                            'status'            => '1',
+                            'created_date'      => date('Y-m-d H:i:s')
+                        );
+                        $this->common->insert_data_getid($data, 'notification_detail');
+
                         $email_html = '';
                         $email_html .= '<table cellpadding="0" cellspacing="0">
                                         <tr>
@@ -505,6 +518,19 @@ class User_post extends MY_Controller {
                                         $login_user_img = base_url('assets/img/female-user.jpg');
                                     }
                                 }
+
+                                $data = array(
+                                    'not_id'            => $insert_id,
+                                    'not_title_name'    => ucwords($login_userdata['first_name']." ".$login_userdata['last_name']),
+                                    'not_desc'          => 'mentioned you in comment.',
+                                    'not_image'         => $login_user_img,
+                                    'not_url'           => $url,
+                                    'user_id'           => $userid,
+                                    'user_type'         => '1',
+                                    'status'            => '1',
+                                    'created_date'      => date('Y-m-d H:i:s'),
+                                );
+                                $this->common->insert_data_getid($data, 'notification_detail');
 
                                 $email_html = '';
                                 $email_html .= '<table cellpadding="0" cellspacing="0">
@@ -696,6 +722,19 @@ class User_post extends MY_Controller {
                                 $login_user_img = base_url('assets/img/female-user.jpg');
                             }
                         }
+
+                        $data = array(
+                            'not_id'            => $insert_id,
+                            'not_title_name'    => ucwords($login_userdata['first_name']." ".$login_userdata['last_name']),
+                            'not_desc'          => 'liked your comment.',
+                            'not_image'         => $login_user_img,
+                            'not_url'           => $url,
+                            'user_id'           => $userid,
+                            'user_type'         => '1',
+                            'status'            => '1',
+                            'created_date'      => date('Y-m-d H:i:s'),
+                        );
+                        $this->common->insert_data_getid($data, 'notification_detail');
 
                         $email_html = '';
                         $email_html .= '<table cellpadding="0" cellspacing="0">
@@ -1081,6 +1120,20 @@ class User_post extends MY_Controller {
                                 $login_user_img = base_url('assets/img/female-user.jpg');
                             }
                         }
+
+                        $data = array(
+                            'not_id'            => $insert_id,
+                            'not_title_name'    => ucwords($login_userdata['first_name']." ".$login_userdata['last_name']),
+                            'not_desc'          => 'liked your post.',
+                            'not_image'         => $login_user_img,
+                            'not_url'           => $url,
+                            'user_id'           => $userid,
+                            'user_type'         => '1',
+                            'status'            => '1',
+                            'created_date'      => date('Y-m-d H:i:s')
+                        );
+                        $this->common->insert_data_getid($data, 'notification_detail');
+                        
                         $email_html .= '<table cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td class="user-img-td">
@@ -2197,6 +2250,19 @@ class User_post extends MY_Controller {
                             }
                         }
 
+                        $data = array(
+                            'not_id'            => $insert_id,
+                            'not_title_name'    => ucwords($login_userdata['first_name']." ".$login_userdata['last_name']),
+                            'not_desc'          => 'Started following you in business profile.',
+                            'not_image'         => $login_user_img,
+                            'not_url'           => base_url($login_userdata['user_slug']),
+                            'user_id'           => $userid,
+                            'user_type'         => '1',
+                            'status'            => '1',
+                            'created_date'      => date('Y-m-d H:i:s')
+                        );
+                        $this->common->insert_data_getid($data, 'notification_detail');
+
                         $email_html = '';
                         $email_html .= '<table cellpadding="0" cellspacing="0">
                                         <tr>
@@ -3031,6 +3097,37 @@ class User_post extends MY_Controller {
                                 }
                             }
 
+                            if($mention == 0)
+                            {
+                                $data = array(
+                                    'not_id'            => $insert_id,
+                                    'not_title_name'    => ucwords($login_userdata['first_name']." ".$login_userdata['last_name']),
+                                    'not_desc'          => 'replied to your comment.',
+                                    'not_image'         => $login_user_img,
+                                    'not_url'           => $url,
+                                    'user_id'           => $userid,
+                                    'user_type'         => '1',
+                                    'status'            => '1',
+                                    'created_date'      => date('Y-m-d H:i:s'),
+                                );
+                                $this->common->insert_data_getid($data, 'notification_detail');
+                            }
+                            elseif($mention == 1)
+                            {
+                                $data = array(
+                                    'not_id'            => $insert_id,
+                                    'not_title_name'    => ucwords($login_userdata['first_name']." ".$login_userdata['last_name']),
+                                    'not_desc'          => 'mentioned you in comment.',
+                                    'not_image'         => $login_user_img,
+                                    'not_url'           => $url,
+                                    'user_id'           => $userid,
+                                    'user_type'         => '1',
+                                    'status'            => '1',
+                                    'created_date'      => date('Y-m-d H:i:s'),
+                                );
+                                $this->common->insert_data_getid($data, 'notification_detail');   
+                            }
+
                             $email_html = '';
                             $email_html .= '<table cellpadding="0" cellspacing="0">
                                             <tr>
@@ -3240,6 +3337,19 @@ class User_post extends MY_Controller {
                                             $login_user_img = base_url('assets/img/female-user.jpg');
                                         }
                                     }
+
+                                    $data = array(
+                                        'not_id'            => $insert_id,
+                                        'not_title_name'    => ucwords($login_userdata['first_name']." ".$login_userdata['last_name']),
+                                        'not_desc'          => 'mentioned you in comment.',
+                                        'not_image'         => $login_user_img,
+                                        'not_url'           => $url,
+                                        'user_id'           => $userid,
+                                        'user_type'         => '1',
+                                        'status'            => '1',
+                                        'created_date'      => date('Y-m-d H:i:s'),
+                                    );
+                                    $this->common->insert_data_getid($data, 'notification_detail');
 
                                     $email_html = '';
                                     $email_html .= '<table cellpadding="0" cellspacing="0">
@@ -3531,6 +3641,20 @@ class User_post extends MY_Controller {
                                     $login_user_img = base_url('assets/img/female-user.jpg');
                                 }
                             }
+
+                            $data = array(
+                                'not_id'            => $insert_id,
+                                'not_title_name'    => ucwords($login_userdata['first_name']." ".$login_userdata['last_name']),
+                                'not_desc'          => 'shared your post.',
+                                'not_image'         => $login_user_img,
+                                'not_url'           => $share_post_url,
+                                'user_id'           => $userid,
+                                'user_type'         => '1',
+                                'status'            => '1',
+                                'created_date'      => date('Y-m-d H:i:s'),
+                            );
+                            $this->common->insert_data_getid($data, 'notification_detail');
+                            
                             $email_html .= '<table cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td class="user-img-td">
@@ -4032,7 +4156,8 @@ class User_post extends MY_Controller {
             {
                 $user_img = base_url('assets/img/female-user.jpg');
             }
-        }
+        }        
+
         $email_html = '';
         $email_html .= '<table cellpadding="0" cellspacing="0">
                         <tr>
@@ -4070,6 +4195,19 @@ class User_post extends MY_Controller {
                 'not_active' => '1'
             );
             $insert_id = $this->common->insert_data_getid($data_notification, 'notification');
+
+            $data = array(
+                'not_id'            => $insert_id,
+                'not_title_name'    => ucwords($login_userdata['first_name']." ".$login_userdata['last_name']),
+                'not_desc'          => 'add new post.',
+                'not_image'         => $user_img,
+                'not_url'           => $url,
+                'user_id'           => $user_id,
+                'user_type'         => '1',
+                'status'            => '1',
+                'created_date'      => date('Y-m-d H:i:s')
+            );
+            $this->common->insert_data_getid($data, 'notification_detail');
 
             $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $_all_user_data['user_id']))->row();
 

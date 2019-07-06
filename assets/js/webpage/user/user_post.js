@@ -1405,6 +1405,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                         }
                     }, 100);
                 });
+                (adsbygoogle = window.adsbygoogle || []).push({});
                 auto_load_feed();
             },1000);
         }, function (error) {
@@ -1583,6 +1584,8 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                         }
                     }, 100);
                 });
+
+                (adsbygoogle = window.adsbygoogle || []).push({});
 
                 // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             },1000);

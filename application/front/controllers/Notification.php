@@ -840,10 +840,7 @@ Your browser does not support the audio tag.
         $notificationData = $this->notification_model->get_notification($userid);
         // print_r($notificationData);exit;
         // freelancer hire shortlisted  notification start
-        
 
-        $this->data['totalnotifi'] = $totalnotifi = array_merge((array) $rec_not, (array) $job_not, (array) $hire_not, (array) $work_post, (array) $artcommnet, (array) $artlike, (array) $artcmtlike, (array) $artimglike, (array) $artimgcommnet, (array) $artfollow, (array) $artimgcmtlike, (array) $busimgcommnet, (array) $busifollow, (array) $buscommnet, (array) $buslike, (array) $buscmtlike, (array) $busimgcmtlike, (array) $busimglike, (array) $shortlist);
-        $this->data['totalnotification'] = $totalnotification = $this->aasort($totalnotifi, "not_created_date");
         $i = 0;
         $notification = "";
         foreach ($notificationData as $total) {
@@ -1861,14 +1858,15 @@ Your browser does not support the audio tag.
         }
 
         $userid = $this->session->userdata('aileenuser');
-        $data = array(
+        $data_not = array(
             'not_read' => '1'
         );
         $this->db->where('not_read', '2');
         $this->db->where('not_type !=', '1');
         $this->db->where('not_type !=', '2');
         $this->db->where('not_to_id', $userid);        
-        $result_array = $this->db->update('notification', $data);        
+        $result_array = $this->db->update('notification', $data_not);
+        
         $count = $this->notification_model->get_notification_unread_count($userid);
 
         echo json_encode(
@@ -4981,16 +4979,17 @@ Your browser does not support the audio tag.
 
         $userid = $this->session->userdata('aileenuser');
 
-        $sql = "SELECT *  FROM `ailee_notification` WHERE `not_from` IN (6,7,8,9)";
+        $sql = "SELECT *  FROM `ailee_notification` WHERE `not_from` IN (6,7,8,9) AND not_id NOT IN(SELECT not_id  FROM `ailee_notification_detail`)";
         $query = $this->db->query($sql);
         $notificationData = $query->result_array();
-        // echo count($notificationData);
+        echo count($notificationData);
         // print_r($notificationData);
         // exit();
         // print_r($notificationData);exit;
         // freelancer hire shortlisted  notification start        
         $notification = "";
         foreach ($notificationData as $total) {
+            print_r($total);
 
             //Business Notification Start
             if ($total['not_from'] == '6' && $total['not_img'] == '0') {
@@ -5020,20 +5019,27 @@ Your browser does not support the audio tag.
                 } else {
                     $img_url = base_url(NOBUSIMAGE2);
                 }
-                
 
-                $data = array(
-                    'not_id'            => $total['not_id'],
-                    'not_title_name'    => ucwords($companyname),
-                    'not_desc'          => 'Started following you in business profile.',
-                    'not_image'         => $img_url,
-                    'not_url'           => base_url('company/' . $busslug."-".$city_name),
-                    'user_id'           => $total['not_from_id'],
-                    'user_type'         => '2',
-                    'status'            => '1',
-                    'created_date'      => $total['not_created_date']
-                );
-                $this->common->insert_data_getid($data, 'notification_detail');
+                $not_detail_data = $this->db->get_where('notification_detail', array('not_id' => $total['not_id']))->row();
+                if(isset($not_detail_data) && !empty($not_detail_data))
+                {
+
+                }
+                else
+                {                    
+                    $data = array(
+                        'not_id'            => $total['not_id'],
+                        'not_title_name'    => ucwords($companyname),
+                        'not_desc'          => 'Started following you in business profile.',
+                        'not_image'         => $img_url,
+                        'not_url'           => base_url('company/' . $busslug."-".$city_name),
+                        'user_id'           => $total['not_from_id'],
+                        'user_type'         => '2',
+                        'status'            => '1',
+                        'created_date'      => $total['not_created_date']
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+                }
             }
 
             if ($total['not_from'] == '6' && $total['not_img'] == '1') {
@@ -5059,28 +5065,33 @@ Your browser does not support the audio tag.
                     $city_name = $this->data_model->getCityName($buss_data->country);
                 }
 
-                $notification .= '<li class="';
-                if ($total['not_active'] == 1) {
-                    $notification .= 'active2';
-                }
                 if ($business_user_image != "") {
                     $img_url = BUS_PROFILE_THUMB_UPLOAD_URL . $business_user_image;
                 } else {
                     $img_url = base_url(NOBUSIMAGE2);
                 }
 
-                $data = array(
-                    'not_id'            => $total['not_id'],
-                    'not_title_name'    => ucwords($companyname),
-                    'not_desc'          => 'Commented on your post in business profile.',
-                    'not_image'         => $img_url,
-                    'not_url'           => base_url('company/' . $busslug."-".$city_name."/post/".$buss_cmt_data->business_profile_post_id),
-                    'user_id'           => $total['not_from_id'],
-                    'user_type'         => '2',
-                    'status'            => '1',
-                    'created_date'      => $total['not_created_date']
-                );
-                $this->common->insert_data_getid($data, 'notification_detail');
+                $not_detail_data = $this->db->get_where('notification_detail', array('not_id' => $total['not_id']))->row();
+                if(isset($not_detail_data) && !empty($not_detail_data))
+                {
+
+                }
+                else
+                {
+
+                    $data = array(
+                        'not_id'            => $total['not_id'],
+                        'not_title_name'    => ucwords($companyname),
+                        'not_desc'          => 'Commented on your post in business profile.',
+                        'not_image'         => $img_url,
+                        'not_url'           => base_url('company/' . $busslug."-".$city_name."/post/".$buss_cmt_data->business_profile_post_id),
+                        'user_id'           => $total['not_from_id'],
+                        'user_type'         => '2',
+                        'status'            => '1',
+                        'created_date'      => $total['not_created_date']
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+                }
             }
 
             if ($total['not_from'] == '6' && $total['not_img'] == '2') {
@@ -5109,18 +5120,26 @@ Your browser does not support the audio tag.
                     $img_url = base_url(NOBUSIMAGE2);
                 }
 
-                $data = array(
-                    'not_id'            => $total['not_id'],
-                    'not_title_name'    => ucwords($companyname),
-                    'not_desc'          => 'Likes your post in business profile.',
-                    'not_image'         => $img_url,
-                    'not_url'           => base_url('company/' . $busslug."-".$city_name."/post/".$total['not_product_id']),
-                    'user_id'           => $total['not_from_id'],
-                    'user_type'         => '2',
-                    'status'            => '1',
-                    'created_date'      => $total['not_created_date']
-                );
-                $this->common->insert_data_getid($data, 'notification_detail');
+                $not_detail_data = $this->db->get_where('notification_detail', array('not_id' => $total['not_id']))->row();
+                if(isset($not_detail_data) && !empty($not_detail_data))
+                {
+
+                }
+                else
+                {
+                    $data = array(
+                        'not_id'            => $total['not_id'],
+                        'not_title_name'    => ucwords($companyname),
+                        'not_desc'          => 'Likes your post in business profile.',
+                        'not_image'         => $img_url,
+                        'not_url'           => base_url('company/' . $busslug."-".$city_name."/post/".$total['not_product_id']),
+                        'user_id'           => $total['not_from_id'],
+                        'user_type'         => '2',
+                        'status'            => '1',
+                        'created_date'      => $total['not_created_date']
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+                }
             }
 
             if ($total['not_from'] == '6' && $total['not_img'] == '3') {
@@ -5152,18 +5171,26 @@ Your browser does not support the audio tag.
                     $img_url = base_url(NOBUSIMAGE2);
                 }
 
-                $data = array(
-                    'not_id'            => $total['not_id'],
-                    'not_title_name'    => ucwords($companyname),
-                    'not_desc'          => 'Likes your post`s comment in business profile.',
-                    'not_image'         => $img_url,
-                    'not_url'           => base_url('company/' . $busslug."-".$city_name."/post/".$buss_cmt_data->business_profile_post_id),
-                    'user_id'           => $total['not_from_id'],
-                    'user_type'         => '2',
-                    'status'            => '1',
-                    'created_date'      => $total['not_created_date']
-                );
-                $this->common->insert_data_getid($data, 'notification_detail');
+                $not_detail_data = $this->db->get_where('notification_detail', array('not_id' => $total['not_id']))->row();
+                if(isset($not_detail_data) && !empty($not_detail_data))
+                {
+
+                }
+                else
+                {
+                    $data = array(
+                        'not_id'            => $total['not_id'],
+                        'not_title_name'    => ucwords($companyname),
+                        'not_desc'          => 'Likes your post`s comment in business profile.',
+                        'not_image'         => $img_url,
+                        'not_url'           => base_url('company/' . $busslug."-".$city_name."/post/".$buss_cmt_data->business_profile_post_id),
+                        'user_id'           => $total['not_from_id'],
+                        'user_type'         => '2',
+                        'status'            => '1',
+                        'created_date'      => $total['not_created_date']
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+                }
             }
 
             if ($total['not_from'] == '6' && $total['not_img'] == '4') {
@@ -5197,18 +5224,26 @@ Your browser does not support the audio tag.
                     $img_url = base_url(NOBUSIMAGE2);
                 }
 
-                $data = array(
-                    'not_id'            => $total['not_id'],
-                    'not_title_name'    => ucwords($companyname),
-                    'not_desc'          => 'Commented on your photo in business profile.',
-                    'not_image'         => $img_url,
-                    'not_url'           => base_url('company/' . $busslug."-".$city_name."/post/". $postid),
-                    'user_id'           => $total['not_from_id'],
-                    'user_type'         => '2',
-                    'status'            => '1',
-                    'created_date'      => $total['not_created_date']
-                );
-                $this->common->insert_data_getid($data, 'notification_detail');
+                $not_detail_data = $this->db->get_where('notification_detail', array('not_id' => $total['not_id']))->row();
+                if(isset($not_detail_data) && !empty($not_detail_data))
+                {
+
+                }
+                else
+                {
+                    $data = array(
+                        'not_id'            => $total['not_id'],
+                        'not_title_name'    => ucwords($companyname),
+                        'not_desc'          => 'Commented on your photo in business profile.',
+                        'not_image'         => $img_url,
+                        'not_url'           => base_url('company/' . $busslug."-".$city_name."/post/". $postid),
+                        'user_id'           => $total['not_from_id'],
+                        'user_type'         => '2',
+                        'status'            => '1',
+                        'created_date'      => $total['not_created_date']
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+                }
             }
 
             if ($total['not_from'] == '6' && $total['not_img'] == '5') {
@@ -5239,18 +5274,26 @@ Your browser does not support the audio tag.
                     $img_url = base_url(NOBUSIMAGE2);
                 }
 
-                $data = array(
-                    'not_id'            => $total['not_id'],
-                    'not_title_name'    => ucwords($companyname),
-                    'not_desc'          => 'Likes your photo in business profile.',
-                    'not_image'         => $img_url,
-                    'not_url'           => base_url('company/' . $busslug."-".$city_name."/post/". $postid),
-                    'user_id'           => $total['not_from_id'],
-                    'user_type'         => '2',
-                    'status'            => '1',
-                    'created_date'      => $total['not_created_date']
-                );
-                $this->common->insert_data_getid($data, 'notification_detail');
+                $not_detail_data = $this->db->get_where('notification_detail', array('not_id' => $total['not_id']))->row();
+                if(isset($not_detail_data) && !empty($not_detail_data))
+                {
+
+                }
+                else
+                {
+                    $data = array(
+                        'not_id'            => $total['not_id'],
+                        'not_title_name'    => ucwords($companyname),
+                        'not_desc'          => 'Likes your photo in business profile.',
+                        'not_image'         => $img_url,
+                        'not_url'           => base_url('company/' . $busslug."-".$city_name."/post/". $postid),
+                        'user_id'           => $total['not_from_id'],
+                        'user_type'         => '2',
+                        'status'            => '1',
+                        'created_date'      => $total['not_created_date']
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+                }
             }
 
             if ($total['not_from'] == '6' && $total['not_img'] == '6') {
@@ -5284,18 +5327,26 @@ Your browser does not support the audio tag.
                     $img_url = base_url(NOBUSIMAGE2);
                 }
 
-                $data = array(
-                    'not_id'            => $total['not_id'],
-                    'not_title_name'    => ucwords($companyname),
-                    'not_desc'          => 'Likes your photos comment in business profile.',
-                    'not_image'         => $img_url,
-                    'not_url'           => base_url('company/' . $busslug."-".$city_name."/post/". $postid),
-                    'user_id'           => $total['not_from_id'],
-                    'user_type'         => '2',
-                    'status'            => '1',
-                    'created_date'      => $total['not_created_date']
-                );
-                $this->common->insert_data_getid($data, 'notification_detail');
+                $not_detail_data = $this->db->get_where('notification_detail', array('not_id' => $total['not_id']))->row();
+                if(isset($not_detail_data) && !empty($not_detail_data))
+                {
+
+                }
+                else
+                {
+                    $data = array(
+                        'not_id'            => $total['not_id'],
+                        'not_title_name'    => ucwords($companyname),
+                        'not_desc'          => 'Likes your photos comment in business profile.',
+                        'not_image'         => $img_url,
+                        'not_url'           => base_url('company/' . $busslug."-".$city_name."/post/". $postid),
+                        'user_id'           => $total['not_from_id'],
+                        'user_type'         => '2',
+                        'status'            => '1',
+                        'created_date'      => $total['not_created_date']
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+                }
             }
 
             if ($total['not_from'] == '6' && $total['not_img'] == '7' && $total['not_type'] == '12') {
@@ -5343,18 +5394,26 @@ Your browser does not support the audio tag.
                     }
                 }
 
-                $data = array(
-                    'not_id'            => $total['not_id'],
-                    'not_title_name'    => ucwords($first_name." ".$last_name),
-                    'not_desc'          => 'gives a review to your business profile.',
-                    'not_image'         => $img_url,
-                    'not_url'           => base_url('company/' . $busslug."-".$city_name.'/details'),
-                    'user_id'           => $total['not_from_id'],
-                    'user_type'         => '1',
-                    'status'            => '1',
-                    'created_date'      => $total['not_created_date']
-                );
-                $this->common->insert_data_getid($data, 'notification_detail');
+                $not_detail_data = $this->db->get_where('notification_detail', array('not_id' => $total['not_id']))->row();
+                if(isset($not_detail_data) && !empty($not_detail_data))
+                {
+
+                }
+                else
+                {
+                    $data = array(
+                        'not_id'            => $total['not_id'],
+                        'not_title_name'    => ucwords($first_name." ".$last_name),
+                        'not_desc'          => 'gives a review to your business profile.',
+                        'not_image'         => $img_url,
+                        'not_url'           => base_url('company/' . $busslug."-".$city_name.'/details'),
+                        'user_id'           => $total['not_from_id'],
+                        'user_type'         => '1',
+                        'status'            => '1',
+                        'created_date'      => $total['not_created_date']
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+                }
             }
             //Business Notification End
 
@@ -5387,18 +5446,26 @@ Your browser does not support the audio tag.
                     }
                 }
 
-                $data = array(
-                    'not_id'            => $total['not_id'],
-                    'not_title_name'    => ucwords($first_name." ".$last_name),
-                    'not_desc'          => 'Started following you.',
-                    'not_image'         => $img_url,
-                    'not_url'           => base_url($user_slug),
-                    'user_id'           => $total['not_from_id'],
-                    'user_type'         => '1',
-                    'status'            => '1',
-                    'created_date'      => $total['not_created_date']
-                );
-                $this->common->insert_data_getid($data, 'notification_detail');
+                $not_detail_data = $this->db->get_where('notification_detail', array('not_id' => $total['not_id']))->row();
+                if(isset($not_detail_data) && !empty($not_detail_data))
+                {
+
+                }
+                else
+                {
+                    $data = array(
+                        'not_id'            => $total['not_id'],
+                        'not_title_name'    => ucwords($first_name." ".$last_name),
+                        'not_desc'          => 'Started following you.',
+                        'not_image'         => $img_url,
+                        'not_url'           => base_url($user_slug),
+                        'user_id'           => $total['not_from_id'],
+                        'user_type'         => '1',
+                        'status'            => '1',
+                        'created_date'      => $total['not_created_date']
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+                }
             }
 
             if ($total['not_from'] == '7' && $total['not_type'] == '8' && $total['not_img'] == '1') {
@@ -5429,18 +5496,26 @@ Your browser does not support the audio tag.
                     }
                 }
 
-                $data = array(
-                    'not_id'            => $total['not_id'],
-                    'not_title_name'    => ucwords($first_name." ".$last_name),
-                    'not_desc'          => 'Started following you in business profile.',
-                    'not_image'         => $img_url,
-                    'not_url'           => base_url($user_slug),
-                    'user_id'           => $total['not_from_id'],
-                    'user_type'         => '1',
-                    'status'            => '1',
-                    'created_date'      => $total['not_created_date']
-                );
-                $this->common->insert_data_getid($data, 'notification_detail');
+                $not_detail_data = $this->db->get_where('notification_detail', array('not_id' => $total['not_id']))->row();
+                if(isset($not_detail_data) && !empty($not_detail_data))
+                {
+
+                }
+                else
+                {
+                    $data = array(
+                        'not_id'            => $total['not_id'],
+                        'not_title_name'    => ucwords($first_name." ".$last_name),
+                        'not_desc'          => 'Started following you in business profile.',
+                        'not_image'         => $img_url,
+                        'not_url'           => base_url($user_slug),
+                        'user_id'           => $total['not_from_id'],
+                        'user_type'         => '1',
+                        'status'            => '1',
+                        'created_date'      => $total['not_created_date']
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+                }
             }
 
             if ($total['not_from'] == '7' && $total['not_type'] == '5' && $total['not_img'] == '2') {
@@ -5494,18 +5569,26 @@ Your browser does not support the audio tag.
                     }
                 }
 
-                $data = array(
-                    'not_id'            => $total['not_id'],
-                    'not_title_name'    => ucwords($first_name." ".$last_name),
-                    'not_desc'          => 'liked your post.',
-                    'not_image'         => $img_url,
-                    'not_url'           => $url,
-                    'user_id'           => $total['not_from_id'],
-                    'user_type'         => '1',
-                    'status'            => '1',
-                    'created_date'      => $total['not_created_date']
-                );
-                $this->common->insert_data_getid($data, 'notification_detail');
+                $not_detail_data = $this->db->get_where('notification_detail', array('not_id' => $total['not_id']))->row();
+                if(isset($not_detail_data) && !empty($not_detail_data))
+                {
+
+                }
+                else
+                {
+                    $data = array(
+                        'not_id'            => $total['not_id'],
+                        'not_title_name'    => ucwords($first_name." ".$last_name),
+                        'not_desc'          => 'liked your post.',
+                        'not_image'         => $img_url,
+                        'not_url'           => $url,
+                        'user_id'           => $total['not_from_id'],
+                        'user_type'         => '1',
+                        'status'            => '1',
+                        'created_date'      => $total['not_created_date']
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+                }
             }
 
             if ($total['not_from'] == '7' && $total['not_type'] == '5' && $total['not_img'] == '3') {
@@ -5560,18 +5643,26 @@ Your browser does not support the audio tag.
                     }
                 }
 
-                $data = array(
-                    'not_id'            => $total['not_id'],
-                    'not_title_name'    => ucwords($first_name." ".$last_name),
-                    'not_desc'          => 'liked your comment.',
-                    'not_image'         => $img_url,
-                    'not_url'           => $url,
-                    'user_id'           => $total['not_from_id'],
-                    'user_type'         => '1',
-                    'status'            => '1',
-                    'created_date'      => $total['not_created_date']
-                );
-                $this->common->insert_data_getid($data, 'notification_detail');
+                $not_detail_data = $this->db->get_where('notification_detail', array('not_id' => $total['not_id']))->row();
+                if(isset($not_detail_data) && !empty($not_detail_data))
+                {
+
+                }
+                else
+                {
+                    $data = array(
+                        'not_id'            => $total['not_id'],
+                        'not_title_name'    => ucwords($first_name." ".$last_name),
+                        'not_desc'          => 'liked your comment.',
+                        'not_image'         => $img_url,
+                        'not_url'           => $url,
+                        'user_id'           => $total['not_from_id'],
+                        'user_type'         => '1',
+                        'status'            => '1',
+                        'created_date'      => $total['not_created_date']
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+                }
             }
 
             if ($total['not_from'] == '7' && $total['not_type'] == '6' && $total['not_img'] == '2') {
@@ -5625,18 +5716,26 @@ Your browser does not support the audio tag.
                     }
                 }                
 
-                $data = array(
-                    'not_id'            => $total['not_id'],
-                    'not_title_name'    => ucwords($first_name." ".$last_name),
-                    'not_desc'          => 'commented on your post.',
-                    'not_image'         => $img_url,
-                    'not_url'           => $url,
-                    'user_id'           => $total['not_from_id'],
-                    'user_type'         => '1',
-                    'status'            => '1',
-                    'created_date'      => $total['not_created_date']
-                );
-                $this->common->insert_data_getid($data, 'notification_detail');
+                $not_detail_data = $this->db->get_where('notification_detail', array('not_id' => $total['not_id']))->row();
+                if(isset($not_detail_data) && !empty($not_detail_data))
+                {
+
+                }
+                else
+                {
+                    $data = array(
+                        'not_id'            => $total['not_id'],
+                        'not_title_name'    => ucwords($first_name." ".$last_name),
+                        'not_desc'          => 'commented on your post.',
+                        'not_image'         => $img_url,
+                        'not_url'           => $url,
+                        'user_id'           => $total['not_from_id'],
+                        'user_type'         => '1',
+                        'status'            => '1',
+                        'created_date'      => $total['not_created_date']
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+                }
             }
 
             if ($total['not_from'] == '7' && $total['not_type'] == '6' && $total['not_img'] == '3') {
@@ -5691,18 +5790,26 @@ Your browser does not support the audio tag.
                     }
                 }
 
-                $data = array(
-                    'not_id'            => $total['not_id'],
-                    'not_title_name'    => ucwords($first_name." ".$last_name),
-                    'not_desc'          => 'replied to your comment.',
-                    'not_image'         => $img_url,
-                    'not_url'           => $url,
-                    'user_id'           => $total['not_from_id'],
-                    'user_type'         => '1',
-                    'status'            => '1',
-                    'created_date'      => $total['not_created_date']
-                );
-                $this->common->insert_data_getid($data, 'notification_detail');
+                $not_detail_data = $this->db->get_where('notification_detail', array('not_id' => $total['not_id']))->row();
+                if(isset($not_detail_data) && !empty($not_detail_data))
+                {
+
+                }
+                else
+                {
+                    $data = array(
+                        'not_id'            => $total['not_id'],
+                        'not_title_name'    => ucwords($first_name." ".$last_name),
+                        'not_desc'          => 'replied to your comment.',
+                        'not_image'         => $img_url,
+                        'not_url'           => $url,
+                        'user_id'           => $total['not_from_id'],
+                        'user_type'         => '1',
+                        'status'            => '1',
+                        'created_date'      => $total['not_created_date']
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+                }
             }
 
             if ($total['not_from'] == '7' && $total['not_type'] == '6' && $total['not_img'] == '4') {
@@ -5757,18 +5864,26 @@ Your browser does not support the audio tag.
                     }
                 }
 
-                $data = array(
-                    'not_id'            => $total['not_id'],
-                    'not_title_name'    => ucwords($first_name." ".$last_name),
-                    'not_desc'          => 'mentioned you in comment.',
-                    'not_image'         => $img_url,
-                    'not_url'           => $url,
-                    'user_id'           => $total['not_from_id'],
-                    'user_type'         => '1',
-                    'status'            => '1',
-                    'created_date'      => $total['not_created_date']
-                );
-                $this->common->insert_data_getid($data, 'notification_detail');
+                $not_detail_data = $this->db->get_where('notification_detail', array('not_id' => $total['not_id']))->row();
+                if(isset($not_detail_data) && !empty($not_detail_data))
+                {
+
+                }
+                else
+                {
+                    $data = array(
+                        'not_id'            => $total['not_id'],
+                        'not_title_name'    => ucwords($first_name." ".$last_name),
+                        'not_desc'          => 'mentioned you in comment.',
+                        'not_image'         => $img_url,
+                        'not_url'           => $url,
+                        'user_id'           => $total['not_from_id'],
+                        'user_type'         => '1',
+                        'status'            => '1',
+                        'created_date'      => $total['not_created_date']
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+                }
             }
 
             if ($total['not_from'] == '7' && $total['not_type'] == '6' && $total['not_img'] == '5') {
@@ -5802,18 +5917,26 @@ Your browser does not support the audio tag.
                     }
                 }
 
-                $data = array(
-                    'not_id'            => $total['not_id'],
-                    'not_title_name'    => ucwords($first_name." ".$last_name),
-                    'not_desc'          => 'mentioned you in comment.',
-                    'not_image'         => $img_url,
-                    'not_url'           => $share_post_url,
-                    'user_id'           => $total['not_from_id'],
-                    'user_type'         => '1',
-                    'status'            => '1',
-                    'created_date'      => $total['not_created_date']
-                );
-                $this->common->insert_data_getid($data, 'notification_detail');
+                $not_detail_data = $this->db->get_where('notification_detail', array('not_id' => $total['not_id']))->row();
+                if(isset($not_detail_data) && !empty($not_detail_data))
+                {
+
+                }
+                else
+                {
+                    $data = array(
+                        'not_id'            => $total['not_id'],
+                        'not_title_name'    => ucwords($first_name." ".$last_name),
+                        'not_desc'          => 'shared your post.',
+                        'not_image'         => $img_url,
+                        'not_url'           => $share_post_url,
+                        'user_id'           => $total['not_from_id'],
+                        'user_type'         => '1',
+                        'status'            => '1',
+                        'created_date'      => $total['not_created_date']
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+                }
             }
             //Opportunity Notification End
 
@@ -5832,18 +5955,26 @@ Your browser does not support the audio tag.
                 $url = base_url('article/'.$article_slug);
                 $img_url = base_url('assets/img/user.jpg');
 
-                $data = array(
-                    'not_id'            => $total['not_id'],
-                    'not_title_name'    => 'Admin',
-                    'not_desc'          => 'has beed approved your article :<br><b>'.$article_title.'</b>.',
-                    'not_image'         => $img_url,
-                    'not_url'           => $url,
-                    'user_id'           => '0',
-                    'user_type'         => '0',
-                    'status'            => '1',
-                    'created_date'      => $total['not_created_date']
-                );
-                $this->common->insert_data_getid($data, 'notification_detail');
+                $not_detail_data = $this->db->get_where('notification_detail', array('not_id' => $total['not_id']))->row();
+                if(isset($not_detail_data) && !empty($not_detail_data))
+                {
+
+                }
+                else
+                {
+                    $data = array(
+                        'not_id'            => $total['not_id'],
+                        'not_title_name'    => 'Admin',
+                        'not_desc'          => 'has beed approved your article :<br><b>'.$article_title.'</b>.',
+                        'not_image'         => $img_url,
+                        'not_url'           => $url,
+                        'user_id'           => '0',
+                        'user_type'         => '0',
+                        'status'            => '1',
+                        'created_date'      => $total['not_created_date']
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+                }
             }
 
             if ($total['not_from'] == '8' && $total['not_type'] == '11') {
@@ -5855,18 +5986,26 @@ Your browser does not support the audio tag.
                 
                 $img_url = base_url('assets/img/user.jpg');
 
-                $data = array(
-                    'not_id'            => $total['not_id'],
-                    'not_title_name'    => 'Admin',
-                    'not_desc'          => 'has rejected your article:<br><b>'.$article_title.'</b>.',
-                    'not_image'         => $img_url,
-                    'not_url'           => 'javascript:void(0);',
-                    'user_id'           => '0',
-                    'user_type'         => '0',
-                    'status'            => '1',
-                    'created_date'      => $total['not_created_date']
-                );
-                $this->common->insert_data_getid($data, 'notification_detail');
+                $not_detail_data = $this->db->get_where('notification_detail', array('not_id' => $total['not_id']))->row();
+                if(isset($not_detail_data) && !empty($not_detail_data))
+                {
+
+                }
+                else
+                {
+                    $data = array(
+                        'not_id'            => $total['not_id'],
+                        'not_title_name'    => 'Admin',
+                        'not_desc'          => 'has rejected your article:<br><b>'.$article_title.'</b>.',
+                        'not_image'         => $img_url,
+                        'not_url'           => 'javascript:void(0);',
+                        'user_id'           => '0',
+                        'user_type'         => '0',
+                        'status'            => '1',
+                        'created_date'      => $total['not_created_date']
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+                }
             }
             //Article Notification End
 
@@ -5926,18 +6065,26 @@ Your browser does not support the audio tag.
                     }
                 }
 
-                $data = array(
-                    'not_id'            => $total['not_id'],
-                    'not_title_name'    => ucwords($first_name." ".$last_name),
-                    'not_desc'          => 'add new post.',
-                    'not_image'         => $img_url,
-                    'not_url'           => $url,
-                    'user_id'           => $total['not_from_id'],
-                    'user_type'         => '1',
-                    'status'            => '1',
-                    'created_date'      => $total['not_created_date']
-                );
-                $this->common->insert_data_getid($data, 'notification_detail');
+                $not_detail_data = $this->db->get_where('notification_detail', array('not_id' => $total['not_id']))->row();
+                if(isset($not_detail_data) && !empty($not_detail_data))
+                {
+
+                }
+                else
+                {
+                    $data = array(
+                        'not_id'            => $total['not_id'],
+                        'not_title_name'    => ucwords($first_name." ".$last_name),
+                        'not_desc'          => 'add new post.',
+                        'not_image'         => $img_url,
+                        'not_url'           => $url,
+                        'user_id'           => $total['not_from_id'],
+                        'user_type'         => '1',
+                        'status'            => '1',
+                        'created_date'      => $total['not_created_date']
+                    );
+                    $this->common->insert_data_getid($data, 'notification_detail');
+                }
             }
             //Add New Post Notification End
         }

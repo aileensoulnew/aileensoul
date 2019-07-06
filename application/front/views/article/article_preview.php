@@ -209,7 +209,7 @@ else
 											if ($user_post_article['is_userlikePost'] == 1) {
 											    $like_cls = "like";
 											} ?>
-											<a id="post-like-<?php echo $user_post_article['id']; ?>" class="ripple <?php echo $like_cls; ?>" href="javascript:void(0);" onclick="post_like(<?php echo $user_post_article['id']; ?>,$user_post_article['user_id']);">
+											<a id="post-like-<?php echo $user_post_article['id']; ?>" class="ripple <?php echo $like_cls; ?>" href="javascript:void(0);" onclick="post_like(<?php echo $user_post_article['id']; ?>,<?php echo $user_post_article['user_id'];?>);">
 												<i class="fa fa-thumbs-up"></i>
 											</a>
 										</li>
