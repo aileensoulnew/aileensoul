@@ -1101,6 +1101,10 @@ class User_post extends MY_Controller {
                         {
                             $url = base_url().'article/'.$postDetailData['article_data']['article_slug'];
                         }
+                        elseif($postDetailData['post_data']['post_for'] == 'share')
+                        {
+                            $url = base_url().'shp/'.$postDetailData['share_data']['shared_post_slug'];
+                        }
 
                         $email_html = '';
                         
@@ -3621,7 +3625,7 @@ class User_post extends MY_Controller {
                             $to_email_id = $this->db->select('email')->get_where('user_login', array('user_id' => $to_id))->row()->email;
                             $login_userdata = $this->user_model->getUserData($userid);
                             
-                            $share_post_url = base_url().'shp'.$shared_post_slug;
+                            $share_post_url = base_url().'shp/'.$shared_post_slug;
 
                             $email_html = '';
                             
