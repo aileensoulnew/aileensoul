@@ -5,9 +5,10 @@ var main_total_record = "";
 var main_perpage_record = "";
 var fail_count = 0;
 $(document).ready(function () {
-    notificatin_ajax_data();
+    notificatin_ajax_data();    
+    getNotification();
     
-    $(window).scroll(function () {        
+    $(window).scroll(function () {
         if (($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7)) {
 
             var page = main_page_number;//$(".page_number:last").val();
@@ -29,7 +30,7 @@ $(document).ready(function () {
         }
     });
 });
-    function notificatin_ajax_data(pagenum) {
+function notificatin_ajax_data(pagenum) {
     if (isProcessing) {
         return;
     }
@@ -53,13 +54,7 @@ $(document).ready(function () {
             fail_count = 0;
             $('.loader').remove();
             $('.notification_data').append(data.notification);
-            /*if(pagenum == undefined || pagenum == 'undefined')
-            {                
-                main_page_number = data.page;
-            }
-            else
-            {
-            }*/
+            
             main_page_number = data.page;
             main_total_record = data.total_record;
             main_perpage_record = data.perpage;
@@ -89,3 +84,37 @@ $(document).ready(function () {
 }
 //AJAX DATA LOAD BY LAZZY LOADER END
 
+function getNotification() {
+    // first click alert('here'); 
+    $.ajax({
+        url: base_url + "notification/update_notification",
+        type: "POST",
+        //data: {uid: 12341234}, //this sends the user-id to php as a post variable, in php it can be accessed as $_POST['uid']
+        success: function (data) {
+            data = JSON.parse(data);
+            if(parseInt(data) > 0)
+            {                    
+                if(parseInt(data) > 99)
+                {
+                    $(".noti_count").addClass('not-max');
+                    $(".noti_count").html('99+');
+                }
+                else
+                {
+                    $(".noti_count").removeClass('not-max');
+                    $(".noti_count").html(data);
+                }
+            }
+            else
+            {
+                $(".noti_count").hide();
+                $(".noti_count").html("");
+            }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            setTimeout(function(){
+                getNotification();
+            },500);
+        }
+    });
+}

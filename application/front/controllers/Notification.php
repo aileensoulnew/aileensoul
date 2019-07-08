@@ -1894,6 +1894,15 @@ Your browser does not support the audio tag.
         $notificationData = $this->notification_model->get_notification_ajax($userid,$perpage,$start);
         $total_record = $this->notification_model->get_notification_ajax_total_rec($userid);
 
+        $data_not = array(
+            'not_read' => '1'
+        );
+        $this->db->where('not_read', '2');
+        $this->db->where('not_type !=', '1');
+        $this->db->where('not_type !=', '2');
+        $this->db->where('not_to_id', $userid);        
+        $result_array = $this->db->update('notification', $data_not);
+
         $i = 0;
         $notification = "";
         if($total_record == 0)
