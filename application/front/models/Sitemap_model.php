@@ -5,6 +5,10 @@ if (!defined('BASEPATH'))
 
 class Sitemap_model extends CI_Model {
 
+    public function __construct() {
+        $this->db->reconnect();
+    }
+
     function getJobDataByLocation() {
         $this->db->select('rp.city,rp.post_name,rp.post_id,rp.user_id,c.city_name,r.re_comp_name')->from('rec_post rp');
         $this->db->join('cities c', 'rp.city = c.city_id');

@@ -2,6 +2,10 @@
 
 class Common extends CI_Model {
 
+    public function __construct() {
+        $this->db->reconnect();
+    }
+
     // insert database
     function insert_data($data, $tablename) {
         if ($this->db->insert($tablename, $data)) {

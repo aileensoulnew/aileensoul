@@ -6,6 +6,9 @@ class Blog_Model extends CI_Model {
 
     public static $category = "blog_category";
     public static $blog = "blog";
+    public function __construct() {
+        $this->db->reconnect();
+    }
 
     public function CategoryOnly() {
         $this->db->where('parent_id', '0');

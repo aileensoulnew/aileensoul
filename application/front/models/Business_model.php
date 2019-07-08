@@ -5,6 +5,10 @@ if (!defined('BASEPATH'))
 
 class Business_model extends CI_Model {
 
+    public function __construct() {
+        $this->db->reconnect();
+    }
+
     function businessCategory($limit = '') {
         $this->db->select('count(bp.business_profile_id) as count,industry_id,industry_name,industry_slug,industry_image')->from('industry_type it');
         $this->db->join('business_profile bp', 'bp.industriyal = it.industry_id', 'left');

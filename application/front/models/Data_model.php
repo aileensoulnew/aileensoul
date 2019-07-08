@@ -5,6 +5,10 @@ if (!defined('BASEPATH'))
 
 class Data_model extends CI_Model {
 
+    public function __construct() {
+        $this->db->reconnect();
+    }
+
     function getFieldList() {
         $this->db->select('it.industry_id,it.industry_name')->from('industry_type it');
         $this->db->where('type_id', '');

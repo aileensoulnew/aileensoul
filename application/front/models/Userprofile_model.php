@@ -5,6 +5,10 @@ if (!defined('BASEPATH'))
 
 class Userprofile_model extends CI_Model {
 
+    public function __construct() {
+        $this->db->reconnect();
+    }
+
     public function getdashboardata($user_id = '', $select_data = '') {
         $this->db->select($select_data)->from("user u");
         $this->db->join('art_reg a', 'a.user_id = u.user_id', 'left');

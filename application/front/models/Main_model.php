@@ -5,6 +5,10 @@ if (!defined('BASEPATH'))
 
 class Main_model extends CI_Model {
 
+	public function __construct() {
+        $this->db->reconnect();
+    }
+
     function checkUserVisitor($ip = '', $date = '') {
         $this->db->select("count(*) as total")->from("user_visit");
         $this->db->where("ip", $ip);

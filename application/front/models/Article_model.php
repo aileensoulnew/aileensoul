@@ -5,6 +5,10 @@ if (!defined('BASEPATH'))
 
 class Article_model extends CI_Model {
 
+    public function __construct() {
+        $this->db->reconnect();
+    }
+
     function add_article($user_id,$article_title = "",$article_content = "",$unique_key = "",$article_meta_title = "",$article_meta_description = "",$article_main_category = "",$article_other_category = "")
     {
         $add_new_article = 0;

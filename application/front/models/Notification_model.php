@@ -4,6 +4,11 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Notification_model extends CI_Model {
+
+    public function __construct() {
+        $this->db->reconnect();
+    }
+    
     public function get_notification($user_id)
     {
         $sql = "SELECT n.*,nd.not_title_name ,nd.not_desc ,nd.not_image ,nd.not_url FROM ailee_notification as n JOIN ailee_notification_detail as nd ON nd.not_id = n.not_id  WHERE n.not_to_id = '".$user_id."' ORDER BY n.not_created_date DESC LIMIT 10";

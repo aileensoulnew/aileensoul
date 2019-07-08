@@ -5,6 +5,10 @@ if (!defined('BASEPATH'))
 
 class User_post_model extends CI_Model {
 
+    public function __construct() {
+        $this->db->reconnect();
+    }
+
     public function getContactSuggetion($user_id = '', $detailsdata = '') {
 
         $limit = 15;

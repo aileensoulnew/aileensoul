@@ -5,7 +5,12 @@ if (!defined('BASEPATH'))
 require 'es/vendor/autoload.php';
 
 class Searchelastic_model extends CI_Model {
+
     private $elasticclient = null;
+    
+    public function __construct() {
+        $this->db->reconnect();
+    }
     
     public function add_edit_single_people($user_id)
     {

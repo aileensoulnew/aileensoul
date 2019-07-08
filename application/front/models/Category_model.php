@@ -6,6 +6,10 @@ class Category_Model extends CI_Model {
     public static $category_groups_table = "category_groups";
     public static $category_table = "category";
 
+    public function __construct() {
+        $this->db->reconnect();
+    }
+
 	public function CategoryOnly(){
 		$this->db->where('parent_id', '0');
 		$results = $this->db->get('category')->result();

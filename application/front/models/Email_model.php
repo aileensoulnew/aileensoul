@@ -5,8 +5,9 @@ if (!defined('BASEPATH'))
 
 class Email_model extends CI_Model {
 
-    function __construct() {
+    public function __construct() {
         parent::__construct();
+        $this->db->reconnect();
     }
 
     function send_email($subject = '', $templ = '', $to_email = '',$unsubscribe = '') {

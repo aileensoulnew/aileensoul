@@ -2,6 +2,10 @@
 
 class Settings extends CI_Model {
 
+    public function __construct() {
+        $this->db->reconnect();
+    }
+
     //get all settings details
     function getSettingDetails() {
         $this->db->select('setting_id,setting_name,setting_value');
