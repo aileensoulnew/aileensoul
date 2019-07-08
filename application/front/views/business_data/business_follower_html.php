@@ -24,12 +24,12 @@ if ($total_record > 0) {
                                             } else {
                                                 if($user['user_gender'] == "M")
                                                 { ?>
-                                                    <img  src="'.base_url('assets/img/man-user.jpg').'"  alt="NOBUSIMAGE">
+                                                    <img  src="<?php echo base_url('assets/img/man-user.jpg');?>"  alt="NOBUSIMAGE">
                                                 <?php
                                                 }
                                                 else
                                                 { ?>
-                                                    <img  src="'.base_url('assets/img/female-user.jpg').'"  alt="NOBUSIMAGE">
+                                                    <img  src="<?php echo base_url('assets/img/female-user.jpg');?>"  alt="NOBUSIMAGE">
                                                 <?php
                                                 }
                                             } ?>
