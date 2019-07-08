@@ -2377,7 +2377,13 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                             }
                             if(data.mutual_friend.length > 0){
                                 all_html += '<ul>';
-                                data.mutual_friend.forEach(function(friends){
+                                // data.mutual_friend.forEach(function(friends,index){
+                                for(var i=0;i<data.mutual_friend.length;i++){
+                                    if(i == 2)
+                                    {
+                                        break;
+                                    }
+                                    friends = data.mutual_friend[i];
                                     all_html += '<li><div class="user-img">';
                                     if(friends.user_image){
                                         all_html += '<img src="'+user_thumb_upload_url+friends.user_image+'">';
@@ -2392,7 +2398,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                                         }
                                     }
                                     all_html += '</div></li>';
-                                });
+                                }
 
                                 all_html += '<li class="m-contacts">';
                                     if(data.mutual_friend.length == 1){
@@ -10170,7 +10176,12 @@ app.controller('contactsController', function ($scope, $http, $location, $window
                             }
                             if(data.mutual_friend.length > 0){
                                 all_html += '<ul>';
-                                data.mutual_friend.forEach(function(friends){
+                                for(var i=0;i<data.mutual_friend.length;i++){
+                                    if(i == 2)
+                                    {
+                                        break;
+                                    }
+                                    friends = data.mutual_friend[i];
                                     all_html += '<li><div class="user-img">';
                                     if(friends.user_image){
                                         all_html += '<img src="'+user_thumb_upload_url+friends.user_image+'">';
@@ -10185,7 +10196,7 @@ app.controller('contactsController', function ($scope, $http, $location, $window
                                         }
                                     }
                                     all_html += '</div></li>';
-                                });
+                                }
 
                                 all_html += '<li class="m-contacts">';
                                     if(data.mutual_friend.length == 1){
@@ -10721,7 +10732,12 @@ app.controller('followersController', function ($scope, $http, $location, $compi
                             }
                             if(data.mutual_friend.length > 0){
                                 all_html += '<ul>';
-                                data.mutual_friend.forEach(function(friends){
+                                for(var i=0;i<data.mutual_friend.length;i++){
+                                    if(i == 2)
+                                    {
+                                        break;
+                                    }
+                                    friends = data.mutual_friend[i];
                                     all_html += '<li><div class="user-img">';
                                     if(friends.user_image){
                                         all_html += '<img src="'+user_thumb_upload_url+friends.user_image+'">';
@@ -10736,7 +10752,7 @@ app.controller('followersController', function ($scope, $http, $location, $compi
                                         }
                                     }
                                     all_html += '</div></li>';
-                                });
+                                }
 
                                 all_html += '<li class="m-contacts">';
                                     if(data.mutual_friend.length == 1){
@@ -11249,7 +11265,12 @@ app.controller('followingController', function ($scope, $http, $location, $compi
                             }
                             if(data.mutual_friend.length > 0){
                                 all_html += '<ul>';
-                                data.mutual_friend.forEach(function(friends){
+                                for(var i=0;i<data.mutual_friend.length;i++){
+                                    if(i == 2)
+                                    {
+                                        break;
+                                    }
+                                    friends = data.mutual_friend[i];
                                     all_html += '<li><div class="user-img">';
                                     if(friends.user_image){
                                         all_html += '<img src="'+user_thumb_upload_url+friends.user_image+'">';
@@ -11264,7 +11285,7 @@ app.controller('followingController', function ($scope, $http, $location, $compi
                                         }
                                     }
                                     all_html += '</div></li>';
-                                });
+                                }
 
                                 all_html += '<li class="m-contacts">';
                                     if(data.mutual_friend.length == 1){
@@ -11831,7 +11852,12 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                             }
                             if(data.mutual_friend.length > 0){
                                 all_html += '<ul>';
-                                data.mutual_friend.forEach(function(friends){
+                                for(var i=0;i<data.mutual_friend.length;i++){
+                                    if(i == 2)
+                                    {
+                                        break;
+                                    }
+                                    friends = data.mutual_friend[i];
                                     all_html += '<li><div class="user-img">';
                                     if(friends.user_image){
                                         all_html += '<img src="'+user_thumb_upload_url+friends.user_image+'">';
@@ -11846,7 +11872,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                                         }
                                     }
                                     all_html += '</div></li>';
-                                });
+                                }
 
                                 all_html += '<li class="m-contacts">';
                                     if(data.mutual_friend.length == 1){
@@ -12708,7 +12734,12 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                             }
                             if(data.mutual_friend.length > 0){
                                 all_html += '<ul>';
-                                data.mutual_friend.forEach(function(friends){
+                                for(var i=0;i<data.mutual_friend.length;i++){
+                                    if(i == 2)
+                                    {
+                                        break;
+                                    }
+                                    friends = data.mutual_friend[i];
                                     all_html += '<li><div class="user-img">';
                                     if(friends.user_image){
                                         all_html += '<img src="'+user_thumb_upload_url+friends.user_image+'">';
@@ -12723,7 +12754,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                                         }
                                     }
                                     all_html += '</div></li>';
-                                });
+                                }
 
                                 all_html += '<li class="m-contacts">';
                                     if(data.mutual_friend.length == 1){
