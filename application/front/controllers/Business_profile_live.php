@@ -7070,7 +7070,7 @@ class Business_profile_live extends MY_Controller {
                         'not_desc'          => 'Likes your photos comment in business profile.',
                         'not_image'         => $img,
                         'not_url'           => base_url($url),
-                        'user_id'           => $userid
+                        'user_id'           => $userid,
                         'user_type'         => '2',
                         'status'            => '1',
                         'created_date'      => date('Y-m-d H:i:s'),
@@ -7233,7 +7233,7 @@ class Business_profile_live extends MY_Controller {
                                 'not_desc'          => 'Likes your photos comment in business profile.',
                                 'not_image'         => $img,
                                 'not_url'           => base_url($url),
-                                'user_id'           => $userid
+                                'user_id'           => $userid,
                                 'user_type'         => '2',
                                 'status'            => '1',
                                 'created_date'      => date('Y-m-d H:i:s'),
@@ -7378,7 +7378,7 @@ class Business_profile_live extends MY_Controller {
                         'not_desc'          => 'Likes your photos comment in business profile.',
                         'not_image'         => $img,
                         'not_url'           => base_url($url),
-                        'user_id'           => $userid
+                        'user_id'           => $userid,
                         'user_type'         => '2',
                         'status'            => '1',
                         'created_date'      => date('Y-m-d H:i:s'),
@@ -7538,7 +7538,7 @@ class Business_profile_live extends MY_Controller {
                                 'not_desc'          => 'Likes your photos comment in business profile.',
                                 'not_image'         => $img,
                                 'not_url'           => base_url($url),
-                                'user_id'           => $userid
+                                'user_id'           => $userid,
                                 'user_type'         => '2',
                                 'status'            => '1',
                                 'created_date'      => date('Y-m-d H:i:s'),

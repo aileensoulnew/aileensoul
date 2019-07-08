@@ -799,7 +799,16 @@ if($first_segment == "")
                 data = JSON.parse(data);
                 if(parseInt(data) > 0)
                 {
-                    $(".noti_count").html(data);
+                    if(parseInt(data) > 99)
+                    {
+                        $(".noti_count").addClass('not-max');
+                        $(".noti_count").html('99+');
+                    }
+                    else
+                    {
+                        $(".noti_count").removeClass('not-max');
+                        $(".noti_count").html(data);
+                    }
                 }
                 else
                 {
@@ -834,7 +843,16 @@ if($first_segment == "")
                     $('#seenot').html(data.seeall);
                     if(parseInt(data.not_count) > 0)
                     {
-                        $(".noti_count").html(data.not_count);
+                        if(parseInt(data.not_count) > 99)
+                        {
+                            $(".noti_count").addClass('not-max');
+                            $(".noti_count").html('99+');
+                        }
+                        else
+                        {
+                            $(".noti_count").removeClass('not-max');
+                            $(".noti_count").html(data.not_count);
+                        }
                     }
                     else
                     {

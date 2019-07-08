@@ -4989,7 +4989,7 @@ Your browser does not support the audio tag.
         // freelancer hire shortlisted  notification start        
         $notification = "";
         foreach ($notificationData as $total) {
-            print_r($total);
+            // print_r($total);
 
             //Business Notification Start
             if ($total['not_from'] == '6' && $total['not_img'] == '0') {
@@ -5038,6 +5038,7 @@ Your browser does not support the audio tag.
                         'status'            => '1',
                         'created_date'      => $total['not_created_date']
                     );
+                    
                     $this->common->insert_data_getid($data, 'notification_detail');
                 }
             }
@@ -5090,6 +5091,7 @@ Your browser does not support the audio tag.
                         'status'            => '1',
                         'created_date'      => $total['not_created_date']
                     );
+                    
                     $this->common->insert_data_getid($data, 'notification_detail');
                 }
             }
@@ -5138,6 +5140,7 @@ Your browser does not support the audio tag.
                         'status'            => '1',
                         'created_date'      => $total['not_created_date']
                     );
+                    
                     $this->common->insert_data_getid($data, 'notification_detail');
                 }
             }
@@ -5190,6 +5193,7 @@ Your browser does not support the audio tag.
                         'created_date'      => $total['not_created_date']
                     );
                     $this->common->insert_data_getid($data, 'notification_detail');
+                    
                 }
             }
 
@@ -5243,6 +5247,7 @@ Your browser does not support the audio tag.
                         'created_date'      => $total['not_created_date']
                     );
                     $this->common->insert_data_getid($data, 'notification_detail');
+                    
                 }
             }
 
@@ -5293,6 +5298,7 @@ Your browser does not support the audio tag.
                         'created_date'      => $total['not_created_date']
                     );
                     $this->common->insert_data_getid($data, 'notification_detail');
+                    
                 }
             }
 
@@ -5346,6 +5352,7 @@ Your browser does not support the audio tag.
                         'created_date'      => $total['not_created_date']
                     );
                     $this->common->insert_data_getid($data, 'notification_detail');
+                    
                 }
             }
 
@@ -5413,6 +5420,7 @@ Your browser does not support the audio tag.
                         'created_date'      => $total['not_created_date']
                     );
                     $this->common->insert_data_getid($data, 'notification_detail');
+                    
                 }
             }
             //Business Notification End
@@ -5465,6 +5473,7 @@ Your browser does not support the audio tag.
                         'created_date'      => $total['not_created_date']
                     );
                     $this->common->insert_data_getid($data, 'notification_detail');
+                    
                 }
             }
 
@@ -5515,6 +5524,7 @@ Your browser does not support the audio tag.
                         'created_date'      => $total['not_created_date']
                     );
                     $this->common->insert_data_getid($data, 'notification_detail');
+                    
                 }
             }
 
@@ -5538,6 +5548,10 @@ Your browser does not support the audio tag.
                 elseif($postDetailData[0]['post_data']['post_for'] == "article" )
                 {
                     $url = base_url()."article/".$postDetailData[0]['article_data']['article_slug'];   
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == 'share')
+                {
+                    $url = base_url().'shp/'.$postDetailData[0]['share_data']['shared_post_slug'];
                 }
                 else
                 {
@@ -5588,6 +5602,7 @@ Your browser does not support the audio tag.
                         'created_date'      => $total['not_created_date']
                     );
                     $this->common->insert_data_getid($data, 'notification_detail');
+                    
                 }
             }
 
@@ -5609,6 +5624,10 @@ Your browser does not support the audio tag.
                 {
                     $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
                     $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == 'share')
+                {
+                    $url = base_url().'shp/'.$postDetailData[0]['share_data']['shared_post_slug'];
                 }
                 elseif($postDetailData[0]['post_data']['post_for'] == "article" )
                 {
@@ -5662,6 +5681,7 @@ Your browser does not support the audio tag.
                         'created_date'      => $total['not_created_date']
                     );
                     $this->common->insert_data_getid($data, 'notification_detail');
+                    
                 }
             }
 
@@ -5685,6 +5705,10 @@ Your browser does not support the audio tag.
                 elseif($postDetailData[0]['post_data']['post_for'] == "article" )
                 {
                     $url = base_url()."article/".$postDetailData[0]['article_data']['article_slug'];   
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == 'share')
+                {
+                    $url = base_url().'shp/'.$postDetailData[0]['share_data']['shared_post_slug'];
                 }
                 else
                 {                    
@@ -5735,6 +5759,7 @@ Your browser does not support the audio tag.
                         'created_date'      => $total['not_created_date']
                     );
                     $this->common->insert_data_getid($data, 'notification_detail');
+                    
                 }
             }
 
@@ -5759,6 +5784,10 @@ Your browser does not support the audio tag.
                 elseif($postDetailData[0]['post_data']['post_for'] == "article" )
                 {
                     $url = base_url()."article/".$postDetailData[0]['article_data']['article_slug'];   
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == 'share')
+                {
+                    $url = base_url().'shp/'.$postDetailData[0]['share_data']['shared_post_slug'];
                 }
                 else
                 {                    
@@ -5809,6 +5838,7 @@ Your browser does not support the audio tag.
                         'created_date'      => $total['not_created_date']
                     );
                     $this->common->insert_data_getid($data, 'notification_detail');
+                    
                 }
             }
 
@@ -5829,6 +5859,10 @@ Your browser does not support the audio tag.
                 {
                     $q_slug = $this->create_slug($postDetailData[0]['question_data']['question']);
                     $url = base_url()."questions/".$postDetailData[0]['question_data']['id']."/".$q_slug;
+                }
+                elseif($postDetailData[0]['post_data']['post_for'] == 'share')
+                {
+                    $url = base_url().'shp/'.$postDetailData[0]['share_data']['shared_post_slug'];
                 }
                 elseif($postDetailData[0]['post_data']['post_for'] == "article" )
                 {
@@ -5883,6 +5917,7 @@ Your browser does not support the audio tag.
                         'created_date'      => $total['not_created_date']
                     );
                     $this->common->insert_data_getid($data, 'notification_detail');
+                    
                 }
             }
 
@@ -5936,6 +5971,7 @@ Your browser does not support the audio tag.
                         'created_date'      => $total['not_created_date']
                     );
                     $this->common->insert_data_getid($data, 'notification_detail');
+                    
                 }
             }
             //Opportunity Notification End
@@ -5974,6 +6010,7 @@ Your browser does not support the audio tag.
                         'created_date'      => $total['not_created_date']
                     );
                     $this->common->insert_data_getid($data, 'notification_detail');
+                    
                 }
             }
 
@@ -6005,6 +6042,7 @@ Your browser does not support the audio tag.
                         'created_date'      => $total['not_created_date']
                     );
                     $this->common->insert_data_getid($data, 'notification_detail');
+                    
                 }
             }
             //Article Notification End
@@ -6029,6 +6067,10 @@ Your browser does not support the audio tag.
                 elseif($postDetailData['post_data']['post_for'] == 'article')
                 {
                     $url = base_url().'article/'.$postDetailData['article_data']['article_slug'];
+                }
+                elseif($postDetailData['post_data']['post_for'] == 'share')
+                {
+                    $url = base_url().'shp/'.$postDetailData['share_data']['shared_post_slug'];
                 }
 
 
@@ -6084,6 +6126,7 @@ Your browser does not support the audio tag.
                         'created_date'      => $total['not_created_date']
                     );
                     $this->common->insert_data_getid($data, 'notification_detail');
+                    
                 }
             }
             //Add New Post Notification End

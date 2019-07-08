@@ -539,11 +539,20 @@ class Business_profile extends MY_Controller {
                     unlink($thumb_image);
                 }*/
             }
-            
+
             $this->searchelastic_model->add_edit_single_business($userid);
 
             $contition_array = array('user_id' => $userid, 'status' => '1', 'is_deleted' => '0');
             $businesspostdata = $this->common->select_data_by_condition('business_profile', $contition_array, $data = 'business_user_image', $sortby = '', $orderby = '', $limit = '', $offset = '', $$join_str = array(), $groupby);
+
+            $data_pro = array(
+                'not_image' => BUS_PROFILE_THUMB_UPLOAD_URL . $businesspostdata[0]['business_user_image']
+            );
+
+            $this->db->where('user_type', '2');
+            $this->db->where('user_id', $userid);
+            $this->db->update('notification_detail', $data_pro);
+            
             $userimage .= '<img src="' . BUS_PROFILE_THUMB_UPLOAD_URL . $businesspostdata[0]['business_user_image'] . '?ver=' . time() . '" alt="' . $businesspostdata[0]['business_user_image'] . '" >';
             $userimage .= '<a class="cusome_upload" href="javascript:void(0);" onclick="updateprofilepopup();"><img src="' . base_url('assets/img/cam.png?ver=' . time()) . '" alt="cam.png">';
             $userimage .= $this->lang->line("update_profile_picture");
@@ -5226,7 +5235,7 @@ class Business_profile extends MY_Controller {
                         'not_desc'          => 'Likes your photos comment in business profile.',
                         'not_image'         => $img,
                         'not_url'           => base_url($url),
-                        'user_id'           => $userid
+                        'user_id'           => $userid,
                         'user_type'         => '2',
                         'status'            => '1',
                         'created_date'      => date('Y-m-d H:i:s'),
@@ -5391,7 +5400,7 @@ class Business_profile extends MY_Controller {
                                 'not_desc'          => 'Likes your photos comment in business profile.',
                                 'not_image'         => $img,
                                 'not_url'           => base_url($url),
-                                'user_id'           => $userid
+                                'user_id'           => $userid,
                                 'user_type'         => '2',
                                 'status'            => '1',
                                 'created_date'      => date('Y-m-d H:i:s'),
@@ -5537,7 +5546,7 @@ class Business_profile extends MY_Controller {
                         'not_desc'          => 'Likes your photos comment in business profile.',
                         'not_image'         => $img,
                         'not_url'           => base_url($url),
-                        'user_id'           => $userid
+                        'user_id'           => $userid,
                         'user_type'         => '2',
                         'status'            => '1',
                         'created_date'      => date('Y-m-d H:i:s'),
@@ -5697,7 +5706,7 @@ class Business_profile extends MY_Controller {
                                 'not_desc'          => 'Likes your photos comment in business profile.',
                                 'not_image'         => $img,
                                 'not_url'           => base_url($url),
-                                'user_id'           => $userid
+                                'user_id'           => $userid,
                                 'user_type'         => '2',
                                 'status'            => '1',
                                 'created_date'      => date('Y-m-d H:i:s'),

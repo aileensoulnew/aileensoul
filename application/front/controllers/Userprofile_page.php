@@ -1014,8 +1014,17 @@ class Userprofile_page extends MY_Controller {
         $insert_post_data['created_date'] = date('Y-m-d H:i:s', time());
         $inserted_id = $user_cover_id = $this->common->insert_data_getid($insert_post_data, 'user_post');
 
-        if ($update) {
+        if ($update) {            
+
             $userdata = $this->user_model->getUserDataByslug($userslug, $data = 'ui.user_image');
+
+            $data_pro = array(
+                'not_image' => USER_THUMB_UPLOAD_URL . $userdata['user_image']
+            );
+
+            $this->db->where('user_type', '1');
+            $this->db->where('user_id', $userid);
+            $this->db->update('notification_detail', $data_pro);
 
             $new_people = $this->searchelastic_model->add_edit_single_people($userid);
 
@@ -1151,8 +1160,8 @@ class Userprofile_page extends MY_Controller {
 
         $user_reg_data = $this->userprofile_model->getUserBackImage($userid);
         $user_reg_back_image = $user_reg_data['profile_background'];
-
-//        echo '<img src = "' . $this->data['busdata'][0]['profile_background'] . '" />';
+        
+        //echo '<img src = "' . $this->data['busdata'][0]['profile_background'] . '" />';
         $resdata['cover'] = '  <div class="bg-images"><a data-toggle="modal" data-target="#view-cover-img" class="cusome_upload" href="#"><img id="image_src" name="image_src" src = "' . USER_BG_MAIN_UPLOAD_URL . $user_reg_back_image . '" /></a></div>';
         $resdata['cover_image'] = USER_BG_MAIN_UPLOAD_URL . $user_reg_back_image;
 

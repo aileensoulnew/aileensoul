@@ -373,6 +373,10 @@ class User_post extends MY_Controller {
                         {
                             $url = base_url().'article/'.$postDetailData['article_data']['article_slug'];
                         }
+                        elseif($postDetailData['post_data']['post_for'] == 'share')
+                        {
+                            $url = base_url().'shp/'.$postDetailData['share_data']['shared_post_slug'];
+                        }
 
                         if($login_userdata['user_image'] != "")
                         {
@@ -500,6 +504,10 @@ class User_post extends MY_Controller {
                                 elseif($postDetailData['post_data']['post_for'] == 'article')
                                 {
                                     $url = base_url().'article/'.$postDetailData['article_data']['article_slug'];
+                                }
+                                elseif($postDetailData['post_data']['post_for'] == 'share')
+                                {
+                                    $url = base_url().'shp/'.$postDetailData['share_data']['shared_post_slug'];
                                 }
 
                                 if($login_userdata['user_image'] != "")
@@ -704,7 +712,11 @@ class User_post extends MY_Controller {
                         elseif($postDetailData['post_data']['post_for'] == 'article')
                         {
                             $url = base_url().'article/'.$postDetailData['article_data']['article_slug'];
-                        }                        
+                        }
+                        elseif($postDetailData['post_data']['post_for'] == 'share')
+                        {
+                            $url = base_url().'shp/'.$postDetailData['share_data']['shared_post_slug'];
+                        }
 
                         if($login_userdata['user_image'] != "")
                         {
@@ -3083,6 +3095,10 @@ class User_post extends MY_Controller {
                             {
                                 $url = base_url().'article/'.$postDetailData['article_data']['article_slug'];
                             }
+                            elseif($postDetailData['post_data']['post_for'] == 'share')
+                            {
+                                $url = base_url().'shp/'.$postDetailData['share_data']['shared_post_slug'];
+                            }
 
                             if($login_userdata['user_image'] != "")
                             {
@@ -3207,6 +3223,10 @@ class User_post extends MY_Controller {
                                 {
                                     $url = base_url().'article/'.$postDetailData['article_data']['article_slug'];
                                 }
+                                elseif($postDetailData['post_data']['post_for'] == 'share')
+                                {
+                                    $url = base_url().'shp/'.$postDetailData['share_data']['shared_post_slug'];
+                                }
 
                                 if($login_userdata['user_image'] != "")
                                 {
@@ -3323,6 +3343,10 @@ class User_post extends MY_Controller {
                                     elseif($postDetailData['post_data']['post_for'] == 'article')
                                     {
                                         $url = base_url().'article/'.$postDetailData['article_data']['article_slug'];
+                                    }
+                                    elseif($postDetailData['post_data']['post_for'] == 'share')
+                                    {
+                                        $url = base_url().'shp/'.$postDetailData['share_data']['shared_post_slug'];
                                     }
 
                                     if($login_userdata['user_image'] != "")
@@ -4128,19 +4152,23 @@ class User_post extends MY_Controller {
 
         if($post_data['post_data']['post_for'] == 'opportunity')
         {
-            $url = base_url().'o/'.$post_data['opportunity_data']['oppslug'];
+            $post_url = base_url().'o/'.$post_data['opportunity_data']['oppslug'];
         }
         elseif($post_data['post_data']['post_for'] == 'simple')
         {
-            $url = base_url().'p/'.$post_data['simple_data']['simslug'];
+            $post_url = base_url().'p/'.$post_data['simple_data']['simslug'];
         }
         elseif($post_data['post_data']['post_for'] == 'question')
         {
-            $url = base_url().'questions/'.$post_data['question_data']['id'].'/'.$this->common->create_slug($post_data['question_data']['question']);
+            $post_url = base_url().'questions/'.$post_data['question_data']['id'].'/'.$this->common->create_slug($post_data['question_data']['question']);
         }
         elseif($post_data['post_data']['post_for'] == 'article')
         {
-            $url = base_url().'article/'.$post_data['article_data']['article_slug'];
+            $post_url = base_url().'article/'.$post_data['article_data']['article_slug'];
+        }
+        elseif($post_data['post_data']['post_for'] == 'share')
+        {
+            $post_url = base_url().'shp/'.$post_data['share_data']['shared_post_slug'];
         }
 
         $login_userdata = $this->user_model->getUserData($user_id);        
@@ -4180,7 +4208,7 @@ class User_post extends MY_Controller {
                                 </div>
                             </td>
                             <td class="mail-btn">
-                                <a href="'.$url.'" class="btn">View</a>                                
+                                <a href="'.$post_url.'" class="btn">View</a>                                
                             </td>
                         </tr>
                         </table>';
@@ -4205,7 +4233,7 @@ class User_post extends MY_Controller {
                 'not_title_name'    => ucwords($login_userdata['first_name']." ".$login_userdata['last_name']),
                 'not_desc'          => 'add new post.',
                 'not_image'         => $user_img,
-                'not_url'           => $url,
+                'not_url'           => $post_url,
                 'user_id'           => $user_id,
                 'user_type'         => '1',
                 'status'            => '1',

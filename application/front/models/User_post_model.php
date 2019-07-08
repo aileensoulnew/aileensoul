@@ -4808,6 +4808,14 @@ class User_post_model extends CI_Model {
                 $question_data = $query->row_array();
                 $question_data['description'] = nl2br($this->common->make_links($question_data['description']));
                 $result_array['question_data'] = $question_data;
+            } elseif($user_post['post_for'] == 'share'){
+                $this->db->select("*")->from("user_post_share");
+                $this->db->where('id_user_post_share', $user_post['post_id']);                
+                $query = $this->db->get();
+                $share_data = $query->row_array();
+                $share_data['description'] = $this->common->make_links(nl2br($share_data['description']));
+                $share_data['data'] = $this->get_post_from_id($share_data['shared_post_id'],$userid_login);
+                $result_array['share_data'] = $share_data;
             } elseif ($user_post['post_for'] == 'profile_update') {
                 $this->db->select("upu.*")->from("user_profile_update upu");
                 $this->db->where('upu.id', $user_post['post_id']);
