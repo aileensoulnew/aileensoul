@@ -18,20 +18,6 @@
 			.all-post-box .post-bottom{border-bottom:1px solid #d2d2d2;}
             .tooltip_templates { display: none; }
             .tooltipster-content .tooltip_templates { display: block; }
-            .hashtag-list ul li:nth-child(n+0) .hash-box-top{width: 100%; height: 100px; padding: 15px;
-                  background: #ffffff;
-                  background: -moz-linear-gradient(top, #ffffff 0%, #ececec 100%);
-                  background: -webkit-linear-gradient(top, #ffffff 0%,#ececec 100%);
-                  background: linear-gradient(to bottom, #ffffff 0%,#ececec 100%);
-                  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ececec',GradientType=0 ); border-bottom: 1px solid #f6f6f6;
-                }
-            .hashtag-list ul li:nth-child(2n+0) .hash-box-top{width: 100%; height: 100px; padding: 15px;
-                  background: #ececec;
-                  background: -moz-linear-gradient(top, #ececec 0%, #ffffff 100%);
-                  background: -webkit-linear-gradient(top, #ececec 0%,#ffffff 100%);
-                  background: linear-gradient(to bottom, #ececec 0%,#ffffff 100%);
-                  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ececec', endColorstr='#ffffff',GradientType=0 ); border-bottom: 1px solid #f6f6f6;
-                }
 		</style>
     </head>
     <body class="two-hd">
@@ -288,32 +274,14 @@
                 </div>
             </header>
 
-            <div class="sub-header">
+            <div class="sub-header list-page">
                 <div class="container">
                     <nav class="search-tab">
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                             <ul class="sub-menu">
-                                <li>
-                                    <a class="nav-item nav-link active" id="search-all-tab" data-toggle="tab" href="#search-all" role="tab" aria-controls="search-all" aria-selected="true">All(785) </a>
-                                </li>
-                                <li>
-                                    <a class="nav-item nav-link" id="search-opp-tab" data-toggle="tab" href="#search-opp" role="tab" aria-controls="search-opp" aria-selected="false">Opportunitis(186)</a>
-                                </li>
-                                <li>
-                                    <a class="nav-item nav-link" id="search-people-tab" data-toggle="tab" href="#search-people" role="tab" aria-controls="search-people" aria-selected="false">People(254)</a>
-                                </li>
-                                <li>
-                                    <a class="nav-item nav-link" id="search-post-tab" data-toggle="tab" href="#search-post" role="tab" aria-controls="search-post" aria-selected="false">Post(102)</a>
-                                </li>
-                                <li>
-                                    <a class="nav-item nav-link" id="search-bus-tab" data-toggle="tab" href="#search-bus" role="tab" aria-controls="search-bus" aria-selected="false">Business(107) </a>
-                                </li>
-                                <li>
-                                    <a class="nav-item nav-link" id="search-article-tab" data-toggle="tab" href="#search-article" role="tab" aria-controls="search-article" aria-selected="false">Article(108) </a>
-                                </li>
-                                <li>
-                                    <a class="nav-item nav-link" id="search-que-tab" data-toggle="tab" href="#search-que" role="tab" aria-controls="search-que" aria-selected="false">Question(102)</a>
-                                </li>
+                                <li><a href="#">People</a></li>
+                                <li><a class="active" href="#">business</a></li>
+                                <li><a href="#">Hashtag</a></li>
                             </ul>
                         </div>
                     </nav>
@@ -462,13 +430,10 @@
                         <div class="nav nav-tabs nav-fill table-responsive content" id="nav-tab" role="tablist">
                             <table class="sub-menu table">
                                 <tr>
-                                    <td><a class="nav-item nav-link active" id="search-all-tab" data-toggle="tab" href="#search-all" role="tab" aria-controls="search-all" aria-selected="true">All <span>(785)</span></a></td>
-                                    <td><a class="nav-item nav-link" id="search-opp-tab" data-toggle="tab" href="#search-opp" role="tab" aria-controls="search-opp" aria-selected="false">Opportunitis<span>(186)</span></a></td>
-                                    <td><a class="nav-item nav-link" id="search-people-tab" data-toggle="tab" href="#search-people" role="tab" aria-controls="search-people" aria-selected="false">People<span>(254)</span></a></td>
-                                    <td><a class="nav-item nav-link" id="search-post-tab" data-toggle="tab" href="#search-post" role="tab" aria-controls="search-post" aria-selected="false">Post<span>(102)</span></a></td>
-                                    <td><a class="nav-item nav-link" id="search-bus-tab" data-toggle="tab" href="#search-bus" role="tab" aria-controls="search-bus" aria-selected="false">Business<span>(107)</span> </a></td>
-                                    <td><a class="nav-item nav-link" id="search-article-tab" data-toggle="tab" href="#search-article" role="tab" aria-controls="search-article" aria-selected="false">Article<span>(108)</span> </a></td>
-                                    <td><a class="nav-item nav-link" id="search-que-tab" data-toggle="tab" href="#search-que" role="tab" aria-controls="search-que" aria-selected="false">Question<span>(102)</span></a></td>
+                                    <td><a href="#">People</a></td>
+                                    <td><a href="#">business</a></td>
+                                    <td><a class="active" href="#">Hashtag</a></td>
+                                    
                                 </tr>
                             </table>
                             
@@ -617,183 +582,252 @@
                         <div class="listing-top">
                             <div class="row">
                                 <div class="col-md-8 col-sm-6 col-xs-4">
-                                    <h1>Hashtag</h1>
+                                    <h1>Business</h1>
                                 </div>
                                 <div class="col-md-4 col-sm-6 col-xs-8">
-                                    <div class="hash-search">
-                                        <input type="text" placeholder="Search hash tag">
-                                        <a href="#"><img src="n-images/s-s.png"></a>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
-                        <div class="hashtag-list">
+                        <div class="sugg-list business-list">
                             <ul>
                                 <li>
-                                    <div class="hash-box">
-                                        <div class="hash-box-top">
-                                            <div class="hash-round">
-                                                #M
-                                            </div>
+                                    <div class="arti-profile-box">
+                                        <div class="user-cover-img">
+                                            <a href="#">
+                                                <div class="gradient-bg">
+                                                </div>
+                                            </a>
                                         </div>
-                                        <div class="hash-detail">
-                                            <p class="hash-name">#MusicStuddio</p>
-                                            <p class="hash-follow">25k Followers</p>
-                                            <a href="#" class="btn-new-1">Follow</a>
+                                        <div class="user-pr-img">
+                                            <a href="#">
+                                                <img src="n-images/bus1.jpg">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="bus-list-detial">
+                                        <div class="bus-list-left">
+                                            <h4><a href="#">Eckhardt Steel and Alloys</a></h4>
+                                            <p>Steel Products(Mumbai)</p>
+                                        </div>
+                                        <div class="bus-list-right">
+                                            <a href="#" class="btn-new-1">Following</a>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="hash-box">
-                                        <div class="hash-box-top">
-                                            <div class="hash-round">
-                                                #M
-                                            </div>
+                                    <div class="arti-profile-box">
+                                        <div class="user-cover-img">
+                                            <a href="#">
+                                                <div class="gradient-bg">
+                                                </div>
+                                            </a>
                                         </div>
-                                        <div class="hash-detail">
-                                            <p class="hash-name">#MusicStuddioMusicStuddio</p>
-                                            <p class="hash-follow">25k Followers</p>
-                                            <a href="#" class="btn-new-1">Follow</a>
+                                        <div class="user-pr-img">
+                                            <a href="#">
+                                                <img src="n-images/bus1.jpg">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="bus-list-detial">
+                                        <div class="bus-list-left">
+                                            <h4><a href="#">Eckhardt Steel and Alloys</a></h4>
+                                            <p>Steel Products(Mumbai)</p>
+                                        </div>
+                                        <div class="bus-list-right">
+                                            <a href="#" class="btn-new-1">Following</a>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="hash-box">
-                                        <div class="hash-box-top">
-                                            <div class="hash-round">
-                                                #M
-                                            </div>
+                                    <div class="arti-profile-box">
+                                        <div class="user-cover-img">
+                                            <a href="#">
+                                                <div class="gradient-bg">
+                                                </div>
+                                            </a>
                                         </div>
-                                        <div class="hash-detail">
-                                            <p class="hash-name">#MusicStuddio</p>
-                                            <p class="hash-follow">25k Followers</p>
-                                            <a href="#" class="btn-new-1">Follow</a>
+                                        <div class="user-pr-img">
+                                            <a href="#">
+                                                <img src="n-images/bus1.jpg">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="bus-list-detial">
+                                        <div class="bus-list-left">
+                                            <h4><a href="#">Eckhardt Steel and Alloys</a></h4>
+                                            <p>Steel Products(Mumbai)</p>
+                                        </div>
+                                        <div class="bus-list-right">
+                                            <a href="#" class="btn-new-1">Following</a>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="hash-box">
-                                        <div class="hash-box-top">
-                                            <div class="hash-round">
-                                                #M
-                                            </div>
+                                    <div class="arti-profile-box">
+                                        <div class="user-cover-img">
+                                            <a href="#">
+                                                <div class="gradient-bg">
+                                                </div>
+                                            </a>
                                         </div>
-                                        <div class="hash-detail">
-                                            <p class="hash-name">#MusicStuddio</p>
-                                            <p class="hash-follow">25k Followers</p>
-                                            <a href="#" class="btn-new-1">Follow</a>
+                                        <div class="user-pr-img">
+                                            <a href="#">
+                                                <img src="n-images/bus1.jpg">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="bus-list-detial">
+                                        <div class="bus-list-left">
+                                            <h4><a href="#">Eckhardt Steel and Alloys alloys</a></h4>
+                                            <p>Steel Products(Mumbai)</p>
+                                        </div>
+                                        <div class="bus-list-right">
+                                            <a href="#" class="btn-new-1">Following</a>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="hash-box">
-                                        <div class="hash-box-top">
-                                            <div class="hash-round">
-                                                #M
-                                            </div>
+                                    <div class="arti-profile-box">
+                                        <div class="user-cover-img">
+                                            <a href="#">
+                                                <div class="gradient-bg">
+                                                </div>
+                                            </a>
                                         </div>
-                                        <div class="hash-detail">
-                                            <p class="hash-name">#MusicStuddio</p>
-                                            <p class="hash-follow">25k Followers</p>
-                                            <a href="#" class="btn-new-1">Follow</a>
+                                        <div class="user-pr-img">
+                                            <a href="#">
+                                                <img src="n-images/bus1.jpg">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="bus-list-detial">
+                                        <div class="bus-list-left">
+                                            <h4><a href="#">Eckhardt Steel and Alloys alloys</a></h4>
+                                            <p>Steel Products(Mumbai)</p>
+                                        </div>
+                                        <div class="bus-list-right">
+                                            <a href="#" class="btn-new-1">Following</a>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="hash-box">
-                                        <div class="hash-box-top">
-                                            <div class="hash-round">
-                                                #M
-                                            </div>
+                                    <div class="arti-profile-box">
+                                        <div class="user-cover-img">
+                                            <a href="#">
+                                                <div class="gradient-bg">
+                                                </div>
+                                            </a>
                                         </div>
-                                        <div class="hash-detail">
-                                            <p class="hash-name">#MusicStuddio</p>
-                                            <p class="hash-follow">25k Followers</p>
-                                            <a href="#" class="btn-new-1">Follow</a>
+                                        <div class="user-pr-img">
+                                            <a href="#">
+                                                <img src="n-images/bus1.jpg">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="bus-list-detial">
+                                        <div class="bus-list-left">
+                                            <h4><a href="#">Eckhardt Steel and Alloys alloys</a></h4>
+                                            <p>Steel Products(Mumbai)</p>
+                                        </div>
+                                        <div class="bus-list-right">
+                                            <a href="#" class="btn-new-1">Following</a>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="hash-box">
-                                        <div class="hash-box-top">
-                                            <div class="hash-round">
-                                                #M
-                                            </div>
+                                    <div class="arti-profile-box">
+                                        <div class="user-cover-img">
+                                            <a href="#">
+                                                <div class="gradient-bg">
+                                                </div>
+                                            </a>
                                         </div>
-                                        <div class="hash-detail">
-                                            <p class="hash-name">#MusicStuddio</p>
-                                            <p class="hash-follow">25k Followers</p>
-                                            <a href="#" class="btn-new-1">Follow</a>
+                                        <div class="user-pr-img">
+                                            <a href="#">
+                                                <img src="n-images/bus1.jpg">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="bus-list-detial">
+                                        <div class="bus-list-left">
+                                            <h4><a href="#">Eckhardt Steel and Alloys alloys</a></h4>
+                                            <p>Steel Products(Mumbai)</p>
+                                        </div>
+                                        <div class="bus-list-right">
+                                            <a href="#" class="btn-new-1">Following</a>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="hash-box">
-                                        <div class="hash-box-top">
-                                            <div class="hash-round">
-                                                #M
-                                            </div>
+                                    <div class="arti-profile-box">
+                                        <div class="user-cover-img">
+                                            <a href="#">
+                                                <div class="gradient-bg">
+                                                </div>
+                                            </a>
                                         </div>
-                                        <div class="hash-detail">
-                                            <p class="hash-name">#MusicStuddio</p>
-                                            <p class="hash-follow">25k Followers</p>
-                                            <a href="#" class="btn-new-1">Follow</a>
+                                        <div class="user-pr-img">
+                                            <a href="#">
+                                                <img src="n-images/bus1.jpg">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="bus-list-detial">
+                                        <div class="bus-list-left">
+                                            <h4><a href="#">Eckhardt Steel and Alloys alloys</a></h4>
+                                            <p>Steel Products(Mumbai)</p>
+                                        </div>
+                                        <div class="bus-list-right">
+                                            <a href="#" class="btn-new-1">Following</a>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="hash-box">
-                                        <div class="hash-box-top">
-                                            <div class="hash-round">
-                                                #M
-                                            </div>
+                                    <div class="arti-profile-box">
+                                        <div class="user-cover-img">
+                                            <a href="#">
+                                                <div class="gradient-bg">
+                                                </div>
+                                            </a>
                                         </div>
-                                        <div class="hash-detail">
-                                            <p class="hash-name">#MusicStuddio</p>
-                                            <p class="hash-follow">25k Followers</p>
-                                            <a href="#" class="btn-new-1">Follow</a>
+                                        <div class="user-pr-img">
+                                            <a href="#">
+                                                <img src="n-images/bus1.jpg">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="bus-list-detial">
+                                        <div class="bus-list-left">
+                                            <h4><a href="#">Eckhardt Steel and Alloys alloys</a></h4>
+                                            <p>Steel Products(Mumbai)</p>
+                                        </div>
+                                        <div class="bus-list-right">
+                                            <a href="#" class="btn-new-1">Following</a>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
-                                    <div class="hash-box">
-                                        <div class="hash-box-top">
-                                            <div class="hash-round">
-                                                #M
-                                            </div>
+                                    <div class="arti-profile-box">
+                                        <div class="user-cover-img">
+                                            <a href="#">
+                                                <div class="gradient-bg">
+                                                </div>
+                                            </a>
                                         </div>
-                                        <div class="hash-detail">
-                                            <p class="hash-name">#MusicStuddio</p>
-                                            <p class="hash-follow">25k Followers</p>
-                                            <a href="#" class="btn-new-1">Follow</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="hash-box">
-                                        <div class="hash-box-top">
-                                            <div class="hash-round">
-                                                #M
-                                            </div>
-                                        </div>
-                                        <div class="hash-detail">
-                                            <p class="hash-name">#MusicStuddio</p>
-                                            <p class="hash-follow">25k Followers</p>
-                                            <a href="#" class="btn-new-1">Follow</a>
+                                        <div class="user-pr-img">
+                                            <a href="#">
+                                                <img src="n-images/bus1.jpg">
+                                            </a>
                                         </div>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="hash-box">
-                                        <div class="hash-box-top">
-                                            <div class="hash-round">
-                                                #M
-                                            </div>
+                                    <div class="bus-list-detial">
+                                        <div class="bus-list-left">
+                                            <h4><a href="#">Eckhardt Steel and Alloys alloys</a></h4>
+                                            <p>Steel Products(Mumbai)</p>
                                         </div>
-                                        <div class="hash-detail">
-                                            <p class="hash-name">#MusicStuddio</p>
-                                            <p class="hash-follow">25k Followers</p>
-                                            <a href="#" class="btn-new-1">Follow</a>
+                                        <div class="bus-list-right">
+                                            <a href="#" class="btn-new-1">Following</a>
                                         </div>
                                     </div>
                                 </li>
@@ -802,8 +836,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="right-add">
-                    123
+                <div class="right-section right-fixed-cus">
+                    <div class="right-add-box">
+                        <img src="img/add.jpg">
+                    </div>
                 </div>
             </div>
         </div>
