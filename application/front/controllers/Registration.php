@@ -213,7 +213,7 @@ class Registration extends CI_Controller {
                         $msg = "";
                         $msg .= '<table cellpadding="0" cellspacing="0">
                                     <tr>                                
-                                        <td>
+                                        <td class="reg-user-pad-cus">
                                             <div class="user-content">
                                                 <p>
                                                     <b>Hi '.ucwords($first_name). ' ' . ucwords($last_name). ',</b> please verify your email address.
@@ -295,7 +295,7 @@ class Registration extends CI_Controller {
             $msg = "";
             $msg .= '<table width="100%" cellpadding="0" cellspacing="0">
                         <tr>                                
-                            <td style="padding:5px;">
+                            <td class="reg-user-pad-cus">
                                 <p><b>Hi '.ucwords($fname). ' ' . ucwords($lname). ',</b> please verify your email address.</p>
                                 <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
                             </td>
@@ -718,7 +718,7 @@ class Registration extends CI_Controller {
                     $msg = "";
                     $msg .= '<table cellpadding="0" cellspacing="0">
                                 <tr>                                
-                                    <td>
+                                    <td class="reg-user-pad-cus">
                                         <div class="user-content">
                                             <p>
                                                 <b>Hi '.ucwords($first_name). ' ' . ucwords($last_name). ',</b> please verify your email address.

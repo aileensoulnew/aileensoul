@@ -878,12 +878,12 @@ class Searchelastic extends MY_Controller {
                                 'bool' =>
                                 [
                                     'must' =>
-                                    [
-                                        'query_string' =>
+                                    [ 
+                                        'multi_match' =>
                                         [
-                                            'fields'=>['first_name', 'last_name', 'title_name', 'degree_name'],
-                                            'query'=>'*'.$searchKeyword.'*',
-                                            'analyzer'=>'standard'
+                                            'fields'=>['fullname.normalize', 'title_name.normalize', 'degree_name.normalize'],
+                                            'query'=> strtolower($searchKeyword),
+                                            // 'analyzer'=>'standard'
                                         ],
                                     ],//must end
                                     'must_not' =>
@@ -952,6 +952,7 @@ class Searchelastic extends MY_Controller {
         $searchData = array();
         $search_data = $query['hits'];
         $searchData['people_count'] = $search_data['total'];
+        // echo $search_data['total'];exit();
         $searchProfileData = $search_data['hits'];
         if($search_data['total'] < 1)
         {        
@@ -970,7 +971,7 @@ class Searchelastic extends MY_Controller {
                                     [
                                         'query_string' =>
                                         [
-                                            'fields'=>['first_name', 'last_name', 'title_name', 'degree_name'],
+                                            'fields'=>['fullname', 'title_name', 'degree_name'],
                                             'query'=>'*'.$searchKeyword.'*',
                                             'analyzer'=>'standard'
                                         ],
@@ -2057,12 +2058,18 @@ class Searchelastic extends MY_Controller {
                                 [
                                     'must' =>
                                     [
+                                        'multi_match' =>
+                                        [
+                                            'fields'=>['fullname.normalize', 'title_name.normalize', 'degree_name.normalize'],
+                                            'query'=> strtolower($searchKeyword),
+                                            // 'analyzer'=>'standard'
+                                        ],/*
                                         'query_string' =>
                                         [
                                             'fields'=>['first_name', 'last_name', 'title_name', 'degree_name'],
                                             'query'=>'*'.$searchKeyword.'*',
                                             'analyzer'=>'standard'
-                                        ],                                            
+                                        ],*/                                            
                                     ],//must end
                                     'must_not' =>
                                     [
@@ -2861,12 +2868,18 @@ class Searchelastic extends MY_Controller {
                                 [
                                     'must' =>
                                     [
-                                        'query_string' =>
+                                        'multi_match' =>
+                                        [
+                                            'fields'=>['fullname.normalize', 'title_name.normalize', 'degree_name.normalize'],
+                                            'query'=> strtolower($searchKeyword),
+                                            // 'analyzer'=>'standard'
+                                        ],
+                                        /*'query_string' =>
                                         [
                                             'fields'=>['first_name', 'last_name', 'title_name', 'degree_name'],
                                             'query'=>'*'.$searchKeyword.'*',
                                             'analyzer'=>'standard'
-                                        ],                                            
+                                        ],*/
                                     ],//must end
                                     'must_not' =>
                                     [
@@ -2894,9 +2907,9 @@ class Searchelastic extends MY_Controller {
         {
             foreach ($search_job_title as $key => $value) {                
                 $params['body']['query']['bool']['filter']['bool']['must'][]['multi_match'] = array(
-                'fields'=>array('degree_name','title_name'),
-                'query' => $value->name,
-            );
+                        'fields'=>array('degree_name.normalize','title_name.normalize'),
+                        'query' => $value->name,
+                    );
             }   
         }
         if($search_field != undefined && $search_field != '')
@@ -2921,7 +2934,7 @@ class Searchelastic extends MY_Controller {
         
         $searchData = array();
         $search_data = $query['hits'];
-        $searchData['people_count'] = $search_data['total'];
+        $searchData['people_count'] = $search_data['total'];        
         $searchProfileData = $search_data['hits'];
         if($search_data['total'] < 1)
         {
@@ -2939,7 +2952,7 @@ class Searchelastic extends MY_Controller {
                                         [
                                             'query_string' =>
                                             [
-                                                'fields'=>['first_name', 'last_name', 'title_name', 'degree_name'],
+                                                'fields'=>['fullname', 'title_name', 'degree_name'],
                                                 'query'=>'*'.$searchKeyword.'*',
                                                 'analyzer'=>'standard'
                                             ],                                            
@@ -3978,6 +3991,268 @@ class Searchelastic extends MY_Controller {
         // print_r($params);
         // $responses = $client->bulk($params);
         // print_r($responses);exit();
+        return true;
+    }
+
+    public function mapping_n()
+    {
+        $client = $this->elasticclient;
+        /*$params = [
+            'index' => 'test_normal',
+            'body' => [
+                'settings' => [
+                    'analysis' => [
+                        'normalizer' => [
+                            'l_case' => [
+                                'type' => 'custom',
+                                'filter' => ['lowercase']
+                            ]
+                        ]
+                    ]
+                ],
+                'mappings' => [
+                    'test_normal' => [
+                        'properties' => [
+                            'id' => [
+                                'type' => 'integer',
+                            ],
+                            'first_name' => [
+                                'type' => 'text',
+                                'fields' => [
+                                    'normalize' => [
+                                        'type' => 'keyword',
+                                        'normalizer' => 'l_case'
+                                    ],
+                                    'keyword' => [
+                                      'type' => 'keyword'
+                                    ]
+                                ]
+                            ],
+                            'last_name' => [
+                                'type' => 'text',
+                                'fields' => [
+                                    'normalize' => [
+                                        'type' => 'keyword',
+                                        'normalizer' => 'l_case'
+                                    ],
+                                    'keyword' => [
+                                      'type' => 'keyword'
+                                    ]
+                                ]
+                            ],
+                            'user_gender' => [
+                                'type' => 'text',
+                                'fields' => [
+                                    'normalize' => [
+                                        'type' => 'keyword',
+                                        'normalizer' => 'l_case'
+                                    ],
+                                    'keyword' => [
+                                      'type' => 'keyword'
+                                    ]
+                                ]
+                            ],
+                            'fullname' => [
+                                'type' => 'text',
+                                'fields' => [
+                                    'normalize' => [
+                                        'type' => 'keyword',
+                                        'normalizer' => 'l_case'
+                                    ],
+                                    'keyword' => [
+                                      'type' => 'keyword'
+                                    ]
+                                ]
+                            ],                            
+                        ]
+                    ]
+                ]
+            ]
+        ];*/
+        $params = [
+            'index' => 'aileensoul_search_people',
+            'body' => [
+                'settings' => [
+                    'analysis' => [
+                        'normalizer' => [
+                            'l_case' => [
+                                'type' => 'custom',
+                                'filter' => ['lowercase']
+                            ]
+                        ]
+                    ]
+                ],
+                'mappings' => [
+                    'aileensoul_search_people' => [
+                        "properties"=> [
+                            "city_name"=> [
+                                "type"=> "text",
+                                "fields"=> [
+                                    "normalize"=> [
+                                      "type"=> "keyword",
+                                      "normalizer"=> "l_case"
+                                    ],
+                                    "keyword"=> [
+                                      "type"=> "keyword"
+                                    ]
+                                ]
+                            ],
+                            "degree_name"=> [
+                                "type"=> "text",
+                                "fields"=> [
+                                    "normalize"=> [
+                                      "type"=> "keyword",
+                                      "normalizer"=> "l_case"
+                                    ],
+                                    "keyword"=> [
+                                      "type"=> "keyword"
+                                    ]
+                                ]
+                            ],
+                            "first_name"=> [
+                                "type"=> "text",
+                                "fields"=> [
+                                    "normalize"=> [
+                                        "type"=> "keyword",
+                                        "normalizer"=> "l_case"
+                                    ],
+                                    "keyword"=> [
+                                        "type"=> "keyword"
+                                    ]
+                                ]
+                            ],
+                            "fullname"=> [
+                                "type"=> "text",
+                                "fields"=> [
+                                "normalize"=> [
+                                      "type"=> "keyword",
+                                      "normalizer"=> "l_case"
+                                    ],
+                                    "keyword"=> [
+                                      "type"=> "keyword"
+                                    ]
+                                ]
+                            ],
+                            "last_name"=> [
+                                "type"=> "text",
+                                "fields"=> [
+                                    "normalize"=> [
+                                      "type"=> "keyword",
+                                      "normalizer"=> "l_case"
+                                    ],
+                                    "keyword"=> [
+                                      "type"=> "keyword"
+                                    ]
+                                ]
+                            ],
+                            "profession_city"=> [
+                                "type"=> "text",
+                                "fields"=> [
+                                    "normalize"=> [
+                                      "type"=> "keyword",
+                                      "normalizer"=> "l_case"
+                                    ],
+                                    "keyword"=> [
+                                      "type"=> "keyword"
+                                    ]
+                                ]
+                            ],
+                            "profession_field"=> [
+                                "type"=> "text",
+                                "fields"=> [
+                                    "normalize"=> [
+                                      "type"=> "keyword",
+                                      "normalizer"=> "l_case"
+                                    ],
+                                    "keyword"=> [
+                                      "type"=> "keyword"
+                                    ]
+                                ]
+                            ],
+                            "student_city"=> [
+                                "type"=> "text",
+                                "fields"=> [
+                                    "normalize"=> [
+                                      "type"=> "keyword",
+                                      "normalizer"=> "l_case"
+                                    ],
+                                    "keyword"=> [
+                                      "type"=> "keyword"
+                                    ]
+                                ]
+                            ],
+                            "student_field"=> [
+                                "type"=> "text",
+                                "fields"=> [
+                                    "normalize"=> [
+                                      "type"=> "keyword",
+                                      "normalizer"=> "l_case"
+                                    ],
+                                    "keyword"=> [
+                                      "type"=> "keyword"
+                                    ]
+                                ]
+                            ],
+                            "title_name"=> [
+                                "type"=> "text",
+                                "fields"=> [
+                                    "normalize"=> [
+                                      "type"=> "keyword",
+                                      "normalizer"=> "l_case"
+                                    ],
+                                    "keyword"=> [
+                                      "type"=> "keyword"
+                                    ]
+                                ]
+                            ],
+                            "user_gender"=> [
+                                "type"=> "text"
+                            ],
+                            "user_image"=> [
+                                "type"=> "text"
+                            ],
+                            "user_slug"=> [
+                                "type"=> "text"
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+        // $response = $this->elasticclient->indices()->update($params);
+        $response = $this->elasticclient->indices()->create($params);
+        // $response = $this->elasticclient->indices()->putMapping($params);
+        print_r($response);
+        //$responses = $client->update($params);
+    }
+
+    public function insert_n_data_from_json()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $client = $this->elasticclient;
+
+        // $this->Mapping();exit();
+
+        $str = file_get_contents('assets/ailee_user.json');
+        // echo $str;exit();
+        $result = json_decode($str, true); 
+        echo "<pre>";
+        // print_r($result);exit();
+
+        $params = null;
+        foreach($result as $k=>$row)
+        {
+            $params = ['index' => 'aileensoul_search_people', 'type' => 'aileensoul_search_people', 'id' => $row['user_id'], 'body' => ['first_name' => $row['first_name'], 'last_name' => $row['last_name'], 'user_gender' => $row['user_gender'], 'fullname' => $row['fullname'],'user_slug' => $row['user_slug'], 'user_image' => $row['user_image'], 'title_name' => $row['title_name'], 'degree_name' => $row['degree_name'], 'profession_field' => $row['profession_field'], 'student_field' => $row['student_field'], 'profession_city' => $row['profession_city'], 'student_city' => $row['student_city'], 'university_name' => $row['university_name'], 'city_name' => $row['city_name'],]];
+            $responses = $client->index($params);            
+            // print_r($responses);
+            print_r($params);
+        }
+        // echo "<pre>";
+        // print_r($params);
+        // $responses = $client->bulk($params);
+        exit();
         return true;
     }
 }

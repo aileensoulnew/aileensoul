@@ -20,7 +20,6 @@ else
     <head>
         <title><?php echo $meta_title; ?></title>
         <meta name="description" content="<?php echo $article_data['article_meta_description']; ?>" />
-        <!-- <meta name="robots" content="noindex, nofollow"> -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="canonical" href="<?php echo current_url(); ?>" />

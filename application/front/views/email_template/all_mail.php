@@ -31,6 +31,7 @@
 	.column-bottom table{padding: 15px 10px; }
 	.column-bottom table td{color:#7b7b7b;}
 	.column-bottom a{font-size: 13px; text-decoration: none; color:#5c5c5c;}
+	.reg-user-pad-cus{padding-left: 10px}
 	@media only screen and (max-width: 600px) {
 		div[class="column"] { width: 100% !important; float:left !important; display: none !important;}
 		div[class="column-right"] { width: 100% !important; float:left !important; padding-top: 15px;}		
