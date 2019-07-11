@@ -1117,7 +1117,7 @@ a:focus{outline:none;}
 	.custom-landscape header .logo svg{margin-top:3px;}
 	.logo-size{font-size:28px;}
 	.detail-job-no-login .logo-size{font-size:28px;}
-	header .logo svg{width:140px;}
+	header .logo svg{width:160px;}
 	.sub-header{top:48px;}
 	.sub-menu li.dropdown.open::before{width:14px; height:7px; top:25px;}
 	

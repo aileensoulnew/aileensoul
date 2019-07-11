@@ -562,6 +562,8 @@
                 </div>
             </div>
         </div>
+        <div class="hash-hdr-move">
+        </div>
 
         <div class="main-section op-main-page">
 
@@ -637,17 +639,17 @@
                 </div>
 
                 <div class="middle-section">
-                    <div class="hash-middle-fix">
+                    <div class="hash-middle-fix" id="hash-hdr-move">
                         <div class="box-border">
                            <div class="hash-detail-top table-responsive content">
                                 <table class="table">
                                     <tr><td class="active"><a href="#">Top</a></td>
                                     <td><a href="#">Recent</a></td>
-                                    <td><a href="#">Opportunitis</a></td>
-                                    <td><a href="#">Article</a></td>
-                                    <td><a href="#">Question</a></td>
+                                    <td><a href="#">Opportunities</a></td>
+                                    <td><a href="#">Articles</a></td>
+                                    <td><a href="#">Questions</a></td>
                                     <td><a href="#">People</a></td>
-                                    <td><a href="#">Business</a></td></tr>
+                                    <td><a href="#">Businesses</a></td></tr>
                                 </table>
     					   </div>
                         </div>
@@ -1491,6 +1493,13 @@
 				$("#edit-profile-move").appendTo($(".edit-custom-move"));
 			}
 		});
+        $(document).ready(function () {
+            if (screen.width <= 991) {
+                $("#hash-hdr-move").appendTo($(".hash-hdr-move"));
+                
+            }
+            
+        });
 		$(document).ready(function() {
 		  $("#your-name").attr("placeholder", "Your Name");  
 		});
