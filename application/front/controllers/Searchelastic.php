@@ -873,74 +873,63 @@ class Searchelastic extends MY_Controller {
             'from'  => 0,
             'size'  => 5,
             'body'  => [
-                            'query' =>
-                            [    
-                                'bool' =>
-                                [
-                                    'must' =>
-                                    [ 
-                                        'multi_match' =>
-                                        [
-                                            'fields'=>['fullname.normalize', 'title_name.normalize', 'degree_name.normalize'],
-                                            'query'=> strtolower($searchKeyword),
-                                            // 'analyzer'=>'standard'
-                                        ],
-                                    ],//must end
-                                    'must_not' =>
-                                    [
-                                        [
-                                            'match' =>
-                                            [
-                                                'id' => $user_id
+                            "query" =>
+                            [
+                                "bool" => [
+                                    "must" => [
+                                        "dis_max"=> [
+                                            "tie_breaker" => 0.7,
+                                            "boost" => 1.2,
+                                            "queries"=> [
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> strtolower($searchKeyword),
+                                                        "fields"=> ["fullname.normalize", "title_name.normalize", "degree_name.normalize"]
+                                                    ]
+                                                ],
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> "*".strtolower($searchKeyword)."*",
+                                                        "fields"=> ["fullname", "title_name", "degree_name"]
+                                                    ]
+                                                ]
                                             ]
-                                        ]
-                                    ],//must not end
-                                    /*'filter' =>
-                                    [
-                                        'term' =>
-                                        [
-                                            'profession_city' => '783',
-                                            // ['profession_city' => '3683'],
-                                        ],
-                                    ]//Filter end*/
-                                    /*"should" => [
-                                        [
-                                            "match_phrase"=>
-                                            [
-                                                "profession_city"=> "3683"
-                                            ]
-                                        ],
-                                        [
-                                            "match_phrase"=>
-                                            [
-                                                "profession_city" => "783"
-                                            ]
-                                        ],                                         
-                                    ],*/
-                                ]//bool end                                
-                            ]//query end                            
+                                        ]//dis_max end
+                                    ]//must end
+                                ]//bool end
+                            ]//query end
                         ],//body end
         ];
         if(!empty($search_city))
         {            
             foreach ($search_city as $key => $value) {            
-                $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['city_name'] = $value->city_name;
+                $params['body']['query']['bool']['filter']['bool']['must'][] = array('wildcard' => array('city_name' => "*".strtolower($value->city_name)."*",
+                ));
+                // $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['city_name'] = $value->city_name;
             }
         }
         if($search_field != undefined && $search_field != '')
         {
-            $params['body']['query']['bool']['filter']['bool']['must'][]['multi_match'] = array(
+            $params['body']['query']['bool']['filter']['bool']['must'][] = array('multi_match' => array(
                 'fields'=>array('profession_field.keyword','student_field.keyword'),
                 'query' => $search_field,
-            );            
+            ));
+            /*$params['body']['query']['bool']['filter']['bool']['must'][]['multi_match'] = array(
+                'fields'=>array('profession_field.keyword','student_field.keyword'),
+                'query' => $search_field,
+            );*/
         }
         if(!empty($search_job_title))
         {
             foreach ($search_job_title as $key => $value) {
-                $params['body']['query']['bool']['filter']['bool']['must'][]['multi_match'] = array(
+                $params['body']['query']['bool']['filter']['bool']['must'][] = array('multi_match' => array(
                     'fields'=>array('degree_name','title_name'),
                     'query' => $value->name,
-                );
+                ));
+                /*$params['body']['query']['bool']['filter']['bool']['must'][]['multi_match'] = array(
+                    'fields'=>array('degree_name','title_name'),
+                    'query' => $value->name,
+                );*/
             }
         }
         // print_r($params['body']['query']['bool']);exit();
@@ -954,70 +943,7 @@ class Searchelastic extends MY_Controller {
         $searchData['people_count'] = $search_data['total'];
         // echo $search_data['total'];exit();
         $searchProfileData = $search_data['hits'];
-        if($search_data['total'] < 1)
-        {        
-            $params = array();
-            $params = [
-                'index' => 'aileensoul_search_people', 
-                'type'  => 'aileensoul_search_people',
-                'from'  => 0,
-                'size'  => 5,
-                'body'  => [
-                            'query' =>
-                            [    
-                                'bool' =>
-                                [
-                                    'must' =>
-                                    [
-                                        'query_string' =>
-                                        [
-                                            'fields'=>['fullname', 'title_name', 'degree_name'],
-                                            'query'=>'*'.$searchKeyword.'*',
-                                            'analyzer'=>'standard'
-                                        ],
-                                    ],//must end
-                                    'must_not' =>
-                                    [
-                                        [
-                                            'match' =>
-                                            [
-                                                'id' => $user_id
-                                            ]
-                                        ]
-                                    ],//must not end                                    
-                                ]//bool end                                
-                            ]//query end                            
-                        ],//body end
-            ];
-            if(!empty($search_city))
-            {            
-                foreach ($search_city as $key => $value) {            
-                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['city_name'] = $value->city_name;
-                }
-            }
-            if($search_field != undefined && $search_field != '')
-            {
-                $params['body']['query']['bool']['filter']['bool']['should'][]['multi_match'] = array(
-                    'fields'=>array('profession_field.keyword','student_field.keyword'),
-                    'query' => $search_field,
-                );            
-            }
-            if(!empty($search_job_title))
-            {
-                foreach ($search_job_title as $key => $value) {
-                    $params['body']['query']['bool']['filter']['bool']['should'][]['multi_match'] = array(
-                        'fields'=>array('degree_name','title_name'),
-                        'query' => "*".$value->name."*",
-                    );
-                }
-            }
-            // print_r($params);exit();
-            $query = $client->search($params);
-
-            $search_data = $query['hits'];
-            $searchData['people_count'] = $search_data['total'];
-            $searchProfileData = $search_data['hits'];
-        }
+        
         $searchProfileDataMain = array();
 
         foreach ($searchProfileData as $key => $value) {
@@ -2052,59 +1978,64 @@ class Searchelastic extends MY_Controller {
             'from'  => 0,
             'size'  => 10,
             'body'  => [
-                            'query' =>
-                            [    
-                                'bool' =>
-                                [
-                                    'must' =>
-                                    [
-                                        'multi_match' =>
-                                        [
-                                            'fields'=>['fullname.normalize', 'title_name.normalize', 'degree_name.normalize'],
-                                            'query'=> strtolower($searchKeyword),
-                                            // 'analyzer'=>'standard'
-                                        ],/*
-                                        'query_string' =>
-                                        [
-                                            'fields'=>['first_name', 'last_name', 'title_name', 'degree_name'],
-                                            'query'=>'*'.$searchKeyword.'*',
-                                            'analyzer'=>'standard'
-                                        ],*/                                            
-                                    ],//must end
-                                    'must_not' =>
-                                    [
-                                        [
-                                            'match' =>
-                                            [
-                                                'id' => $user_id
+                            "query" =>
+                            [
+                                "bool" => [
+                                    "must" => [
+                                        "dis_max"=> [
+                                            "tie_breaker" => 0.7,
+                                            "boost" => 1.2,
+                                            "queries"=> [
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> strtolower($searchKeyword),
+                                                        "fields"=> ["fullname.normalize", "title_name.normalize", "degree_name.normalize"]
+                                                    ]
+                                                ],
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> "*".strtolower($searchKeyword)."*",
+                                                        "fields"=> ["fullname", "title_name", "degree_name"]
+                                                    ]
+                                                ]
                                             ]
-                                        ]
-                                    ]//must not end
-                                ]//bool end                                
-                            ]//query end                            
+                                        ]//dis_max end
+                                    ]//must end
+                                ]//bool end
+                            ]//query end
                         ],//body end
         ];
 
         if(!empty($search_city))
         {            
-            foreach ($search_city as $key => $value) {            
-                $params_people['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['city_name'] = $value->city_name;
+            foreach ($search_city as $key => $value) {
+                $params_people['body']['query']['bool']['filter']['bool']['must'][] = array('wildcard' => array('city_name' => "*".strtolower($value->city_name)."*",
+                ));
+                // $params_people['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['city_name'] = $value->city_name;
             }
         }
         if($search_field != undefined && $search_field != '')
-        {            
-            $params_people['body']['query']['bool']['filter']['bool']['must'][]['multi_match'] = array(
+        {
+            $params_people['body']['query']['bool']['filter']['bool']['must'][] = array('multi_match' => array(
+                    'fields'=>array('profession_field.keyword','student_field.keyword'),
+                    'query' => $search_field,
+                ));
+            /*$params_people['body']['query']['bool']['filter']['bool']['must'][]['multi_match'] = array(
                 'fields'=>array('profession_field.keyword','student_field.keyword'),
                 'query' => $search_field,
-            );
+            );*/
         }
         if(!empty($search_job_title))
         {
             foreach ($search_job_title as $key => $value) {
-                $params_people['body']['query']['bool']['filter']['bool']['must'][]['multi_match'] = array(
+                $params_people['body']['query']['bool']['filter']['bool']['must'][] = array('multi_match' => array(
+                        'fields'=>array('degree_name','title_name'),
+                        'query' => $value->name,
+                    ));
+                /*$params_people['body']['query']['bool']['filter']['bool']['must'][]['multi_match'] = array(
                     'fields'=>array('degree_name','title_name'),
                     'query' => $value->name,
-                );
+                );*/
             }   
         }
 
@@ -2112,70 +2043,7 @@ class Searchelastic extends MY_Controller {
         // print_r($params_people['body']['query']['bool']);exit();
         $search_data_people = $query_people['hits'];
         $return_arr['people_count'] = $search_data_people['total'];
-        if($search_data_people['total'] < 1)
-        {
-            $params_people = [
-                'index' => 'aileensoul_search_people', 
-                'type'  => 'aileensoul_search_people',
-                'from'  => 0,
-                'size'  => 10,
-                'body'  => [
-                                'query' =>
-                                [    
-                                    'bool' =>
-                                    [
-                                        'must' =>
-                                        [
-                                            'query_string' =>
-                                            [
-                                                'fields'=>['first_name', 'last_name', 'title_name', 'degree_name'],
-                                                'query'=>'*'.$searchKeyword.'*',
-                                                'analyzer'=>'standard'
-                                            ],                                            
-                                        ],//must end
-                                        'must_not' =>
-                                        [
-                                            [
-                                                'match' =>
-                                                [
-                                                    'id' => $user_id
-                                                ]
-                                            ]
-                                        ]//must not end
-                                    ]//bool end                                
-                                ]//query end                            
-                            ],//body end
-            ];
-
-            if(!empty($search_city))
-            {            
-                foreach ($search_city as $key => $value) {            
-                    $params_people['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['city_name'] = $value->city_name;
-                }
-            }
-            if($search_field != undefined && $search_field != '')
-            {            
-                $params_people['body']['query']['bool']['filter']['bool']['should'][]['multi_match'] = array(
-                    'fields'=>array('profession_field.keyword','student_field.keyword'),
-                    'query' => $search_field,
-                );
-            }
-            if(!empty($search_job_title))
-            {
-                foreach ($search_job_title as $key => $value) {
-                    $params_people['body']['query']['bool']['filter']['bool']['should'][]['multi_match'] = array(
-                        'fields'=>array('degree_name','title_name'),
-                        'query' => $value->name,
-                    );
-                }   
-            }
-
-            $query_people = $client->search($params_people);
-            // print_r($params_people['body']['query']['bool']);exit();
-            $search_data_people = $query_people['hits'];
-            $return_arr['people_count'] = $search_data_people['total'];
-        }
-
+        
         $params_buss = [
             'index' => 'aileensoul_search_business', 
             'type'  => 'aileensoul_search_business',
@@ -2862,147 +2730,82 @@ class Searchelastic extends MY_Controller {
             'from'  => $start,
             'size'  => $limit,
             'body'  => [
-                            'query' =>
+                            "query" =>
                             [
-                                'bool' =>
-                                [
-                                    'must' =>
-                                    [
-                                        'multi_match' =>
-                                        [
-                                            'fields'=>['fullname.normalize', 'title_name.normalize', 'degree_name.normalize'],
-                                            'query'=> strtolower($searchKeyword),
-                                            // 'analyzer'=>'standard'
-                                        ],
-                                        /*'query_string' =>
-                                        [
-                                            'fields'=>['first_name', 'last_name', 'title_name', 'degree_name'],
-                                            'query'=>'*'.$searchKeyword.'*',
-                                            'analyzer'=>'standard'
-                                        ],*/
-                                    ],//must end
-                                    'must_not' =>
-                                    [
-                                        [
-                                            'match' =>
-                                            [
-                                                'id' => $user_id
+                                "bool" => [
+                                    "must" => [
+                                        "dis_max"=> [
+                                            "tie_breaker" => 0.7,
+                                            "boost" => 1.2,
+                                            "queries"=> [
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> strtolower($searchKeyword),
+                                                        "fields"=> ["fullname.normalize", "title_name.normalize", "degree_name.normalize"]
+                                                    ]
+                                                ],
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> "*".strtolower($searchKeyword)."*",
+                                                        "fields"=> ["fullname", "title_name", "degree_name"]
+                                                    ]
+                                                ]
                                             ]
-                                        ]
-                                    ]//must not end
-                                ]//bool end                                
-                            ],//query end
-                            /*'sort' =>
-                            [
-                                'id' =>
-                                [
-                                    "order" => "desc"
-                                ],
-                            ],*/
+                                        ]//dis_max end
+                                    ]//must end
+                                ]//bool end
+                            ]//query end
 
                         ],//body end
         ];
         
         if(!empty($search_job_title))
         {
-            foreach ($search_job_title as $key => $value) {                
-                $params['body']['query']['bool']['filter']['bool']['must'][]['multi_match'] = array(
+            foreach ($search_job_title as $key => $value) {
+                $params['body']['query']['bool']['filter']['bool']['must'][] = array('multi_match' => array(
+                    'fields'=>array('degree_name','title_name'),
+                    'query' => $value->name,
+                ));
+                /*$params['body']['query']['bool']['filter']['bool']['must'][]['multi_match'] = array(
                         'fields'=>array('degree_name.normalize','title_name.normalize'),
                         'query' => $value->name,
-                    );
+                    );*/
             }   
         }
         if($search_field != undefined && $search_field != '')
         {
-            $params['body']['query']['bool']['filter']['bool']['must'][]['multi_match'] = array(
+            $params['body']['query']['bool']['filter']['bool']['must'][] = array('multi_match' => array(
                 'fields'=>array('profession_field.keyword','student_field.keyword'),
                 'query' => $search_field,
-            );
+            ));
+            /*$params['body']['query']['bool']['filter']['bool']['must'][]['multi_match'] = array(
+                'fields'=>array('profession_field.keyword','student_field.keyword'),
+                'query' => $search_field,
+            );*/
         }
         if(!empty($search_city))
         {            
-            foreach ($search_city as $key => $value) {            
-                $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['city_name'] = $value->city_name;
+            foreach ($search_city as $key => $value) {
+                $params['body']['query']['bool']['filter']['bool']['must'][] = array('wildcard' => array('city_name' => "*".strtolower($value->city_name)."*",
+                ));
+                // $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['city_name'] = $value->city_name;
             }
         }
         if($search_gender != undefined && $search_gender != '')
         {
-            $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['user_gender'] = $search_gender;
+            $params['body']['query']['bool']['filter']['bool']['must'][] = array('match_phrase' => array('user_gender' => $search_gender,
+            ));
+            //$params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['user_gender'] = $search_gender;
         }
         // print_r($params['body']['query']['bool']);exit();
+        // print_r($params);exit();
         $query = $client->search($params);        
         
         $searchData = array();
         $search_data = $query['hits'];
         $searchData['people_count'] = $search_data['total'];        
         $searchProfileData = $search_data['hits'];
-        if($search_data['total'] < 1)
-        {
-            $params = [
-                'index' => 'aileensoul_search_people', 
-                'type'  => 'aileensoul_search_people',
-                'from'  => $start,
-                'size'  => $limit,
-                'body'  => [
-                                'query' =>
-                                [
-                                    'bool' =>
-                                    [
-                                        'must' =>
-                                        [
-                                            'query_string' =>
-                                            [
-                                                'fields'=>['fullname', 'title_name', 'degree_name'],
-                                                'query'=>'*'.$searchKeyword.'*',
-                                                'analyzer'=>'standard'
-                                            ],                                            
-                                        ],//must end
-                                        'must_not' =>
-                                        [
-                                            [
-                                                'match' =>
-                                                [
-                                                    'id' => $user_id
-                                                ]
-                                            ]
-                                        ]//must not end
-                                    ]//bool end
-                                ],//query end
-                            ],//body end
-            ];
-            
-            if(!empty($search_job_title))
-            {
-                foreach ($search_job_title as $key => $value) {                
-                    $params['body']['query']['bool']['filter']['bool']['should'][]['multi_match'] = array(
-                    'fields'=>array('degree_name','title_name'),
-                    'query' => $value->name,
-                );
-                }   
-            }
-            if($search_field != undefined && $search_field != '')
-            {
-                $params['body']['query']['bool']['filter']['bool']['should'][]['multi_match'] = array(
-                    'fields'=>array('profession_field.keyword','student_field.keyword'),
-                    'query' => $search_field,
-                );
-            }
-            if(!empty($search_city))
-            {            
-                foreach ($search_city as $key => $value) {            
-                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['city_name'] = $value->city_name;
-                }
-            }
-            if($search_gender != undefined && $search_gender != '')
-            {
-                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['user_gender'] = $search_gender;
-            }
-            // print_r($params['body']['query']['bool']);exit();
-            $query = $client->search($params);
-            $search_data = $query['hits'];
-            $searchData['people_count'] = $search_data['total'];
-            $searchProfileData = $search_data['hits'];
-        }
+       
         $searchProfileDataMain = array();
 
         foreach ($searchProfileData as $key => $value) {
@@ -4238,8 +4041,8 @@ class Searchelastic extends MY_Controller {
         $str = file_get_contents('assets/ailee_user.json');
         // echo $str;exit();
         $result = json_decode($str, true); 
-        echo "<pre>";
-        // print_r($result);exit();
+        echo "<pre>111";
+        print_r($result);exit();
 
         $params = null;
         foreach($result as $k=>$row)
@@ -4254,5 +4057,37 @@ class Searchelastic extends MY_Controller {
         // $responses = $client->bulk($params);
         exit();
         return true;
+    }
+
+    public function insert_n_opportunity_data()
+    {
+        $client = $this->elasticclient;
+
+        // $this->Mapping();exit();
+
+        $sql = "SELECT up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type,GROUP_CONCAT(DISTINCT(jt.name)) AS opportunity_for,opportunity_for AS opportunity_for_id,GROUP_CONCAT(DISTINCT(c.city_name)) AS location,location AS location_id,uo.opportunity,it.industry_name AS field, uo.other_field, uo.opptitle ,uo.oppslug, uo.company_name,IF(uo.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) AS hashtag,uo.hashtag AS hashtag_id
+            FROM ailee_user_opportunity uo
+            LEFT JOIN ailee_user_post up ON up.id = uo.post_id
+            LEFT JOIN ailee_user_login ul ON ul.user_id = up.user_id
+            LEFT JOIN ailee_industry_type it ON it.industry_id = uo.field
+            LEFT OUTER JOIN ailee_job_title jt ON FIND_IN_SET(jt.title_id, uo.opportunity_for) > 0
+            LEFT OUTER JOIN ailee_cities c ON FIND_IN_SET(c.city_id, uo.location) > 0
+            LEFT OUTER JOIN ailee_hashtag ht ON FIND_IN_SET(ht.id, uo.hashtag) > 0
+            WHERE ul.status = '1' AND ul.is_delete = '0' AND up.status = 'publish' AND up.is_delete = '0' 
+            GROUP BY up.id,uo.opportunity_for, uo.location,uo.hashtag ORDER BY id DESC";
+        $query = $this->db->query($sql);
+        $result = $query->result_array();        
+        $params = null;
+        foreach($result as $k=>$row)
+        {
+            print_r($row);
+            $params = ['index' => 'aileensoul_search_opportunity', 'type' => 'aileensoul_search_opportunity', 'id' => $row['id'], 'body' => ['user_id' => $row['user_id'],'post_for' => $row['post_for'],'created_date' => $row['created_date'],'post_id' => $row['post_id'], 'user_type' => $row['user_type'], 'opportunity_for' => $row['opportunity_for'], 'opportunity_for_id' => $row['opportunity_for_id'], 'location' => $row['location'], 'location_id' => $row['location_id'], 'opportunity' => $row['opportunity'], 'field' => $row['field'], 'other_field' => $row['other_field'], 'opptitle' => $row['opptitle'], 'oppslug' => $row['oppslug'], 'company_name' => $row['company_name'], 'hashtag' => $row['hashtag'],'hashtag_id' => $row['hashtag_id'],]];
+            $responses = $client->index($params);
+        }
+        echo "<pre>";
+        print_r($params);
+        // $responses = $client->bulk($params);
+        // print_r($responses);exit();
+        // return true;
     }
 }

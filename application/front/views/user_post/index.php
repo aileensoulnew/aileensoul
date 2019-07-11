@@ -138,7 +138,7 @@
                             <?php $this->load->view('right_add_box'); ?>
                             
                             <div class="box-border">
-                                <a href="<?php echo base_url('monetize-aileensoul-account'); ?>">
+                                <a href="<?php echo base_url('monetize-aileensoul-account'); ?>" target="_self">
                                     <img src="<?php echo base_url('assets/n-images/earn-with-ai.jpg') ?>">
                                 </a>
                             </div>
@@ -225,7 +225,7 @@
                             
                             <div id="business-move" class="follow-box">
                                 <div class="all-user-list">
-                                    <h4><a href="<?php echo base_url('company/userlist'); ?>" class="">All Businesses</a></h4>                
+                                    <h4><a href="<?php echo base_url('company/userlist'); ?>" class="" target="_self">All Businesses</a></h4>                
                                     <data-owl-carousel class="owl-carousel owl-theme" data-options="">
                                         <div owl-carousel-item="" ng-repeat="contact in business_suggetion" class="item">
                                             <div class="item" id="item-{{contact.user_id}}">
