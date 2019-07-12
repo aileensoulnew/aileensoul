@@ -842,8 +842,6 @@ class Searchelastic extends MY_Controller {
         $search_question = $this->search_question();
         $search_article = $this->search_article();
 
-        // print_r($search_opp);
-        // print_r($search_post);exit();
         echo json_encode(array_merge($search_people,$search_business,$search_opp,$search_post,$search_question,$search_article));
     }
 
@@ -961,12 +959,6 @@ class Searchelastic extends MY_Controller {
                 $state_id = $this->data_model->getStateIdByCityId($value['_source']['student_city']);
                 $searchProfileDataMain[$key]['country'] = $this->data_model->getCountryByStateId($state_id);
             }
-            /*$contact_detail = $this->db->select('id,from_id,to_id,status,not_read')->from('user_contact')->where('(from_id =' . $value['_id'] . ' AND to_id =' . $user_id . ') OR (to_id =' . $value['_id'] . ' AND from_id =' . $user_id . ')')->get()->row_array();
-            $searchProfileDataMain[$key]['contact_from_id'] = $contact_detail['from_id'];
-            $searchProfileDataMain[$key]['contact_to_id'] = $contact_detail['to_id'];
-            $searchProfileDataMain[$key]['contact_status'] = $contact_detail['status'];
-            $searchProfileDataMain[$key]['contact_not_read'] = $contact_detail['not_read'];
-            $searchProfileDataMain[$key]['contact_id'] = $contact_detail['id'];*/
 
             $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "1"')->get()->row_array();
 
@@ -1087,42 +1079,45 @@ class Searchelastic extends MY_Controller {
             'body'  => [
                             'query' =>
                             [
-                                'bool' =>
-                                [
-                                    'must' =>
-                                    [
-                                        'query_string' =>
-                                        [
-                                            'fields'=>['opptitle','opportunity_for','hashtag'],
-                                            'query'=>'*'.$searchKeyword.'*',
-                                            'analyzer'=>'standard'
-                                        ],                                            
-                                    ],//must end
-                                    'must_not' =>
-                                    [
-                                        [
-                                            'match' =>
-                                            [
-                                                'user_id' => $user_id
+                                "bool" => [
+                                    "must" => [
+                                        "dis_max"=> [
+                                            "tie_breaker" => 0.7,
+                                            "boost" => 1.2,
+                                            "queries"=> [
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> strtolower($searchKeyword),
+                                                        "fields"=> ["opptitle.normalize", "opportunity_for.normalize", "hashtag"]
+                                                    ]
+                                                ],
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> "*".strtolower($searchKeyword)."*",
+                                                        "fields"=> ["opptitle", "opportunity_for", "hashtag"]
+                                                    ]
+                                                ]
                                             ]
-                                        ]
-                                    ]//must not end
+                                        ]//dis_max end
+                                    ]//must end
                                 ]//bool end
-                            ],//query end
-                            'sort' =>
+                            ]//query end
+                            /*'sort' =>
                             [
                                 'created_date.keyword' =>
                                 [
                                     "order" => "desc"
                                 ],
-                            ],
+                            ],*/
                         ],//body end
         ];
 
         if(!empty($search_city))
         {            
             foreach ($search_city as $key => $value) {            
-                $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['location'] = $value->city_name;
+                // $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['location'] = $value->city_name;
+                $params['body']['query']['bool']['filter']['bool']['must'][] = array('wildcard' => array('location' => "*".strtolower($value->city_name)."*",
+                ));
             }
         }
         if($search_field != undefined && $search_field != '')
@@ -1142,74 +1137,7 @@ class Searchelastic extends MY_Controller {
         $search_data = $query['hits'];
         $searchData['opp_count'] = $search_data['total'];
         $searchOpportunityData = $search_data['hits'];
-
-        if($search_data['total'] < 1)
-        {        
-            $params = array();
-            $params = [
-                'index' => 'aileensoul_search_opportunity', 
-                'type'  => 'aileensoul_search_opportunity',
-                'from'  => 0,
-                'size'  => 1,
-                'body'  => [
-                                'query' =>
-                                [
-                                    'bool' =>
-                                    [
-                                        'must' =>
-                                        [
-                                            'query_string' =>
-                                            [
-                                                'fields'=>['opptitle','opportunity_for','hashtag'],
-                                                'query'=>'*'.$searchKeyword.'*',
-                                                'analyzer'=>'standard'
-                                            ],                                            
-                                        ],//must end
-                                        'must_not' =>
-                                        [
-                                            [
-                                                'match' =>
-                                                [
-                                                    'user_id' => $user_id
-                                                ]
-                                            ]
-                                        ]//must not end
-                                    ]//bool end
-                                ],//query end
-                                'sort' =>
-                                [
-                                    'created_date.keyword' =>
-                                    [
-                                        "order" => "desc"
-                                    ],
-                                ],
-                            ],//body end
-            ];
-
-            if(!empty($search_city))
-            {            
-                foreach ($search_city as $key => $value) {            
-                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['location'] = $value->city_name;
-                }
-            }
-            if($search_field != undefined && $search_field != '')
-            {
-                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field.keyword'] = $search_field;//array('match_phrase'=>array('field'=>$search_field));
-            }
-            if(!empty($search_job_title))
-            {
-                foreach ($search_job_title as $key => $value) {            
-                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['opportunity_for'] = $value->name;
-                }   
-            }
-            
-            // print_r($params);exit();
-            $query = $client->search($params);
-
-            $search_data = $query['hits'];
-            $searchData['opp_count'] = $search_data['total'];
-            $searchOpportunityData = $search_data['hits'];
-        }
+        
         $searchOpportunityDataMain = array();        
 
         foreach ($searchOpportunityData as $key => $value) {
@@ -1317,35 +1245,29 @@ class Searchelastic extends MY_Controller {
             'body'  => [
                             'query' =>
                             [
-                                'bool' =>
-                                [
-                                    'must' =>
-                                    [
-                                        'query_string' =>
-                                        [
-                                            'fields'=>['sim_title','hashtag'],
-                                            'query'=>'*'.$searchKeyword.'*',
-                                            'analyzer'=>'standard'
-                                        ],                                            
-                                    ],//must end
-                                    'must_not' =>
-                                    [
-                                        [
-                                            'match' =>
-                                            [
-                                                'user_id' => $user_id
+                                "bool" => [
+                                    "must" => [
+                                        "dis_max"=> [
+                                            "tie_breaker" => 0.7,
+                                            "boost" => 1.2,
+                                            "queries"=> [
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> strtolower($searchKeyword),
+                                                        "fields"=> ["sim_title.normalize","hashtag"]
+                                                    ]
+                                                ],
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> "*".strtolower($searchKeyword)."*",
+                                                        "fields"=> ["sim_title", "hashtag"]
+                                                    ]
+                                                ]
                                             ]
-                                        ]
-                                    ]//must not end
+                                        ]//dis_max end
+                                    ]//must end
                                 ]//bool end
-                            ],//query end
-                            'sort' =>
-                            [
-                                'created_date.keyword' =>
-                                [
-                                    "order" => "desc"
-                                ],
-                            ],
+                            ]//query end                            
                         ],//body end
         ];
 
@@ -1365,64 +1287,6 @@ class Searchelastic extends MY_Controller {
         $searchData['simple_count'] = $search_data['total'];
         $searchSimpleData = $search_data['hits'];
 
-        if($search_data['total'] < 1)
-        {        
-            $params = array();
-            $params = [
-                'index' => 'aileensoul_search_post', 
-                'type'  => 'aileensoul_search_post',
-                'from'  => 0,
-                'size'  => 1,
-                'body'  => [
-                                'query' =>
-                                [
-                                    'bool' =>
-                                    [
-                                        'must' =>
-                                        [
-                                            'query_string' =>
-                                            [
-                                                'fields'=>['sim_title','hashtag'],
-                                                'query'=>'*'.$searchKeyword.'*',
-                                                'analyzer'=>'standard'
-                                            ],                                            
-                                        ],//must end
-                                        'must_not' =>
-                                        [
-                                            [
-                                                'match' =>
-                                                [
-                                                    'user_id' => $user_id
-                                                ]
-                                            ]
-                                        ]//must not end
-                                    ]//bool end
-                                ],//query end
-                                'sort' =>
-                                [
-                                    'created_date.keyword' =>
-                                    [
-                                        "order" => "desc"
-                                    ],
-                                ],
-                            ],//body end
-            ];
-
-            /*if(!empty($search_job_title))
-            {
-                foreach ($search_job_title as $key => $value) {            
-                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['sim_title'] = $value->name;
-                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['hashtag'] = $value->name;
-                }   
-            }*/
-            
-            // print_r($params);exit();
-            $query = $client->search($params);
-
-            $search_data = $query['hits'];
-            $searchData['simple_count'] = $search_data['total'];
-            $searchSimpleData = $search_data['hits'];            
-        }
         $searchSimpleDataMain = array();        
 
         foreach ($searchSimpleData as $key => $value) {
@@ -1525,35 +1389,29 @@ class Searchelastic extends MY_Controller {
             'body'  => [
                             'query' =>
                             [
-                                'bool' =>
-                                [
-                                    'must' =>
-                                    [
-                                        'query_string' =>
-                                        [
-                                            'fields'=>['question','hashtag'],
-                                            'query'=>'*'.$searchKeyword.'*',
-                                            'analyzer'=>'standard'
-                                        ],                                            
-                                    ],//must end
-                                    'must_not' =>
-                                    [
-                                        [
-                                            'match' =>
-                                            [
-                                                'user_id' => $user_id
+                                "bool" => [
+                                    "must" => [
+                                        "dis_max"=> [
+                                            "tie_breaker" => 0.7,
+                                            "boost" => 1.2,
+                                            "queries"=> [
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> strtolower($searchKeyword),
+                                                        "fields"=> ["question.normalize","hashtag"]
+                                                    ]
+                                                ],
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> "*".strtolower($searchKeyword)."*",
+                                                        "fields"=> ["question", "hashtag"]
+                                                    ]
+                                                ]
                                             ]
-                                        ]
-                                    ]//must not end
+                                        ]//dis_max end
+                                    ]//must end
                                 ]//bool end
-                            ],//query end
-                            'sort' =>
-                            [
-                                'created_date.keyword' =>
-                                [
-                                    "order" => "desc"
-                                ],
-                            ],
+                            ]//query end
                         ],//body end
         ];
 
@@ -1564,8 +1422,7 @@ class Searchelastic extends MY_Controller {
 
         if(!empty($search_job_title))
         {
-            foreach ($search_job_title as $key => $value) {            
-                $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['question'] = $value->name;
+            foreach ($search_job_title as $key => $value) {
                 $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['hashtag'] = $value->name;
             }   
         }
@@ -1577,69 +1434,7 @@ class Searchelastic extends MY_Controller {
         $search_data = $query['hits'];
         $searchData['question_count'] = $search_data['total'];
         $searchQuestionData = $search_data['hits'];
-
-        if($search_data['total'] < 1)
-        {        
-            $params = array();            
-            $params = [
-                'index' => 'aileensoul_search_question', 
-                'type'  => 'aileensoul_search_question',
-                'from'  => 0,
-                'size'  => 1,
-                'body'  => [
-                                'query' =>
-                                [
-                                    'bool' =>
-                                    [
-                                        'must' =>
-                                        [
-                                            'query_string' =>
-                                            [
-                                                'fields'=>['question','hashtag'],
-                                                'query'=>'*'.$searchKeyword.'*',
-                                                'analyzer'=>'standard'
-                                            ],                                            
-                                        ],//must end
-                                        'must_not' =>
-                                        [
-                                            [
-                                                'match' =>
-                                                [
-                                                    'user_id' => $user_id
-                                                ]
-                                            ]
-                                        ]//must not end
-                                    ]//bool end
-                                ],//query end
-                                'sort' =>
-                                [
-                                    'created_date.keyword' =>
-                                    [
-                                        "order" => "desc"
-                                    ],
-                                ],
-                            ],//body end
-            ];
-
-            if($search_field != undefined && $search_field != '')
-            {
-                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field'] = $search_field;//array('match_phrase'=>array('profession_field'=>$search_field));
-            }
-
-            if(!empty($search_job_title))
-            {
-                foreach ($search_job_title as $key => $value) {            
-                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['question'] = $value->name;
-                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['hashtag'] = $value->name;
-                }   
-            }
-            // print_r($params);exit();
-            $query = $client->search($params);
-
-            $search_data = $query['hits'];
-            $searchData['question_count'] = $search_data['total'];
-            $searchQuestionData = $search_data['hits'];
-        }
+        
 
         $searchQuestionDataMain = array();        
 
@@ -1749,37 +1544,31 @@ class Searchelastic extends MY_Controller {
             'body'  => [
                             'query' =>
                             [
-                                'bool' =>
-                                [
-                                    'must' =>
-                                    [                                            
-                                        'query_string' =>
-                                        [
-                                            'fields'=>['article_title','hashtag'],
-                                            'query'=>'*'.$searchKeyword.'*',
-                                            'analyzer'=>'standard'
-                                        ],                                            
-                                    ],//must end
-                                    'must_not' =>
-                                    [
-                                        [
-                                            'match' =>
-                                            [
-                                                'user_id' => $user_id
+                                "bool" => [
+                                    "must" => [
+                                        "dis_max"=> [
+                                            "tie_breaker" => 0.7,
+                                            "boost" => 1.2,
+                                            "queries"=> [
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> strtolower($searchKeyword),
+                                                        "fields"=> ["article_title.normalize","hashtag"]
+                                                    ]
+                                                ],
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> "*".strtolower($searchKeyword)."*",
+                                                        "fields"=> ["article_title", "hashtag"]
+                                                    ]
+                                                ]
                                             ]
-                                        ]
-                                    ]//must not end
+                                        ]//dis_max end
+                                    ]//must end
                                 ]//bool end
-                            ],//query end
-                            'sort' =>
-                            [
-                                'created_date.keyword' =>
-                                [
-                                    "order" => "desc"
-                                ],
-                            ],
+                            ]//query end                            
                         ],//body end
-        ];
+            ];
 
 
         if($search_field != undefined && $search_field != '')
@@ -1801,69 +1590,7 @@ class Searchelastic extends MY_Controller {
         $search_data = $query['hits'];
         $searchData['article_count'] = $search_data['total'];
         $searchArticleData = $search_data['hits'];
-
-        if($search_data['total'] < 1)
-        {        
-            $params = array();            
-            $params = [
-                'index' => 'aileensoul_search_article', 
-                'type'  => 'aileensoul_search_article',
-                'from'  => 0,
-                'size'  => 1,
-                'body'  => [
-                                'query' =>
-                                [
-                                    'bool' =>
-                                    [
-                                        'must' =>
-                                        [
-                                            'query_string' =>
-                                            [
-                                                'fields'=>['article_title','hashtag'],
-                                                'query'=>'*'.$searchKeyword.'*',
-                                                'analyzer'=>'standard'
-                                            ],                                            
-                                        ],//must end
-                                        'must_not' =>
-                                        [
-                                            [
-                                                'match' =>
-                                                [
-                                                    'user_id' => $user_id
-                                                ]
-                                            ]
-                                        ]//must not end
-                                    ]//bool end
-                                ],//query end
-                                'sort' =>
-                                [
-                                    'created_date.keyword' =>
-                                    [
-                                        "order" => "desc"
-                                    ],
-                                ],
-                            ],//body end
-            ];
-
-            if($search_field != undefined && $search_field != '')
-            {
-                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field'] = $search_field;
-            }
-
-            /*if(!empty($search_job_title))
-            {
-                foreach ($search_job_title as $key => $value) {            
-                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['question'] = $value->name;
-                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['hashtag'] = $value->name;
-                }   
-            }*/
-            // print_r($params);exit();
-            $query = $client->search($params);
-
-            $search_data = $query['hits'];
-            $searchData['article_count'] = $search_data['total'];
-            $searchArticleData = $search_data['hits'];
-        }
+        
         $searchArticleDataMain = array();        
 
         foreach ($searchArticleData as $key => $value) {
@@ -2090,26 +1817,27 @@ class Searchelastic extends MY_Controller {
             'body'  => [
                             'query' =>
                             [
-                                'bool' =>
-                                [
-                                    'must' =>
-                                    [
-                                        'query_string' =>
-                                        [
-                                            'fields'=>['opptitle','opportunity_for','hashtag'],
-                                            'query'=>'*'.$searchKeyword.'*',
-                                            'analyzer'=>'standard'
-                                        ],                                            
-                                    ],//must end
-                                    'must_not' =>
-                                    [
-                                        [
-                                            'match' =>
-                                            [
-                                                'user_id' => $user_id
+                                "bool" => [
+                                    "must" => [
+                                        "dis_max"=> [
+                                            "tie_breaker" => 0.7,
+                                            "boost" => 1.2,
+                                            "queries"=> [
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> strtolower($searchKeyword),
+                                                        "fields"=> ["opptitle.normalize", "opportunity_for.normalize", "hashtag"]
+                                                    ]
+                                                ],
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> "*".strtolower($searchKeyword)."*",
+                                                        "fields"=> ["opptitle", "opportunity_for", "hashtag"]
+                                                    ]
+                                                ]
                                             ]
-                                        ]
-                                    ]//must not end
+                                        ]//dis_max end
+                                    ]//must end
                                 ]//bool end
                             ]//query end                            
                         ],//body end
@@ -2117,12 +1845,14 @@ class Searchelastic extends MY_Controller {
         if(!empty($search_city))
         {            
             foreach ($search_city as $key => $value) {            
-                $params_opp['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['location'] = $value->city_name;
+                $params_opp['body']['query']['bool']['filter']['bool']['must'][] = array('wildcard' => array('location' => "*".strtolower($value->city_name)."*",
+                ));
             }
         }
         if($search_field != undefined && $search_field != '')
         {
-            $params_opp['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['field.keyword'] = $search_field;//array('match_phrase'=>array('field'=>$search_field));
+            $params_opp['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['field.keyword'] = $search_field;
+            //array('match_phrase'=>array('field'=>$search_field));
         }
         if(!empty($search_job_title))
         {
@@ -2132,62 +1862,7 @@ class Searchelastic extends MY_Controller {
         }
         $query_opp = $client->search($params_opp); 
         $search_data_opp = $query_opp['hits'];
-        $return_arr['opp_count'] = $search_data_opp['total'];
-        if($search_data_opp['total'] < 1)
-        {
-            $params_opp = array();
-            $params_opp = [
-                'index' => 'aileensoul_search_opportunity', 
-                'type'  => 'aileensoul_search_opportunity',
-                'from'  => 0,
-                'size'  => 1,
-                'body'  => [
-                                'query' =>
-                                [
-                                    'bool' =>
-                                    [
-                                        'must' =>
-                                        [
-                                            'query_string' =>
-                                            [
-                                                'fields'=>['opptitle','opportunity_for','hashtag'],
-                                                'query'=>'*'.$searchKeyword.'*',
-                                                'analyzer'=>'standard'
-                                            ],                                            
-                                        ],//must end
-                                        'must_not' =>
-                                        [
-                                            [
-                                                'match' =>
-                                                [
-                                                    'user_id' => $user_id
-                                                ]
-                                            ]
-                                        ]//must not end
-                                    ]//bool end
-                                ]//query end                            
-                            ],//body end
-            ];
-            if(!empty($search_city))
-            {            
-                foreach ($search_city as $key => $value) {            
-                    $params_opp['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['location'] = $value->city_name;
-                }
-            }
-            if($search_field != undefined && $search_field != '')
-            {
-                $params_opp['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field.keyword'] = $search_field;//array('match_phrase'=>array('field'=>$search_field));
-            }
-            if(!empty($search_job_title))
-            {
-                foreach ($search_job_title as $key => $value) {            
-                    $params_opp['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['opportunity_for'] = $value->name;
-                }   
-            }
-            $query_opp = $client->search($params_opp); 
-            $search_data_opp = $query_opp['hits'];
-            $return_arr['opp_count'] = $search_data_opp['total'];
-        }
+        $return_arr['opp_count'] = $search_data_opp['total'];        
         //Opportunity End
 
         //Post Start
@@ -2199,26 +1874,27 @@ class Searchelastic extends MY_Controller {
             'body'  => [
                             'query' =>
                             [
-                                'bool' =>
-                                [
-                                    'must' =>
-                                    [
-                                        'query_string' =>
-                                        [
-                                            'fields'=>['sim_title','hashtag'],
-                                            'query'=>'*'.$searchKeyword.'*',
-                                            'analyzer'=>'standard'
-                                        ],                                            
-                                    ],//must end
-                                    'must_not' =>
-                                    [
-                                        [
-                                            'match' =>
-                                            [
-                                                'user_id' => $user_id
+                                "bool" => [
+                                    "must" => [
+                                        "dis_max"=> [
+                                            "tie_breaker" => 0.7,
+                                            "boost" => 1.2,
+                                            "queries"=> [
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> strtolower($searchKeyword),
+                                                        "fields"=> ["sim_title.normalize","hashtag"]
+                                                    ]
+                                                ],
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> "*".strtolower($searchKeyword)."*",
+                                                        "fields"=> ["sim_title", "hashtag"]
+                                                    ]
+                                                ]
                                             ]
-                                        ]
-                                    ]//must not end
+                                        ]//dis_max end
+                                    ]//must end
                                 ]//bool end
                             ]//query end                        
                         ],//body end
@@ -2244,27 +1920,28 @@ class Searchelastic extends MY_Controller {
             'body'  => [
                             'query' =>
                             [
-                                'bool' =>
-                                [
-                                    'must' =>
-                                    [
-                                        'query_string' =>
-                                        [
-                                            'fields'=>['question','hashtag'],
-                                            'query'=>'*'.$searchKeyword.'*',
-                                            'analyzer'=>'standard'
-                                        ],                                            
-                                    ],//must end
-                                    'must_not' =>
-                                    [
-                                        [
-                                            'match' =>
-                                            [
-                                                'user_id' => $user_id
+                                "bool" => [
+                                    "must" => [
+                                        "dis_max"=> [
+                                            "tie_breaker" => 0.7,
+                                            "boost" => 1.2,
+                                            "queries"=> [
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> strtolower($searchKeyword),
+                                                        "fields"=> ["question.normalize","hashtag"]
+                                                    ]
+                                                ],
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> "*".strtolower($searchKeyword)."*",
+                                                        "fields"=> ["question", "hashtag"]
+                                                    ]
+                                                ]
                                             ]
-                                        ]
-                                    ]//must not end
-                                ]//bool end
+                                        ]//dis_max end
+                                    ]//must end
+                                ]//bool end 
                             ]//query end
                         ],//body end
         ];
@@ -2281,49 +1958,7 @@ class Searchelastic extends MY_Controller {
         }*/
         $query_que = $client->search($params_que);
         $search_data_que = $query_que['hits'];
-        $return_arr['question_count'] = $search_data_que['total'];
-        if($search_data_que['total'] < 1)
-        {
-            $params_que = [
-                'index' => 'aileensoul_search_question', 
-                'type'  => 'aileensoul_search_question',
-                'from'  => 0,
-                'size'  => 1,
-                'body'  => [
-                                'query' =>
-                                [
-                                    'bool' =>
-                                    [
-                                        'must' =>
-                                        [
-                                            'query_string' =>
-                                            [
-                                                'fields'=>['question','hashtag'],
-                                                'query'=>'*'.$searchKeyword.'*',
-                                                'analyzer'=>'standard'
-                                            ],                                            
-                                        ],//must end
-                                        'must_not' =>
-                                        [
-                                            [
-                                                'match' =>
-                                                [
-                                                    'user_id' => $user_id
-                                                ]
-                                            ]
-                                        ]//must not end
-                                    ]//bool end
-                                ]//query end
-                            ],//body end
-            ];
-            if($search_field != undefined && $search_field != '')
-            {
-                $params_que['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field.keyword'] = $search_field;//array('match_phrase'=>array('profession_field'=>$search_field));
-            }
-            $query_que = $client->search($params_que);
-            $search_data_que = $query_que['hits'];
-            $return_arr['question_count'] = $search_data_que['total'];   
-        }
+        $return_arr['question_count'] = $search_data_que['total'];        
         //Question End
 
         //Article Start
@@ -2335,26 +1970,27 @@ class Searchelastic extends MY_Controller {
             'body'  => [
                             'query' =>
                             [
-                                'bool' =>
-                                [
-                                    'must' =>
-                                    [                                            
-                                        'query_string' =>
-                                        [
-                                            'fields'=>['article_title','hashtag'],
-                                            'query'=>'*'.$searchKeyword.'*',
-                                            'analyzer'=>'standard'
-                                        ],                                            
-                                    ],//must end
-                                    'must_not' =>
-                                    [
-                                        [
-                                            'match' =>
-                                            [
-                                                'user_id' => $user_id
+                                "bool" => [
+                                    "must" => [
+                                        "dis_max"=> [
+                                            "tie_breaker" => 0.7,
+                                            "boost" => 1.2,
+                                            "queries"=> [
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> strtolower($searchKeyword),
+                                                        "fields"=> ["article_title.normalize","hashtag"]
+                                                    ]
+                                                ],
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> "*".strtolower($searchKeyword)."*",
+                                                        "fields"=> ["article_title", "hashtag"]
+                                                    ]
+                                                ]
                                             ]
-                                        ]
-                                    ]//must not end
+                                        ]//dis_max end
+                                    ]//must end
                                 ]//bool end
                             ]//query end
                         ],//body end
@@ -2372,46 +2008,7 @@ class Searchelastic extends MY_Controller {
         }*/
         $query_article = $client->search($params_article);
         $search_data_article = $query_article['hits'];
-        $return_arr['article_count'] = $search_data_article['total'];
-        if($search_data_article['total'] < 1)
-        {
-            $params_article = [
-                'index' => 'aileensoul_search_article', 
-                'type'  => 'aileensoul_search_article',
-                'from'  => 0,
-                'size'  => 1,
-                'body'  => [
-                                'query' =>
-                                [
-                                    'bool' =>
-                                    [
-                                        'must' =>
-                                        [                                            
-                                            'query_string' =>
-                                            [
-                                                'fields'=>['article_title','hashtag'],
-                                                'query'=>'*'.$searchKeyword.'*',
-                                                'analyzer'=>'standard'
-                                            ],                                            
-                                        ],//must end
-                                        'must_not' =>
-                                        [
-                                            [
-                                                'match' =>
-                                                [
-                                                    'user_id' => $user_id
-                                                ]
-                                            ]
-                                        ]//must not end
-                                    ]//bool end
-                                ]//query end
-                            ],//body end
-            ];
-            if($search_field != undefined && $search_field != '')
-            {
-                $params_article['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field.keyword'] = $search_field;
-            } 
-        }
+        $return_arr['article_count'] = $search_data_article['total'];        
         //Article End
 
         $return_arr['total_count'] = $search_data_people['total']+$search_data_buss['total']+$search_data_opp['total']+$search_data_post['total']+$search_data_que['total']+$search_data_article['total'];
@@ -2468,42 +2065,45 @@ class Searchelastic extends MY_Controller {
             'body'  => [
                             'query' =>
                             [
-                                'bool' =>
-                                [
-                                    'must' =>
-                                    [
-                                        'query_string' =>
-                                        [
-                                            'fields'=>['opptitle','opportunity_for','hashtag'],
-                                            'query'=>'*'.$searchKeyword.'*',
-                                            'analyzer'=>'standard'
-                                        ],                                            
-                                    ],//must end
-                                    'must_not' =>
-                                    [
-                                        [
-                                            'match' =>
-                                            [
-                                                'user_id' => $user_id
+                                "bool" => [
+                                    "must" => [
+                                        "dis_max"=> [
+                                            "tie_breaker" => 0.7,
+                                            "boost" => 1.2,
+                                            "queries"=> [
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> strtolower($searchKeyword),
+                                                        "fields"=> ["opptitle.normalize", "opportunity_for.normalize", "hashtag"]
+                                                    ]
+                                                ],
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> "*".strtolower($searchKeyword)."*",
+                                                        "fields"=> ["opptitle", "opportunity_for", "hashtag"]
+                                                    ]
+                                                ]
                                             ]
-                                        ]
-                                    ]//must not end
-                                ]//bool end
-                            ],//query end
-                            'sort' =>
+                                        ]//dis_max end
+                                    ]//must end
+                                ]//bool end                                
+                            ]//query end
+                            /*'sort' =>
                             [
                                 'created_date.keyword' =>
                                 [
                                     "order" => "desc"
                                 ],
-                            ],
+                            ],*/
                         ],//body end
         ];
 
         if(!empty($search_city))
         {            
-            foreach ($search_city as $key => $value) {            
-                $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['location'] = $value->city_name;
+            foreach ($search_city as $key => $value) {
+                $params['body']['query']['bool']['filter']['bool']['must'][] = array('wildcard' => array('location' => "*".strtolower($value->city_name)."*",
+                ));
+                // $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['location'] = $value->city_name;
             }
         }
         if($search_field != undefined && $search_field != '')
@@ -2518,100 +2118,29 @@ class Searchelastic extends MY_Controller {
         }
         if(!empty($search_hashtag))
         {
-            foreach ($search_hashtag as $key => $value) {            
-                $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['hashtag'] = $value->hashtag;
+            foreach ($search_hashtag as $key => $value) {
+                $params['body']['query']['bool']['filter']['bool']['must'][] = array('wildcard' => array('hashtag' => "*".strtolower($value->hashtag)."*",
+                ));
+                // $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['hashtag'] = $value->hashtag;
             }   
         }
         if(!empty($search_company))
         {
-            foreach ($search_company as $key => $value) {            
-                $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['company_name'] = $value->company_name;
+            foreach ($search_company as $key => $value) {
+                $params['body']['query']['bool']['filter']['bool']['must'][] = array('wildcard' => array('company_name' => "*".strtolower($value->company_name)."*",
+                ));
+                // $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['company_name'] = $value->company_name;
             }   
         }
         
-
+        // print_r($params);exit();
         $query = $client->search($params);        
         
         $searchData = array();
         $search_data = $query['hits'];
         $searchData['opp_count'] = $search_data['total'];
         $searchOpportunityData = $search_data['hits'];
-        if($search_data['total'] < 1)
-        {
-            $params = [
-                'index' => 'aileensoul_search_opportunity', 
-                'type'  => 'aileensoul_search_opportunity',
-                'from'  => $start,
-                'size'  => $limit,
-                'body'  => [
-                                'query' =>
-                                [
-                                    'bool' =>
-                                    [
-                                        'must' =>
-                                        [
-                                            'query_string' =>
-                                            [
-                                                'fields'=>['opptitle','opportunity_for','hashtag'],
-                                                'query'=>'*'.$searchKeyword.'*',
-                                                'analyzer'=>'standard'
-                                            ],                                            
-                                        ],//must end
-                                        'must_not' =>
-                                        [
-                                            [
-                                                'match' =>
-                                                [
-                                                    'user_id' => $user_id
-                                                ]
-                                            ]
-                                        ]//must not end
-                                    ]//bool end
-                                ],//query end
-                                'sort' =>
-                                [
-                                    'created_date.keyword' =>
-                                    [
-                                        "order" => "desc"
-                                    ],
-                                ],
-                            ],//body end
-            ];
-
-            if(!empty($search_city))
-            {            
-                foreach ($search_city as $key => $value) {            
-                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['location'] = $value->city_name;
-                }
-            }
-            if($search_field != undefined && $search_field != '')
-            {
-                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field.keyword'] = $search_field;//array('match_phrase'=>array('field'=>$search_field));
-            }
-            if(!empty($search_job_title))
-            {
-                foreach ($search_job_title as $key => $value) {            
-                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['opportunity_for'] = $value->name;
-                }   
-            }
-            if(!empty($search_hashtag))
-            {
-                foreach ($search_hashtag as $key => $value) {            
-                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['hashtag'] = $value->hashtag;
-                }   
-            }
-            if(!empty($search_company))
-            {
-                foreach ($search_company as $key => $value) {            
-                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['company_name'] = $value->company_name;
-                }   
-            }            
-
-            $query = $client->search($params);
-            $search_data = $query['hits'];
-            $searchData['opp_count'] = $search_data['total'];
-            $searchOpportunityData = $search_data['hits'];
-        }
+        
         $searchOpportunityDataMain = array();        
 
         foreach ($searchOpportunityData as $key => $value) {
@@ -2877,42 +2406,37 @@ class Searchelastic extends MY_Controller {
             'body'  => [
                             'query' =>
                             [
-                                'bool' =>
-                                [
-                                    'must' =>
-                                    [
-                                        'query_string' =>
-                                        [
-                                            'fields'=>['sim_title','hashtag'],
-                                            'query'=>'*'.$searchKeyword.'*',
-                                            'analyzer'=>'standard'
-                                        ],                                            
-                                    ],//must end
-                                    'must_not' =>
-                                    [
-                                        [
-                                            'match' =>
-                                            [
-                                                'user_id' => $user_id
+                                "bool" => [
+                                    "must" => [
+                                        "dis_max"=> [
+                                            "tie_breaker" => 0.7,
+                                            "boost" => 1.2,
+                                            "queries"=> [
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> strtolower($searchKeyword),
+                                                        "fields"=> ["sim_title.normalize","hashtag"]
+                                                    ]
+                                                ],
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> "*".strtolower($searchKeyword)."*",
+                                                        "fields"=> ["sim_title", "hashtag"]
+                                                    ]
+                                                ]
                                             ]
-                                        ]
-                                    ]//must not end
+                                        ]//dis_max end
+                                    ]//must end
                                 ]//bool end
-                            ],//query end
-                            'sort' =>
-                            [
-                                'created_date.keyword' =>
-                                [
-                                    "order" => "desc"
-                                ],
-                            ],
-
+                            ]//query end
                         ],//body end
         ];
         if(!empty($search_hashtag))
         {
             foreach ($search_hashtag as $key => $value) {
-                $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['hashtag'] = $value->hashtag;
+                $params['body']['query']['bool']['filter']['bool']['must'][] = array('wildcard' => array('hashtag' => "*".strtolower($value->hashtag)."*",
+                ));
+                // $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['hashtag'] = $value->hashtag;
             }   
         }        
 
@@ -3196,35 +2720,29 @@ class Searchelastic extends MY_Controller {
             'body'  => [
                             'query' =>
                             [
-                                'bool' =>
-                                [
-                                    'must' =>
-                                    [                                            
-                                        'query_string' =>
-                                        [
-                                            'fields'=>['article_title','hashtag'],
-                                            'query'=>'*'.$searchKeyword.'*',
-                                            'analyzer'=>'standard'
-                                        ],                                            
-                                    ],//must end
-                                    'must_not' =>
-                                    [
-                                        [
-                                            'match' =>
-                                            [
-                                                'user_id' => $user_id
+                                "bool" => [
+                                    "must" => [
+                                        "dis_max"=> [
+                                            "tie_breaker" => 0.7,
+                                            "boost" => 1.2,
+                                            "queries"=> [
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> strtolower($searchKeyword),
+                                                        "fields"=> ["article_title.normalize","hashtag"]
+                                                    ]
+                                                ],
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> "*".strtolower($searchKeyword)."*",
+                                                        "fields"=> ["article_title", "hashtag"]
+                                                    ]
+                                                ]
                                             ]
-                                        ]
-                                    ]//must not end
+                                        ]//dis_max end
+                                    ]//must end
                                 ]//bool end
-                            ],//query end
-                            'sort' =>
-                            [
-                                'created_date.keyword' =>
-                                [
-                                    "order" => "desc"
-                                ],
-                            ],
+                            ]//query end                            
                         ],//body end
         ];
 
@@ -3246,66 +2764,7 @@ class Searchelastic extends MY_Controller {
         $search_data = $query['hits'];        
         $searchData['article_count'] = $search_data['total'];
         $searchArticleData = $search_data['hits'];
-        if($search_data['total'] < 1)
-        {
-            $params = [
-                'index' => 'aileensoul_search_article', 
-                'type'  => 'aileensoul_search_article',
-                'from'  => $start,
-                'size'  => $limit,
-                'body'  => [
-                                'query' =>
-                                [
-                                    'bool' =>
-                                    [
-                                        'must' =>
-                                        [                                            
-                                            'query_string' =>
-                                            [
-                                                'fields'=>['article_title','hashtag'],
-                                                'query'=>'*'.$searchKeyword.'*',
-                                                'analyzer'=>'standard'
-                                            ],                                            
-                                        ],//must end
-                                        'must_not' =>
-                                        [
-                                            [
-                                                'match' =>
-                                                [
-                                                    'user_id' => $user_id
-                                                ]
-                                            ]
-                                        ]//must not end
-                                    ]//bool end
-                                ],//query end
-                                'sort' =>
-                                [
-                                    'created_date.keyword' =>
-                                    [
-                                        "order" => "desc"
-                                    ],
-                                ],
-                            ],//body end
-            ];
 
-            if($search_field != undefined && $search_field != '')
-            {
-                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field.keyword'] = base64_decode($search_field);//array('match_phrase'=>array('field'=>$search_field));
-            }
-            
-            if(!empty($search_hashtag))
-            {
-                foreach ($search_hashtag as $key => $value) {            
-                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['hashtag'] = $value->hashtag;
-                }   
-            }
-
-            $query = $client->search($params);
-
-            $search_data = $query['hits'];        
-            $searchData['article_count'] = $search_data['total'];
-            $searchArticleData = $search_data['hits'];
-        }
         $searchArticleDataMain = array();        
 
         foreach ($searchArticleData as $key => $value) {
@@ -3427,41 +2886,35 @@ class Searchelastic extends MY_Controller {
             'body'  => [
                             'query' =>
                             [
-                                'bool' =>
-                                [
-                                    'must' =>
-                                    [
-                                        'query_string' =>
-                                        [
-                                            'fields'=>['question','hashtag'],
-                                            'query'=>'*'.$searchKeyword.'*',
-                                            'analyzer'=>'standard'
-                                        ],                                            
-                                    ],//must end
-                                    'must_not' =>
-                                    [
-                                        [
-                                            'match' =>
-                                            [
-                                                'user_id' => $user_id
+                                "bool" => [
+                                    "must" => [
+                                        "dis_max"=> [
+                                            "tie_breaker" => 0.7,
+                                            "boost" => 1.2,
+                                            "queries"=> [
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> strtolower($searchKeyword),
+                                                        "fields"=> ["question.normalize","hashtag"]
+                                                    ]
+                                                ],
+                                                [
+                                                    "multi_match"=> [
+                                                        "query"=> "*".strtolower($searchKeyword)."*",
+                                                        "fields"=> ["question", "hashtag"]
+                                                    ]
+                                                ]
                                             ]
-                                        ]
-                                    ]//must not end
-                                ]//bool end
-                            ],//query end
-                            'sort' =>
-                            [
-                                'created_date.keyword' =>
-                                [
-                                    "order" => "desc"
-                                ],
-                            ],
+                                        ]//dis_max end
+                                    ]//must end
+                                ]//bool end 
+                            ]//query end                            
                         ],//body end
         ];
 
         if($search_field != undefined && $search_field != '')
         {
-            $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['field.keyword'] = base64_decode($search_field);//array('match_phrase'=>array('field'=>$search_field));
+            $params['body']['query']['bool']['filter']['bool']['must'][]['match_phrase']['field.keyword'] = $search_field;//array('match_phrase'=>array('field'=>$search_field));
         }
         
         if(!empty($search_hashtag))
@@ -3477,67 +2930,7 @@ class Searchelastic extends MY_Controller {
         $search_data = $query['hits'];
         $searchData['question_count'] = $search_data['total'];
         $searchQuestionData = $search_data['hits'];
-        if($search_data['total'] < 1)
-        {
-            $params = array();
-            $params = [
-                'index' => 'aileensoul_search_question', 
-                'type'  => 'aileensoul_search_question',
-                'from'  => $start,
-                'size'  => $limit,
-                'body'  => [
-                                'query' =>
-                                [
-                                    'bool' =>
-                                    [
-                                        'must' =>
-                                        [
-                                            'query_string' =>
-                                            [
-                                                'fields'=>['question','hashtag'],
-                                                'query'=>'*'.$searchKeyword.'*',
-                                                'analyzer'=>'standard'
-                                            ],                                            
-                                        ],//must end
-                                        'must_not' =>
-                                        [
-                                            [
-                                                'match' =>
-                                                [
-                                                    'user_id' => $user_id
-                                                ]
-                                            ]
-                                        ]//must not end
-                                    ]//bool end
-                                ],//query end
-                                'sort' =>
-                                [
-                                    'created_date.keyword' =>
-                                    [
-                                        "order" => "desc"
-                                    ],
-                                ],
-                            ],//body end
-            ];
-
-            if($search_field != undefined && $search_field != '')
-            {
-                $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['field.keyword'] = base64_decode($search_field);//array('match_phrase'=>array('field'=>$search_field));
-            }
-            
-            if(!empty($search_hashtag))
-            {
-                foreach ($search_hashtag as $key => $value) {            
-                    $params['body']['query']['bool']['filter']['bool']['should'][]['match_phrase']['hashtag'] = $value->hashtag;
-                }   
-            }
-
-            $query = $client->search($params);        
-            
-            $search_data = $query['hits'];
-            $searchData['question_count'] = $search_data['total'];
-            $searchQuestionData = $search_data['hits'];
-        }
+        
         $searchQuestionDataMain = array();        
 
         foreach ($searchQuestionData as $key => $value) {
@@ -4042,7 +3435,7 @@ class Searchelastic extends MY_Controller {
         // echo $str;exit();
         $result = json_decode($str, true); 
         echo "<pre>111";
-        print_r($result);exit();
+        // print_r($result);exit();
 
         $params = null;
         foreach($result as $k=>$row)
@@ -4089,5 +3482,72 @@ class Searchelastic extends MY_Controller {
         // $responses = $client->bulk($params);
         // print_r($responses);exit();
         // return true;
+    }
+
+    public function insert_n_post_data()
+    {
+        $client = $this->elasticclient;
+        $stmt = "SELECT up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type,usp.description,IF(usp.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) AS hashtag, usp.hashtag AS hashtag_id,usp.sim_title, usp.simslug
+            FROM ailee_user_simple_post usp
+            LEFT JOIN ailee_user_post up ON up.id = usp.post_id
+            LEFT JOIN ailee_user_login ul ON ul.user_id = up.user_id
+            LEFT OUTER JOIN ailee_hashtag ht ON FIND_IN_SET(ht.id, usp.hashtag) > 0
+            WHERE ul.status = '1' AND ul.is_delete = '0' AND up.status = 'publish' AND up.is_delete = '0' GROUP BY up.id,usp.hashtag ORDER BY id DESC";
+        $query = $this->db->query($stmt);
+        $result = $query->result_array();
+        $params = null;
+        foreach($result as $k=>$row) {
+            print_r($row);
+            $params = ['index' => 'aileensoul_search_post', 'type' => 'aileensoul_search_post', 'id' => $row['id'], 'body' => ['user_id' => $row['user_id'],'post_for' => $row['post_for'],'created_date' => $row['created_date'],'post_id' => $row['post_id'], 'user_type' => $row['user_type'], 'description' => $row['description'], 'hashtag' => $row['hashtag'],'hashtag_id' => $row['hashtag_id'], 'sim_title' => $row['sim_title'], 'simslug' => $row['simslug'],]];
+            $responses = $client->index($params);
+        }        
+    }
+
+    public function insert_n_question_data()
+    {
+        $client = $this->elasticclient;
+        $stmt = "SELECT up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type,IF(uaq.category != '', GROUP_CONCAT(DISTINCT(t.name)) , '') as category, uaq.description, it.industry_name AS field, uaq.others_field, uaq.is_anonymously ,uaq.link, uaq.modify_date, uaq.question,IF(uaq.hashtag IS NULL,'',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #'))) AS hashtag,uaq.hashtag AS hashtag_id
+            FROM ailee_user_ask_question uaq
+            LEFT JOIN ailee_user_post up ON up.id = uaq.post_id
+            LEFT JOIN ailee_user_login ul ON ul.user_id = up.user_id
+            LEFT JOIN ailee_industry_type it ON it.industry_id = uaq.field
+            LEFT OUTER JOIN ailee_tags t ON FIND_IN_SET(t.id, uaq.category) > 0            
+            LEFT OUTER JOIN ailee_hashtag ht ON FIND_IN_SET(ht.id, uaq.hashtag) > 0
+            WHERE ul.status = '1' AND ul.is_delete = '0' AND up.status = 'publish' AND up.is_delete = '0'
+            GROUP BY up.id,uaq.category,uaq.hashtag ORDER BY id DESC";
+        $query = $this->db->query($stmt);
+        $result = $query->result_array();
+        echo "<pre>";
+        // print_r($result);exit();
+        $params = null;
+        foreach($result as $k=>$row) {
+            print_r($row);
+            $params = ['index' => 'aileensoul_search_question', 'type' => 'aileensoul_search_question', 'id' => $row['id'], 'body' => ['user_id' => $row['user_id'],'post_for' => $row['post_for'],'created_date' => $row['created_date'],'post_id' => $row['post_id'],'user_type' => $row['user_type'],'category' => $row['category'],'description' => $row['description'],'field' => $row['field'],'hashtag' => $row['hashtag'],'is_anonymously' => $row['is_anonymously'],'link' => $row['link'],'modify_date' => $row['modify_date'],'others_field' => $row['others_field'],'question' => $row['question'],]];
+            $responses = $client->index($params);
+        }
+        echo "Done";
+    }
+
+    public function insert_n_article_data()
+    {
+        $client = $this->elasticclient;
+        $stmt = "SELECT up.id, up.user_id, up.post_for, up.created_date, up.post_id, up.user_type, pa.article_desc, pa.article_main_category, pa.article_other_category, pa.article_featured_image, pa.article_meta_description, pa.article_meta_title, pa.article_slug, pa.article_sub_category, pa.article_title, pa.hashtag as hashtag_id , pa.id_post_article, IF(pa.hashtag != '',CONCAT('#',GROUP_CONCAT(DISTINCT(ht.hashtag) SEPARATOR ' #')),'') AS hashtag,it.industry_name AS field
+            FROM ailee_post_article pa
+            LEFT JOIN ailee_user_post up ON up.post_id = pa.id_post_article
+            LEFT JOIN ailee_user_login ul ON ul.user_id = up.user_id
+            LEFT JOIN ailee_industry_type it ON it.industry_id = pa.article_main_category
+            LEFT OUTER JOIN ailee_hashtag ht ON FIND_IN_SET(ht.id, pa.hashtag) > 0
+            WHERE ul.status = '1' AND ul.is_delete = '0' AND up.post_for = 'article' AND up.status = 'publish' AND up.is_delete = '0'
+            GROUP BY up.id,pa.hashtag ORDER BY id DESC";
+        $query = $this->db->query($stmt);
+        $result = $query->result_array();
+        $params = null;
+        echo "<pre>";
+        foreach($result as $k=>$row) {
+            print_r($row);
+           $params = ['index' => 'aileensoul_search_article', 'type' => 'aileensoul_search_article', 'id' => $row['id'], 'body' => ['user_id' => $row['user_id'],'post_for' => $row['post_for'],'created_date' => $row['created_date'],'post_id' => $row['post_id'],'user_type' => $row['user_type'],'article_desc' => $row['article_desc'],'article_main_category' => $row['article_main_category'],'article_other_category' => $row['article_other_category'],'article_featured_image' => $row['article_featured_image'],'article_meta_description' => $row['article_meta_description'],'article_meta_title' => $row['article_meta_title'],'article_slug' => $row['article_slug'],'article_sub_category' => $row['article_sub_category'],'article_title' => $row['article_title'],'hashtag_id' => $row['hashtag_id'],'id_post_article' => $row['id_post_article'],'hashtag' => $row['hashtag'],'field' => $row['field'],]];
+           $responses = $client->index($params);
+        }
+        echo "Done";
     }
 }
