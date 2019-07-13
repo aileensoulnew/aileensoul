@@ -30,6 +30,7 @@
             .mejs__button > button {
                 background-image: url("https://www.aileensoul.com/assets/as-videoplayer/build/mejs-controls.svg");
             }
+            .popover{background: transparent;}
         </style>
     <?php $this->load->view('adsense'); ?>
 </head>

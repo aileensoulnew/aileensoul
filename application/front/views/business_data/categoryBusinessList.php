@@ -21,6 +21,9 @@
         <script src="<?php echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/bootstrap.min.js?ver=' . time()) ?>"></script>
         <?php $this->load->view('adsense'); ?>
+        <style type="text/css">
+            .popover{background: transparent;}
+        </style>
     </head>
     <body class="profile-main-page two-hd">
         <?php //$this->load->view('page_loader'); ?>
@@ -536,9 +539,11 @@
                         all_html += '</div>';
                     }
                     // console.log(data);
-                    $('#'+div_id).html(all_html);
+                    setTimeout(function(){
+                        $('#'+div_id).html(all_html);
+                    },2000);
                 });
-                return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+                return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
             }
             $(document).ready(function(){
                 $("#pagination").on("click", "a", function(e){

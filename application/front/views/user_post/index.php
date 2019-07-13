@@ -68,7 +68,7 @@
                 padding-left: 40px;
                 padding-top: 10px;
             }
-
+            .popover{background: transparent;}
         </style>        
         <?php $this->load->view('adsense');
         $user_id = $this->session->userdata('aileenuser');

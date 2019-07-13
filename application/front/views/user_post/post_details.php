@@ -22,6 +22,9 @@
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     <?php $this->load->view('adsense');
     $login_userid = $this->session->userdata('aileenuser'); ?>
+    <style type="text/css">
+        .popover{background: transparent;}
+    </style>
 </head>
     <body class="one-hd profile-db body-loader">
         <?php $this->load->view('page_loader'); ?>

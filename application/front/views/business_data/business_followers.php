@@ -16,6 +16,9 @@
         <?php } ?>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-commen.css?ver=' . time()); ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/n-css/n-style.css?ver=' . time()); ?>" />
+        <style type="text/css">
+            .popover{background: transparent;}
+        </style>
     <?php $this->load->view('adsense'); ?>
 </head>
     <body class="page-container-bg-solid page-boxed pushmenu-push botton_footer body-loader">

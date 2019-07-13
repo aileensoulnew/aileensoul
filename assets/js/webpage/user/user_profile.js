@@ -2453,10 +2453,12 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                         all_html += '</div>';
                     all_html += '</div>';
                 }            
-                $('#'+div_id).html(all_html);
+                setTimeout(function(){
+                    $('#'+div_id).html(all_html);
+                },2000);
             }
         });
-        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+        return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
     }
     /*$scope.makeActive = function (item,slug) {
         $scope.active = $scope.active == item ? '' : item;
@@ -10251,10 +10253,12 @@ app.controller('contactsController', function ($scope, $http, $location, $window
                         all_html += '</div>';
                     all_html += '</div>';
                 }            
-                $('#'+div_id).html(all_html);
+                setTimeout(function(){
+                    $('#'+div_id).html(all_html);
+                },2000);
             }
         });
-        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+        return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
     }
 
     setTimeout(function(){        
@@ -10808,10 +10812,12 @@ app.controller('followersController', function ($scope, $http, $location, $compi
                     all_html += '</div>';
                 }
                 
-                $('#'+div_id).html(all_html);
+                setTimeout(function(){
+                    $('#'+div_id).html(all_html);
+                },2000);
             }
         });
-        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+        return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
     }
 
     setTimeout(function(){
@@ -11341,10 +11347,12 @@ app.controller('followingController', function ($scope, $http, $location, $compi
                     all_html += '</div>';
                 }
                 
-                $('#'+div_id).html(all_html);
+                setTimeout(function(){
+                    $('#'+div_id).html(all_html);
+                },2000);
             }
         });
-        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+        return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
     }
 
     
@@ -11928,10 +11936,12 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                     all_html += '</div>';
                 }
                 
-                $('#'+div_id).html(all_html);
+                setTimeout(function(){
+                    $('#'+div_id).html(all_html);
+                },2000);
             }
         });
-        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+        return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
     }
 
     setTimeout(function(){
@@ -12810,10 +12820,12 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                     all_html += '</div>';
                 }
                 
-                $('#'+div_id).html(all_html);
+                setTimeout(function(){
+                    $('#'+div_id).html(all_html);
+                },2000);
             }
         });
-        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+        return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
     }
 
     $('footer').hide();

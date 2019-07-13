@@ -22,6 +22,9 @@
             <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/1.10.3.jquery-ui.css?ver='.time()); ?>">
         <?php } ?>
     <?php $this->load->view('adsense'); ?>
+    <style type="text/css">
+        .popover{background: transparent;}
+    </style>
 </head>
     <body class="profile-main-page body-loader two-hd">        
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js?ver=' . time()) ?>"></script>

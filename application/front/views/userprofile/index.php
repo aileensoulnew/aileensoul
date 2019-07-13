@@ -27,6 +27,9 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/developer.css') ?>">
         <!-- <link href="<?php //echo base_url('8/ninja-slider.css'); ?>" rel="stylesheet" type="text/css" /> -->
+        <style type="text/css">
+            .popover{background: transparent;}
+        </style>
     </head>
         <!-- <script src="<?php //echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script> -->
         <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>

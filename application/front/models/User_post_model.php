@@ -923,116 +923,7 @@ class User_post_model extends CI_Model {
     {
         $new_signup = $this->get_new_signup($user_id);
         $getUserProfessionData = $this->user_model->getUserProfessionData($user_id, $select_data = 'designation,field,other_field,city,jt.name');
-        $getUserStudentData = $this->user_model->getUserStudentData($user_id, $select_data = 'us.current_study, us.city, us.university_name,us.interested_fields,us.other_interested_fields');
-
-        //Start Old Feed before 14-03-2019
-        /*if($getUserProfessionData)
-        {
-            $sql = "SELECT COUNT(*) as total FROM(
-                    SELECT con1.* FROM (SELECT up.* FROM ailee_user_profession upr 
-                    LEFT JOIN ailee_user_profession c1 ON c1.`designation` = upr.`designation` AND c1.`field` = upr.`field` AND c1.`city` = upr.`city` 
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE upr.`user_id` = $user_id AND c1.user_id != $user_id AND (IF(upr.`field` = 0, CONCAT(LOWER(c1.other_field) LIKE '%',REPLACE(upr.other_field,' ','%' OR LOWER(c1.other_field) LIKE '%'),'%'),1 = 1)) AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update') as con1
-
-                    UNION
-
-                    SELECT con2.* FROM (SELECT up.* FROM ailee_user_profession upr 
-                    LEFT JOIN ailee_user_profession c1 ON c1.`designation` = upr.`designation` AND c1.`city` = upr.`city` 
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE upr.`user_id` = $user_id AND c1.user_id != $user_id AND up.status = 'publish' AND up.is_delete = '0'  AND up.user_type = '1' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ) as con2
-
-                    UNION
-
-                    SELECT con3.* FROM (SELECT up.* FROM ailee_user_profession upr 
-                    LEFT JOIN ailee_user_profession c1 ON c1.`field` = upr.`field` AND c1.`city` = upr.`city` 
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE upr.`user_id` = $user_id AND c1.user_id != $user_id AND (IF(upr.`field` = 0, CONCAT(LOWER(c1.other_field) LIKE '%',REPLACE(upr.other_field,' ','%' OR LOWER(c1.other_field) LIKE '%'),'%'),1 = 1)) AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update') AS con3
-
-                    UNION
-
-                    SELECT con3a.* FROM (SELECT up.* FROM ailee_user_profession upr 
-                    LEFT JOIN ailee_user_profession c1 ON c1.`field` = upr.`field` AND c1.`city` = upr.`city` 
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE upr.`user_id` = $user_id AND c1.user_id != $user_id AND (IF(upr.`field` = 0, CONCAT(LOWER(c1.other_field) LIKE '%',REPLACE(upr.other_field,' ','%' OR LOWER(c1.other_field) LIKE '%'),'%'),1 = 1)) AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update') AS con3a
-
-                    UNION
-
-                    SELECT con4.* FROM (SELECT up.* FROM ailee_user_profession upr 
-                    LEFT JOIN ailee_user_profession c1 ON c1.`designation` = upr.`designation` AND c1.`field` = upr.`field`
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE upr.`user_id` = $user_id AND c1.user_id != $user_id AND (IF(upr.`field` = 0, CONCAT(LOWER(c1.other_field) LIKE '%',REPLACE(upr.other_field,' ','%' OR LOWER(c1.other_field) LIKE '%'),'%'),1 = 1)) AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update') as con4
-
-                    UNION
-
-                    SELECT con5.* FROM (SELECT up.* FROM ailee_user_profession upr 
-                    LEFT JOIN ailee_user_profession c1 ON c1.`designation` = upr.`designation` 
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE upr.`user_id` = $user_id AND c1.user_id != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update') AS con5
-
-                    UNION
-
-                    SELECT con5a.* FROM (SELECT up.* FROM ailee_user_contact  uc JOIN ailee_user_post up  ON up.user_id = (CASE WHEN uc.from_id=$user_id THEN uc.to_id ELSE uc.from_id END)
-                            WHERE (uc.from_id =  $user_id  OR uc.to_id = $user_id) AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' AND uc.status = 'confirm') AS con5a
-                    UNION
-
-                    SELECT con5b.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '1' AND up.user_type = '1' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update') AS con5b
-                    
-                    UNION
-
-                    SELECT con5c.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update') AS con5c
-
-                    UNION
-
-                    SELECT con6.* FROM (SELECT up.* FROM ailee_user_profession upr 
-                    LEFT JOIN ailee_user_profession c1 ON c1.`city` = upr.`city` 
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE upr.`user_id` = $user_id AND c1.user_id != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update') AS con6
-
-                    UNION
-
-                    SELECT con7.* FROM (SELECT up.* FROM ailee_user_profession upr 
-                    LEFT JOIN ailee_user_profession c1 ON c1.`field` = upr.`field`
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE upr.`user_id` = $user_id AND c1.user_id != $user_id AND (IF(upr.`field` = 0, CONCAT(LOWER(c1.other_field) LIKE '%',REPLACE(upr.other_field,' ','%' OR LOWER(c1.other_field) LIKE '%'),'%'),1 = 1)) AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update') AS con7
-
-                    UNION
-
-                    SELECT con8.* FROM (SELECT up.* FROM ailee_user_post up 
-                    WHERE up.`user_id` != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update') AS con8
-                ) as main WHERE main.user_id != $user_id AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND main.post_for != 'profile_update' AND main.post_for != 'cover_update' AND main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ";
-        }
-
-        if($getUserStudentData)
-        {
-            $sql = "SELECT COUNT(*) as total FROM(
-
-                SELECT con1.* FROM (SELECT up.* FROM ailee_user_student us 
-                    LEFT JOIN ailee_user_student c1 ON c1.`interested_fields` = us.`interested_fields` AND c1.`city` = us.`city` 
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE us.`user_id` = $user_id AND c1.user_id != $user_id AND (IF(us.`interested_fields` = 0, CONCAT(LOWER(c1.other_interested_fields) LIKE '%',REPLACE(us.other_interested_fields,' ','%' OR LOWER(c1.other_interested_fields) LIKE '%'),'%'),1 = 1)) AND up.status = 'publish' AND up.is_delete = '0' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update') as con1
-
-                UNION
-
-                SELECT con2.* FROM (SELECT up.* FROM ailee_user_student us 
-                    LEFT JOIN ailee_user_student c1 ON c1.`interested_fields` = us.`interested_fields`
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE us.`user_id` = $user_id AND c1.user_id != $user_id AND (IF(us.`interested_fields` = 0, CONCAT(LOWER(c1.other_interested_fields) LIKE '%',REPLACE(us.other_interested_fields,' ','%' OR LOWER(c1.other_interested_fields) LIKE '%'),'%'),1 = 1)) AND up.status = 'publish' AND up.is_delete = '0' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update') as con2
-
-                UNION
-
-                SELECT con3.* FROM (SELECT up.* FROM ailee_user_student us 
-                    LEFT JOIN ailee_user_student c1 ON c1.`city` = us.`city` 
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE us.`user_id` = $user_id AND c1.user_id != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update') as con3
-
-                UNION
-
-                SELECT con4.* FROM (SELECT up.* FROM ailee_user_post up 
-                    WHERE up.`user_id` != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update') AS con4
-                
-            ) as main WHERE main.user_id != $user_id AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND main.post_for != 'profile_update' AND main.post_for != 'cover_update' AND main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id);";
-        }*/
-        //End Old Feed before 14-03-2019
+        $getUserStudentData = $this->user_model->getUserStudentData($user_id, $select_data = 'us.current_study, us.city, us.university_name,us.interested_fields,us.other_interested_fields');        
 
         //Start New Feed After 09-04-2019
         if($new_signup == 1)
@@ -1483,115 +1374,7 @@ class User_post_model extends CI_Model {
         $new_signup = $this->get_new_signup($user_id);
 
         $getUserProfessionData = $this->user_model->getUserProfessionData($user_id, $select_data = 'designation,field,other_field,city,jt.name');
-        $getUserStudentData = $this->user_model->getUserStudentData($user_id, $select_data = 'us.current_study, us.city, us.university_name,us.interested_fields,us.other_interested_fields');
-        //Start Old Feed before 14-03-2019
-        /*if($getUserProfessionData)
-        {
-            $sql = "SELECT main.* FROM(
-                    SELECT con1.* FROM (SELECT up.* FROM ailee_user_profession upr 
-                    LEFT JOIN ailee_user_profession c1 ON c1.`designation` = upr.`designation` AND c1.`field` = upr.`field` AND c1.`city` = upr.`city` 
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE upr.`user_id` = $user_id AND c1.user_id != $user_id AND (IF(upr.`field` = 0, CONCAT(LOWER(c1.other_field) LIKE '%',REPLACE(upr.other_field,' ','%' OR LOWER(c1.other_field) LIKE '%'),'%'),1 = 1)) AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) as con1
-
-                    UNION
-
-                    SELECT con2.* FROM (SELECT up.* FROM ailee_user_profession upr 
-                    LEFT JOIN ailee_user_profession c1 ON c1.`designation` = upr.`designation` AND c1.`city` = upr.`city` 
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE upr.`user_id` = $user_id AND c1.user_id != $user_id AND up.status = 'publish' AND up.is_delete = '0'  AND up.user_type = '1' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update'  ORDER BY up.created_date DESC LIMIT $total_record) as con2
-
-                    UNION
-
-                    SELECT con3.* FROM (SELECT up.* FROM ailee_user_profession upr 
-                    LEFT JOIN ailee_user_profession c1 ON c1.`field` = upr.`field` AND c1.`city` = upr.`city` 
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE upr.`user_id` = $user_id AND c1.user_id != $user_id AND (IF(upr.`field` = 0, CONCAT(LOWER(c1.other_field) LIKE '%',REPLACE(upr.other_field,' ','%' OR LOWER(c1.other_field) LIKE '%'),'%'),1 = 1)) AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS con3
-
-                    UNION
-
-                    SELECT con3a.* FROM (SELECT up.* FROM ailee_user_profession upr 
-                    LEFT JOIN ailee_user_profession c1 ON c1.`field` = upr.`field` AND c1.`city` = upr.`city` 
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE upr.`user_id` = $user_id AND c1.user_id != $user_id AND (IF(upr.`field` = 0, CONCAT(LOWER(c1.other_field) LIKE '%',REPLACE(upr.other_field,' ','%' OR LOWER(c1.other_field) LIKE '%'),'%'),1 = 1)) AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS con3a
-
-                    UNION
-
-                    SELECT con4.* FROM (SELECT up.* FROM ailee_user_profession upr 
-                    LEFT JOIN ailee_user_profession c1 ON c1.`designation` = upr.`designation` AND c1.`field` = upr.`field`
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE upr.`user_id` = $user_id AND c1.user_id != $user_id AND (IF(upr.`field` = 0, CONCAT(LOWER(c1.other_field) LIKE '%',REPLACE(upr.other_field,' ','%' OR LOWER(c1.other_field) LIKE '%'),'%'),1 = 1)) AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) as con4
-
-                    UNION
-
-                    SELECT con5.* FROM (SELECT up.* FROM ailee_user_profession upr 
-                    LEFT JOIN ailee_user_profession c1 ON c1.`designation` = upr.`designation` 
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE upr.`user_id` = $user_id AND c1.user_id != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS con5
-
-                    UNION
-
-                    SELECT con5a.* FROM (SELECT up.* FROM ailee_user_contact  uc JOIN ailee_user_post up  ON up.user_id = (CASE WHEN uc.from_id=$user_id THEN uc.to_id ELSE uc.from_id END) WHERE (uc.from_id =  $user_id  OR uc.to_id = $user_id) AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' AND uc.status = 'confirm' ORDER BY up.created_date DESC LIMIT $total_record) AS con5a
-                    
-                    UNION
-
-                    SELECT con5b.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '1' AND up.user_type = '1' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS con5b
-                    
-                    UNION
-
-                    SELECT con5c.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS con5c
-                    
-                    UNION
-
-                    SELECT con6.* FROM (SELECT up.* FROM ailee_user_profession upr 
-                    LEFT JOIN ailee_user_profession c1 ON c1.`city` = upr.`city` 
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE upr.`user_id` = $user_id AND c1.user_id != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS con6
-
-                    UNION
-
-                    SELECT con7.* FROM (SELECT up.* FROM ailee_user_profession upr 
-                    LEFT JOIN ailee_user_profession c1 ON c1.`field` = upr.`field`
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE upr.`user_id` = $user_id AND c1.user_id != $user_id AND (IF(upr.`field` = 0, CONCAT(LOWER(c1.other_field) LIKE '%',REPLACE(upr.other_field,' ','%' OR LOWER(c1.other_field) LIKE '%'),'%'),1 = 1)) AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS con7
-
-                    UNION
-
-                    SELECT con8.* FROM (SELECT up.* FROM ailee_user_post up 
-                    WHERE up.`user_id` != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.user_type = '1' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS con8
-                ) as main WHERE main.user_id != $user_id AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND main.post_for != 'profile_update' AND main.post_for != 'cover_update' AND main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ";
-        }
-
-        if($getUserStudentData)
-        {
-            $sql = "SELECT main.* FROM(
-
-                SELECT con1.* FROM (SELECT up.* FROM ailee_user_student us 
-                    LEFT JOIN ailee_user_student c1 ON c1.`interested_fields` = us.`interested_fields` AND c1.`city` = us.`city` 
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE us.`user_id` = $user_id AND c1.user_id != $user_id AND (IF(us.`interested_fields` = 0, CONCAT(LOWER(c1.other_interested_fields) LIKE '%',REPLACE(us.other_interested_fields,' ','%' OR LOWER(c1.other_interested_fields) LIKE '%'),'%'),1 = 1)) AND up.status = 'publish' AND up.is_delete = '0' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) as con1
-
-                UNION
-
-                SELECT con2.* FROM (SELECT up.* FROM ailee_user_student us 
-                    LEFT JOIN ailee_user_student c1 ON c1.`interested_fields` = us.`interested_fields`
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE us.`user_id` = $user_id AND c1.user_id != $user_id AND (IF(us.`interested_fields` = 0, CONCAT(LOWER(c1.other_interested_fields) LIKE '%',REPLACE(us.other_interested_fields,' ','%' OR LOWER(c1.other_interested_fields) LIKE '%'),'%'),1 = 1)) AND up.status = 'publish' AND up.is_delete = '0' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) as con2
-
-                UNION
-
-                SELECT con3.* FROM (SELECT up.* FROM ailee_user_student us 
-                    LEFT JOIN ailee_user_student c1 ON c1.`city` = us.`city` 
-                    JOIN ailee_user_post up  ON up.user_id = c1.user_id
-                    WHERE us.`user_id` = $user_id AND c1.user_id != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) as con3
-
-                UNION
-
-                SELECT con4.* FROM (SELECT up.* FROM ailee_user_post up 
-                    WHERE up.`user_id` != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS con4
-                
-            ) as main WHERE main.user_id != $user_id AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND main.post_for != 'profile_update' AND main.post_for != 'cover_update' AND main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ";
-        }*/
-        //End Old Feed before 14-03-2019
+        $getUserStudentData = $this->user_model->getUserStudentData($user_id, $select_data = 'us.current_study, us.city, us.university_name,us.interested_fields,us.other_interested_fields');        
 
         //Start New Feed After 09-04-2019
         if($new_signup == 1)
@@ -1821,7 +1604,7 @@ class User_post_model extends CI_Model {
 
                             SELECT main16.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS main16
 
-                        ) as main1 WHERE main1.user_id != $user_id AND main1.status = 'publish' AND main1.is_delete = '0' AND main1.post_for != '' AND  main1.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main1.created_date >= NOW() - INTERVAL 4 DAY ORDER BY RAND(DATE_FORMAT(main1.created_date, 'Ymd')) LIMIT $total_record
+                        ) as main1 WHERE main1.user_id != $user_id AND main1.status = 'publish' AND main1.is_delete = '0' AND main1.post_for != '' AND  main1.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main1.created_date >= NOW() - INTERVAL 4 DAY LIMIT $total_record
                     ) as inner1
                     UNION
                     SELECT inner2.* FROM(
@@ -1899,9 +1682,9 @@ class User_post_model extends CI_Model {
 
                             SELECT main26.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS main26
 
-                        ) as main2 WHERE main2.user_id != $user_id AND main2.status = 'publish' AND main2.is_delete = '0' AND main2.post_for != '' AND  main2.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main2.created_date < NOW() - INTERVAL 4 DAY ORDER BY RAND(DATE_FORMAT(main2.created_date, 'Ymd')) LIMIT $total_record
+                        ) as main2 WHERE main2.user_id != $user_id AND main2.status = 'publish' AND main2.is_delete = '0' AND main2.post_for != '' AND  main2.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main2.created_date < NOW() - INTERVAL 4 DAY LIMIT $total_record
                     ) as inner2
-                ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE ul.status = '1' AND ul.is_delete = '0' ";
+                ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE ul.status = '1' AND ul.is_delete = '0' ORDER BY RAND(DATE_FORMAT(main.created_date, 'Ymd'))";
             }
 
             if($getUserStudentData)
@@ -1954,7 +1737,7 @@ class User_post_model extends CI_Model {
                             UNION
 
                             SELECT main16.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS main16
-                        ) as main1 WHERE main1.user_id != $user_id AND main1.status = 'publish' AND main1.is_delete = '0' AND main1.post_for != '' AND main1.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main1.created_date >= NOW() - INTERVAL 4 DAY ORDER BY RAND(DATE_FORMAT(main1.created_date, 'Ymd')) 
+                        ) as main1 WHERE main1.user_id != $user_id AND main1.status = 'publish' AND main1.is_delete = '0' AND main1.post_for != '' AND main1.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main1.created_date >= NOW() - INTERVAL 4 DAY
                     ) as inner1
                     UNION
                     SELECT inner2.* FROM(
@@ -2006,9 +1789,9 @@ class User_post_model extends CI_Model {
                             UNION
 
                             SELECT main26.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS main26
-                        ) as main2 WHERE main2.user_id != $user_id AND main2.status = 'publish' AND main2.is_delete = '0' AND main2.post_for != '' AND main2.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main2.created_date < NOW() - INTERVAL 4 DAY ORDER BY RAND(DATE_FORMAT(main2.created_date, 'Ymd')) 
+                        ) as main2 WHERE main2.user_id != $user_id AND main2.status = 'publish' AND main2.is_delete = '0' AND main2.post_for != '' AND main2.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main2.created_date < NOW() - INTERVAL 4 DAY
                     ) as inner2
-                ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE ul.status = '1' AND ul.is_delete = '0' ";
+                ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE ul.status = '1' AND ul.is_delete = '0'  ORDER BY RAND(DATE_FORMAT(main.created_date, 'Ymd'))";
             }
         }
         //End New Feed After 09-04-2019

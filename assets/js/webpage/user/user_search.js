@@ -535,10 +535,12 @@ app.controller('searchController', function($scope, $http, $compile) {
                     all_html += '</div>';
                 }
                 // console.log(data);
-                $('#'+div_id).html(all_html);
+                setTimeout(function(){
+                    $('#'+div_id).html(all_html);
+                },2000);
             }
         });
-        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+        return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
     }
 
     $(document).on('keydown','#search_job_title .input',function () {
@@ -2453,10 +2455,12 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                     all_html += '</div>';
                 }
                 // console.log(data);
-                $('#'+div_id).html(all_html);
+                setTimeout(function(){
+                    $('#'+div_id).html(all_html);
+                },2000);
             }
         });
-        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+        return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
     }
 
     $(document).on('keydown','#search_job_title .input',function () {
@@ -4501,10 +4505,12 @@ app.controller('peopleController', function($scope, $http, $compile, $window, $l
                     all_html += '</div>';
                 }
                 // console.log(data);
-                $('#'+div_id).html(all_html);
+                setTimeout(function(){
+                    $('#'+div_id).html(all_html);
+                },2000);
             }
         });
-        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+        return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
     }
 
     $(document).on('keydown','#search_job_title .input',function () {
@@ -5173,10 +5179,12 @@ app.controller('postController', function($scope, $http, $compile, $window, $loc
                     all_html += '</div>';
                 }
                 // console.log(data);
-                $('#'+div_id).html(all_html);
+                setTimeout(function(){
+                    $('#'+div_id).html(all_html);
+                },2000);
             }
         });
-        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+        return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
     }
 
     $(document).on('keydown','#search_hashtag .input',function () {
@@ -7069,10 +7077,12 @@ app.controller('businessController', function($scope, $http, $compile, $window, 
                     all_html += '</div>';
                 }
                 // console.log(data);
-                $('#'+div_id).html(all_html);
+                setTimeout(function(){
+                    $('#'+div_id).html(all_html);
+                },2000);
             }
         });
-        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+        return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
     }
 
     var pagenum = 0
@@ -7638,10 +7648,12 @@ app.controller('articleController', function($scope, $http, $compile, $window, $
                     all_html += '</div>';
                 }
                 // console.log(data);
-                $('#'+div_id).html(all_html);
+                setTimeout(function(){
+                    $('#'+div_id).html(all_html);
+                },2000);
             }
         });
-        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+        return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
     }
 
     var pagenum = 0
@@ -9532,10 +9544,12 @@ app.controller('questionController', function($scope, $http, $compile, $window, 
                     all_html += '</div>';
                 }
                 // console.log(data);
-                $('#'+div_id).html(all_html);
+                setTimeout(function(){
+                    $('#'+div_id).html(all_html);
+                },2000);
             }
         });
-        return '<div id="'+ div_id +'"><div class="user-tooltip"><div class="fw text-center" style="padding-top:85px;min-height:200px"><img src="'+base_url+'assets/images/loader.gif" alt="Loader" style="width:auto;" /></div></div></div>';
+        return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
     }
 
     var isProcessing = false;
