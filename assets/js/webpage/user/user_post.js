@@ -591,7 +591,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 
                 setTimeout(function(){
                     $('#'+div_id).html(all_html);
-                },2000);
+                },1000);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
@@ -4880,7 +4880,7 @@ app.controller('peopleController', function($scope, $http, $compile, $window,$lo
                 
                 setTimeout(function(){
                     $('#'+div_id).html(all_html);
-                },2000);
+                },1000);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
@@ -5451,7 +5451,7 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
                 
                 setTimeout(function(){
                     $('#'+div_id).html(all_html);
-                },2000);
+                },1000);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
@@ -7360,7 +7360,7 @@ app.controller('opportunityController', function($scope, $http, $compile, $windo
                 
                 setTimeout(function(){
                     $('#'+div_id).html(all_html);
-                },2000);
+                },1000);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
@@ -9308,7 +9308,7 @@ app.controller('articleController', function($scope, $http, $compile, $window,$l
                 
                 setTimeout(function(){
                     $('#'+div_id).html(all_html);
-                },2000);
+                },1000);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
@@ -11171,7 +11171,7 @@ app.controller('questionController', function($scope, $http, $compile, $window,$
                 
                 setTimeout(function(){
                     $('#'+div_id).html(all_html);
-                },2000);
+                },1000);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
@@ -12836,7 +12836,7 @@ app.controller('businessController', function($scope, $http, $compile, $window,$
                 
                 setTimeout(function(){
                     $('#'+div_id).html(all_html);
-                },2000);
+                },1000);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';

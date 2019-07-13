@@ -2455,7 +2455,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 }            
                 setTimeout(function(){
                     $('#'+div_id).html(all_html);
-                },2000);
+                },1000);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
@@ -10255,7 +10255,7 @@ app.controller('contactsController', function ($scope, $http, $location, $window
                 }            
                 setTimeout(function(){
                     $('#'+div_id).html(all_html);
-                },2000);
+                },1000);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
@@ -10814,7 +10814,7 @@ app.controller('followersController', function ($scope, $http, $location, $compi
                 
                 setTimeout(function(){
                     $('#'+div_id).html(all_html);
-                },2000);
+                },1000);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
@@ -11349,7 +11349,7 @@ app.controller('followingController', function ($scope, $http, $location, $compi
                 
                 setTimeout(function(){
                     $('#'+div_id).html(all_html);
-                },2000);
+                },1000);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
@@ -11938,7 +11938,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                 
                 setTimeout(function(){
                     $('#'+div_id).html(all_html);
-                },2000);
+                },1000);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
@@ -12822,7 +12822,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 
                 setTimeout(function(){
                     $('#'+div_id).html(all_html);
-                },2000);
+                },1000);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';

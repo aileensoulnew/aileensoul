@@ -308,7 +308,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                 // console.log(data);
                 setTimeout(function(){
                     $('#'+div_id).html(all_html);
-                },2000);
+                },1000);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
