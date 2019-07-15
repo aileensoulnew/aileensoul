@@ -1046,6 +1046,7 @@ class Common extends CI_Model {
         
         /* create a new, "virtual" image */
         $virtual_image = imagecreatetruecolor($thumbWidth, $desired_height);
+        imageinterlace($virtual_image, true);
         
         /* copy source image at a resized size */
         imagecopyresampled($virtual_image, $source_image, 0, 0, 0, 0, $thumbWidth, $desired_height, $width, $height);
@@ -1143,6 +1144,7 @@ class Common extends CI_Model {
 
         // Create final image with new dimensions.
         $newImage = imagecreatetruecolor($newWidth, $newHeight);
+        imageinterlace($newImage, true);
         imagecopyresampled($newImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $origWidth, $origHeight);
         imagejpeg($newImage, $path.$targetImage, $quality);
         if($create_thumb == 1)

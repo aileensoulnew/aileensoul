@@ -155,6 +155,7 @@ class Article extends MY_Controller {
     public function upload_image()
     {
         $article_upload_path = $this->config->item('article_upload_path');
+        $article_featured_thumb_path = $this->config->item('article_featured_thumb_path');
         $config = array(
             'image_library' => 'gd',
             'upload_path'   => $article_upload_path,
@@ -165,8 +166,9 @@ class Article extends MY_Controller {
         $store = $_FILES['file']['name'];
         $store_ext = explode('.', $store);        
         $store_ext = $store_ext[count($store_ext)-1];
-        $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
-        $config['file_name'] = $fileName;
+        // $fileName = 'file_' . random_string('numeric', 4) . '.' . $store_ext;        
+        $fileName = 'file_' . random_string('numeric', 4);
+        $config['file_name'] = $fileName . '.' . $store_ext;
         $this->upload->initialize($config);
         $imgdata = $this->upload->data();
         $unique_key = $this->input->post('unique_key');
@@ -189,13 +191,16 @@ class Article extends MY_Controller {
         {
             if($this->upload->do_upload('file'))
             {
-                $main_image = $article_upload_path . $fileName;
+                // $main_image = $article_upload_path . $fileName;
+                $fileName = $fileName.'.jpg';
+                $this->common->resizeImage($_FILES['file']['tmp_name'],$article_upload_path,$fileName,90,'','',0);
+                $this->common->createThumbnail($article_upload_path,$fileName,$article_featured_thumb_path,241);
 
-                $s3 = new S3(awsAccessKey, awsSecretKey);
+                /*$s3 = new S3(awsAccessKey, awsSecretKey);
                 $s3->putBucket(bucket, S3::ACL_PUBLIC_READ);
                 if (IMAGEPATHFROM == 's3bucket') {
                     $abc = $s3->putObjectFile($main_image, bucket, $main_image, S3::ACL_PUBLIC_READ);
-                }
+                }*/
                 if($edit_art_published == 0)
                 {                    
                     $success = $this->article_model->add_article_media($user_id,$article_title,$article_content,$unique_key,$fileName,$article_meta_title,$article_meta_description,$article_main_category,$article_other_category);                

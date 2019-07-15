@@ -354,10 +354,12 @@
         <script src="<?php echo base_url('assets/js/angular/angular.min-1.6.4.js?ver=' . time()); ?>"></script>
         <script data-semver="0.13.0" src="<?php echo base_url('assets/js/angular/ui-bootstrap-tpls-0.13.0.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
-        <script src="<?php echo base_url('assets/js/angular/angular-route-1.6.4.js?ver=' . time()); ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/angular/angular-route-1.6.4.js?ver=' . time()); ?>"></script> -->
+        <script src="<?php echo base_url('assets/js/angular/angular-route-1.6.4.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script>
         <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script>        
-        <script src="<?php echo base_url('assets/js/angular/angular-sanitize-1.6.4.js?ver=' . time()); ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/angular/angular-sanitize-1.6.4.js?ver=' . time()); ?>"></script> -->
+        <script src="<?php echo base_url('assets/js/angular/angular-sanitize-1.6.4.min.js?ver=' . time()); ?>"></script>
         <!-- <script src="<?php //echo base_url('8/ninja-slider.js'); ?>" type="text/javascript"></script> -->
         <script src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>        
         <script>
@@ -412,7 +414,7 @@
         <script src="<?php echo base_url('assets/js/webpage/user/user_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
         <!-- <script src="<?php //echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script> -->
-        <script src="<?php echo base_url('assets/js/jquery-ui-1.12.1.js') ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js') ?>"></script>
         <script src="<?php echo base_url('assets/js/autosize.js') ?>"></script>
         <script>    		
     		$(function () {

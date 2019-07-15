@@ -177,7 +177,7 @@
             <div class="media-display">
                 <div class="all-meda" ng-repeat="imageData in postImageData | limitTo : 6">
                     <img ng-if="imageData.filetype == 'profile_picture'" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{imageData.filename}}" alt="Image" ng-click="openModal2('myModalImage');currentSlide2($index + 1,'Image');load_more_photos();">
-                    <img ng-if="imageData.filetype == 'cover_picture'" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{imageData.filename}}" alt="Image" ng-click="openModal2('myModalImage');currentSlide2($index + 1,'Image');load_more_photos();">
+                    <img ng-if="imageData.filetype == 'cover_picture'" ng-src="<?php echo USER_BG_THUMB_UPLOAD_URL ?>{{imageData.filename}}" alt="Image" ng-click="openModal2('myModalImage');currentSlide2($index + 1,'Image');load_more_photos();">
                     <img ng-if="imageData.filetype == 'image'" ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{imageData.filename}}" alt="Image" ng-click="openModal2('myModalImage');currentSlide2($index + 1,'Image');load_more_photos();">
                 </div>
             </div>
@@ -266,7 +266,7 @@
                     <a href="{{articleData.article_slug}}" target="_self">
                         <div ng-class="articleData.article_featured_image == '' ? 'article-img default-img' : 'article-img'">
                             <img ng-if="articleData.article_featured_image == ''" ng-src="<?php echo base_url() ?>assets/img/art-default.jpg">
-                            <img ng-if="articleData.article_featured_image != ''" ng-src="<?php echo base_url().$this->config->item('article_featured_upload_path'); ?>{{articleData.article_featured_image}}">
+                            <img ng-if="articleData.article_featured_image != ''" ng-src="<?php echo ARTICLE_FEATURED_THUMBS_URL; ?>{{articleData.article_featured_image}}">
                         </div>
                         <div class="article-hover">
                             <span dd-text-collapse dd-text-collapse-max-length="49" dd-text-collapse-text="{{articleData.article_title != '' ? articleData.article_title : 'Untitled'}}" dd-text-collapse-cond="false"></span>
@@ -552,10 +552,10 @@
                                 </div>
                             </div>
                             <div class="post-discription" ng-if="post.post_data.post_for == 'profile_update'">
-                                <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{post.profile_update.data_value}}" ng-click="openModal2('myModalCoverPic'+post.post_data.id);">
+                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.profile_update.data_value}}" ng-click="openModal2('myModalCoverPic'+post.post_data.id);">
                             </div>
                             <div class="post-discription" ng-if="post.post_data.post_for == 'cover_update'">
-                                <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{post.cover_update.data_value}}" ng-if="post.cover_update.data_value != ''" ng-click="openModal2('myModalCoverPic'+post.post_data.id);">
+                                <img ng-src="<?php echo USER_BG_THUMB_UPLOAD_URL ?>{{post.cover_update.data_value}}" ng-if="post.cover_update.data_value != ''" ng-click="openModal2('myModalCoverPic'+post.post_data.id);">
                             </div>
                             <div ng-if="post.post_data.post_for == 'profile_update' || post.post_data.post_for == 'cover_update'" id="myModalCoverPic{{post.post_data.id}}" class="modal modal2" style="display: none;">
                                 <button type="button" class="modal-close" data-dismiss="modal" ng-click="closeModal2('myModalCoverPic'+post.post_data.id)">×</button>
@@ -568,10 +568,10 @@
                                         <div class="mySlides mySlides2{{post.post_data.id}}">
                                             <div class="numbertext"></div>
                                             <div class="slider_img_p" ng-if="post.post_data.post_for == 'cover_update'">
-                                                <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{post.cover_update.data_value}}" alt="Cover Image" id="cover{{post.post_data.id}}">
+                                                <img ng-src="<?php echo USER_BG_THUMB_UPLOAD_URL ?>{{post.cover_update.data_value}}" alt="Cover Image" id="cover{{post.post_data.id}}">
                                             </div>
                                             <div class="slider_img_p" ng-if="post.post_data.post_for == 'profile_update'">
-                                                <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{post.profile_update.data_value}}" alt="Profile Image" id="cover{{post.post_data.id}}">
+                                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.profile_update.data_value}}" alt="Profile Image" id="cover{{post.post_data.id}}">
                                             </div>
                                         </div>                                
                                     </div>
@@ -750,10 +750,10 @@
                                                 </div>
                                             </div>
                                             <div class="post-discription" ng-if="post.share_data.data.post_data.post_for == 'profile_update'">
-                                                <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{post.share_data.data.profile_update.data_value}}" ng-click="openModal2('myModalCoverPicShare'+post.share_data.data.post_data.id);">
+                                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.share_data.data.profile_update.data_value}}" ng-click="openModal2('myModalCoverPicShare'+post.share_data.data.post_data.id);">
                                             </div>
                                             <div class="post-discription" ng-if="post.share_data.data.post_data.post_for == 'cover_update'">
-                                                <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{post.share_data.data.cover_update.data_value}}" ng-if="post.share_data.data.cover_update.data_value != ''" ng-click="openModal2('myModalCoverPicShare'+post.share_data.data.post_data.id);">
+                                                <img ng-src="<?php echo USER_BG_THUMB_UPLOAD_URL ?>{{post.share_data.data.cover_update.data_value}}" ng-if="post.share_data.data.cover_update.data_value != ''" ng-click="openModal2('myModalCoverPicShare'+post.share_data.data.post_data.id);">
                                             </div>
                                             <div ng-if="post.share_data.data.post_data.post_for == 'profile_update' || post.share_data.data.post_data.post_for == 'cover_update'" id="myModalCoverPicShare{{post.share_data.data.post_data.id}}" tabindex="-1" role="dialog"  class="modal modal2" style="display: none;">
                                                 <button type="button" class="modal-close" data-dismiss="modal" ng-click="closeModalShare('myModalCoverPicShare'+post.share_data.data.post_data.id)">×</button>
@@ -766,10 +766,10 @@
                                                         <div class="mySlides mySlides2{{post.share_data.data.post_data.id}}">
                                                             <div class="numbertext"></div>
                                                             <div class="slider_img_p" ng-if="post.share_data.data.post_data.post_for == 'cover_update'">
-                                                                <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{post.share_data.data.cover_update.data_value}}" alt="Cover Image" id="cover{{post.share_data.data.post_data.id}}">
+                                                                <img ng-src="<?php echo USER_BG_THUMB_UPLOAD_URL ?>{{post.share_data.data.cover_update.data_value}}" alt="Cover Image" id="cover{{post.share_data.data.post_data.id}}">
                                                             </div>
                                                             <div class="slider_img_p" ng-if="post.share_data.data.post_data.post_for == 'profile_update'">
-                                                                <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{post.share_data.data.profile_update.data_value}}" alt="Profile Image" id="cover{{post.share_data.data.post_data.id}}">
+                                                                <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.share_data.data.profile_update.data_value}}" alt="Profile Image" id="cover{{post.share_data.data.post_data.id}}">
                                                             </div>
                                                         </div>                                
                                                     </div>
@@ -1282,7 +1282,7 @@
                                 <div class="arti-profile-box">
                                     <div class="user-cover-img" ng-if="contact.profile_background != null && contact.profile_background != ''">
                                         <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
-                                            <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
+                                            <img ng-src="<?php echo USER_BG_THUMB_UPLOAD_URL ?>{{contact.profile_background}}">
                                         </a>
                                     </div>
                                     <div class="user-cover-img" ng-if="contact.profile_background == null || contact.profile_background == ''">
@@ -1292,7 +1292,7 @@
                                     </div>
                                     <div class="user-pr-img" ng-if="contact.user_image != ''">
                                         <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
-                                            <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{contact.user_image}}">
+                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{contact.user_image}}">
                                         </a>
                                     </div>
                                     <div class="user-pr-img" ng-if="contact.user_image == ''">
@@ -1800,8 +1800,8 @@
                 <div class="mySlides mySlides2Image" ng-repeat="_postAllImageData in postAllImageData" style="display: none;">
                     <div class="numbertext">{{$index + 1}} / {{postAllImageData.length}}</div>
                     <div class="slider_img_p">
-                        <img ng-if="_postAllImageData.filetype == 'profile_picture'" ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{_postAllImageData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
-                        <img ng-if="_postAllImageData.filetype == 'cover_picture'" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{_postAllImageData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
+                        <img ng-if="_postAllImageData.filetype == 'profile_picture'" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{_postAllImageData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
+                        <img ng-if="_postAllImageData.filetype == 'cover_picture'" ng-src="<?php echo USER_BG_THUMB_UPLOAD_URL ?>{{_postAllImageData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
                         <img ng-if="_postAllImageData.filetype == 'image'" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_postAllImageData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
                     </div>
                 </div>
@@ -2219,10 +2219,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="post-discription" ng-if="share_post_data.share_data.data.post_data.post_for == 'profile_update'">
-                                                    <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{share_post_data.share_data.data.profile_update.data_value}}" ng-click="openModal2('myModalCoverPicInnerShare'+share_post_data.share_data.data.post_data.id);">
+                                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{share_post_data.share_data.data.profile_update.data_value}}" ng-click="openModal2('myModalCoverPicInnerShare'+share_post_data.share_data.data.post_data.id);">
                                                 </div>
                                                 <div class="post-discription" ng-if="share_post_data.share_data.data.post_data.post_for == 'cover_update'">
-                                                    <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{share_post_data.share_data.data.cover_update.data_value}}" ng-if="share_post_data.share_data.data.cover_update.data_value != ''" ng-click="openModal2('myModalCoverPicInnerShare'+share_post_data.share_data.data.post_data.id);">
+                                                    <img ng-src="<?php echo USER_BG_THUMB_UPLOAD_URL ?>{{share_post_data.share_data.data.cover_update.data_value}}" ng-if="share_post_data.share_data.data.cover_update.data_value != ''" ng-click="openModal2('myModalCoverPicInnerShare'+share_post_data.share_data.data.post_data.id);">
                                                 </div>
                                                 <div ng-if="share_post_data.share_data.data.post_data.post_for == 'profile_update' || share_post_data.share_data.data.post_data.post_for == 'cover_update'" id="myModalCoverPicInnerShare{{share_post_data.share_data.data.post_data.id}}" tabindex="-1" role="dialog"  class="modal modal2" style="display: none;">
                                                     <button type="button" class="modal-close" ng-click="closeModalShare('myModalCoverPicInnerShare'+share_post_data.share_data.data.post_data.id)">×</button>
@@ -2235,10 +2235,10 @@
                                                             <div class="mySlides mySlides2{{share_post_data.share_data.data.post_data.id}}">
                                                                 <div class="numbertext"></div>
                                                                 <div class="slider_img_p" ng-if="share_post_data.share_data.data.post_data.post_for == 'cover_update'">
-                                                                    <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{share_post_data.share_data.data.cover_update.data_value}}" alt="Cover Image" id="cover{{share_post_data.share_data.data.post_data.id}}">
+                                                                    <img ng-src="<?php echo USER_BG_THUMB_UPLOAD_URL ?>{{share_post_data.share_data.data.cover_update.data_value}}" alt="Cover Image" id="cover{{share_post_data.share_data.data.post_data.id}}">
                                                                 </div>
                                                                 <div class="slider_img_p" ng-if="share_post_data.share_data.data.post_data.post_for == 'profile_update'">
-                                                                    <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{share_post_data.share_data.data.profile_update.data_value}}" alt="Profile Image" id="cover{{share_post_data.share_data.data.post_data.id}}">
+                                                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{share_post_data.share_data.data.profile_update.data_value}}" alt="Profile Image" id="cover{{share_post_data.share_data.data.post_data.id}}">
                                                                 </div>
                                                             </div>                          
                                                         </div>
@@ -2345,10 +2345,10 @@
                                     </div>
                                 </div>
                                 <div class="post-discription" ng-if="share_post_data.post_data.post_for == 'profile_update'">
-                                    <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{share_post_data.profile_update.data_value}}" ng-click="openModal2('myModalCoverPicShare'+share_post_data.post_data.id);">
+                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{share_post_data.profile_update.data_value}}" ng-click="openModal2('myModalCoverPicShare'+share_post_data.post_data.id);">
                                 </div>
                                 <div class="post-discription" ng-if="share_post_data.post_data.post_for == 'cover_update'">
-                                    <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{share_post_data.cover_update.data_value}}" ng-if="share_post_data.cover_update.data_value != ''" ng-click="openModal2('myModalCoverPicShare'+share_post_data.post_data.id);">
+                                    <img ng-src="<?php echo USER_BG_THUMB_UPLOAD_URL ?>{{share_post_data.cover_update.data_value}}" ng-if="share_post_data.cover_update.data_value != ''" ng-click="openModal2('myModalCoverPicShare'+share_post_data.post_data.id);">
                                 </div>
                                 <div ng-if="share_post_data.post_data.post_for == 'profile_update' || share_post_data.post_data.post_for == 'cover_update'" id="myModalCoverPicShare{{share_post_data.post_data.id}}" tabindex="-1" role="dialog"  class="modal modal2" style="display: none;">
                                     <button type="button" class="modal-close" ng-click="closeModalShare('myModalCoverPicShare'+share_post_data.post_data.id)">×</button>
@@ -2361,10 +2361,10 @@
                                             <div class="mySlides mySlides2{{share_post_data.post_data.id}}">
                                                 <div class="numbertext"></div>
                                                 <div class="slider_img_p" ng-if="share_post_data.post_data.post_for == 'cover_update'">
-                                                    <img ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{share_post_data.cover_update.data_value}}" alt="Cover Image" id="cover{{share_post_data.post_data.id}}">
+                                                    <img ng-src="<?php echo USER_BG_THUMB_UPLOAD_URL ?>{{share_post_data.cover_update.data_value}}" alt="Cover Image" id="cover{{share_post_data.post_data.id}}">
                                                 </div>
                                                 <div class="slider_img_p" ng-if="share_post_data.post_data.post_for == 'profile_update'">
-                                                    <img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{share_post_data.profile_update.data_value}}" alt="Profile Image" id="cover{{share_post_data.post_data.id}}">
+                                                    <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{share_post_data.profile_update.data_value}}" alt="Profile Image" id="cover{{share_post_data.post_data.id}}">
                                                 </div>
                                             </div>                                
                                         </div>
