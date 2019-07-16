@@ -2295,33 +2295,33 @@ class Customscript extends CI_Controller {
         }
     }
 
-    public function article_pic()
+    public function post_pic()
     {
         set_time_limit(0);
         ini_set("memory_limit","1024M");
-        $s_sql = "SELECT id_post_article,article_featured_image FROM ailee_post_article";
+        $s_sql = "SELECT id,filename FROM ailee_user_post_file WHERE file_type = 'image'";
         $result = $this->db->query($s_sql)->result();
         echo "<pre>";        
         // print_r($result);exit();
         foreach ($result as $_result) {
             // print_r($_result);
-            if($_result->article_featured_image != '')
+            if($_result->filename != '')
             {                
-                if(!file_exists($this->config->item('article_featured_upload_path').$_result->article_featured_image))
+                if(!file_exists($this->config->item('user_post_main_upload_path').$_result->filename))
                 {                
                 }
                 else
                 {
-                    $img_path = explode(".", $_result->article_featured_image);
+                    $img_path = explode(".", $_result->filename);
                     $fileName = $img_path[0].'.jpg';
-                    $ret = $this->common->resizeImage($this->config->item('article_featured_upload_path').$_result->article_featured_image,$this->config->item('article_featured_upload_path'),$fileName,90,'','',0);
+                    $ret = $this->common->resizeImage($this->config->item('user_post_main_upload_path').$_result->filename,$this->config->item('user_post_main_upload_path'),$fileName,90,$this->config->item('user_post_thumb_upload_path'),$this->config->item('user_post_resize1_upload_path'));
 
-                    $this->common->createThumbnail($this->config->item('article_featured_upload_path'),$fileName,$this->config->item('article_featured_thumb_path'),241);
+                    /*$this->common->createThumbnail($this->config->item('article_featured_upload_path'),$fileName,$this->config->item('article_featured_thumb_path'),241);
                     
                     $data = array(
                         "article_featured_image" => $fileName
                     );
-                    $updatdata = $this->common->update_data($data, 'post_article', 'id_post_article', $_result->id_post_article);
+                    $updatdata = $this->common->update_data($data, 'post_article', 'id_post_article', $_result->id_post_article);*/
                     echo "--->".$ret."<---";
                     echo $fileName;
                     echo "<br>";
