@@ -71,17 +71,28 @@ class Userprofile extends MY_Controller {
         $is_userFollowInfo = $this->userprofile_model->userFollowStatus($userid, $userdata['user_id']);
         $this->data['to_id'] = $userdata['user_id'];
 
-        if (count($is_userContactInfo) != 0) {
-            $this->data['contact_status'] = 1;
-            $this->data['contact_value'] = $is_userContactInfo['status'];
-            $this->data['contact_id'] = $is_userContactInfo['id'];
-            $this->data['from_id'] = $is_userContactInfo['from_id'];
-        } else {
-            $this->data['contact_value'] = 'new';
-            $this->data['contact_status'] = 0;
-            $this->data['contact_id'] = ($is_userContactInfo['id'] ? $is_userContactInfo['id'] : "");
-            $this->data['from_id'] = $is_userContactInfo['from_id'];
+        if($userid == "")
+        {
+            $this->data['contact_status'] = "";
+            $this->data['contact_value'] = "new";
+            $this->data['contact_id'] = "";
+            $this->data['from_id'] = "";
         }
+        else
+        {            
+            if (count($is_userContactInfo) != 0) {
+                $this->data['contact_status'] = 1;
+                $this->data['contact_value'] = $is_userContactInfo['status'];
+                $this->data['contact_id'] = $is_userContactInfo['id'];
+                $this->data['from_id'] = $is_userContactInfo['from_id'];
+            } else {
+                $this->data['contact_value'] = 'new';
+                $this->data['contact_status'] = 0;
+                $this->data['contact_id'] = ($is_userContactInfo['id'] ? $is_userContactInfo['id'] : "");
+                $this->data['from_id'] = $is_userContactInfo['from_id'];
+            }
+        }
+
 
         if (count($is_userFollowInfo) != 0) {
             $this->data['follow_status'] = 1;
@@ -92,6 +103,7 @@ class Userprofile extends MY_Controller {
             $this->data['follow_id'] = ($is_userFollowInfo['id'] ? $is_userFollowInfo['id'] : "");
             $this->data['follow_status'] = 0;
         }
+        // print_r($this->data);exit();
         $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
         $this->data['header'] = $this->load->view('userprofile/header', $this->data, TRUE);
         $this->data['login_footer'] = $this->load->view('login_footer', $this->data, TRUE);
