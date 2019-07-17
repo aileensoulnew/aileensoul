@@ -1295,6 +1295,77 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         });
     }
 
+    $scope.promotedPostIndex10Data = [];
+    function getUserPromotedPostIndex10() {
+        $http.get(base_url + "user_post/getUserPromotedPostIndex10").then(function (success) {            
+            $('body').removeClass("body-loader");
+            if (success.data) {                
+                $scope.promotedPostIndex10Data = success.data; 
+                setTimeout(function(){
+                    $('[data-toggle="popover"]').popover({
+                        trigger: "manual" ,
+                        html: true, 
+                        animation:false,
+                        template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                        content: function () {
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
+                            // return $('#popover-content').html();
+                        },
+                        placement: function (context, element) {
+
+                            var $this = $(element);
+                            var offset = $this.offset();
+                            var width = $this.width();
+                            var height = $this.height();
+
+                            var centerX = offset.left + width / 2;
+                            var centerY = offset.top + height / 2;
+                            var position = $(element).position();
+                            
+                            if(centerY > $(window).scrollTop())
+                            {
+                                scroll_top = $(window).scrollTop();
+                                scroll_center = centerY;
+                            }
+                            if($(window).scrollTop() > centerY)
+                            {
+                                scroll_top = centerY;
+                                scroll_center = $(window).scrollTop();
+                            }
+                            
+                            if (parseInt(scroll_center - scroll_top) < 340){
+                                return "bottom";
+                            }                        
+                            return "top";
+                        }
+                    }).on("mouseenter", function () {
+                        var _this = this;
+                        $(this).popover("show");
+                        $(".popover").on("mouseleave", function () {
+                            $(_this).popover('hide');
+                        });
+                    }).on("mouseleave", function () {
+                        var _this = this;
+                        setTimeout(function () {
+                            if (!$(".popover:hover").length) {
+                                $(_this).popover("hide");
+                            }
+                        }, 100);
+                    });
+                },500);
+
+            } else {
+                isLoadingData = true;
+            }           
+        }, function (error) {
+            getUserPromotedPostIndex10();
+        });
+    }
+
     getUserPost(pg);
     var isProcessing = false;
 
@@ -1508,6 +1579,10 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 $scope.showLoadmore = false;
             }
 
+            if(pg == 2)
+            {
+                getUserPromotedPostIndex10();
+            }
             setTimeout(function(){
                 var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
 
@@ -4672,7 +4747,7 @@ app.controller('peopleController', function($scope, $http, $compile, $window,$lo
     var isProcessingPst = false;
     
     var pagenum = 0
-    $scope.perpage_record = 7;
+    $scope.perpage_record = 15;
     $scope.total_record = 0;
 
     $scope.details_in_popup = function(uid,login_user_id,utype,div_id){

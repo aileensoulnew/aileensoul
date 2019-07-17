@@ -872,7 +872,13 @@ class User_post extends MY_Controller {
     }
     public function getUserPromotedPost() {
         $userid = $this->session->userdata('aileenuser');
-        $post_data = $this->user_post_model->user_promoted_post($userid);
+        $post_data = $this->user_post_model->user_promoted_post($userid,PROMOTEDPOST);
+        echo json_encode($post_data);
+    }
+
+    public function getUserPromotedPostIndex10() {
+        $userid = $this->session->userdata('aileenuser');
+        $post_data = $this->user_post_model->user_promoted_post($userid,PROMOTEDPOSTNEW);
         echo json_encode($post_data);
     }
 
@@ -3966,7 +3972,7 @@ class User_post extends MY_Controller {
             $search_city = json_decode($search_city);
         }
         
-        $limit = '7';
+        $limit = '15';
         $start = ($page - 1) * $limit;
         if ($start < 0)
             $start = 0;

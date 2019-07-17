@@ -4703,11 +4703,11 @@ class User_post_model extends CI_Model {
         return $bank_data;
     }
 
-    public function user_promoted_post($user_id = '') {
+    public function user_promoted_post($user_id = '',$promoted_ids) {
         $getDeleteUserPost = $this->deletePostUser($user_id);
         $result_array = array();
         $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type")->from("user_post up");//UNIX_TIMESTAMP(STR_TO_DATE(up.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
-        $this->db->where_in('up.id', explode(",",PROMOTEDPOST));
+        $this->db->where_in('up.id', explode(",",$promoted_ids));
         $this->db->where('up.status', 'publish');
         // $this->db->where('up.post_for != ', 'question');
         $this->db->where('up.is_delete', '0');

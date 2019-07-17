@@ -10,6 +10,7 @@ class Cron extends MY_Controller {
 
         $this->load->model('user_model');
         $this->load->model('notification_model');
+        $this->load->model('user_post_model');
     }
 
     public function kill_all_query()
@@ -99,6 +100,45 @@ class Cron extends MY_Controller {
         $count = $cr_count['total'];
         echo "data:{$count}\n\n";
         flush();
+    }
+
+    public function manual_like($offset = 0)
+    {
+        $limit = 10;
+        $offset = ($offset ? $offset : 0);
+        $query = $this->db->query("SELECT *  FROM ailee_user_post WHERE post_for IN ('simple', 'opportunity', 'article', 'question', 'share') AND status = 'publish' AND `is_delete` = '0' ORDER BY created_date DESC LIMIT $offset,$limit");
+        $result = $query->result_array();
+        if($result)
+        {            
+            foreach ($result as $key => $value) {
+                $post_like_count = $this->user_post_model->likepost_count($value['id']);            
+                if($post_like_count < 91)
+                {
+                    gotoRandom:
+                    $q_user = $this->db->query("SELECT u.*  FROM ailee_user u LEFT JOIN ailee_user_login ul ON ul.user_id = u.user_id WHERE ul.status = '1' AND ul.is_delete = '0' order by rand() limit 1");
+                    $res_user = $q_user->row_array();                
+
+                    $is_likepost = $this->user_post_model->is_likepost($res_user['user_id'], $value['id']);
+                    if($is_likepost && $is_likepost['is_like'] == '1')
+                    {
+                        goto gotoRandom;
+                    }
+                    else
+                    {
+                        // echo "user_id-->".$res_user['user_id']."<----->".$value['id']."<--post_id<br>";
+                        $insert_data = array();
+                        $insert_data['user_id'] = $res_user['user_id'];
+                        $insert_data['post_id'] = $value['id'];
+                        $insert_data['created_date'] = date('Y-m-d H:i:s', time());
+                        $insert_data['modify_date'] = date('Y-m-d H:i:s', time());
+                        $insert_data['is_like'] = '1';
+                        $user_post_like_id = $this->common->insert_data_getid($insert_data, 'user_post_like');
+                    }
+                }
+            }
+            $offset = $offset + $limit;
+            $this->manual_like($offset);
+        }
     }
 
 }
