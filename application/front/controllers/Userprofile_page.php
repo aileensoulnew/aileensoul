@@ -83,6 +83,24 @@ class Userprofile_page extends MY_Controller {
         $this->load->view('userprofile/contact_request', $this->data);
     }
 
+    public function contact_request_people() {
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");        
+        $this->load->view('userprofile/contact_request_people', $this->data);
+    }
+
+    public function hashtag_list() {
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");        
+        $this->load->view('userprofile/hashtag_list', $this->data);
+    }
+
+    public function business_list() {
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");        
+        $this->load->view('userprofile/contact_request_business', $this->data);
+    }
+
     public function pending_contact_request() {
         $userid = $this->session->userdata('aileenuser');
         $pendingContactRequest = $this->user_model->contact_request_pending($userid);
@@ -973,12 +991,12 @@ class Userprofile_page extends MY_Controller {
 
 
         /* RESIZE */
-        $freelancer_hire_profile['image_library'] = 'gd2';
-        $freelancer_hire_profile['source_image'] = $main_image;
-        $freelancer_hire_profile['new_image'] = $main_image;
-        $freelancer_hire_profile['quality'] = $quality;
+        $pro_pic_config['image_library'] = 'gd2';
+        $pro_pic_config['source_image'] = $main_image;
+        $pro_pic_config['new_image'] = $main_image;
+        $pro_pic_config['quality'] = $quality;
         $instanse10 = "image10";
-        $this->load->library('image_lib', $freelancer_hire_profile, $instanse10);
+        $this->load->library('image_lib', $pro_pic_config, $instanse10);
         /* RESIZE */
         
 
@@ -986,11 +1004,18 @@ class Userprofile_page extends MY_Controller {
         $user_thumb_width = $this->config->item('user_thumb_width');
         $user_thumb_height = $this->config->item('user_thumb_height');
 
-        $upload_image = $user_bg_path . $imageName;
+        if (!file_exists($user_bg_path . $imageName)) {
+            $imageName = '';
+        }
+        else
+        {
+            $upload_image = $user_bg_path . $imageName;
 
-        $thumb_image_uplode = $this->thumb_img_uplode($upload_image, $imageName, $user_thumb_path, $user_thumb_width, $user_thumb_height);
+            $thumb_image_uplode = $this->thumb_img_uplode($upload_image, $imageName, $user_thumb_path, $user_thumb_width, $user_thumb_height);
 
-        $thumb_image = $user_thumb_path . $imageName;       
+            $thumb_image = $user_thumb_path . $imageName;                   
+        }
+
 
         $data = array(
             'user_image' => $imageName
@@ -1016,10 +1041,26 @@ class Userprofile_page extends MY_Controller {
 
         if ($update) {            
 
-            $userdata = $this->user_model->getUserDataByslug($userslug, $data = 'ui.user_image');
+            $userdata = $this->user_model->getUserDataByslug($userslug, $data = 'ui.user_image, u.user_gender');
+
+            if ($userdata['user_image'] != '') {
+                $not_pro_pic = USER_THUMB_UPLOAD_URL . $userdata['user_image'];
+                $main_pro_pic = USER_MAIN_UPLOAD_URL.$userdata['user_image'];
+            } else {
+                if($userdata['user_gender'] == "M")
+                {
+                    $not_pro_pic = base_url('assets/img/man-user.jpg');
+                    $main_pro_pic = base_url('assets/img/man-user.jpg');
+                }
+                else
+                {
+                    $not_pro_pic = base_url('assets/img/female-user.jpg');                    
+                    $main_pro_pic = base_url('assets/img/female-user.jpg');                    
+                }
+            }
 
             $data_pro = array(
-                'not_image' => USER_THUMB_UPLOAD_URL . $userdata['user_image']
+                'not_image' => $not_pro_pic
             );
 
             $this->db->where('user_type', '1');
@@ -1028,7 +1069,7 @@ class Userprofile_page extends MY_Controller {
 
             $new_people = $this->searchelastic_model->add_edit_single_people($userid);
 
-            $userImageContent = '<a class="other-user-profile" hrerf="#" data-toggle="modal" data-target="#other-user-profile-img"><img src="' . USER_MAIN_UPLOAD_URL . $userdata['user_image'] . '"></a>';
+            $userImageContent = '<a class="other-user-profile" hrerf="#" data-toggle="modal" data-target="#other-user-profile-img"><img src="' . $not_pro_pic . '"></a>';
             $userImageContent .= '<div class="upload-profile"><a class="cusome_upload" href="#" onclick="updateprofilepopup();" title="Update profile picture">
                             <img src="' . base_url('assets/n-images/cam.png') . '"  alt="CAMERAIMAGE">Update Profile Picture
                         </a>
@@ -1038,8 +1079,8 @@ class Userprofile_page extends MY_Controller {
 
             $this->session->set_userdata('aileenuser_userimage', $userdata['user_image']);
             $resData['userImageContent'] = $userImageContent;
-            $resData['userProfilePicMain'] = USER_MAIN_UPLOAD_URL.$userdata['user_image'];
-            $resData['userProfilePicThumb'] = USER_THUMB_UPLOAD_URL.$userdata['user_image'];
+            $resData['userProfilePicMain'] = $main_pro_pic;
+            $resData['userProfilePicThumb'] = $not_pro_pic;
 
             echo json_encode($resData);
         } else {

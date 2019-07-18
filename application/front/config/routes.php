@@ -88,6 +88,8 @@ $route['userprofile_page/(:any)'] = 'userprofile_page/$1';
 
 $route['opportunities'] = 'user_post';
 $route['contact-request'] = 'userprofile_page/contact_request';
+$route['hashtags'] = 'userprofile_page/contact_request';
+$route['contact-business'] = 'userprofile_page/contact_request';
 
 $route['questions/(:any)/(:any)'] = 'userprofile_page/question_detail/$1/$2';
 

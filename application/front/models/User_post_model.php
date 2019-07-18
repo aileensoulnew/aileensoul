@@ -5965,4 +5965,88 @@ class User_post_model extends CI_Model {
         $result_array = $query->result_array();   
         return $result_array;
     }
+
+    public function get_hashtag_follow_status($hashtag_id = '',$user_id = '') {
+        $where = "(hashtag_id = '" . $hashtag_id . "' AND user_id = '".$user_id."')";
+        $this->db->select("status")->from("hashtag_follow");
+        $this->db->where($where);        
+        $query = $this->db->get();
+        $result_array = $query->row_array();        
+        if($result_array)
+        {
+            $follow_status = $result_array['status'];
+        }
+        else
+        {
+            $follow_status = 0;
+        }
+        return $follow_status;
+    }
+
+    public function get_hashtag_follower_count($hashtag_id = '') {
+        $where = "(hashtag_id = '" . $hashtag_id . "')";
+        $this->db->select("count(*) as follower_count")->from("hashtag_follow");
+        $this->db->where('status', '1');        
+        $this->db->where($where);        
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array['follower_count'];
+    }
+
+    public function get_hashtag_list($user_id = '', $page = "",$limit = "12",$search_tag = '') {
+        
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $this->db->distinct();
+        
+        $this->db->select("id,hashtag,status")->from("hashtag");        
+        $this->db->where('status', '1');
+        if($search_tag != '')
+        {
+            $sql_like = "hashtag LIKE '".$search_tag."%'";
+            $this->db->where($sql_like);
+        }
+        $this->db->order_by('hashtag', 'ASC');
+        if($limit != '') {
+            $this->db->limit($limit,$start);
+        }
+        $query = $this->db->get();
+        // echo $this->db->last_query();exit;
+        $result_array = $query->result_array();
+        foreach ($result_array as $key => $value) {
+            $follower_counter = $this->get_hashtag_follower_count($value['id']);
+            $hashtag_follow_status = $this->get_hashtag_follow_status($value['id'],$user_id);
+            $follower_count = $this->common->change_number_long_format_to_short((int)$follower_counter);
+            $result_array[$key]['hashtag_follower_count'] = $follower_count;
+            $result_array[$key]['hashtag_follow_status'] = $hashtag_follow_status;
+        }
+        $ret_array['hashtag_list'] = $result_array;
+        $ret_array['total_record'] =$this->get_hashtag_list_total_rec($search_tag);
+        return $ret_array;
+    }
+
+    public function get_hashtag_list_total_rec($search_tag = '') {
+        $this->db->distinct();        
+        $this->db->select("COUNT(*) as total_record")->from("hashtag");        
+        $this->db->where('status', '1');
+        if($search_tag != '')
+        {
+            $sql_like = "hashtag LIKE '".$search_tag."%'";
+            $this->db->where($sql_like);
+        }
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array['total_record'];
+    }
+
+    public function get_hashtag_follow($hashtag_id = '', $user_id = '') {
+        $this->db->select("id_hashtag_follow,hashtag_id,status")->from("hashtag_follow");
+        $where = "hashtag_id = '" . $hashtag_id . "' AND user_id = '" . $user_id . "'";
+        $this->db->where($where);
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array;
+    }
 }

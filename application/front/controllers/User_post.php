@@ -4274,4 +4274,106 @@ class User_post extends MY_Controller {
         $this->data['type'] = $type;
         $this->load->view('userprofile/user_info_box', $this->data);
     }
+
+    public function get_hashtag_list() {
+        $search_tag = $this->input->post('search_tag') && $this->input->post('search_tag') != undefined ? $this->input->post('search_tag') : '';
+        if (!empty($this->input->get('page')) && $this->input->get('page') != 'undefined') {
+            $page = $this->input->get('page');
+        }
+        else
+        {
+            $page = 1;
+        }
+        $limit = 12;//40;
+        $userid = $this->session->userdata('aileenuser');
+        $user_data = $this->user_post_model->get_hashtag_list($userid,$page,$limit,$search_tag);
+        echo json_encode($user_data);
+    }
+
+    public function follow_hashtag() {
+        $user_id = $this->session->userdata('aileenuser');
+        $hashtag_id = $_POST['hashtag_id'];
+        $follow = $this->user_post_model->get_hashtag_follow($hashtag_id, $user_id);
+
+        if (count($follow) != 0) {
+            $data = array('status' => '1','modify_date' => date("Y-m-d h:i:s"));
+            $where = array('id_hashtag_follow' => $follow['id_hashtag_follow']);
+            $this->db->where($where);
+            $updatdata = $this->db->update('hashtag_follow', $data);
+            $response = 1;
+        } else {
+            $data = array(                
+                'hashtag_id' => $hashtag_id,
+                'user_id' => $user_id,
+                'status' => '1',
+                'created_date' => date("Y-m-d h:i:s"),
+                'modify_date' => date("Y-m-d h:i:s"),
+            );
+            $insert_id = $this->common->insert_data($data, 'hashtag_follow');
+            $response = 1;
+        }
+        $follower_counter = $this->user_post_model->get_hashtag_follower_count($hashtag_id);
+        $return_array = array("status"=>1,"hashtag_follower_count" => $follower_counter);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
+    }
+
+    public function unfollow_hashtag() {
+        $user_id = $this->session->userdata('aileenuser');
+        $hashtag_id = $_POST['hashtag_id'];
+        $unfollow = $this->user_post_model->get_hashtag_follow($hashtag_id, $user_id);
+
+        if (count($unfollow) != 0) {
+            $data = array('status' => '0','modify_date' => date("Y-m-d h:i:s"));
+            $where = array('id_hashtag_follow' => $unfollow['id_hashtag_follow']);
+            $this->db->where($where);
+            $updatdata = $this->db->update('hashtag_follow', $data);
+            $response = 1;
+        } else {
+            $data = array(
+                'hashtag_id' => $hashtag_id,
+                'user_id' => $user_id,
+                'status' => '0',
+                'created_date' => date("Y-m-d h:i:s"),
+                'modify_date' => date("Y-m-d h:i:s"),
+            );
+            $insert_id = $this->common->insert_data($data, 'hashtag_follow');
+            $response = 1;
+        }
+        $follower_counter = $this->user_post_model->get_hashtag_follower_count($hashtag_id);
+        $return_array = array("status"=>0,"hashtag_follower_count" => $follower_counter);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
+    }
+
+    public function get_business_list(){
+        
+        $perpage = 12;
+        $page = 1;
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }
+
+        $start = ($page - 1) * $perpage;
+        if ($start < 0)
+            $start = 0;
+
+        $userid = $this->session->userdata('aileenuser');
+
+        // $limit = 50;
+        $limit = $perpage;
+        $offset = $start;
+        $location_id = "";
+        $category_id = "";
+        $userlist = $this->business_model->business_userlist($userid, $sortby = 'business_profile_id', $orderby = 'desc', $limit, $offset,$category_id,$location_id);
+        if (empty($_GET["total_record"])) {
+            $userlist1 = $this->business_model->business_userlist($userid, $sortby = 'business_profile_id', $orderby = 'desc');
+            $total_record = count($userlist1);
+        }
+        else
+        {
+            $total_record = $_GET["total_record"];
+        }
+
+        $return_array = array("page"=>$page,"total_record"=>$total_record,"business_data" => $userlist);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
+    }
 }

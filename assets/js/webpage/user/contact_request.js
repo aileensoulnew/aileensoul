@@ -1,7 +1,40 @@
 var isscroll = true;
+app.directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if (event.which === 13) {
+                scope.$apply(function () {
+                    scope.$eval(attrs.ngEnter);
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
+});
+app.config(function ($routeProvider, $locationProvider) {
+    $routeProvider
+            .when("/contact-business", {
+                templateUrl: base_url + "userprofile_page/business_list",
+                controller: 'businessController'
+            })
+            .when("/hashtags", {
+                templateUrl: base_url + "userprofile_page/hashtag_list",
+                controller: 'hashtagController'
+            })
+            .otherwise({
+                templateUrl: base_url + "userprofile_page/contact_request_people",
+                controller: 'contactRequestController'
+            });
+    $locationProvider.html5Mode(true);
+});
+app.controller('mainDefaultController', function($scope, $http, $compile) {
+    $scope.active_pg = 1;
+});
 app.controller('contactRequestController', function ($scope, $http,$window ) {
+    $scope.$parent.active_pg = 1;
     $scope.today = new Date();
-    $scope.title = "Contact Request | Aileensoul";
+    $scope.$parent.title = "Contact Request | Aileensoul";
     $scope.user_id = user_id;
     pending_contact_request();
     var offset = "40";
@@ -195,6 +228,327 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
         });
     }
 });
+app.controller('businessController', function ($scope, $http,$window ) {
+    $scope.$parent.active_pg = 2;
+    $scope.today = new Date();
+    $scope.$parent.title = "Business | Aileensoul";
+    $scope.user_id = user_id;
+    var offset = "12";
+    var processing = false;
+    //getContactSuggetion(1);
+    var isProcessing = false;
+    
+    angular.element($window).bind("scroll", function (e) {
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.4) {
+            // isLoadingData = true;
+            var page = $scope.page_number;
+            var total_record = $scope.total_record;
+            var perpage_record = $scope.perpage_record;
+    
+            if (parseInt(perpage_record * page) <= parseInt(total_record)) {
+                var available_page = total_record / perpage_record;
+                available_page = parseInt(available_page, 10);
+                var mod_page = total_record % perpage_record;
+                if (mod_page > 0) {
+                    available_page = available_page + 1;
+                }
+                if (parseInt(page) <= parseInt(available_page)) {
+                    var pagenum =  $scope.page_number + 1;
+                    $scope.get_business_list(pagenum);
+                }
+            }
+        }
+    });
+
+    $scope.get_business_list = function(start) {
+        if (isProcessing) {
+            return false;
+        }
+        isProcessing = true;
+        $(".sugg_post_load").show();
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/get_business_list?page='+start,            
+            data: 'search_tag='+$scope.search_tag,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            $(".sugg_post_load").hide();            
+            
+            if (success.data.business_data.length >0 ) {
+                if(start > 1)
+                {
+                    for (var i in success.data.business_data) {                            
+                        //$scope.searchJob.push(data.latestJobs[i]);
+                        //$scope.$apply(function () {
+                            $scope.business_data.push(success.data.business_data[i]);
+                        //});
+                    }
+                }
+                else
+                {
+                    $scope.business_data = success.data.business_data;
+                }
+
+                
+                isProcessing = false;
+
+                // $scope.business_data = success.data.business_data;
+                $scope.page_number = start;
+                $scope.total_record = success.data.total_record;
+                $scope.perpage_record = 12;
+            }
+            else
+            {
+                isProcessing = true;
+                $scope.showLoadmore = false;
+                // $scope.business_data = success.data.business_data;
+                $scope.page_number = start;
+                $scope.total_record = success.data.total_record;
+                $scope.perpage_record = 12;
+            }
+            $('#main_loader').hide();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
+        }, function (error) {
+            $(".sugg_post_load").hide();
+            setTimeout(function(){
+                $scope.get_business_list(start);
+            },500);
+        }, 
+        function (complete) {
+            $(".sugg_post_load").hide();
+        });
+    };
+    $scope.get_business_list(1);
+
+    $scope.follow_hashtag = function(hashtag_id,index)
+    {
+        $(".hashtag-follow-btn-"+hashtag_id).attr('style','pointer-events:none;');
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/follow_hashtag',
+            data: 'hashtag_id=' + hashtag_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            if (success.data.status == 1) {
+                $scope.hashtag_list[index].hashtag_follow_status = success.data.status;
+                $scope.hashtag_list[index].hashtag_follower_count = success.data.hashtag_follower_count;
+            }
+            $(".hashtag-follow-btn-"+hashtag_id).removeAttr('style');
+        }, function (error) {
+            $(".sugg_post_load").hide();
+            setTimeout(function(){
+                $scope.follow_hashtag(hashtag_id,index);
+            },500);
+        });
+    };
+});
+app.controller('hashtagController', function ($scope, $http,$window ) {
+    $scope.$parent.active_pg = 3;
+    $scope.today = new Date();
+    $scope.$parent.title = "Hashtags | Aileensoul";
+    $scope.user_id = user_id;
+    var offset = "12";
+    var processing = false;
+    //getContactSuggetion(1);
+    var isProcessing = false;
+    
+    angular.element($window).bind("scroll", function (e) {
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.4) {
+            // isLoadingData = true;
+            var page = $scope.page_number;
+            var total_record = $scope.total_record;
+            var perpage_record = $scope.perpage_record;
+    
+            if (parseInt(perpage_record * page) <= parseInt(total_record)) {
+                var available_page = total_record / perpage_record;
+                available_page = parseInt(available_page, 10);
+                var mod_page = total_record % perpage_record;
+                if (mod_page > 0) {
+                    available_page = available_page + 1;
+                }
+                if (parseInt(page) <= parseInt(available_page)) {
+                    var pagenum =  $scope.page_number + 1;
+                    $scope.get_hashtag_list(pagenum);
+                }
+            }
+        }
+    });
+
+    $scope.check_enter_key = function($event){
+        var keyCode = $event.which || $event.keyCode;
+        if (keyCode === 13) {
+            isProcessing = false;
+            $scope.get_hashtag_search(1);
+        }
+    };
+
+    $scope.get_hashtag_list = function(start) {
+        if (isProcessing) {
+            return false;
+        }
+        isProcessing = true;
+        $(".sugg_post_load").show();
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/get_hashtag_list?page='+start,            
+            data: 'search_tag='+$scope.search_tag,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            $(".sugg_post_load").hide();            
+            
+            if (success.data.hashtag_list.length >0 ) {
+                if(start > 1)
+                {
+                    for (var i in success.data.hashtag_list) {                            
+                        //$scope.searchJob.push(data.latestJobs[i]);
+                        //$scope.$apply(function () {
+                            $scope.hashtag_list.push(success.data.hashtag_list[i]);
+                        //});
+                    }
+                }
+                else
+                {
+                    $scope.hashtag_list = success.data.hashtag_list;
+                }
+
+                
+                isProcessing = false;
+
+                // $scope.hashtag_list = success.data.hashtag_list;
+                $scope.page_number = start;
+                $scope.total_record = success.data.total_record;
+                $scope.perpage_record = 12;
+            }
+            else
+            {
+                isProcessing = true;
+                $scope.showLoadmore = false;
+                // $scope.hashtag_list = success.data.hashtag_list;
+                $scope.page_number = start;
+                $scope.total_record = success.data.total_record;
+                $scope.perpage_record = 12;
+            }
+            $('#main_loader').hide();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
+        }, function (error) {
+            $(".sugg_post_load").hide();
+            setTimeout(function(){
+                $scope.get_hashtag_list(start);
+            },500);
+        }, 
+        function (complete) {
+            $(".sugg_post_load").hide();
+        });
+    };
+    $scope.get_hashtag_list(1);
+
+    $scope.get_hashtag_search = function() {
+        start = 1;
+        if (isProcessing) {
+            return false;
+        }
+        isProcessing = true;
+        $(".sugg_post_load").show();
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/get_hashtag_list?page='+start,
+            data: 'search_tag='+$scope.search_tag,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            $(".sugg_post_load").hide();            
+            
+            if (success.data.hashtag_list.length >0 ) {
+                if(start > 1)
+                {
+                    for (var i in success.data.hashtag_list) {                            
+                        //$scope.searchJob.push(data.latestJobs[i]);
+                        //$scope.$apply(function () {
+                            $scope.hashtag_list.push(success.data.hashtag_list[i]);
+                        //});
+                    }
+                }
+                else
+                {
+                    $scope.hashtag_list = success.data.hashtag_list;
+                }
+
+                
+                isProcessing = false;
+
+                // $scope.hashtag_list = success.data.hashtag_list;
+                $scope.page_number = start;
+                $scope.total_record = success.data.total_record;
+                $scope.perpage_record = 12;
+            }
+            else
+            {
+                isProcessing = true;
+                $scope.showLoadmore = false;
+                $scope.hashtag_list = success.data.hashtag_list;
+                $scope.page_number = start;
+                $scope.total_record = success.data.total_record;
+                $scope.perpage_record = 12;
+            }
+            $('#main_loader').hide();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
+        }, function (error) {
+            $(".sugg_post_load").hide();
+            setTimeout(function(){
+                $scope.get_hashtag_list(start);
+            },500);
+        }, 
+        function (complete) {
+            $(".sugg_post_load").hide();
+        });
+    };
+
+    $scope.follow_hashtag = function(hashtag_id,index)
+    {
+        $(".hashtag-follow-btn-"+hashtag_id).attr('style','pointer-events:none;');
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/follow_hashtag',
+            data: 'hashtag_id=' + hashtag_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            if (success.data.status == 1) {
+                $scope.hashtag_list[index].hashtag_follow_status = success.data.status;
+                $scope.hashtag_list[index].hashtag_follower_count = success.data.hashtag_follower_count;
+            }
+            $(".hashtag-follow-btn-"+hashtag_id).removeAttr('style');
+        }, function (error) {
+            $(".sugg_post_load").hide();
+            setTimeout(function(){
+                $scope.follow_hashtag(hashtag_id,index);
+            },500);
+        });
+    };
+
+    $scope.unfollow_hashtag = function(hashtag_id,index)
+    {
+        $(".hashtag-follow-btn-"+hashtag_id).attr('style','pointer-events:none;');
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/unfollow_hashtag',
+            data: 'hashtag_id=' + hashtag_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            if (success.data.status == 0) {
+                $scope.hashtag_list[index].hashtag_follow_status = success.data.status;
+                $scope.hashtag_list[index].hashtag_follower_count = success.data.hashtag_follower_count;
+            }
+            $(".hashtag-follow-btn-"+hashtag_id).removeAttr('style');
+        }, function (error) {
+            $(".sugg_post_load").hide();
+            setTimeout(function(){
+                $scope.follow_hashtag(hashtag_id,index);
+            },500);
+        });
+    };
+});
 $(window).on("load", function () {
     $(".custom-scroll").mCustomScrollbar({
         autoHideScrollbar: true,
@@ -298,4 +652,38 @@ function contact(elid)
             }
         });
     }    
+}
+function follow_user_bus(id)
+{
+    var uid = $("#"+id).data('uid').toString();
+    $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $(".follow-btn-bus-" + uid.slice(0, -6) + ' a').html('Following');
+    $.ajax({
+        url: base_url + "userprofile_page/business_follow_tooltip",        
+        type: "POST",
+        data: 'to_id=' + uid + '&ele_id=' + id,
+        success: function (data) {            
+            $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
+            setTimeout(function(){
+                $(".follow-btn-bus-" + uid.slice(0, -6)).html(data);
+            },500);
+        }
+    });
+}
+
+function unfollow_user_bus(id) {
+    var uid = $("#"+id).data('uid').toString();
+    $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:none;');
+    $(".follow-btn-bus-" + uid.slice(0, -6) + ' a').html('Follow');
+    $.ajax({
+        url: base_url + "userprofile_page/business_unfollow_tooltip",        
+        type: "POST",
+        data: 'to_id=' + uid + '&ele_id=' + id,
+        success: function (data) {            
+            $(".follow-btn-bus-" + uid.slice(0, -6)).attr('style','pointer-events:all;');
+            setTimeout(function(){
+                $(".follow-btn-bus-" + uid.slice(0, -6)).html(data);
+            },500);
+        }
+    });
 }

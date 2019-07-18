@@ -10,6 +10,7 @@ class Customscript extends CI_Controller {
         $this->load->model('email_model');
         $this->load->model('user_model');
         $this->load->model('business_model');
+        $this->load->model('searchelastic_model');
         // $this->load->model('job_model');
         $this->load->library('S3');
     }
@@ -2326,6 +2327,59 @@ class Customscript extends CI_Controller {
                     echo $fileName;
                     echo "<br>";
                 }
+            }
+        }
+        echo "Done";
+    }
+
+    public function pro_pic()
+    {
+        set_time_limit(0);
+        ini_set("memory_limit","1024M");
+        $s_sql = "SELECT u.user_id,ui.user_image,u.user_gender FROM ailee_user u LEFT JOIN ailee_user_info ui ON ui.user_id = u.user_id ";
+        $result = $this->db->query($s_sql)->result();
+        echo "<pre>";        
+        // print_r($result);exit();
+        foreach ($result as $_result) {
+            // print_r($_result);
+            if($_result->user_image != '')
+            {                
+                if(!file_exists($this->config->item('user_main_upload_path').$_result->user_image))
+                {
+                    $imageName = '';
+                    if($_result->user_gender == "M")
+                    {
+                        $not_pro_pic = base_url('assets/img/man-user.jpg');
+                    }
+                    else
+                    {
+                        $not_pro_pic = base_url('assets/img/female-user.jpg');
+                    }
+
+                    $data = array(
+                        'user_image' => $imageName
+                    );
+
+                    $update = $this->common->update_data($data, 'user_info', 'user_id', $_result->user_id);
+
+                    $data_pro = array(
+                        'not_image' => $not_pro_pic
+                    );
+
+                    $this->db->where('user_type', '1');
+                    $this->db->where('user_id', $_result->user_id);
+                    $this->db->update('notification_detail', $data_pro);
+
+                    $new_people = $this->searchelastic_model->add_edit_single_people($_result->user_id);
+
+                    echo $_result->user_id." <-----Not Exist--->  ".base_url().$this->config->item('user_main_upload_path').$_result->user_image;
+                    echo "<br>";             
+                }
+                /*else
+                {                    
+                    echo $_result->user_id." Exist--->  ".base_url().$this->config->item('user_main_upload_path').$_result->user_image;
+                    echo "<br>";
+                }*/
             }
         }
         echo "Done";
