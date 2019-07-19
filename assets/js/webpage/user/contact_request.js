@@ -265,14 +265,14 @@ app.controller('businessController', function ($scope, $http,$window ) {
             return false;
         }
         isProcessing = true;
-        $(".sugg_post_load").show();
+        $("#business-loader").show();
         $http({
             method: 'POST',
             url: base_url + 'user_post/get_business_list?page='+start,            
             data: 'search_tag='+$scope.search_tag,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
-            $(".sugg_post_load").hide();            
+            $("#business-loader").hide();
             
             if (success.data.business_data.length >0 ) {
                 if(start > 1)
@@ -388,14 +388,14 @@ app.controller('hashtagController', function ($scope, $http,$window ) {
             return false;
         }
         isProcessing = true;
-        $(".sugg_post_load").show();
+        $("#hashtag-loader").show();
         $http({
             method: 'POST',
             url: base_url + 'user_post/get_hashtag_list?page='+start,            
             data: 'search_tag='+$scope.search_tag,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
-            $(".sugg_post_load").hide();            
+            $("#hashtag-loader").hide();            
             
             if (success.data.hashtag_list.length >0 ) {
                 if(start > 1)
