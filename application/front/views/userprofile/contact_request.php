@@ -30,7 +30,7 @@
                     <nav class="search-tab">
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                             <ul class="sub-menu">
-                                <li><a ng-class="active_pg == 1 ? 'active' : ''" href="<?php echo base_url('contact-request'); ?>">Peoples</a></li>
+                                <li><a ng-class="active_pg == 1 ? 'active' : ''" href="<?php echo base_url('contact-request'); ?>">People</a></li>
                                 <li><a ng-class="active_pg == 2 ? 'active' : ''" href="<?php echo base_url('contact-business'); ?>">Businesses</a></li>
                                 <li><a ng-class="active_pg == 3 ? 'active' : ''" href="<?php echo base_url('hashtags'); ?>">Hashtags</a></li>
                             </ul>

@@ -91,6 +91,9 @@ $route['contact-request'] = 'userprofile_page/contact_request';
 $route['hashtags'] = 'userprofile_page/contact_request';
 $route['contact-business'] = 'userprofile_page/contact_request';
 
+$route['hashtag/(:any)'] = 'userprofile_page/hashtag_detail/$1';
+$route['hashtag/(:any)/(:any)'] = 'userprofile_page/hashtag_detail/$1';
+
 $route['questions/(:any)/(:any)'] = 'userprofile_page/question_detail/$1/$2';
 
 //$route['default_controller'] = 'under_construction';

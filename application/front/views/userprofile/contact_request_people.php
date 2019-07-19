@@ -91,7 +91,7 @@
 						
 						<div class="author-btn">
 							<div id="item-{{suggest.user_id}}" class="user-btns contact-btn-{{suggest.user_id}}">
-                                <a class="btn-new-1" ng-if="suggest.contact_value == 'new'" data-param="{{suggest.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ suggest.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_bt_{{suggest.user_id}}">Add to contact</a>
+                                <a class="btn-new-1" ng-if="suggest.contact_value == 'new' || suggest.contact_value == 'cancel' || suggest.contact_value == 'reject'" data-param="{{suggest.contact_id}}{{ today | date : 'hhmmss'}},pending,{{ suggest.user_id}}{{ today | date : 'hhmmss'}},{{$index + 1}}{{ today | date : 'hhmmss'}},0" onclick="contact(this.id);" id="contact_bt_{{suggest.user_id}}">Add to contact</a>
 
 								<!-- <a class="btn3" ng-click="addToContact(suggest.user_id, suggest);">Add to Contacts</a> -->
 							</div>

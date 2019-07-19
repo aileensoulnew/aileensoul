@@ -4313,7 +4313,8 @@ class User_post extends MY_Controller {
             $response = 1;
         }
         $follower_counter = $this->user_post_model->get_hashtag_follower_count($hashtag_id);
-        $return_array = array("status"=>1,"hashtag_follower_count" => $follower_counter);
+        $html = '<a href="javascript:void(0);" class="btn-new-1" ng-click="unfollow_hashtag('.$hashtag_id.');">Following</a>';        
+        $return_array = array("status"=>1,"hashtag_follower_count" => $follower_counter, 'follow_html' => $html);
         return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
     }
 
@@ -4340,7 +4341,8 @@ class User_post extends MY_Controller {
             $response = 1;
         }
         $follower_counter = $this->user_post_model->get_hashtag_follower_count($hashtag_id);
-        $return_array = array("status"=>0,"hashtag_follower_count" => $follower_counter);
+        $html = '<a href="javascript:void(0);" class="btn-new-1" ng-click="follow_hashtag('.$hashtag_id.');">Follow</a>';
+        $return_array = array("status"=>0,"hashtag_follower_count" => $follower_counter, 'follow_html' => $html);
         return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
     }
 
@@ -4374,6 +4376,86 @@ class User_post extends MY_Controller {
         }
 
         $return_array = array("page"=>$page,"total_record"=>$total_record,"business_data" => $userlist);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
+    }
+
+    public function get_hashtag_top_posts(){
+        $user_id = $this->session->userdata('aileenuser');
+        $page = 1;
+        if (!empty($this->input->get('page')) && $this->input->get('page') != 'undefined') {
+            $page = $this->input->get('page');
+        }
+        $total_record = 0;
+        $hashtag_id = $this->input->post('hashtag_id');
+        $post_data = $this->user_post_model->get_hashtag_top_posts($hashtag_id, $user_id, $page);
+        if (!empty($this->input->get('total_record')) && $this->input->get('total_record') != 'undefined') {
+            $total_record = $this->input->get('total_record');
+        }
+        else{
+            $total_record = $this->user_post_model->get_hashtag_top_posts_total_records($hashtag_id, $user_id);
+        }
+
+        $return_array = array("page"=>$page,"total_record"=>$total_record,"postData" => $post_data);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
+    }
+
+    public function get_hashtag_recent_posts(){
+        $user_id = $this->session->userdata('aileenuser');
+        $page = 1;
+        if (!empty($this->input->get('page')) && $this->input->get('page') != 'undefined') {
+            $page = $this->input->get('page');
+        }
+        $total_record = 0;
+        $hashtag_id = $this->input->post('hashtag_id');
+        $post_data = $this->user_post_model->get_hashtag_recent_posts($hashtag_id, $user_id, $page);
+        if (!empty($this->input->get('total_record')) && $this->input->get('total_record') != 'undefined') {
+            $total_record = $this->input->get('total_record');
+        }
+        else{
+            $total_record = $this->user_post_model->get_hashtag_recent_posts_total_records($hashtag_id, $user_id);
+        }
+
+        $return_array = array("page"=>$page,"total_record"=>$total_record,"postData" => $post_data);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
+    }
+
+    public function get_hashtag_opportunity_posts(){
+        $user_id = $this->session->userdata('aileenuser');
+        $page = 1;
+        if (!empty($this->input->get('page')) && $this->input->get('page') != 'undefined') {
+            $page = $this->input->get('page');
+        }
+        $total_record = 0;
+        $hashtag_id = $this->input->post('hashtag_id');
+        $post_data = $this->user_post_model->get_hashtag_opportunity_posts($hashtag_id, $user_id, $page);
+        if (!empty($this->input->get('total_record')) && $this->input->get('total_record') != 'undefined') {
+            $total_record = $this->input->get('total_record');
+        }
+        else{
+            $total_record = $this->user_post_model->get_hashtag_opportunity_posts_total_records($hashtag_id, $user_id);
+        }
+
+        $return_array = array("page"=>$page,"total_record"=>$total_record,"postData" => $post_data);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
+    }
+
+    public function get_hashtag_article_posts(){
+        $user_id = $this->session->userdata('aileenuser');
+        $page = 1;
+        if (!empty($this->input->get('page')) && $this->input->get('page') != 'undefined') {
+            $page = $this->input->get('page');
+        }
+        $total_record = 0;
+        $hashtag_id = $this->input->post('hashtag_id');
+        $post_data = $this->user_post_model->get_hashtag_article_posts($hashtag_id, $user_id, $page);
+        if (!empty($this->input->get('total_record')) && $this->input->get('total_record') != 'undefined') {
+            $total_record = $this->input->get('total_record');
+        }
+        else{
+            $total_record = $this->user_post_model->get_hashtag_article_posts_total_records($hashtag_id, $user_id);
+        }
+
+        $return_array = array("page"=>$page,"total_record"=>$total_record,"postData" => $post_data);
         return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
     }
 }

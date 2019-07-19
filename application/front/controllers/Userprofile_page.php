@@ -3409,7 +3409,7 @@ class Userprofile_page extends MY_Controller {
                                         <tr>
                                             <td class="user-img-td">
                                                 <div class="user-img">
-                                                    <img src="'.$user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                    <img src="'.$login_user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
                                                 </div>
                                             </td>
                                             <td style="padding:5px;">
@@ -3479,5 +3479,63 @@ class Userprofile_page extends MY_Controller {
             $html = '<a class="btn-new-1 follow" data-uid="' . $uid . '" onclick="follow_user_bus(this.id)" id="'.$ele_id.'">Follow</a>';
         }
         echo $html;
+    }
+
+    public function hashtag_detail($hashtag){
+        $user_id = $this->session->userdata('aileenuser');
+        $hashtag_detail = $this->user_post_model->get_hashtag_detail($hashtag,$user_id);
+        if($user_id =='' || empty($hashtag_detail))
+        {
+            $this->data['title'] = "404".TITLEPOSTFIX;
+            $this->data['metadesc'] = "404";
+            $this->load->view('404', $this->data);
+        }
+        else
+        {
+            $this->data['is_userBasicInfo'] = $this->user_model->is_userBasicInfo($user_id);
+            $this->data['is_userStudentInfo'] = $this->user_model->is_userStudentInfo($user_id);
+
+            $this->data['header_profile'] = $this->load->view('header_profile', $this->data, TRUE);
+            $this->data['title'] = "Hashtag Detail".TITLEPOSTFIX;
+            $this->data['left_footer'] = $this->load->view('leftfooter', $this->data, TRUE);
+            $this->data['hashtag_detail'] = $hashtag_detail;
+            $this->load->view('userprofile/hashtag_detail', $this->data);
+        }
+    }
+
+    public function hashtag_top_post(){
+        $user_id = $this->session->userdata('aileenuser');
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($user_id);
+        $this->load->view('userprofile/hashtag_posts', $this->data);
+    }
+
+    public function hashtag_recent(){
+        $user_id = $this->session->userdata('aileenuser');
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($user_id);
+        $this->load->view('userprofile/hashtag_posts', $this->data);
+    }
+
+    public function hashtag_opportunities(){
+        $user_id = $this->session->userdata('aileenuser');
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($user_id);
+        $this->load->view('userprofile/hashtag_posts', $this->data);
+    }
+
+    public function hashtag_articles(){
+        $user_id = $this->session->userdata('aileenuser');
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($user_id);
+        $this->load->view('userprofile/hashtag_posts', $this->data);
+    }
+
+    public function hashtag_questions(){
+        $user_id = $this->session->userdata('aileenuser');
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($user_id);
+        $this->load->view('userprofile/hashtag_posts', $this->data);
+    }
+
+    public function hashtag_people(){
+        $user_id = $this->session->userdata('aileenuser');
+        $this->data['leftbox_data'] = $this->user_model->getLeftboxData($user_id);
+        // $this->load->view('userprofile/hashtag_posts', $this->data);
     }
 }
