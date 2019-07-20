@@ -44,7 +44,7 @@
         <div class="custom-user-box no-data-available">
             <div class='art-img-nn'>
                 <div class='art_no_post_img'>
-                    <img src="<?php echo base_url('assets/img/no-post.png'); ?>" alt="No People">
+                    <img src="<?php echo base_url('assets/img/no-contact.png'); ?>" alt="No People">
                 </div>
                 <div class='art_no_post_text'>No People Available. </div>
             </div>

@@ -593,15 +593,16 @@ class Common extends CI_Model {
     // falguni cahnges function start
     function make_links($text, $class='content_link', $target='_blank'){
 
-        $text= preg_replace("/(^|[\n ])([\w]*?)([\w]*?:\/\/[\w]+[^ \,\"\n\r\t<]*)/is", "$1$2<a href=\"$3\"  target=\"$target\">$3</a>", $text);  
+        /*$text= preg_replace("/(^|[\n ])([\w]*?)([\w]*?:\/\/[\w]+[^ \,\"\n\r\t<]*)/is", "$1$2<a href=\"$3\"  target=\"$target\">$3</a>", $text);  
         $text= preg_replace("/(^|[\n ])([\w]*?)((www)\.[^ \,\"\t\n\r<]*)/is", "$1$2<a href=\"http://$3\"  target=\"$target\">$3</a>", $text);
                 $text= preg_replace("/(^|[\n ])([\w]*?)((ftp)\.[^ \,\"\t\n\r<]*)/is", "$1$2<a href=\"ftp://$3\"  target=\"$target\">$3</a>", $text);  
-        $text= preg_replace("/(^|[\n ])([a-z0-9&\-_\.]+?)@([\w\-]+\.([\w\-\.]+)+)/i", "$1<a href=\"mailto:$2@$3\" >$2@$3</a>", $text);
+        $text= preg_replace("/(^|[\n ])([a-z0-9&\-_\.]+?)@([\w\-]+\.([\w\-\.]+)+)/i", "$1<a href=\"mailto:$2@$3\" >$2@$3</a>", $text);*/
 
         /*$url = '/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/';   
         $string= preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $text);*/
-        
-        /*$reg = '/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(\/\S*)?/'; 
+
+        # $reg = '/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(\/\S*)?/'; 
+        $reg = '/\b(?<!=")(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[A-Z0-9+&@#\/%=~_|](?!.*".*>)(?!.*<\/a>)/i'; 
         $text = preg_replace($reg, '<a href="$0" target="_blank" title="$0">$0</a>', $text);
 
         //Catch all links without protocol
@@ -611,7 +612,7 @@ class Common extends CI_Model {
         //Catch all emails
         $emailRegex = '/(\S+\@\S+\.\S+)/';
         $text = preg_replace($emailRegex, '<a href="mailto:$1" target="_blank" title="$1">$1</a>', $text);
-        $text = nl2br($text);*/
+        $text = nl2br($text);
 
         return($text);  
 

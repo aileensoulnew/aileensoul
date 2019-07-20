@@ -547,7 +547,7 @@
             </div>
         </div>
     </div>
-    <div ng-if="total_record == 0" ng-class="total_record == 0 ? 'no-search-data' : ''">
+    <div ng-if="total_record == 0" ng-class="total_record == 0 ? 'no-data-box' : ''">
         <div class="custom-user-box no-data-available">
             <div class='art-img-nn'>
                 <div class='art_no_post_img'>
