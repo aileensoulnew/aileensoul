@@ -606,8 +606,8 @@ class Common extends CI_Model {
         $text = preg_replace($reg, '<a href="$0" target="_blank" title="$0">$0</a>', $text);
 
         //Catch all links without protocol
-        $reg2 = '/(?<=\s|\A)([0-9a-zA-Z\-\.]+\.[a-zA-Z0-9\/]{2,})(?=\s|$|\,|\.)/';
-        $text = preg_replace($reg2, '<a href="//$0" target="_blank" title="$0">$0</a>', $text);
+        /*$reg2 = '/(?<=\s|\A)([0-9a-zA-Z\-\.]+\.[a-zA-Z0-9\/]{2,})(?=\s|$|\,|\.)/';
+        $text = preg_replace($reg2, '<a href="//$0" target="_blank" title="$0">$0</a>', $text);*/
 
         //Catch all emails
         $emailRegex = '/(\S+\@\S+\.\S+)/';
