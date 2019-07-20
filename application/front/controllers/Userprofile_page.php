@@ -3536,6 +3536,26 @@ class Userprofile_page extends MY_Controller {
     public function hashtag_people(){
         $user_id = $this->session->userdata('aileenuser');
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($user_id);
-        // $this->load->view('userprofile/hashtag_posts', $this->data);
+        $this->load->view('userprofile/hashtag_people', $this->data);
+    }
+
+    public function user_hashtags(){
+        $userid = $this->session->userdata('aileenuser');
+        $this->data['userdata'] = $this->user_model->getUserSelectedData($userid, $select_data = "u.first_name,u.last_name,ui.user_image");        
+        $this->load->view('userprofile/following_hashtags', $this->data);
+    }
+
+    public function following_hashtags_data() {        
+        if (!empty($this->input->get('page')) && $this->input->get('page') != 'undefined') {
+            $page = $this->input->get('page');
+        }
+        else
+        {
+            $page = 1;
+        }
+        $limit = 12;//40;
+        $userid = $this->session->userdata('aileenuser');
+        $user_data = $this->user_post_model->get_following_hashtags($userid,$page,$limit);
+        echo json_encode($user_data);
     }
 }

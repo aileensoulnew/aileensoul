@@ -250,12 +250,15 @@ class User_model extends CI_Model {
         $this->db->select("uc.from_id,uc.modify_date,uc.status,uc.not_read,CONCAT(u.first_name,' ', u.last_name) as fullname,u.user_gender, u.user_slug,ui.user_image,ui.profile_background, jt.name as designation,d.degree_name as degree")->from("user_contact uc");
         $this->db->join('user u', 'u.user_id = uc.from_id');
         $this->db->join('user_info ui', 'ui.user_id = uc.from_id');
+        $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
         $this->db->join('user_profession up', 'up.user_id = uc.from_id', 'left');
         $this->db->join('job_title jt', 'jt.title_id = up.designation', 'left');
         $this->db->join('user_student us', 'us.user_id = uc.from_id', 'left');
         $this->db->join('degree d', 'd.degree_id = us.current_study', 'left');
         $this->db->where("uc.to_id", $user_id);
         $this->db->where('uc.status', 'pending');
+        $this->db->where('ul.status','1');
+        $this->db->where('ul.is_delete', '0');
         $this->db->order_by('uc.modify_date', 'desc');
         $query = $this->db->get();
         $result_array = $query->result_array();

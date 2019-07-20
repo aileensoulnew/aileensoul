@@ -70,7 +70,7 @@
 <div class="middle-section">
     <div class="availabel-data-box">
         <div ng-if="people_data.length != '0'">
-            <div class="search-profiles" ng-repeat="people in people_data">                
+            <div class="search-profiles" ng-repeat="people in people_data">
                 <div class="profile-img post-img">
                     <a href="<?php echo base_url() ?>{{people.user_slug}}" target="_self" data-toggle="popover" data-uid="{{people.user_id}}" data-utype="1">
                         <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{people.user_image}}" alt="{{people.fullname}}" ng-if="people.user_image">                                    
@@ -110,7 +110,7 @@
                 </div>            
             </div>
         </div>
-        <div ng-if="total_record == 0 && postData.length == 0" ng-class="total_record == 0 ? 'no-search-data' : ''">
+        <div ng-if="total_record == 0" ng-class="total_record == 0 ? 'no-search-data' : ''">
             <div class="custom-user-box no-data-available">
                 <div class='art-img-nn'>
                     <div class='art_no_post_img'>

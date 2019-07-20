@@ -1,3 +1,4 @@
+<?php $user_id = $this->session->userdata('aileenuser'); ?>
 <!DOCTYPE html>
 <html lang="en" ng-app="hashtagDetailApp" ng-controller="defaultController">
     <head>
@@ -18,6 +19,9 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css'); ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css'); ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/developer.css') ?>">
+        <style type="text/css">
+            .popover{background: transparent;}
+        </style>
     </head>
     <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
     <body class="one-hd hashtag-detail-page">
@@ -32,10 +36,10 @@
                     </div>
                     <div class="hash-head-detail">
                         <h4><?php echo '#'.$hashtag_detail['hashtag']; ?></h4>
-                        <p id="hashtag-follow-count"><?php echo $hashtag_detail['hashtag_follower_count'] ?> followers</p>
+                        <p class="hashtag-follow-count"><?php echo $hashtag_detail['hashtag_follower_count'] ?> followers</p>
                     </div>
                 </div>
-                <div class="hash-head-right">
+                <div class="hash-head-right hashtag-follow-btn">
                     <?php 
                     if($hashtag_detail['hashtag_follow_status'] == 0){ ?>
                         <a href="javascript:void(0);" class="hash-btn-mob" ng-click="follow_hashtag(<?php echo $hashtag_detail['id']; ?>);">Follow</a>
@@ -63,8 +67,8 @@
                                         </div>
                                         <div class="hash-detail">
                                             <h4><?php echo '#'.$hashtag_detail['hashtag']; ?></h4>
-                                            <p id="hashtag-follow-count"><?php echo $hashtag_detail['hashtag_follower_count'] ?> followers</p>
-                                            <div id="hashtag-follow-btn">
+                                            <p class="hashtag-follow-count"><?php echo $hashtag_detail['hashtag_follower_count'] ?> followers</p>
+                                            <div class="hashtag-follow-btn">
                                                 <?php 
                                                 if($hashtag_detail['hashtag_follow_status'] == 0){ ?>
                                                     <a href="javascript:void(0);" class="btn-new-1" ng-click="follow_hashtag(<?php echo $hashtag_detail['id']; ?>);">Follow</a>
@@ -98,8 +102,16 @@
                                                         $user_img = base_url('assets/img/female-user.jpg');
                                                     }
                                                 }
+                                                if($user_id == $value['user_id'])
+                                                {
+                                                    $fullname = "You";
+                                                }
+                                                else
+                                                {
+                                                    $fullname = $value['first_name'].' '.$value['last_name'];   
+                                                }
                                                 ?>
-                                                <li><a href="<?php echo base_url().$value['user_slug']; ?>" title="<?php echo $value['first_name'].' '.$value['last_name']; ?>"><img src="<?php echo $user_img; ?>" alt="<?php echo $value['first_name'].' '.$value['last_name']; ?>"></a></li>
+                                                <li><a href="<?php echo base_url().$value['user_slug']; ?>" title="<?php echo $fullname; ?>"><img src="<?php echo $user_img; ?>" alt="<?php echo $fullname; ?>"></a></li>
                                             <?php
                                             } ?>
                                         </ul>
@@ -165,6 +177,7 @@
             var user_thumb_upload_url = '<?php echo USER_THUMB_UPLOAD_URL; ?>';
             var message_url = '<?php echo MESSAGE_URL; ?>';
             var hashtag_id = '<?php echo $hashtag_detail['id']; ?>';
+            var cmt_maxlength = '700';
 
             var app = angular.module("hashtagDetailApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','ngValidate']);
         </script>

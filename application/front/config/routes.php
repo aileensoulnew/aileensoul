@@ -254,6 +254,7 @@ $route['(:any)/audios/(:any)'] = 'user_post/post_detail/$2';
 
 $route['(:any)/contacts'] = 'Userprofile';
 $route['(:any)/following'] = 'Userprofile';
+$route['(:any)/hashtags'] = 'Userprofile';
 $route['(:any)/followers'] = 'Userprofile';
 $route['(:any)/details'] = 'Userprofile';
 $route['(:any)/questions'] = 'Userprofile';

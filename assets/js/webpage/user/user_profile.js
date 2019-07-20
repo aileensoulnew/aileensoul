@@ -305,7 +305,7 @@ app.controller('userProfileController', function ($scope, $http) {
     $scope.active = url.substring(url.lastIndexOf("/") + 1);
     //$scope.active = $scope.active == item ? '' : item;
     $scope.pade_reload = true;
-    $scope.makeActive = function (item) {        
+    $scope.makeActive = function (item) {
         $scope.pade_reload = false;
         $scope.active = $scope.active == item ? '' : item;
     }
@@ -741,6 +741,10 @@ app.config(function ($routeProvider, $locationProvider) {
             .when(":name*\/following", {
                 templateUrl: base_url + "userprofile_page/following",
                 controller: 'followingController'
+            })
+            .when(":name*\/hashtags", {
+                templateUrl: base_url + "userprofile_page/user_hashtags",
+                controller: 'hashtagController'
             })
             .when(":name*\/questions", {
                 templateUrl: base_url + "userprofile_page/questions",
@@ -11142,6 +11146,7 @@ app.controller('followingController', function ($scope, $http, $location, $compi
     $scope.page_number = 0;
     $scope.total_record = '';
     $scope.perpage = 10;
+    console.log($scope.$parent.pade_reload);
 
     $scope.details_in_popup = function(uid,login_user_id,utype,div_id){
         socket.emit('get user card',uid,login_user_id,utype);
@@ -11716,6 +11721,272 @@ app.controller('followingController', function ($scope, $http, $location, $compi
             },500);
         });
     }
+    $scope.goUserprofile = function (path) {
+        location.href = base_url + 'profiles/' + path;
+    }
+});
+app.controller('hashtagController', function ($scope, $http, $location, $compile, $window) {
+    $scope.today = new Date();
+    // Variables
+    $scope.showLoadmore = true;
+    $scope.row = 0;
+    $scope.rowperpage = 3;
+    $scope.buttonText = "Load More";
+    $scope.user_id = user_id;
+    $scope.live_slug = live_slug;    
+    $scope.user_slug = user_data_slug;
+    $scope.$parent.title = "Hashtags | Aileensoul";
+    $scope.page_number = 0;
+    $scope.total_record = '';
+    $scope.perpage = 12;
+    
+    setTimeout(function(){
+    /*var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-format="auto"></adsense>').appendTo('.ads');
+        $compile($el)($scope);
+
+    var $el = $('<adsense ad-client="ca-pub-6060111582812113" ad-slot="8390312875" inline-style="display:block;" ad-class="adBlock"></adsense>').appendTo('.right-add-box');
+        $compile($el)($scope);*/
+    },1000);
+
+    $scope.prettifyNumber = function(value) {
+        var thousand = 1000;
+        var million = 1000000;
+        var billion = 1000000000;
+        var trillion = 1000000000000;
+        if (value < thousand) {
+            return String(value);   
+        }
+        
+        if (value >= thousand && value <= 1000000) {
+             return  Math.abs(value/thousand).toFixed(1) + 'k';   
+        }
+        
+        if (value >= million && value <= billion) {
+            return Math.abs(value/million).toFixed(1) + 'M';   
+        }
+        
+        if (value >= billion && value <= trillion) {
+            return Math.abs(value/billion).toFixed(1) + 'B';   
+        }
+        
+        else {
+            return Math.abs(value/trillion).toFixed(1) + 'T';   
+        }
+    };
+
+    $scope.get_all_counter = function() {
+        $http.get(base_url + "userprofile_page/get_all_counter?user_slug="+user_slug).then(function (success) {
+            var result = success.data;
+            if(result.dashboard_counter != '')
+            {
+                $('.dashboard_counter').show();
+                $('.dashboard_counter').html(result.dashboard_counter);
+            }
+            else
+            {
+                //$('.dashboard_counter').hide();
+                $('.dashboard_counter').html('0');
+            }
+
+            if(result.detail_counter > 0)
+            {
+                $('.detail_counter').show();
+                $('.detail_counter').html(result.detail_counter+'%');
+            }
+            else
+            {
+                //$('.detail_counter').hide();
+                $('.detail_counter').html('0%');
+            }
+
+            if(result.contact_counter != '')
+            {
+                $('.contact_counter').show();
+                $('.contact_counter').html(result.contact_counter);
+            }
+            else
+            {
+                //$('.contact_counter').hide();
+                $('.contact_counter').html('0');
+            }
+
+            if(result.follower_counter != '')
+            {
+                $('.follower_counter').show();
+                $('.follower_counter').html(result.follower_counter);
+            }
+            else
+            {
+                //$('.follower_counter').hide();
+                $('.follower_counter').html('0');
+            }
+
+            if(result.following_counter != '')
+            {
+                $('.following_counter').show();
+                $('.following_counter').html(result.following_counter);
+            }
+            else
+            {
+                //$('.following_counter').hide();
+                $('.following_counter').html('0');
+            }
+
+            if(result.question_counter != '')
+            {
+                $('.question_counter').show();
+                $('.question_counter').html(result.question_counter);
+            }
+            else
+            {
+                //$('.question_counter').hide();
+                $('.question_counter').html('0');
+            }
+
+            if(result.savedpost_counter != '')
+            {
+                $('.savedpost_counter').show();
+                $('.savedpost_counter').html(result.savedpost_counter);
+            }
+            else
+            {
+                //$('.savedpost_counter').hide();
+                $('.savedpost_counter').html('0');
+            }
+
+            if(result.monetize_earn != '')
+            {
+                $('.monetize_earn').show();
+                $('.monetize_earn').html(result.monetize_earn);
+            }
+            else
+            {
+                //$('.monetize_earn').hide();
+                $('.monetize_earn').html('0');
+            }            
+        }, function (error) {
+            setTimeout(function(){
+                $scope.get_all_counter();
+            },500);
+        });
+    }
+    $scope.get_all_counter();
+    var isProcessing = false;
+    // Fetch data
+    $scope.getFollowingHashtags = function (pagenum) {
+        if (isProcessing) {
+            return;
+        }
+        isProcessing = true;
+        if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+            // $('#main_loader').show();
+            if($scope.$parent.pade_reload == true)
+            {
+                $('#main_loader').show();            
+            }
+        }
+        $('#hashtag-loader').show();
+
+        $http({
+            method: 'post',
+            url: base_url + "userprofile_page/following_hashtags_data?page=" + pagenum +"&user_slug="+user_slug,
+            data: {row: $scope.row, rowperpage: $scope.rowperpage}
+        }).then(function successCallback(response) {
+            if(pagenum == undefined || pagenum == "1" || pagenum == ""){
+                $('#main_loader').hide();
+            }
+            $('#hashtag-loader').hide();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
+            if (response.data != '') {
+                if ($scope.hashtag_list != undefined) {
+                    isProcessing = false;
+                    $scope.page_number = response.data.page;
+                    $scope.total_record = response.data.total_record;                    
+                    for (var i in response.data.hashtag_list) {
+                        $scope.hashtag_list.push(response.data.hashtag_list[i]);
+                    }
+                } else {
+                    isProcessing = false;
+                    $scope.hashtag_list = response.data.hashtag_list;
+                    $scope.page_number = response.data.page;
+                    $scope.total_record = response.data.total_record;                    
+                }
+            } else {
+                $scope.showLoadmore = false;
+            }
+            $('footer').show();
+        }, function (error) {
+            setTimeout(function(){
+                $scope.getFollowingHashtags(pagenum);
+            },500);
+        });
+    }
+    angular.element($window).bind("scroll", function (e) {
+        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.7) {
+            var page = $scope.page_number;//$(".page_number").val();
+            var total_record = $scope.total_record;//$(".total_record").val();
+            var perpage_record = $scope.perpage;//$(".perpage_record").val();
+            if (parseInt(perpage_record * page) <= parseInt(total_record)) {
+                var available_page = total_record / perpage_record;
+                available_page = parseInt(available_page, 10);
+                var mod_page = total_record % perpage_record;
+                if (mod_page > 0) {
+                    available_page = available_page + 1;
+                }
+                if (parseInt(page) <= parseInt(available_page)) {
+                    var pagenum = parseInt($scope.page_number) + 1;
+                    $scope.getFollowingHashtags(pagenum);
+                }
+            }
+        }
+    });
+    // Call function
+    $scope.getFollowingHashtags();
+    // lazzy loader end
+    $scope.follow_hashtag = function(hashtag_id,index)
+    {
+        $(".hashtag-follow-btn-"+hashtag_id).attr('style','pointer-events:none;');
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/follow_hashtag',
+            data: 'hashtag_id=' + hashtag_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            if (success.data.status == 1) {
+                $scope.hashtag_list[index].hashtag_follow_status = success.data.status;
+                $scope.hashtag_list[index].hashtag_follower_count = success.data.hashtag_follower_count;
+            }
+            $(".hashtag-follow-btn-"+hashtag_id).removeAttr('style');
+        }, function (error) {
+            $(".sugg_post_load").hide();
+            setTimeout(function(){
+                $scope.follow_hashtag(hashtag_id,index);
+            },500);
+        });
+    };
+
+    $scope.unfollow_hashtag = function(hashtag_id,index)
+    {
+        $(".hashtag-follow-btn-"+hashtag_id).attr('style','pointer-events:none;');
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/unfollow_hashtag',
+            data: 'hashtag_id=' + hashtag_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            if (success.data.status == 0) {
+                $scope.hashtag_list[index].hashtag_follow_status = success.data.status;
+                $scope.hashtag_list[index].hashtag_follower_count = success.data.hashtag_follower_count;
+            }
+            $(".hashtag-follow-btn-"+hashtag_id).removeAttr('style');
+        }, function (error) {
+            $(".sugg_post_load").hide();
+            setTimeout(function(){
+                $scope.follow_hashtag(hashtag_id,index);
+            },500);
+        });
+    };
     $scope.goUserprofile = function (path) {
         location.href = base_url + 'profiles/' + path;
     }

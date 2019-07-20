@@ -4458,4 +4458,45 @@ class User_post extends MY_Controller {
         $return_array = array("page"=>$page,"total_record"=>$total_record,"postData" => $post_data);
         return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
     }
+
+    public function get_hashtag_question_posts(){
+        $user_id = $this->session->userdata('aileenuser');
+        $page = 1;
+        if (!empty($this->input->get('page')) && $this->input->get('page') != 'undefined') {
+            $page = $this->input->get('page');
+        }
+        $total_record = 0;
+        $hashtag_id = $this->input->post('hashtag_id');
+        $post_data = $this->user_post_model->get_hashtag_question_posts($hashtag_id, $user_id, $page);
+        if (!empty($this->input->get('total_record')) && $this->input->get('total_record') != 'undefined') {
+            $total_record = $this->input->get('total_record');
+        }
+        else{
+            $total_record = $this->user_post_model->get_hashtag_question_posts_total_records($hashtag_id, $user_id);
+        }
+
+        $return_array = array("page"=>$page,"total_record"=>$total_record,"postData" => $post_data);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
+    }
+
+    public function get_hashtag_people(){
+        $user_id = $this->session->userdata('aileenuser');
+        $page = 1;
+        if (!empty($this->input->get('page')) && $this->input->get('page') != 'undefined') {
+            $page = $this->input->get('page');
+        }
+        $total_record = 0;
+        $limit = 7;
+        $hashtag_id = $this->input->post('hashtag_id');
+        $post_data = $this->user_post_model->get_hashtag_people($hashtag_id, $user_id, $page,$limit);
+        if (!empty($this->input->get('total_record')) && $this->input->get('total_record') != 'undefined') {
+            $total_record = $this->input->get('total_record');
+        }
+        else{
+            $total_record = $this->user_post_model->get_hashtag_people_total_records($hashtag_id, $user_id);
+        }
+
+        $return_array = array("page"=>$page,"total_record"=>$total_record,"peopleData" => $post_data);
+        return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
+    }
 }

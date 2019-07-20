@@ -216,7 +216,7 @@ $is_user_monetize = $this->common->is_user_monetize(); ?>
                             <td><a href="<?php echo base_url().$userdata['user_slug']; ?>/followers"  ng-click='makeActive("followers")' ng-class="{
                                     'active': active == 'followers'}">followers <span class="follower_counter"></span></a></td>
                             <td><a href="<?php echo base_url().$userdata['user_slug']; ?>/following"  ng-click='makeActive("following")' ng-class="{
-                                    'active': active == 'following'}">following <span class="following_counter"></span></a></td>
+                                    'active': active == 'following' || active == 'hashtags'}">following <span class="following_counter"></span></a></td>
                             <td><a href="<?php echo base_url().$userdata['user_slug']; ?>/questions"  ng-click='makeActive("questions")' ng-class="{
                                     'active': active == 'questions'}">Questions <span class="question_counter"></span></a></td>
 
