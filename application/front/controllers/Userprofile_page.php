@@ -3483,7 +3483,7 @@ class Userprofile_page extends MY_Controller {
 
     public function hashtag_detail($hashtag){
         $user_id = $this->session->userdata('aileenuser');
-        $hashtag_detail = $this->user_post_model->get_hashtag_detail($hashtag,$user_id);
+        $hashtag_detail = $this->user_post_model->get_hashtag_detail($hashtag,$user_id,1);
         if($user_id =='' || empty($hashtag_detail))
         {
             $this->data['title'] = "404".TITLEPOSTFIX;

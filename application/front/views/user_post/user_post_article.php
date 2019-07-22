@@ -115,7 +115,7 @@
                         <div class="post-discription" ng-if="post.post_data.post_for == 'article'">
                             <p ng-if="post.article_data.hashtag" class="hashtag-grd">
                                 <span>
-                                    <span class="post-hash-tag" id="opp-post-hashtag-{{post.article_data.id}}" ng-repeat="hashtag in post.article_data.hashtag.split(' ')">{{hashtag}}</span>
+                                    <span class="post-hash-tag" id="opp-post-hashtag-{{post.article_data.id}}" ng-repeat="hashtag in post.article_data.hashtag.split(' ')"><a href="<?php echo base_url(); ?>hashtag/{{hashtag | removeFirstCharacter}}" target="_self">{{hashtag}}</a></span>
                                 </span>
                             </p>
                         </div>
@@ -821,7 +821,7 @@
                                         <p ng-if="!share_post_data.opportunity_data.field || share_post_data.opportunity_data.field == 0"><b>Field:</b><span ng-bind="share_post_data.opportunity_data.other_field" id="opp-post-field-{{share_post_data.post_data.id}}"></span></p>
                                         <p ng-if="share_post_data.opportunity_data.hashtag" class="hashtag-grd"><b>Hashtags:</b>
                                             <span>
-                                                <span class="post-hash-tag" id="opp-post-hashtag-{{share_post_data.post_data.id}}" ng-repeat="hashtag in share_post_data.opportunity_data.hashtag.split(' ')">{{hashtag}}</span>
+                                                <span class="post-hash-tag" id="opp-post-hashtag-{{share_post_data.post_data.id}}" ng-repeat="hashtag in share_post_data.opportunity_data.hashtag.split(' ')"><a href="<?php echo base_url(); ?>hashtag/{{hashtag | removeFirstCharacter}}" target="_self">{{hashtag}}</a></span>
                                             </span>
                                         </p>                                            
                                         <p ng-if="share_post_data.opportunity_data.company_name"><b>Company Name:</b><span ng-bind="share_post_data.opportunity_data.company_name" id="opp-post-company-{{share_post_data.post_data.id}}"></span></p>
@@ -840,7 +840,7 @@
                                 <p ng-if="share_post_data.simple_data.hashtag" class="hashtag-grd">
                                     <b>Hashtags:</b>
                                     <span>
-                                        <span class="post-hash-tag" id="sim-post-hashtag-{{share_post_data.post_data.id}}" ng-repeat="hashtag in share_post_data.simple_data.hashtag.split(' ')">{{hashtag}}</span>
+                                        <span class="post-hash-tag" id="sim-post-hashtag-{{share_post_data.post_data.id}}" ng-repeat="hashtag in share_post_data.simple_data.hashtag.split(' ')"><a href="<?php echo base_url(); ?>hashtag/{{hashtag | removeFirstCharacter}}" target="_self">{{hashtag}}</a></span>
                                     </span>
                                 </p>
                                 <div ng-init="limit = 250; moreShown = false">
@@ -852,7 +852,7 @@
                             <div class="post-discription" ng-if="share_post_data.post_data.post_for == 'article'">
                                 <p ng-if="share_post_data.article_data.hashtag" class="hashtag-grd">
                                     <span>
-                                        <span class="post-hash-tag" id="opp-post-hashtag-{{share_post_data.post_data.id}}" ng-repeat="hashtag in share_post_data.article_data.hashtag.split(' ')">{{hashtag}}</span>
+                                        <span class="post-hash-tag" id="opp-post-hashtag-{{share_post_data.post_data.id}}" ng-repeat="hashtag in share_post_data.article_data.hashtag.split(' ')"><a href="<?php echo base_url(); ?>hashtag/{{hashtag | removeFirstCharacter}}" target="_self">{{hashtag}}</a></span>
                                     </span>
                                 </p>
                             </div>
@@ -960,7 +960,7 @@
                                                         <p ng-if="!share_post_data.share_data.data.opportunity_data.field || share_post_data.share_data.data.opportunity_data.field == 0"><b>Field:</b><span ng-bind="share_post_data.share_data.data.opportunity_data.other_field" id="opp-post-field-{{share_post_data.share_data.data.post_data.id}}"></span></p>
                                                         <p ng-if="share_post_data.share_data.data.opportunity_data.hashtag" class="hashtag-grd"><b>Hashtags:</b>
                                                             <span>
-                                                                <span class="post-hash-tag" id="opp-post-hashtag-{{share_post_data.share_data.data.post_data.id}}" ng-repeat="hashtag in share_post_data.share_data.data.opportunity_data.hashtag.split(' ')">{{hashtag}}</span>
+                                                                <span class="post-hash-tag" id="opp-post-hashtag-{{share_post_data.share_data.data.post_data.id}}" ng-repeat="hashtag in share_post_data.share_data.data.opportunity_data.hashtag.split(' ')"><a href="<?php echo base_url(); ?>hashtag/{{hashtag | removeFirstCharacter}}" target="_self">{{hashtag}}</a></span>
                                                             </span>
                                                         </p>                                            
                                                         <p ng-if="share_post_data.share_data.data.opportunity_data.company_name"><b>Company Name:</b><span ng-bind="share_post_data.share_data.data.opportunity_data.company_name" id="opp-post-company-{{share_post_data.share_data.data.post_data.id}}"></span></p>
@@ -979,7 +979,7 @@
                                                 <p ng-if="share_post_data.share_data.data.simple_data.hashtag" class="hashtag-grd">
                                                     <b>Hashtags:</b>
                                                     <span>
-                                                        <span class="post-hash-tag" id="sim-post-hashtag-{{share_post_data.share_data.data.post_data.id}}" ng-repeat="hashtag in share_post_data.share_data.data.simple_data.hashtag.split(' ')">{{hashtag}}</span>
+                                                        <span class="post-hash-tag" id="sim-post-hashtag-{{share_post_data.share_data.data.post_data.id}}" ng-repeat="hashtag in share_post_data.share_data.data.simple_data.hashtag.split(' ')"><a href="<?php echo base_url(); ?>hashtag/{{hashtag | removeFirstCharacter}}" target="_self">{{hashtag}}</a></span>
                                                     </span>
                                                 </p>
                                                 <div ng-init="limit = 250; moreShown = false">
@@ -991,7 +991,7 @@
                                             <div class="post-discription" ng-if="share_post_data.share_data.data.post_data.post_for == 'article'">
                                                 <p ng-if="share_post_data.share_data.data.article_data.hashtag" class="hashtag-grd">
                                                     <span>
-                                                        <span class="post-hash-tag" id="opp-post-hashtag-{{share_post_data.share_data.data.post_data.id}}" ng-repeat="hashtag in share_post_data.share_data.data.article_data.hashtag.split(' ')">{{hashtag}}</span>
+                                                        <span class="post-hash-tag" id="opp-post-hashtag-{{share_post_data.share_data.data.post_data.id}}" ng-repeat="hashtag in share_post_data.share_data.data.article_data.hashtag.split(' ')"><a href="<?php echo base_url(); ?>hashtag/{{hashtag | removeFirstCharacter}}" target="_self">{{hashtag}}</a></span>
                                                     </span>
                                                 </p>
                                             </div>

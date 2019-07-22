@@ -6069,10 +6069,13 @@ class User_post_model extends CI_Model {
         return $result_array;
     }
 
-    public function get_hashtag_detail($hashtag = '',$user_id = '') {
+    public function get_hashtag_detail($hashtag = '',$user_id = '',$hashtag_detail = 0) {
         $where = "(hashtag = '" . $hashtag . "')";
         $this->db->select("*")->from("hashtag");
-        $this->db->where('status', '1');        
+        if($hashtag_detail == 0)
+        {
+            $this->db->where('status', '1');
+        }
         $this->db->where($where);        
         $query = $this->db->get();
         $result_array = $query->row_array();

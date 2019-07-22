@@ -79,6 +79,12 @@ app.filter('removeLastCharacter', function() {
         //return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
     };
 });
+app.filter('removeFirstCharacter', function() {
+    return function(text) {
+        return text.substr(1);
+        //return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
+    };
+});
 app.filter('capitalize', function() {
     return function(input) {
         return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';

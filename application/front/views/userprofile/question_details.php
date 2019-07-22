@@ -103,7 +103,7 @@
                                         <p ng-if="post.question_data.hashtag" class="hashtag-grd">
                                             <b>Hashtags:</b>
                                             <span>
-                                                <span class="post-hash-tag" id="ask-post-hashtag-{{post.post_data.id}}" ng-repeat="hashtag in post.question_data.hashtag.split(' ')">{{hashtag}}</span>
+                                                <span class="post-hash-tag" id="ask-post-hashtag-{{post.post_data.id}}" ng-repeat="hashtag in post.question_data.hashtag.split(' ')"><a href="<?php echo base_url(); ?>hashtag/{{hashtag | removeFirstCharacter}}" target="_self">{{hashtag}}</a></span>
                                             </span>
                                         </p>
 

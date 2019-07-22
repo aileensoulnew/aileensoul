@@ -127,6 +127,12 @@ app.filter('removeLastCharacter', function () {
         //return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
     };
 });
+app.filter('removeFirstCharacter', function() {
+    return function(text) {
+        return text.substr(1);
+        //return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
+    };
+});
 app.filter('slugify', function () {
     return function (input) {
         if (!input)

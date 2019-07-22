@@ -139,6 +139,12 @@ app.filter('removeLastCharacter', function() {
         //return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
     };
 });
+app.filter('removeFirstCharacter', function() {
+    return function(text) {
+        return text.substr(1);
+        //return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
+    };
+});
 app.filter('parseUrl', function($sce) {
     var urls = /(\b(https:\/\/?|http:\/\/?|ftp:\/\/)[A-Z0-9+&@#\/%?=~_|!:,.;-]*[-A-Z0-9+&@#\/%=~_|])/gim
     var urlswww = /(\b(www.?)[A-Z0-9+&@#\/%?=~_|!:,.;-]*[-A-Z0-9+&@#\/%=~_|])/gim
