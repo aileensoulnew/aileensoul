@@ -82,17 +82,25 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
             contact_request = success.data;
             if(contact_request.total > 0)
             {
-                $(".con_req_cnt").show();
+                $(".con_req_cnt").show();                
                 if(contact_request.total > 99)
                 {
                     $(".con_req_cnt").addClass('not-max');
+                    $(".con_req_cnt").html('99+');
                 }
                 else
                 {
                     $(".con_req_cnt").removeClass('not-max');
+                    $(".con_req_cnt").html(contact_request.total);
                 }
             }
-            $scope.contact_request_count = (contact_request.total > 99 ? '99+' : contact_request.total);
+            else
+            {
+                $(".con_req_cnt").hide();
+            }
+            // setTimeout(function(){
+                $scope.contact_request_count = (contact_request.total > 99 ? '99+' : contact_request.total);
+            // },500);
         }, function (error) {
             setTimeout(function(){
                 contactRequestCount();

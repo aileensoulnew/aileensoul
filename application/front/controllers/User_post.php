@@ -4313,7 +4313,7 @@ class User_post extends MY_Controller {
             $response = 1;
         }
         $follower_counter = $this->user_post_model->get_hashtag_follower_count($hashtag_id);
-        $html = '<a href="javascript:void(0);" class="btn-new-1" ng-click="unfollow_hashtag('.$hashtag_id.');">Following</a>';        
+        $html = '<a href="javascript:void(0);" class="btn-new-1 hash-btn-mob" ng-click="unfollow_hashtag('.$hashtag_id.');">Following</a>';        
         $return_array = array("status"=>1,"hashtag_follower_count" => $follower_counter, 'follow_html' => $html);
         return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
     }
@@ -4341,7 +4341,7 @@ class User_post extends MY_Controller {
             $response = 1;
         }
         $follower_counter = $this->user_post_model->get_hashtag_follower_count($hashtag_id);
-        $html = '<a href="javascript:void(0);" class="btn-new-1" ng-click="follow_hashtag('.$hashtag_id.');">Follow</a>';
+        $html = '<a href="javascript:void(0);" class="btn-new-1 hash-btn-mob" ng-click="follow_hashtag('.$hashtag_id.');">Follow</a>';
         $return_array = array("status"=>0,"hashtag_follower_count" => $follower_counter, 'follow_html' => $html);
         return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
     }

@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/developer.css') ?>">
         <script src="<?php echo base_url('assets/js/jquery.min.js'); ?>"></script>
         <!-- <script src="<?php //echo base_url('assets/js/jquery-3.2.1.min.js') ?>"></script> -->
         <style type="text/css">
@@ -25,19 +26,37 @@
         <?php $this->load->view('page_loader'); ?>
         <div id="main_page_load" style="display: block;">
             <?php echo $header_profile; ?>
-            <div class="sub-header list-page">
-                <div class="container">
-                    <nav class="search-tab">
-                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            <ul class="sub-menu">
-                                <li><a ng-class="active_pg == 1 ? 'active' : ''" href="<?php echo base_url('contact-request'); ?>">People</a></li>
-                                <li><a ng-class="active_pg == 2 ? 'active' : ''" href="<?php echo base_url('contact-business'); ?>">Businesses</a></li>
-                                <li><a ng-class="active_pg == 3 ? 'active' : ''" href="<?php echo base_url('hashtags'); ?>">Hashtags</a></li>
-                            </ul>
-                        </div>
-                    </nav>
+            <div class="web-header">
+                <div class="sub-header list-page">
+                    <div class="container">
+                        <nav class="search-tab">
+                            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                <ul class="sub-menu">
+                                    <li><a ng-class="active_pg == 1 ? 'active' : ''" href="<?php echo base_url('contact-request'); ?>">People</a></li>
+                                    <li><a ng-class="active_pg == 2 ? 'active' : ''" href="<?php echo base_url('contact-business'); ?>">Businesses</a></li>
+                                    <li><a ng-class="active_pg == 3 ? 'active' : ''" href="<?php echo base_url('hashtags'); ?>">Hashtags</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
                 </div>
             </div>
+            <div class="mobile-header">
+                <div class="sub-header list-page">
+                    <div class="container">
+                        <nav class="search-tab">
+                            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                <ul class="sub-menu">
+                                    <li><a ng-class="active_pg == 1 ? 'active' : ''" href="<?php echo base_url('contact-request'); ?>">People</a></li>
+                                    <li><a ng-class="active_pg == 2 ? 'active' : ''" href="<?php echo base_url('contact-business'); ?>">Businesses</a></li>
+                                    <li><a ng-class="active_pg == 3 ? 'active' : ''" href="<?php echo base_url('hashtags'); ?>">Hashtags</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
             <div class="main-section">
                 <div class="container pt20 mobp0">
 					<div ng-view></div>
