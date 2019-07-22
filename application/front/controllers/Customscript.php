@@ -2384,4 +2384,111 @@ class Customscript extends CI_Controller {
         }
         echo "Done";
     }
+
+    public function hashtag_changes()
+    {
+        $sql = "SELECT id,COUNT(id) AS total_count,hashtag FROM `ailee_hashtag` GROUP BY hashtag  HAVING total_count > 1 ORDER BY COUNT(id) DESC";
+        $result = $this->db->query($sql)->result_array();
+        // print_r($result);exit();
+        foreach ($result as $key => $value) {
+            // echo $value['id'].$value['hashtag']."<br>";
+            $sql1 = "SELECT id FROM `ailee_hashtag` WHERE hashtag = '".$value['hashtag']."'";
+            $result1 = $this->db->query($sql1)->result_array();
+            $res1 = array_column($result1, 'id');            
+
+            $sql2 = "SELECT * FROM `ailee_user_simple_post` WHERE hashtag IN (SELECT id FROM ailee_hashtag WHERE hashtag = '".$value['hashtag']."')";
+            $result2 = $this->db->query($sql2)->result_array();
+            if(isset($result2) && !empty($result2))
+            {                
+                foreach ($result2 as $key1 => $value1) {
+                    $hashtag_arr = explode(",", $value1['hashtag']);
+                    $ret_arr = array_diff($hashtag_arr, $res1);
+                    $new_hashtag = implode(",", $ret_arr);
+                    if($new_hashtag != '')
+                    {
+                        $new_hashtag .= ",".$value['id'];
+                    }
+                    else
+                    {
+                        $new_hashtag = $value['id'];
+                    }
+                    $data1 = array('hashtag' => $new_hashtag);
+                    $this->common->update_data($data1,'user_simple_post','id',$value1['id']);
+                }
+            }
+            echo count($result2)."<---Simple Post Done <br>";
+
+            $sql3 = "SELECT * FROM `ailee_user_opportunity` WHERE hashtag IN (SELECT id FROM ailee_hashtag WHERE hashtag = '".$value['hashtag']."')";
+            $result3 = $this->db->query($sql3)->result_array();
+            // print_r($result3);exit();
+            if(isset($result3) && !empty($result3))
+            {                
+                foreach ($result3 as $key2 => $value2) {
+                    $hashtag_arr = explode(",", $value2['hashtag']);
+                    $ret_arr = array_diff($hashtag_arr, $res1);
+                    $new_hashtag = implode(",", $ret_arr);
+                    if($new_hashtag != '')
+                    {
+                        $new_hashtag .= ",".$value['id'];
+                    }
+                    else
+                    {
+                        $new_hashtag = $value['id'];
+                    }
+                    $data1 = array('hashtag' => $new_hashtag);
+                    $this->common->update_data($data1,'user_opportunity','id',$value2['id']);
+                }
+            }
+            echo count($result3)."<---opportunity Post Done <br>";
+
+            $sql4 = "SELECT * FROM `ailee_user_ask_question` WHERE hashtag IN (SELECT id FROM ailee_hashtag WHERE hashtag = '".$value['hashtag']."')";
+            $result4 = $this->db->query($sql4)->result_array();
+            if(isset($result4) && !empty($result4))
+            {                
+                foreach ($result4 as $key3 => $value3) {
+                    $hashtag_arr = explode(",", $value3['hashtag']);
+                    $ret_arr = array_diff($hashtag_arr, $res1);
+                    $new_hashtag = implode(",", $ret_arr);
+                    if($new_hashtag != '')
+                    {
+                        $new_hashtag .= ",".$value['id'];
+                    }
+                    else
+                    {
+                        $new_hashtag = $value['id'];
+                    }
+                    $data1 = array('hashtag' => $new_hashtag);
+                    $this->common->update_data($data1,'user_ask_question','id',$value3['id']);
+                }
+            }
+            echo count($result4)."Question Post Done <br>";
+
+            $sql5 = "SELECT * FROM `ailee_post_article` WHERE hashtag IN (SELECT id FROM ailee_hashtag WHERE hashtag = '".$value['hashtag']."')";
+            $result5 = $this->db->query($sql5)->result_array();
+            // print_r($result5);exit();
+            if(isset($result5) && !empty($result5))
+            {                
+                foreach ($result5 as $key4 => $value4) {
+                    $hashtag_arr = explode(",", $value4['hashtag']);
+                    $ret_arr = array_diff($hashtag_arr, $res1);
+                    $new_hashtag = implode(",", $ret_arr);
+                    if($new_hashtag != '')
+                    {
+                        $new_hashtag .= ",".$value['id'];
+                    }
+                    else
+                    {
+                        $new_hashtag = $value['id'];
+                    }
+                    $data1 = array('hashtag' => $new_hashtag);
+                    $this->common->update_data($data1,'post_article','id_post_article',$value4['id_post_article']);
+                }
+            }
+            echo count($result5)."Article Post Done <br>";exit();
+
+            /*$sql6 = "DELETE FROM `ailee_hashtag` WHERE hashtag = '".$value['hashtag']."' AND id != '".$value['id']."'";
+            $result6 = $this->db->query($sql6);
+            print_r($result6);exit();*/
+        }
+    }
 }

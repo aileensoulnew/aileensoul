@@ -1307,7 +1307,7 @@ class User_post extends MY_Controller {
                 $hashtag_arr = $this->get_hashtag_array($hashtag);
                 $hashtag_id = "";
                 foreach ($hashtag_arr as $key=>$value) {
-                    $ht_arr = $this->data_model->find_hashtag($value);
+                    $ht_arr = $this->data_model->find_hashtag_all($value);
                     if ($ht_arr['id'] != '') {
                         $ht_id = $ht_arr['id'];
                     } else {
@@ -1326,7 +1326,7 @@ class User_post extends MY_Controller {
                 $hashtag_arr = $this->get_hashtag_array($hashtag);
                 $hashtag_id = "";
                 foreach ($hashtag_arr as $key=>$value) {
-                    $ht_arr = $this->data_model->find_hashtag($value);
+                    $ht_arr = $this->data_model->find_hashtag_all($value);
                     if ($ht_arr['id'] != '') {
                         $ht_id = $ht_arr['id'];
                     } else {
@@ -1361,7 +1361,7 @@ class User_post extends MY_Controller {
                 $hashtag_arr = $this->get_hashtag_array($hashtag);
                 $hashtag_id = "";
                 foreach ($hashtag_arr as $key=>$value) {
-                    $ht_arr = $this->data_model->find_hashtag($value);
+                    $ht_arr = $this->data_model->find_hashtag_all($value);
                     if ($ht_arr['id'] != '') {
                         $ht_id = $ht_arr['id'];
                     } else {
@@ -2443,7 +2443,7 @@ class User_post extends MY_Controller {
                 $hashtag_arr = $this->get_hashtag_array($hashtag);
                 $hashtag_id = "";
                 foreach ($hashtag_arr as $key=>$value) {
-                    $ht_arr = $this->data_model->find_hashtag($value);
+                    $ht_arr = $this->data_model->find_hashtag_all($value);
                     if ($ht_arr['id'] != '') {
                         $ht_id = $ht_arr['id'];
                     } else {
@@ -2462,7 +2462,7 @@ class User_post extends MY_Controller {
                 $hashtag_arr = $this->get_hashtag_array($hashtag);
                 $hashtag_id = "";
                 foreach ($hashtag_arr as $key=>$value) {
-                    $ht_arr = $this->data_model->find_hashtag($value);
+                    $ht_arr = $this->data_model->find_hashtag_all($value);
                     if ($ht_arr['id'] != '') {
                         $ht_id = $ht_arr['id'];
                     } else {
@@ -2497,7 +2497,7 @@ class User_post extends MY_Controller {
                 $hashtag_arr = $this->get_hashtag_array($hashtag);
                 $hashtag_id = "";
                 foreach ($hashtag_arr as $key=>$value) {
-                    $ht_arr = $this->data_model->find_hashtag($value);
+                    $ht_arr = $this->data_model->find_hashtag_all($value);
                     if ($ht_arr['id'] != '') {
                         $ht_id = $ht_arr['id'];
                     } else {
