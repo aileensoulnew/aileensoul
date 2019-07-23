@@ -6828,7 +6828,7 @@ class User_post_model extends CI_Model {
         $this->db->distinct();        
         $this->db->select("ht.id,ht.hashtag,ht.status")->from("hashtag ht");
         $this->db->join('hashtag_follow hf', 'hf.hashtag_id = ht.id', 'left');
-        $this->db->where('ht.status', '1');
+        // $this->db->where('ht.status', '1');
         $this->db->where('hf.status', '1');
         $this->db->where('hf.user_id', $user_id);
         $this->db->order_by('ht.hashtag', 'ASC');
@@ -6854,7 +6854,7 @@ class User_post_model extends CI_Model {
         $this->db->distinct();        
         $this->db->select("COUNT(*) as total_record")->from("hashtag ht");
         $this->db->join('hashtag_follow hf', 'hf.hashtag_id = ht.id', 'left');
-        $this->db->where('ht.status', '1');
+        // $this->db->where('ht.status', '1');
         $this->db->where('hf.status', '1');
         $this->db->where('hf.user_id', $user_id);
         $this->db->order_by('ht.hashtag', 'ASC');        
