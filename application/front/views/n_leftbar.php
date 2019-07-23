@@ -122,6 +122,55 @@ $all_counter = $this->common->get_all_counter($leftbox_data['user_id']);
         <?php }
     }
     endif; ?>
+    <div class="add-detail all-user-list">
+        <h4 class="hashtag-h4">
+            <a href="" class="" target="_self">Hashtags</a>
+        </h4>
+        <ul class="main-hashtag">
+            <li>
+                <div class="hashtag-left">
+                    <div class="hash-round">
+                        <a href="">#1</a>
+                    </div>
+                    <div class="hash-detail">
+                        <p>#15yrsworkexincorejavajavascriptajax</p>
+                        <span>1.2 Followers</span>
+                    </div>
+                </div>
+                <div class="hashtag-right">
+                    <a href="#" class="btn-new-1">Follow</a>
+                </div>
+            </li>
+            <li>
+                <div class="hashtag-left">
+                    <div class="hash-round">
+                        <a href="">#A</a>
+                    </div>
+                    <div class="hash-detail">
+                        <p>#Angular</p>
+                        <span>1.2 Followers</span>
+                    </div>
+                </div>
+                <div class="hashtag-right">
+                    <a href="#" class="btn-new-1">Follow</a>
+                </div>
+            </li>
+            <li>
+                <div class="hashtag-left">
+                    <div class="hash-round">
+                        <a href="">#A</a>
+                    </div>
+                    <div class="hash-detail">
+                        <p>#Angular</p>
+                        <span>1.2 Followers</span>
+                    </div>
+                </div>
+                <div class="hashtag-right">
+                    <a href="#" class="btn-new-1">Follow</a>
+                </div>
+            </li>            
+        </ul>
+    </div>
 	<div class="business-move">
 	</div>
 					

@@ -864,6 +864,48 @@ class User_post extends MY_Controller {
             $post_data['contact_suggetion_'.$page] = $contact_data;
             echo json_encode($post_data);
         }
+        elseif($page != 1 && ($page == 3 || $page == 5 || $page == 7 || $page == 9 || $page == 11 || $page == 13 || $page == 15 || $page == 17 || $page == 19))
+        {
+            if($page == 3)
+            {
+                $page = 1;   
+            }
+            elseif($page == 5)
+            {
+                $page = 2;
+            }
+            elseif($page == 7)
+            {
+                $page = 3;
+            }
+            elseif($page == 9)
+            {
+                $page = 4;
+            }
+            elseif($page == 11)
+            {
+                $page = 5;
+            }
+            elseif($page == 13)
+            {
+                $page = 6;
+            }
+            elseif($page == 15)
+            {
+                $page = 7;
+            }
+            elseif($page == 17)
+            {
+                $page = 8;
+            }
+            elseif($page == 19)
+            {
+                $page = 9;
+            }
+            $hashtag_data = $this->user_post_model->get_hashtag_sugetion_in_post($userid, $page);
+            $post_data['hashtag_suggetion_'.$page] = $hashtag_data;
+            echo json_encode($post_data);
+        }
         else
         {
             echo json_encode($post_data);

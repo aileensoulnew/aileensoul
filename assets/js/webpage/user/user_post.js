@@ -1578,7 +1578,44 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 if(success.data.contact_suggetion_5)
                 {
                     $scope.contact_suggetion_5 = success.data.contact_suggetion_5;
-                }                
+                }
+
+                if(success.data.hashtag_suggetion_1)
+                {
+                    $scope.hashtag_suggetion_1 = success.data.hashtag_suggetion_1;
+                }
+                if(success.data.hashtag_suggetion_2)
+                {
+                    $scope.hashtag_suggetion_2 = success.data.hashtag_suggetion_2;
+                }
+                if(success.data.hashtag_suggetion_3)
+                {
+                    $scope.hashtag_suggetion_3 = success.data.hashtag_suggetion_3;
+                }
+                if(success.data.hashtag_suggetion_4)
+                {
+                    $scope.hashtag_suggetion_4 = success.data.hashtag_suggetion_4;
+                }
+                if(success.data.hashtag_suggetion_5)
+                {
+                    $scope.hashtag_suggetion_5 = success.data.hashtag_suggetion_5;
+                }
+                if(success.data.hashtag_suggetion_6)
+                {
+                    $scope.hashtag_suggetion_6 = success.data.hashtag_suggetion_6;
+                }
+                if(success.data.hashtag_suggetion_7)
+                {
+                    $scope.hashtag_suggetion_7 = success.data.hashtag_suggetion_7;
+                }
+                if(success.data.hashtag_suggetion_8)
+                {
+                    $scope.hashtag_suggetion_8 = success.data.hashtag_suggetion_8;
+                }
+                if(success.data.hashtag_suggetion_9)
+                {
+                    $scope.hashtag_suggetion_9 = success.data.hashtag_suggetion_9;
+                }
             } else {
                 // processing = false;
                 // isLoadingData = false;                
@@ -4479,6 +4516,31 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 },
                 1280: {
                     items: 2
+                }
+            }
+        };
+
+    $scope.owlOptionsHashtag = {
+            'slideBy':3,
+            'touchDrag':false,
+            'mouseDrag':false,
+            'loop': false,
+            'nav': true,
+            'lazyLoad': true,
+            'margin': 0,
+            'video': true,
+            'responsive': {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 3
+                },
+                768: {
+                    items: 3,
+                },
+                1280: {
+                    items: 3
                 }
             }
         };

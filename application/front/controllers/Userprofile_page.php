@@ -3545,17 +3545,30 @@ class Userprofile_page extends MY_Controller {
         $this->load->view('userprofile/following_hashtags', $this->data);
     }
 
-    public function following_hashtags_data() {        
-        if (!empty($this->input->get('page')) && $this->input->get('page') != 'undefined') {
+    public function following_hashtags_data() {
+        $page = 1;
+        if (!empty($_GET["page"]) && $_GET["page"] != 'undefined') {
+            $page = $_GET["page"];
+        }        
+        if (!empty($_GET["user_slug"]) && $_GET["user_slug"] != 'undefined')
+        {
+            $user_slug = $_GET["user_slug"];             
+            $userid = $this->db->select('user_id')->get_where('user', array('user_slug' => $user_slug))->row('user_id');
+        }
+        else
+        {            
+            $userid = $this->session->userdata('aileenuser');
+        }
+        $login_user_id = $this->session->userdata('aileenuser');
+        /*if (!empty($this->input->get('page')) && $this->input->get('page') != 'undefined') {
             $page = $this->input->get('page');
         }
         else
         {
             $page = 1;
-        }
-        $limit = 12;//40;
-        $userid = $this->session->userdata('aileenuser');
-        $user_data = $this->user_post_model->get_following_hashtags($userid,$page,$limit);
+        }*/
+        $limit = 12;//40;        
+        $user_data = $this->user_post_model->get_following_hashtags($userid,$page,$limit,$login_user_id);
         echo json_encode($user_data);
     }
 }

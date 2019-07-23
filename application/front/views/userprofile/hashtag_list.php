@@ -31,7 +31,7 @@
                                         <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">#{{hashtag_arr.hashtag}}</a>
                                     </p>
                                     <p class="hash-follow">
-                                        {{hashtag_arr.hashtag_follower_count && hashtag_arr.hashtag_follower_count > 0 ? hashtag_arr.hashtag_follower_count+' Followers' : '&nbsp;' }}</p>
+                                        {{hashtag_arr.hashtag_follower_count ? hashtag_arr.hashtag_follower_count+' Followers' : '&nbsp;' }}</p>
                                     <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.id}}" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.id,$index);">Follow</a>
                                     <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.id}}" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.id,$index);">Following</a>
                                 </div>

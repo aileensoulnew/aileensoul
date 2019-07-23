@@ -2968,8 +2968,7 @@
                         </div>
                     </div>                              
                 </div>
-            </div>
-
+            </div>            
             <div ng-if="(postIndex + 1) % <?php echo ADS_BREAK; ?> == 0">
                 <div class="tab-add">
                     <!-- <adsense ad-client="ca-pub-6060111582812113" ad-slot="6296725909" inline-style="display:block;" ad-format="fluid" data-ad-layout-key="-6r+eg+1e-3d+36" ad-class="infeed"></adsense> -->
@@ -3059,7 +3058,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>            
             <div ng-if="(postIndex + 1) / 20 === 1 && contact_suggetion_2">
                 <div class="all-contact-cus">
                     <div class="all-contact">
@@ -3364,6 +3363,476 @@
                     </div>
                 </div>
             </div>
+
+            <div ng-if="(postIndex + 1) / 15 === 1 && hashtag_suggetion_1">
+                <div class="all-contact-cus">
+                    <div class="all-contact">
+                        <h4><a href="<?php echo base_url('hashtags'); ?>" target="_self">Hashtags</a></h4> 
+                        <div class="all-user-list">
+                            <data-owl-carousel class="owl-carousel owl-carousel1" data-options="{{owlOptionsHashtag}}">
+                                <div owl-carousel-item="" ng-repeat="hashtag_arr in hashtag_suggetion_1" class="item">
+                                    <div class="item" id="item-{{hashtag_arr.hashtag_id}}">
+                                        <div class="hash-box">
+                                            <div class="hash-box-top">
+                                                <div class="hash-round">
+                                                    <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">
+                                                        #{{hashtag_arr.hashtag | limitTo:1 | uppercase}}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="hash-detail">
+                                                <p class="hash-name" title="#{{hashtag_arr.hashtag}}">
+                                                    <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">#{{hashtag_arr.hashtag}}</a>
+                                                </p>
+                                                <p class="hash-follow">
+                                                    {{hashtag_arr.hashtag_follower_count && hashtag_arr.hashtag_follower_count != '' ? hashtag_arr.hashtag_follower_count+' Followers' : '&nbsp;' }}</p>
+                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
+                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                                <div owl-carousel-item="" class="item last-item-box">
+                                    <div class="hash-box">
+                                        <div class="hash-box-top">
+                                            <div class="hash-round" style="padding: 0;border: none;">
+                                                <a href="<?php echo base_url('hashtags'); ?>" target="_self">
+                                                    <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="hash-detail">
+                                            <p class="hash-name" title="">
+                                                <a href="<?php echo base_url('hashtags') ?>" target="_self">Find more hashtags
+                                                </a>
+                                            </p>
+                                            <p class="hash-follow">&nbsp;</p>
+                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 112px;">View More</a>
+                                        </div>
+                                    </div>           
+                                </div>
+                            </data-owl-carousel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="(postIndex + 1) / 25 === 1 && hashtag_suggetion_2">
+                <div class="all-contact-cus">
+                    <div class="all-contact">
+                        <h4><a href="<?php echo base_url('hashtags'); ?>" target="_self">Hashtags</a></h4> 
+                        <div class="all-user-list">
+                            <data-owl-carousel class="owl-carousel owl-carousel1" data-options="{{owlOptionsHashtag}}">
+                                <div owl-carousel-item="" ng-repeat="hashtag_arr in hashtag_suggetion_2" class="item">
+                                    <div class="item" id="item-{{hashtag_arr.hashtag_id}}">
+                                        <div class="hash-box">
+                                            <div class="hash-box-top">
+                                                <div class="hash-round">
+                                                    <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">
+                                                        #{{hashtag_arr.hashtag | limitTo:1 | uppercase}}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="hash-detail">
+                                                <p class="hash-name" title="#{{hashtag_arr.hashtag}}">
+                                                    <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">#{{hashtag_arr.hashtag}}</a>
+                                                </p>
+                                                <p class="hash-follow">
+                                                    {{hashtag_arr.hashtag_follower_count && hashtag_arr.hashtag_follower_count != '' ? hashtag_arr.hashtag_follower_count+' Followers' : '&nbsp;' }}</p>
+                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
+                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                                <div owl-carousel-item="" class="item last-item-box">
+                                    <div class="hash-box">
+                                        <div class="hash-box-top">
+                                            <div class="hash-round" style="padding: 0;border: none;">
+                                                <a href="<?php echo base_url('hashtags'); ?>" target="_self">
+                                                    <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="hash-detail">
+                                            <p class="hash-name" title="">
+                                                <a href="<?php echo base_url('hashtags') ?>" target="_self">Find more hashtags
+                                                </a>
+                                            </p>
+                                            <p class="hash-follow">&nbsp;</p>
+                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 112px;">View More</a>
+                                        </div>
+                                    </div>           
+                                </div>
+                            </data-owl-carousel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="(postIndex + 1) / 35 === 1 && hashtag_suggetion_3">
+                <div class="all-contact-cus">
+                    <div class="all-contact">
+                        <h4><a href="<?php echo base_url('hashtags'); ?>" target="_self">Hashtags</a></h4> 
+                        <div class="all-user-list">
+                            <data-owl-carousel class="owl-carousel owl-carousel1" data-options="{{owlOptionsHashtag}}">
+                                <div owl-carousel-item="" ng-repeat="hashtag_arr in hashtag_suggetion_3" class="item">
+                                    <div class="item" id="item-{{hashtag_arr.hashtag_id}}">
+                                        <div class="hash-box">
+                                            <div class="hash-box-top">
+                                                <div class="hash-round">
+                                                    <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">
+                                                        #{{hashtag_arr.hashtag | limitTo:1 | uppercase}}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="hash-detail">
+                                                <p class="hash-name" title="#{{hashtag_arr.hashtag}}">
+                                                    <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">#{{hashtag_arr.hashtag}}</a>
+                                                </p>
+                                                <p class="hash-follow">
+                                                    {{hashtag_arr.hashtag_follower_count && hashtag_arr.hashtag_follower_count != '' ? hashtag_arr.hashtag_follower_count+' Followers' : '&nbsp;' }}</p>
+                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
+                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                                <div owl-carousel-item="" class="item last-item-box">
+                                    <div class="hash-box">
+                                        <div class="hash-box-top">
+                                            <div class="hash-round" style="padding: 0;border: none;">
+                                                <a href="<?php echo base_url('hashtags'); ?>" target="_self">
+                                                    <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="hash-detail">
+                                            <p class="hash-name" title="">
+                                                <a href="<?php echo base_url('hashtags') ?>" target="_self">Find more hashtags
+                                                </a>
+                                            </p>
+                                            <p class="hash-follow">&nbsp;</p>
+                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 112px;">View More</a>
+                                        </div>
+                                    </div>           
+                                </div>
+                            </data-owl-carousel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="(postIndex + 1) / 45 === 1 && hashtag_suggetion_4">
+                <div class="all-contact-cus">
+                    <div class="all-contact">
+                        <h4><a href="<?php echo base_url('hashtags'); ?>" target="_self">Hashtags</a></h4> 
+                        <div class="all-user-list">
+                            <data-owl-carousel class="owl-carousel owl-carousel1" data-options="{{owlOptionsHashtag}}">
+                                <div owl-carousel-item="" ng-repeat="hashtag_arr in hashtag_suggetion_4" class="item">
+                                    <div class="item" id="item-{{hashtag_arr.hashtag_id}}">
+                                        <div class="hash-box">
+                                            <div class="hash-box-top">
+                                                <div class="hash-round">
+                                                    <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">
+                                                        #{{hashtag_arr.hashtag | limitTo:1 | uppercase}}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="hash-detail">
+                                                <p class="hash-name" title="#{{hashtag_arr.hashtag}}">
+                                                    <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">#{{hashtag_arr.hashtag}}</a>
+                                                </p>
+                                                <p class="hash-follow">
+                                                    {{hashtag_arr.hashtag_follower_count && hashtag_arr.hashtag_follower_count != '' ? hashtag_arr.hashtag_follower_count+' Followers' : '&nbsp;' }}</p>
+                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
+                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                                <div owl-carousel-item="" class="item last-item-box">
+                                    <div class="hash-box">
+                                        <div class="hash-box-top">
+                                            <div class="hash-round" style="padding: 0;border: none;">
+                                                <a href="<?php echo base_url('hashtags'); ?>" target="_self">
+                                                    <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="hash-detail">
+                                            <p class="hash-name" title="">
+                                                <a href="<?php echo base_url('hashtags') ?>" target="_self">Find more hashtags
+                                                </a>
+                                            </p>
+                                            <p class="hash-follow">&nbsp;</p>
+                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 112px;">View More</a>
+                                        </div>
+                                    </div>           
+                                </div>
+                            </data-owl-carousel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="(postIndex + 1) / 55 === 1 && hashtag_suggetion_5">
+                <div class="all-contact-cus">
+                    <div class="all-contact">
+                        <h4><a href="<?php echo base_url('hashtags'); ?>" target="_self">Hashtags</a></h4> 
+                        <div class="all-user-list">
+                            <data-owl-carousel class="owl-carousel owl-carousel1" data-options="{{owlOptionsHashtag}}">
+                                <div owl-carousel-item="" ng-repeat="hashtag_arr in hashtag_suggetion_5" class="item">
+                                    <div class="item" id="item-{{hashtag_arr.hashtag_id}}">
+                                        <div class="hash-box">
+                                            <div class="hash-box-top">
+                                                <div class="hash-round">
+                                                    <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">
+                                                        #{{hashtag_arr.hashtag | limitTo:1 | uppercase}}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="hash-detail">
+                                                <p class="hash-name" title="#{{hashtag_arr.hashtag}}">
+                                                    <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">#{{hashtag_arr.hashtag}}</a>
+                                                </p>
+                                                <p class="hash-follow">
+                                                    {{hashtag_arr.hashtag_follower_count && hashtag_arr.hashtag_follower_count != '' ? hashtag_arr.hashtag_follower_count+' Followers' : '&nbsp;' }}</p>
+                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
+                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                                <div owl-carousel-item="" class="item last-item-box">
+                                    <div class="hash-box">
+                                        <div class="hash-box-top">
+                                            <div class="hash-round" style="padding: 0;border: none;">
+                                                <a href="<?php echo base_url('hashtags'); ?>" target="_self">
+                                                    <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="hash-detail">
+                                            <p class="hash-name" title="">
+                                                <a href="<?php echo base_url('hashtags') ?>" target="_self">Find more hashtags
+                                                </a>
+                                            </p>
+                                            <p class="hash-follow">&nbsp;</p>
+                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 112px;">View More</a>
+                                        </div>
+                                    </div>           
+                                </div>
+                            </data-owl-carousel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="(postIndex + 1) / 65 === 1 && hashtag_suggetion_6">
+                <div class="all-contact-cus">
+                    <div class="all-contact">
+                        <h4><a href="<?php echo base_url('hashtags'); ?>" target="_self">Hashtags</a></h4> 
+                        <div class="all-user-list">
+                            <data-owl-carousel class="owl-carousel owl-carousel1" data-options="{{owlOptionsHashtag}}">
+                                <div owl-carousel-item="" ng-repeat="hashtag_arr in hashtag_suggetion_6" class="item">
+                                    <div class="item" id="item-{{hashtag_arr.hashtag_id}}">
+                                        <div class="hash-box">
+                                            <div class="hash-box-top">
+                                                <div class="hash-round">
+                                                    <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">
+                                                        #{{hashtag_arr.hashtag | limitTo:1 | uppercase}}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="hash-detail">
+                                                <p class="hash-name" title="#{{hashtag_arr.hashtag}}">
+                                                    <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">#{{hashtag_arr.hashtag}}</a>
+                                                </p>
+                                                <p class="hash-follow">
+                                                    {{hashtag_arr.hashtag_follower_count && hashtag_arr.hashtag_follower_count != '' ? hashtag_arr.hashtag_follower_count+' Followers' : '&nbsp;' }}</p>
+                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
+                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                                <div owl-carousel-item="" class="item last-item-box">
+                                    <div class="hash-box">
+                                        <div class="hash-box-top">
+                                            <div class="hash-round" style="padding: 0;border: none;">
+                                                <a href="<?php echo base_url('hashtags'); ?>" target="_self">
+                                                    <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="hash-detail">
+                                            <p class="hash-name" title="">
+                                                <a href="<?php echo base_url('hashtags') ?>" target="_self">Find more hashtags
+                                                </a>
+                                            </p>
+                                            <p class="hash-follow">&nbsp;</p>
+                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 112px;">View More</a>
+                                        </div>
+                                    </div>           
+                                </div>
+                            </data-owl-carousel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="(postIndex + 1) / 75 === 1 && hashtag_suggetion_7">
+                <div class="all-contact-cus">
+                    <div class="all-contact">
+                        <h4><a href="<?php echo base_url('hashtags'); ?>" target="_self">Hashtags</a></h4> 
+                        <div class="all-user-list">
+                            <data-owl-carousel class="owl-carousel owl-carousel1" data-options="{{owlOptionsHashtag}}">
+                                <div owl-carousel-item="" ng-repeat="hashtag_arr in hashtag_suggetion_7" class="item">
+                                    <div class="item" id="item-{{hashtag_arr.hashtag_id}}">
+                                        <div class="hash-box">
+                                            <div class="hash-box-top">
+                                                <div class="hash-round">
+                                                    <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">
+                                                        #{{hashtag_arr.hashtag | limitTo:1 | uppercase}}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="hash-detail">
+                                                <p class="hash-name" title="#{{hashtag_arr.hashtag}}">
+                                                    <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">#{{hashtag_arr.hashtag}}</a>
+                                                </p>
+                                                <p class="hash-follow">
+                                                    {{hashtag_arr.hashtag_follower_count && hashtag_arr.hashtag_follower_count != '' ? hashtag_arr.hashtag_follower_count+' Followers' : '&nbsp;' }}</p>
+                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
+                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                                <div owl-carousel-item="" class="item last-item-box">
+                                    <div class="hash-box">
+                                        <div class="hash-box-top">
+                                            <div class="hash-round" style="padding: 0;border: none;">
+                                                <a href="<?php echo base_url('hashtags'); ?>" target="_self">
+                                                    <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="hash-detail">
+                                            <p class="hash-name" title="">
+                                                <a href="<?php echo base_url('hashtags') ?>" target="_self">Find more hashtags
+                                                </a>
+                                            </p>
+                                            <p class="hash-follow">&nbsp;</p>
+                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 112px;">View More</a>
+                                        </div>
+                                    </div>           
+                                </div>
+                            </data-owl-carousel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="(postIndex + 1) / 85 === 1 && hashtag_suggetion_8">
+                <div class="all-contact-cus">
+                    <div class="all-contact">
+                        <h4><a href="<?php echo base_url('hashtags'); ?>" target="_self">Hashtags</a></h4> 
+                        <div class="all-user-list">
+                            <data-owl-carousel class="owl-carousel owl-carousel1" data-options="{{owlOptionsHashtag}}">
+                                <div owl-carousel-item="" ng-repeat="hashtag_arr in hashtag_suggetion_8" class="item">
+                                    <div class="item" id="item-{{hashtag_arr.hashtag_id}}">
+                                        <div class="hash-box">
+                                            <div class="hash-box-top">
+                                                <div class="hash-round">
+                                                    <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">
+                                                        #{{hashtag_arr.hashtag | limitTo:1 | uppercase}}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="hash-detail">
+                                                <p class="hash-name" title="#{{hashtag_arr.hashtag}}">
+                                                    <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">#{{hashtag_arr.hashtag}}</a>
+                                                </p>
+                                                <p class="hash-follow">
+                                                    {{hashtag_arr.hashtag_follower_count && hashtag_arr.hashtag_follower_count != '' ? hashtag_arr.hashtag_follower_count+' Followers' : '&nbsp;' }}</p>
+                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
+                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                                <div owl-carousel-item="" class="item last-item-box">
+                                    <div class="hash-box">
+                                        <div class="hash-box-top">
+                                            <div class="hash-round" style="padding: 0;border: none;">
+                                                <a href="<?php echo base_url('hashtags'); ?>" target="_self">
+                                                    <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="hash-detail">
+                                            <p class="hash-name" title="">
+                                                <a href="<?php echo base_url('hashtags') ?>" target="_self">Find more hashtags
+                                                </a>
+                                            </p>
+                                            <p class="hash-follow">&nbsp;</p>
+                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 112px;">View More</a>
+                                        </div>
+                                    </div>           
+                                </div>
+                            </data-owl-carousel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="(postIndex + 1) / 95 === 1 && hashtag_suggetion_9">
+                <div class="all-contact-cus">
+                    <div class="all-contact">
+                        <h4><a href="<?php echo base_url('hashtags'); ?>" target="_self">Hashtags</a></h4> 
+                        <div class="all-user-list">
+                            <data-owl-carousel class="owl-carousel owl-carousel1" data-options="{{owlOptionsHashtag}}">
+                                <div owl-carousel-item="" ng-repeat="hashtag_arr in hashtag_suggetion_9" class="item">
+                                    <div class="item" id="item-{{hashtag_arr.hashtag_id}}">
+                                        <div class="hash-box">
+                                            <div class="hash-box-top">
+                                                <div class="hash-round">
+                                                    <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">
+                                                        #{{hashtag_arr.hashtag | limitTo:1 | uppercase}}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="hash-detail">
+                                                <p class="hash-name" title="#{{hashtag_arr.hashtag}}">
+                                                    <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">#{{hashtag_arr.hashtag}}</a>
+                                                </p>
+                                                <p class="hash-follow">
+                                                    {{hashtag_arr.hashtag_follower_count && hashtag_arr.hashtag_follower_count != '' ? hashtag_arr.hashtag_follower_count+' Followers' : '&nbsp;' }}</p>
+                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
+                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                                
+                                <div owl-carousel-item="" class="item last-item-box">
+                                    <div class="hash-box">
+                                        <div class="hash-box-top">
+                                            <div class="hash-round" style="padding: 0;border: none;">
+                                                <a href="<?php echo base_url('hashtags'); ?>" target="_self">
+                                                    <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="hash-detail">
+                                            <p class="hash-name" title="">
+                                                <a href="<?php echo base_url('hashtags') ?>" target="_self">Find more hashtags
+                                                </a>
+                                            </p>
+                                            <p class="hash-follow">&nbsp;</p>
+                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 112px;">View More</a>
+                                        </div>
+                                    </div>           
+                                </div>
+                            </data-owl-carousel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
         </div>
         <!-- Feed End -->
         
