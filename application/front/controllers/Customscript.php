@@ -11,6 +11,7 @@ class Customscript extends CI_Controller {
         $this->load->model('user_model');
         $this->load->model('business_model');
         $this->load->model('searchelastic_model');
+        $this->load->model('data_model');
         // $this->load->model('job_model');
         $this->load->library('S3');
     }
@@ -2188,7 +2189,7 @@ class Customscript extends CI_Controller {
     //End Education
     //Merge Detail End
 
-    public function crate_hashtag()
+    public function create_hashtag()
     {
         $hashtag = array();
         $art_sql = "SELECT category_id,REPLACE(art_category,' ','') as art_category FROM ailee_art_category WHERE art_category != 'other';";
@@ -2489,7 +2490,81 @@ class Customscript extends CI_Controller {
             $sql6 = "DELETE FROM `ailee_hashtag` WHERE hashtag = '".$value['hashtag']."' AND id != '".$value['id']."'";
             $result6 = $this->db->query($sql6);
             print_r($result6);
-            echo $value['id'].'--->'.$value['hashtag']."Done";
+            echo $value['user_id'].'--->'.$value['hashtag']."Done";
+        }
+    }
+
+    public function user_follow_default_hashtag(){
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $sql = "SELECT up.* FROM ailee_user_profession up LEFT JOIN ailee_user_login ul ON ul.user_id = up.user_id WHERE ul.status ='1' AND ul.is_delete = '0' AND up.user_id NOT IN(SELECT user_id FROM ailee_hashtag_follow)";
+        $result = $this->db->query($sql)->result_array();
+        foreach ($result as $key => $value) {
+            $job_title = $this->db->select('name')->get_where('job_title', array('title_id' => $value['designation']))->row()->name;
+            $hashtag = preg_replace("/[^a-zA-Z0-9]/", "", $job_title);
+            $hashtag_data = $this->data_model->get_hashtag_id($hashtag);            
+            if(isset($hashtag_data) && !empty($hashtag_data))
+            {                    
+                $data_hashtag = array(
+                    'hashtag_id' => $hashtag_data['id'],
+                    'user_id' => $value['user_id'],
+                    'status' => '1',
+                    'created_date' => date("Y-m-d h:i:s"),
+                    'modify_date' => date("Y-m-d h:i:s"),
+                );
+                $hashtag_id = $this->common->insert_data($data_hashtag, 'hashtag_follow');
+            }
+            else
+            {
+                $data_hashtag1 = array(
+                    'hashtag_id' => '3686',//jobs
+                    'user_id' => $value['user_id'],
+                    'status' => '1',
+                    'created_date' => date("Y-m-d h:i:s"),
+                    'modify_date' => date("Y-m-d h:i:s"),
+                );
+                $hashtag_id = $this->common->insert_data($data_hashtag1, 'hashtag_follow');
+
+                $data_hashtag2 = array(
+                    'hashtag_id' => '3927',//business
+                    'user_id' => $value['user_id'],
+                    'status' => '1',
+                    'created_date' => date("Y-m-d h:i:s"),
+                    'modify_date' => date("Y-m-d h:i:s"),
+                );
+                $hashtag_id = $this->common->insert_data($data_hashtag2, 'hashtag_follow');
+
+                $data_hashtag3 = array(
+                    'hashtag_id' => '4201',//opportunity
+                    'user_id' => $value['user_id'],
+                    'status' => '1',
+                    'created_date' => date("Y-m-d h:i:s"),
+                    'modify_date' => date("Y-m-d h:i:s"),
+                );
+                $hashtag_id = $this->common->insert_data($data_hashtag3, 'hashtag_follow');
+            }
+
+            echo $value['user_id'].'<----'.$hashtag.'---->'.$hashtag_data['id']."<br>";
+        }
+    }
+
+    public function user_student_follow_default_hashtag(){
+        set_time_limit(0);
+        ini_set("memory_limit","512M");
+
+        $sql = "SELECT us.* FROM ailee_user_student us LEFT JOIN ailee_user_login ul ON ul.user_id = us.user_id WHERE ul.status ='1' AND ul.is_delete = '0' AND us.user_id NOT IN(SELECT user_id FROM ailee_hashtag_follow)";
+        $result = $this->db->query($sql)->result_array();
+        foreach ($result as $key => $value) {
+            $data_hashtag = array(
+                'hashtag_id' => '3686',//jobs
+                'user_id' => $value['user_id'],
+                'status' => '1',
+                'created_date' => date("Y-m-d h:i:s"),
+                'modify_date' => date("Y-m-d h:i:s"),
+            );
+            $insert_id = $this->common->insert_data($data_hashtag, 'hashtag_follow');
+            echo $value['user_id'].'<--------><br>';
         }
     }
 }

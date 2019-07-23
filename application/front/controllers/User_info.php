@@ -118,6 +118,51 @@ class User_info extends MY_Controller {
             $insert_id = $this->common->insert_data_getid($data, 'user_profession');
             if ($insert_id) {
 
+                $job_title = $this->db->select('name')->get_where('job_title', array('title_id' => $jobTitleId))->row()->name;
+                $hashtag = preg_replace("/[^a-zA-Z0-9]/", "", $job_title);
+                $hashtag_data = $this->data_model->get_hashtag_id($hashtag);
+                if(isset($hashtag_data) && !empty($hashtag_data))
+                {                    
+                    $data_hashtag = array(
+                        'hashtag_id' => $hashtag_data['id'],
+                        'user_id' => $userid,
+                        'status' => '1',
+                        'created_date' => date("Y-m-d h:i:s"),
+                        'modify_date' => date("Y-m-d h:i:s"),
+                    );
+                    $hashtag_id = $this->common->insert_data($data_hashtag, 'hashtag_follow');
+                }
+                else
+                {
+                    $data_hashtag1 = array(
+                        'hashtag_id' => '3686',//jobs
+                        'user_id' => $userid,
+                        'status' => '1',
+                        'created_date' => date("Y-m-d h:i:s"),
+                        'modify_date' => date("Y-m-d h:i:s"),
+                    );
+                    $hashtag_id = $this->common->insert_data($data_hashtag1, 'hashtag_follow');
+
+                    $data_hashtag2 = array(
+                        'hashtag_id' => '3927',//business
+                        'user_id' => $userid,
+                        'status' => '1',
+                        'created_date' => date("Y-m-d h:i:s"),
+                        'modify_date' => date("Y-m-d h:i:s"),
+                    );
+                    $hashtag_id = $this->common->insert_data($data_hashtag2, 'hashtag_follow');
+
+                    $data_hashtag3 = array(
+                        'hashtag_id' => '4201',//opportunity
+                        'user_id' => $userid,
+                        'status' => '1',
+                        'created_date' => date("Y-m-d h:i:s"),
+                        'modify_date' => date("Y-m-d h:i:s"),
+                    );
+                    $hashtag_id = $this->common->insert_data($data_hashtag3, 'hashtag_follow');
+                }
+
+
                 $new_people = $this->searchelastic_model->add_edit_single_people($userid);
 
                 $this->userdata['user_data'] = $user_data = $this->user_model->getUserData($userid);
@@ -260,6 +305,14 @@ class User_info extends MY_Controller {
 
             $insert_id = $this->common->insert_data_getid($data, 'user_student');
             if ($insert_id) {
+                $data_hashtag = array(
+                    'hashtag_id' => '3686',
+                    'user_id' => $userid,
+                    'status' => '1',
+                    'created_date' => date("Y-m-d h:i:s"),
+                    'modify_date' => date("Y-m-d h:i:s"),
+                );
+                $insert_id = $this->common->insert_data($data_hashtag, 'hashtag_follow');
                 
                 $new_people = $this->searchelastic_model->add_edit_single_people($userid);
 

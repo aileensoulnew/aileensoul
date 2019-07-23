@@ -186,6 +186,9 @@
 .nav-tabs > li.active > a:hover{
     border: 0;    
 }
+.hashtag-grd .post-hash-tag a { 
+    background : none
+}
 @media screen and (max-width: 479px) {
     .hash-header-mob .btn-new-1 {
         line-height: 2;
