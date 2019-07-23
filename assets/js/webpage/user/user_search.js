@@ -141,7 +141,7 @@ app.filter('removeLastCharacter', function() {
 });
 app.filter('removeFirstCharacter', function() {
     return function(text) {
-        return text.substr(1);
+        return text.substr(1).toLowerCase();
         //return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
     };
 });

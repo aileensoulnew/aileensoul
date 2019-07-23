@@ -6070,7 +6070,7 @@ class User_post_model extends CI_Model {
     }
 
     public function get_hashtag_detail($hashtag = '',$user_id = '',$hashtag_detail = 0) {
-        $where = "(hashtag = '" . $hashtag . "')";
+        $where = "(LOWER(hashtag) = '" . strtolower($hashtag) . "')";
         $this->db->select("*")->from("hashtag");
         if($hashtag_detail == 0)
         {

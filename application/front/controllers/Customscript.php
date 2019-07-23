@@ -2484,11 +2484,12 @@ class Customscript extends CI_Controller {
                     $this->common->update_data($data1,'post_article','id_post_article',$value4['id_post_article']);
                 }
             }
-            echo count($result5)."Article Post Done <br>";exit();
+            echo count($result5)."Article Post Done <br>";
 
-            /*$sql6 = "DELETE FROM `ailee_hashtag` WHERE hashtag = '".$value['hashtag']."' AND id != '".$value['id']."'";
+            $sql6 = "DELETE FROM `ailee_hashtag` WHERE hashtag = '".$value['hashtag']."' AND id != '".$value['id']."'";
             $result6 = $this->db->query($sql6);
-            print_r($result6);exit();*/
+            print_r($result6);
+            echo $value['id'].'--->'.$value['hashtag']."Done";
         }
     }
 }
