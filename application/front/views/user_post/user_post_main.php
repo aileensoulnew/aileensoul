@@ -3364,7 +3364,7 @@
                 </div>
             </div>
 
-            <div ng-if="(postIndex + 1) / 15 === 1 && hashtag_suggetion_1">
+            <div ng-if="(postIndex + 1) / 5 === 1 && hashtag_suggetion_1">
                 <div class="all-contact-cus">
                     <div class="all-contact">
                         <h4><a href="<?php echo base_url('hashtags'); ?>" target="_self">Hashtags</a></h4> 
@@ -3418,7 +3418,7 @@
                     </div>
                 </div>
             </div>
-            <div ng-if="(postIndex + 1) / 25 === 1 && hashtag_suggetion_2">
+            <div ng-if="(postIndex + 1) / 15 === 1 && hashtag_suggetion_2">
                 <div class="all-contact-cus">
                     <div class="all-contact">
                         <h4><a href="<?php echo base_url('hashtags'); ?>" target="_self">Hashtags</a></h4> 
@@ -3472,7 +3472,7 @@
                     </div>
                 </div>
             </div>
-            <div ng-if="(postIndex + 1) / 35 === 1 && hashtag_suggetion_3">
+            <div ng-if="(postIndex + 1) / 25 === 1 && hashtag_suggetion_3">
                 <div class="all-contact-cus">
                     <div class="all-contact">
                         <h4><a href="<?php echo base_url('hashtags'); ?>" target="_self">Hashtags</a></h4> 
@@ -3526,7 +3526,7 @@
                     </div>
                 </div>
             </div>
-            <div ng-if="(postIndex + 1) / 45 === 1 && hashtag_suggetion_4">
+            <div ng-if="(postIndex + 1) / 35 === 1 && hashtag_suggetion_4">
                 <div class="all-contact-cus">
                     <div class="all-contact">
                         <h4><a href="<?php echo base_url('hashtags'); ?>" target="_self">Hashtags</a></h4> 
@@ -3580,7 +3580,7 @@
                     </div>
                 </div>
             </div>
-            <div ng-if="(postIndex + 1) / 55 === 1 && hashtag_suggetion_5">
+            <div ng-if="(postIndex + 1) / 45 === 1 && hashtag_suggetion_5">
                 <div class="all-contact-cus">
                     <div class="all-contact">
                         <h4><a href="<?php echo base_url('hashtags'); ?>" target="_self">Hashtags</a></h4> 
@@ -3634,7 +3634,7 @@
                     </div>
                 </div>
             </div>
-            <div ng-if="(postIndex + 1) / 65 === 1 && hashtag_suggetion_6">
+            <div ng-if="(postIndex + 1) / 55 === 1 && hashtag_suggetion_6">
                 <div class="all-contact-cus">
                     <div class="all-contact">
                         <h4><a href="<?php echo base_url('hashtags'); ?>" target="_self">Hashtags</a></h4> 
@@ -3688,7 +3688,7 @@
                     </div>
                 </div>
             </div>
-            <div ng-if="(postIndex + 1) / 75 === 1 && hashtag_suggetion_7">
+            <div ng-if="(postIndex + 1) / 65 === 1 && hashtag_suggetion_7">
                 <div class="all-contact-cus">
                     <div class="all-contact">
                         <h4><a href="<?php echo base_url('hashtags'); ?>" target="_self">Hashtags</a></h4> 
@@ -3742,7 +3742,7 @@
                     </div>
                 </div>
             </div>
-            <div ng-if="(postIndex + 1) / 85 === 1 && hashtag_suggetion_8">
+            <div ng-if="(postIndex + 1) / 75 === 1 && hashtag_suggetion_8">
                 <div class="all-contact-cus">
                     <div class="all-contact">
                         <h4><a href="<?php echo base_url('hashtags'); ?>" target="_self">Hashtags</a></h4> 
@@ -3796,7 +3796,7 @@
                     </div>
                 </div>
             </div>
-            <div ng-if="(postIndex + 1) / 95 === 1 && hashtag_suggetion_9">
+            <div ng-if="(postIndex + 1) / 85 === 1 && hashtag_suggetion_9">
                 <div class="all-contact-cus">
                     <div class="all-contact">
                         <h4><a href="<?php echo base_url('hashtags'); ?>" target="_self">Hashtags</a></h4> 

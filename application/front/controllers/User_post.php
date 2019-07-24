@@ -864,7 +864,7 @@ class User_post extends MY_Controller {
             $post_data['contact_suggetion_'.$page] = $contact_data;
             echo json_encode($post_data);
         }
-        elseif($page != 1 && ($page == 3 || $page == 5 || $page == 7 || $page == 9 || $page == 11 || $page == 13 || $page == 15 || $page == 17 || $page == 19))
+        elseif($page == 1 || $page == 3 || $page == 5 || $page == 7 || $page == 9 || $page == 11 || $page == 13 || $page == 15 || $page == 17)
         {
             if($page == 3)
             {
@@ -998,7 +998,12 @@ class User_post extends MY_Controller {
         $data = array();
         if ($userid == $getPostUserId) {
             $data['is_delete'] = '1';
+            $data['status'] = 'draft';
             $updatedata = $this->common->update_data($data, 'user_post', 'id', $post_id);
+
+            $sql = "UPDATE ailee_user_post SET is_delete = '1',status = 'draft' WHERE id = (SELECT post_id FROM ailee_user_post_share WHERE shared_post_id = '".$post_id."')";
+            $query = $this->db->query($sql);
+
         } else {
             $data['post_id'] = $post_id;
             $data['user_id'] = $userid;
