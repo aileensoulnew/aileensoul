@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>" />
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/developer.css') ?>">
         <style type="text/css">
             .ui-helper-hidden-accessible{display: none;}
         </style>
@@ -538,6 +539,14 @@
             var user_id = '<?php echo $this->session->userdata('aileenuser'); ?>';
             var user_slug = '<?php echo $question_data['user_data']['user_slug']; ?>';
             var cmt_maxlength = '700';
+
+            var bus_bg_main_upload_url = '<?php echo BUS_BG_MAIN_UPLOAD_URL; ?>';
+            var bus_profile_thumb_upload_url = '<?php echo BUS_PROFILE_THUMB_UPLOAD_URL; ?>';
+            var nobusimage = '<?php echo NOBUSIMAGE; ?>';
+            var user_bg_main_upload_url = '<?php echo USER_BG_MAIN_UPLOAD_URL; ?>';
+            var user_thumb_upload_url = '<?php echo USER_THUMB_UPLOAD_URL; ?>';
+            var message_url = '<?php echo MESSAGE_URL; ?>';
+        
             var question = '<?php echo $question_id ?>';
             var title = '<?php //echo addslashes($title) ?>';
             var live_slug = '<?php echo $this->session->userdata('aileenuser_slug'); ?>';

@@ -320,28 +320,6 @@ app.controller('businessController', function ($scope, $http,$window ) {
         });
     };
     $scope.get_business_list(1);
-
-    $scope.follow_hashtag = function(hashtag_id,index)
-    {
-        $(".hashtag-follow-btn-"+hashtag_id).attr('style','pointer-events:none;');
-        $http({
-            method: 'POST',
-            url: base_url + 'user_post/follow_hashtag',
-            data: 'hashtag_id=' + hashtag_id,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).then(function (success) {
-            if (success.data.status == 1) {
-                $scope.hashtag_list[index].hashtag_follow_status = success.data.status;
-                $scope.hashtag_list[index].hashtag_follower_count = success.data.hashtag_follower_count;
-            }
-            $(".hashtag-follow-btn-"+hashtag_id).removeAttr('style');
-        }, function (error) {
-            $(".sugg_post_load").hide();
-            setTimeout(function(){
-                $scope.follow_hashtag(hashtag_id,index);
-            },500);
-        });
-    };
 });
 app.controller('hashtagController', function ($scope, $http,$window ) {
     $scope.$parent.active_pg = 3;
@@ -508,6 +486,7 @@ app.controller('hashtagController', function ($scope, $http,$window ) {
     $scope.follow_hashtag = function(hashtag_id,index)
     {
         $(".hashtag-follow-btn-"+hashtag_id).attr('style','pointer-events:none;');
+        $(".hashtag-follow-btn-"+hashtag_id).html('Following');
         $http({
             method: 'POST',
             url: base_url + 'user_post/follow_hashtag',
@@ -530,6 +509,7 @@ app.controller('hashtagController', function ($scope, $http,$window ) {
     $scope.unfollow_hashtag = function(hashtag_id,index)
     {
         $(".hashtag-follow-btn-"+hashtag_id).attr('style','pointer-events:none;');
+        $(".hashtag-follow-btn-"+hashtag_id).html('Follow');
         $http({
             method: 'POST',
             url: base_url + 'user_post/unfollow_hashtag',

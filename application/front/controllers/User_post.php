@@ -902,7 +902,8 @@ class User_post extends MY_Controller {
             {
                 $page = 9;
             }
-            $hashtag_data = $this->user_post_model->get_hashtag_sugetion_in_post($userid, $page);
+            $limit = '20';
+            $hashtag_data = $this->user_post_model->get_hashtag_sugetion_in_post($userid, $page, $limit);
             $post_data['hashtag_suggetion_'.$page] = $hashtag_data;
             echo json_encode($post_data);
         }

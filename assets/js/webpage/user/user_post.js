@@ -4493,57 +4493,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         } else {
             $scope.isMsgBoxEmpty = true;
         }
-    };   
-
-    $scope.owlOptionsTestimonials = {
-            'slideBy':2,
-            'touchDrag':false,
-            'mouseDrag':false,
-            'loop': false,
-            'nav': true,
-            'lazyLoad': true,
-            'margin': 0,
-            'video': true,
-            'responsive': {
-                0: {
-                    items: 1
-                },
-                480: {
-                    items: 2
-                },
-                768: {
-                    items: 2,
-                },
-                1280: {
-                    items: 2
-                }
-            }
-        };
-
-    $scope.owlOptionsHashtag = {
-            'slideBy':3,
-            'touchDrag':false,
-            'mouseDrag':false,
-            'loop': false,
-            'nav': true,
-            'lazyLoad': true,
-            'margin': 0,
-            'video': true,
-            'responsive': {
-                0: {
-                    items: 1
-                },
-                480: {
-                    items: 3
-                },
-                768: {
-                    items: 3,
-                },
-                1280: {
-                    items: 3
-                }
-            }
-        };
+    };
 
     $scope.save_post = function(post_id,index,postData,is_promoted){
         $('#save-post-' + post_id).attr('style','pointer-events: none;');
@@ -4803,6 +4753,148 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             $scope.unfollow_user(id);
         });
     }*/
+
+    $scope.owlOptionsTestimonials = {
+        'slideBy':2,
+        'touchDrag':false,
+        'mouseDrag':false,
+        'loop': false,
+        'nav': true,
+        'lazyLoad': true,
+        'margin': 0,
+        'video': true,
+        'responsive': {
+            0: {
+                items: 1
+            },
+            480: {
+                items: 2
+            },
+            768: {
+                items: 2,
+            },
+            1280: {
+                items: 2
+            }
+        }
+    };
+
+    $scope.owlOptionsHashtag = {
+        'slideBy':3,
+        'touchDrag':false,
+        'mouseDrag':false,
+        'loop': false,
+        'nav': true,
+        'lazyLoad': true,
+        'margin': 0,
+        'video': true,
+        'responsive': {
+            0: {
+                items: 1
+            },
+            480: {
+                items: 3
+            },
+            768: {
+                items: 3,
+            },
+            1280: {
+                items: 3
+            }
+        }
+    };
+
+    setTimeout(function(){
+        $(".hashtags-left-bar .owl-carousel").owlCarousel({
+            'slideBy':1,
+            'touchDrag':false,
+            'mouseDrag':false,
+            'loop': false,
+            'nav': true,
+            'lazyLoad': true,
+            'margin': 0,
+            'video': true,
+            'responsive': {
+                0: {
+                    items: 1
+                },
+                480: {
+                    items: 1
+                },
+                768: {
+                    items: 1,
+                },
+                1280: {
+                    items: 1
+                }
+            }
+        });
+    },500);
+
+    $scope.follow_hashtag = function(hashtag_id)
+    {
+        $(".hashtag-follow-btn-"+hashtag_id+" a").attr('style','pointer-events:none;');
+        $(".hashtag-follow-btn-"+hashtag_id+" a").html('Following');
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/follow_hashtag',
+            data: 'hashtag_id=' + hashtag_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            if (success.data.status == 1) {
+                setTimeout(function(){
+                    var $f_html = $(".hashtag-follow-btn-"+hashtag_id).html(success.data.follow_html);
+                    $compile($f_html)($scope);
+
+                    $(".hashtag-follow-count-"+hashtag_id).show();
+                    if(success.data.hashtag_follower_count != '')
+                    {
+                        var $f_count = $(".hashtag-follow-count-"+hashtag_id).html(success.data.hashtag_follower_count + ' Followers');
+                    }
+                    $compile($f_count)($scope);
+                },500);                
+            }
+            $(".hashtag-follow-btn-"+hashtag_id+" a").removeAttr('style');
+        }, function (error) {
+            $(".sugg_post_load").hide();
+            setTimeout(function(){
+                $scope.follow_hashtag(hashtag_id);
+            },500);
+        });
+    };
+    $scope.unfollow_hashtag = function(hashtag_id)
+    {
+        $(".hashtag-follow-btn-"+hashtag_id+" a").attr('style','pointer-events:none;');
+        $(".hashtag-follow-btn-"+hashtag_id+" a").html('Follow');
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/unfollow_hashtag',
+            data: 'hashtag_id=' + hashtag_id,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            if (success.data.status == 0) {
+                setTimeout(function(){
+                    var $f_html = $(".hashtag-follow-btn-"+hashtag_id).html(success.data.follow_html);
+                    $compile($f_html)($scope);
+                    if(success.data.hashtag_follower_count != '')
+                    {
+                        var $f_count = $(".hashtag-follow-count-"+hashtag_id).html(success.data.hashtag_follower_count + ' Followers');
+                    }
+                    else
+                    {
+                        $(".hashtag-follow-count-"+hashtag_id).hide();
+                    }
+                    $compile($f_count)($scope);
+                },100);                
+            }
+            $(".hashtag-follow-btn-"+hashtag_id+" a").removeAttr('style');
+        }, function (error) {
+            $(".sugg_post_load").hide();
+            setTimeout(function(){
+                $scope.unfollow_hashtag(hashtag_id);
+            },500);
+        });
+    };
 });
 
 app.controller('peopleController', function($scope, $http, $compile, $window,$location) {

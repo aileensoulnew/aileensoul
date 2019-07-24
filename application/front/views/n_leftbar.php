@@ -1,6 +1,7 @@
 <?php
 $url = $this->uri->segment_array();
 $all_counter = $this->common->get_all_counter($leftbox_data['user_id']);
+$hashtag_list = $this->user_post_model->get_hashtag_sugetion_in_leftbar($leftbox_data['user_id'],0,30);
 ?>
 <div id="left-fixed" class="fw">
     <div class="user-profile-box box-border">
@@ -122,54 +123,66 @@ $all_counter = $this->common->get_all_counter($leftbox_data['user_id']);
         <?php }
     }
     endif; ?>
-    <div class="add-detail all-user-list">
-        <h4 class="hashtag-h4">
-            <a href="" class="" target="_self">Hashtags</a>
-        </h4>
-        <ul class="main-hashtag">
-            <li>
-                <div class="hashtag-left">
-                    <div class="hash-round">
-                        <a href="">#1</a>
+    <div class="follow-box">
+        <div class="all-user-list hashtags-left-bar">
+            <h4 class="hashtag-h4">
+                <a href="<?php echo base_url('hashtags'); ?>" target="_self">Hashtags</a>
+            </h4>
+            <data-owl-carousel class="owl-carousel owl-theme" data-options="">
+                <?php foreach ($hashtag_list as $key => $_hashtag_list) { ?>                    
+                    <div owl-carousel-item="" class="item">
+                        <div class="item">
+                            <ul class="main-hashtag">
+                            <?php 
+                            foreach ($_hashtag_list as $key => $value) { ?>
+                                <li>
+                                    <div class="hashtag-left">
+                                        <div class="hash-round">
+                                            <a href="<?php echo base_url('hashtag/').$value['hashtag']; ?>" target="_self"><?php echo "#".strtoupper(substr($value['hashtag'], 0,1)); ?></a>
+                                        </div>
+                                        <div class="hash-detail">
+                                            <p class="hash-name">
+                                                <a href="<?php echo base_url('hashtag/').$value['hashtag']; ?>" target="_self">
+                                                <?php echo "#".$value['hashtag']; ?></a>
+                                            </p>
+                                            <span class="hashtag-follow-count-<?php echo $value['hashtag_id']; ?>"><?php echo $value['hashtag_follower_count']; ?> Followers</span>
+                                        </div>
+                                    </div>
+                                    <div class="hashtag-right hashtag-follow-btn-<?php echo $value['hashtag_id']; ?>">
+                                        <?php 
+                                        if($value['hashtag_follow_status'] == 0){ ?>
+                                            <a href="javascript:void(0);" class="btn-new-1" ng-click="follow_hashtag(<?php echo $value['hashtag_id']; ?>);">Follow</a>
+                                        <?php 
+                                        } ?>
+                                    </div>
+                                </li>          
+                            <?php
+                            } ?>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="hash-detail">
-                        <p>#15yrsworkexincorejavajavascriptajax</p>
-                        <span>1.2 Followers</span>
+                <?php
+                } ?>
+                <div owl-carousel-item="" class="item last-item-box">
+                    <div class="arti-profile-box">
+                        <div class="find-more">
+                            <img src="<?php echo base_url('assets/n-images/view-all.png') ?>">
+                        </div>                            
+                        <div class="user-info-text text-center">
+                            <h3>
+                                <a href="<?php echo base_url('hashtags'); ?>" target="_self">Find More Hashtags
+                                </a>
+                            </h3>                                
+                        </div>
+                        <div class="author-btn">
+                            <div class="user-btns">
+                                <a class="btn3" href="<?php echo base_url('hashtags'); ?>" target="_self">View More</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="hashtag-right">
-                    <a href="#" class="btn-new-1">Follow</a>
-                </div>
-            </li>
-            <li>
-                <div class="hashtag-left">
-                    <div class="hash-round">
-                        <a href="">#A</a>
-                    </div>
-                    <div class="hash-detail">
-                        <p>#Angular</p>
-                        <span>1.2 Followers</span>
-                    </div>
-                </div>
-                <div class="hashtag-right">
-                    <a href="#" class="btn-new-1">Follow</a>
-                </div>
-            </li>
-            <li>
-                <div class="hashtag-left">
-                    <div class="hash-round">
-                        <a href="">#A</a>
-                    </div>
-                    <div class="hash-detail">
-                        <p>#Angular</p>
-                        <span>1.2 Followers</span>
-                    </div>
-                </div>
-                <div class="hashtag-right">
-                    <a href="#" class="btn-new-1">Follow</a>
-                </div>
-            </li>            
-        </ul>
+            </data-owl-carousel>
+        </div>
     </div>
 	<div class="business-move">
 	</div>

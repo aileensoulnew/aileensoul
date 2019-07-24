@@ -224,6 +224,7 @@ app.controller('defaultController', function($scope, $http, $compile) {
     $scope.follow_hashtag = function(hashtag_id)
     {
         $(".hashtag-follow-btn a").attr('style','pointer-events:none;');
+        $(".hashtag-follow-btn a").html('Following');
         $http({
             method: 'POST',
             url: base_url + 'user_post/follow_hashtag',
@@ -236,13 +237,9 @@ app.controller('defaultController', function($scope, $http, $compile) {
                     $compile($f_html)($scope);
 
                     $(".hashtag-follow-count").show();
-                    if(parseInt(success.data.hashtag_follower_count) > 1)
+                    if(success.data.hashtag_follower_count != '')
                     {
-                        var $f_count = $(".hashtag-follow-count").html(parseInt(success.data.hashtag_follower_count) + ' followers');
-                    }
-                    else if(parseInt(success.data.hashtag_follower_count) > 0)
-                    {
-                        var $f_count = $(".hashtag-follow-count").html(parseInt(success.data.hashtag_follower_count) + ' follower');
+                        var $f_count = $(".hashtag-follow-count").html(success.data.hashtag_follower_count + ' followers');
                     }
                     $compile($f_count)($scope);
                 },100);                
@@ -258,6 +255,7 @@ app.controller('defaultController', function($scope, $http, $compile) {
     $scope.unfollow_hashtag = function(hashtag_id)
     {
         $(".hashtag-follow-btn a").attr('style','pointer-events:none;');
+        $(".hashtag-follow-btn a").html('Follow');
         $http({
             method: 'POST',
             url: base_url + 'user_post/unfollow_hashtag',
@@ -268,13 +266,9 @@ app.controller('defaultController', function($scope, $http, $compile) {
                 setTimeout(function(){
                     var $f_html = $(".hashtag-follow-btn").html(success.data.follow_html);
                     $compile($f_html)($scope);
-                    if(parseInt(success.data.hashtag_follower_count) > 1)
+                    if(success.data.hashtag_follower_count != '')
                     {
-                        var $f_count = $(".hashtag-follow-count").html(parseInt(success.data.hashtag_follower_count) + ' followers');
-                    }
-                    else if(parseInt(success.data.hashtag_follower_count) > 0)
-                    {
-                        var $f_count = $(".hashtag-follow-count").html(parseInt(success.data.hashtag_follower_count) + ' follower');
+                        var $f_count = $(".hashtag-follow-count").html(success.data.hashtag_follower_count + ' followers');
                     }
                     else
                     {

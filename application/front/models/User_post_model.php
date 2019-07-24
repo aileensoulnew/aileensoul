@@ -5998,7 +5998,8 @@ class User_post_model extends CI_Model {
         $this->db->where($where);        
         $query = $this->db->get();
         $result_array = $query->row_array();
-        return $result_array['follower_count'];
+        $follower_count = $this->common->change_number_long_format_to_short((int)$result_array['follower_count']);
+        return $follower_count;
     }
 
     public function get_hashtag_list($user_id = '', $page = "",$limit = "12",$search_tag = '') {
@@ -6007,7 +6008,7 @@ class User_post_model extends CI_Model {
         if ($start < 0)
             $start = 0;
 
-        $sql = "SELECT COUNT(hf.hashtag_id) AS follower_count,ht.id,ht.hashtag,ht.status FROM ailee_hashtag_follow hf LEFT JOIN ailee_hashtag ht ON ht.id=hf.hashtag_id WHERE hf.hashtag_id NOT IN(SELECT hashtag_id FROM ailee_hashtag_follow WHERE user_id = '$user_id')";
+        $sql = "SELECT COUNT(hf.hashtag_id) AS follower_count,ht.id,ht.hashtag,ht.status FROM ailee_hashtag_follow hf LEFT JOIN ailee_hashtag ht ON ht.id=hf.hashtag_id WHERE hf.hashtag_id NOT IN(SELECT hashtag_id FROM ailee_hashtag_follow WHERE user_id = '$user_id' AND status = '1')";
         if($search_tag != '')
         {
             $sql .= "hashtag LIKE '".$search_tag."%'";
@@ -6048,7 +6049,7 @@ class User_post_model extends CI_Model {
     }
 
     public function get_hashtag_list_total_rec($search_tag = '') {
-        $sql = "SELECT COUNT(hf.hashtag_id) AS follower_count,ht.id,ht.hashtag,ht.status FROM ailee_hashtag_follow hf LEFT JOIN ailee_hashtag ht ON ht.id=hf.hashtag_id WHERE hf.hashtag_id NOT IN(SELECT hashtag_id FROM ailee_hashtag_follow WHERE user_id = '$user_id')";
+        $sql = "SELECT COUNT(hf.hashtag_id) AS follower_count,ht.id,ht.hashtag,ht.status FROM ailee_hashtag_follow hf LEFT JOIN ailee_hashtag ht ON ht.id=hf.hashtag_id WHERE hf.hashtag_id NOT IN(SELECT hashtag_id FROM ailee_hashtag_follow WHERE user_id = '$user_id' AND status = '1')";
         if($search_tag != '')
         {
             $sql .= "hashtag LIKE '".$search_tag."%'";
@@ -6102,9 +6103,8 @@ class User_post_model extends CI_Model {
 
         if(isset($result_array) && !empty($result_array))
         {            
-            $follower_counter = $this->get_hashtag_follower_count($result_array['id']);
+            $follower_count = $this->get_hashtag_follower_count($result_array['id']);
             $hashtag_follow_status = $this->get_hashtag_follow_status($result_array['id'],$user_id);
-            $follower_count = $this->common->change_number_long_format_to_short((int)$follower_counter);
             $result_array['hashtag_follower_count'] = $follower_count;
             $result_array['hashtag_follow_status'] = $hashtag_follow_status;
             $result_array['hashtag_recent_follower'] = $this->get_hashtag_recent_follower($result_array['id'],$user_id);
@@ -6883,13 +6883,12 @@ class User_post_model extends CI_Model {
         return $result_array['total_record'];
     }
 
-    public function get_hashtag_sugetion_in_post($user_id, $page){
-        $limit = '20';
+    public function get_hashtag_sugetion_in_post($user_id, $page, $limit = '20'){        
         $start = ($page - 1) * $limit;
         if ($start < 0)
             $start = 0;
 
-        $sql = "SELECT COUNT(hf.hashtag_id) AS follower_count,hf.hashtag_id,ht.hashtag FROM ailee_hashtag_follow hf LEFT JOIN ailee_hashtag ht ON ht.id=hf.hashtag_id WHERE hf.hashtag_id NOT IN(SELECT hashtag_id FROM ailee_hashtag_follow WHERE user_id = '$user_id') GROUP BY hf.hashtag_id ORDER BY follower_count DESC";
+        $sql = "SELECT COUNT(hf.hashtag_id) AS follower_count,hf.hashtag_id,ht.hashtag FROM ailee_hashtag_follow hf LEFT JOIN ailee_hashtag ht ON ht.id=hf.hashtag_id WHERE hf.hashtag_id NOT IN(SELECT hashtag_id FROM ailee_hashtag_follow WHERE user_id = '$user_id' AND status = '1') GROUP BY hf.hashtag_id ORDER BY follower_count DESC";
         if($limit != '') {
             $sql .= " LIMIT $start,$limit";
         }
@@ -6903,6 +6902,39 @@ class User_post_model extends CI_Model {
             $result_array[$key]['hashtag_follow_status'] = $hashtag_follow_status;
         }
         return $result_array;
+    }
+
+    public function get_hashtag_sugetion_in_leftbar($user_id, $page, $limit = '20'){        
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
+
+        $sql = "SELECT COUNT(hf.hashtag_id) AS follower_count,hf.hashtag_id,ht.hashtag FROM ailee_hashtag_follow hf LEFT JOIN ailee_hashtag ht ON ht.id=hf.hashtag_id WHERE hf.hashtag_id NOT IN(SELECT hashtag_id FROM ailee_hashtag_follow WHERE user_id = '$user_id' AND status = '1') GROUP BY hf.hashtag_id ORDER BY follower_count DESC";
+        if($limit != '') {
+            $sql .= " LIMIT $start,$limit";
+        }
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        $main_arr = array();
+        $i=0;$j=0;
+        foreach ($result_array as $key => $value) {
+            $main_arr[$i][$j] = $value;
+            $follower_counter = $value['follower_count'];
+            $hashtag_follow_status = $this->get_hashtag_follow_status($value['hashtag_id'],$user_id);
+            $follower_count = $this->common->change_number_long_format_to_short((int)$follower_counter);
+            $main_arr[$i][$j]['hashtag_follower_count'] = $follower_count;
+            $main_arr[$i][$j]['hashtag_follow_status'] = $hashtag_follow_status;
+            if(($j + 1) % 3 == 0)
+            {
+                $j=0;
+                $i=$i+1;
+            }
+            else
+            {
+                $j=$j+1;
+            }         
+        }
+        return $main_arr;
     }
 
 }

@@ -3384,10 +3384,12 @@
                                                 <p class="hash-name" title="#{{hashtag_arr.hashtag}}">
                                                     <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">#{{hashtag_arr.hashtag}}</a>
                                                 </p>
-                                                <p class="hash-follow">
+                                                <p class="hash-follow hashtag-follow-count-{{hashtag_arr.hashtag_id}}">
                                                     {{hashtag_arr.hashtag_follower_count && hashtag_arr.hashtag_follower_count != '' ? hashtag_arr.hashtag_follower_count+' Followers' : '&nbsp;' }}</p>
-                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
-                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                                <div class="hashtag-follow-btn-{{hashtag_arr.hashtag_id}}">
+                                                    <a href="#" class="btn-new-1" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
+                                                    <a href="#" class="btn-new-1" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -3436,10 +3438,12 @@
                                                 <p class="hash-name" title="#{{hashtag_arr.hashtag}}">
                                                     <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">#{{hashtag_arr.hashtag}}</a>
                                                 </p>
-                                                <p class="hash-follow">
+                                                <p class="hash-follow hashtag-follow-count-{{hashtag_arr.hashtag_id}}">
                                                     {{hashtag_arr.hashtag_follower_count && hashtag_arr.hashtag_follower_count != '' ? hashtag_arr.hashtag_follower_count+' Followers' : '&nbsp;' }}</p>
-                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
-                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                                <div class="hashtag-follow-btn-{{hashtag_arr.hashtag_id}}">
+                                                    <a href="#" class="btn-new-1" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
+                                                    <a href="#" class="btn-new-1" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -3488,10 +3492,12 @@
                                                 <p class="hash-name" title="#{{hashtag_arr.hashtag}}">
                                                     <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">#{{hashtag_arr.hashtag}}</a>
                                                 </p>
-                                                <p class="hash-follow">
+                                                <p class="hash-follow hashtag-follow-count-{{hashtag_arr.hashtag_id}}">
                                                     {{hashtag_arr.hashtag_follower_count && hashtag_arr.hashtag_follower_count != '' ? hashtag_arr.hashtag_follower_count+' Followers' : '&nbsp;' }}</p>
-                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
-                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                                <div class="hashtag-follow-btn-{{hashtag_arr.hashtag_id}}">
+                                                    <a href="#" class="btn-new-1" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
+                                                    <a href="#" class="btn-new-1" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -3540,10 +3546,12 @@
                                                 <p class="hash-name" title="#{{hashtag_arr.hashtag}}">
                                                     <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">#{{hashtag_arr.hashtag}}</a>
                                                 </p>
-                                                <p class="hash-follow">
+                                                <p class="hash-follow hashtag-follow-count-{{hashtag_arr.hashtag_id}}">
                                                     {{hashtag_arr.hashtag_follower_count && hashtag_arr.hashtag_follower_count != '' ? hashtag_arr.hashtag_follower_count+' Followers' : '&nbsp;' }}</p>
-                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
-                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                                <div class="hashtag-follow-btn-{{hashtag_arr.hashtag_id}}">
+                                                    <a href="#" class="btn-new-1" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
+                                                    <a href="#" class="btn-new-1" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -3592,10 +3600,12 @@
                                                 <p class="hash-name" title="#{{hashtag_arr.hashtag}}">
                                                     <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">#{{hashtag_arr.hashtag}}</a>
                                                 </p>
-                                                <p class="hash-follow">
+                                                <p class="hash-follow hashtag-follow-count-{{hashtag_arr.hashtag_id}}">
                                                     {{hashtag_arr.hashtag_follower_count && hashtag_arr.hashtag_follower_count != '' ? hashtag_arr.hashtag_follower_count+' Followers' : '&nbsp;' }}</p>
-                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
-                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                                <div class="hashtag-follow-btn-{{hashtag_arr.hashtag_id}}">
+                                                    <a href="#" class="btn-new-1" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
+                                                    <a href="#" class="btn-new-1" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -3644,10 +3654,12 @@
                                                 <p class="hash-name" title="#{{hashtag_arr.hashtag}}">
                                                     <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">#{{hashtag_arr.hashtag}}</a>
                                                 </p>
-                                                <p class="hash-follow">
+                                                <p class="hash-follow hashtag-follow-count-{{hashtag_arr.hashtag_id}}">
                                                     {{hashtag_arr.hashtag_follower_count && hashtag_arr.hashtag_follower_count != '' ? hashtag_arr.hashtag_follower_count+' Followers' : '&nbsp;' }}</p>
-                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
-                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                                <div class="hashtag-follow-btn-{{hashtag_arr.hashtag_id}}">
+                                                    <a href="#" class="btn-new-1" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
+                                                    <a href="#" class="btn-new-1" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -3696,10 +3708,12 @@
                                                 <p class="hash-name" title="#{{hashtag_arr.hashtag}}">
                                                     <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">#{{hashtag_arr.hashtag}}</a>
                                                 </p>
-                                                <p class="hash-follow">
+                                                <p class="hash-follow hashtag-follow-count-{{hashtag_arr.hashtag_id}}">
                                                     {{hashtag_arr.hashtag_follower_count && hashtag_arr.hashtag_follower_count != '' ? hashtag_arr.hashtag_follower_count+' Followers' : '&nbsp;' }}</p>
-                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
-                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                                <div class="hashtag-follow-btn-{{hashtag_arr.hashtag_id}}">
+                                                    <a href="#" class="btn-new-1" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
+                                                    <a href="#" class="btn-new-1" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -3748,10 +3762,12 @@
                                                 <p class="hash-name" title="#{{hashtag_arr.hashtag}}">
                                                     <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">#{{hashtag_arr.hashtag}}</a>
                                                 </p>
-                                                <p class="hash-follow">
+                                                <p class="hash-follow hashtag-follow-count-{{hashtag_arr.hashtag_id}}">
                                                     {{hashtag_arr.hashtag_follower_count && hashtag_arr.hashtag_follower_count != '' ? hashtag_arr.hashtag_follower_count+' Followers' : '&nbsp;' }}</p>
-                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
-                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                                <div class="hashtag-follow-btn-{{hashtag_arr.hashtag_id}}">
+                                                    <a href="#" class="btn-new-1" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
+                                                    <a href="#" class="btn-new-1" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -3800,10 +3816,12 @@
                                                 <p class="hash-name" title="#{{hashtag_arr.hashtag}}">
                                                     <a href="<?php echo base_url().'hashtag/'; ?>{{hashtag_arr.hashtag}}" target="_self">#{{hashtag_arr.hashtag}}</a>
                                                 </p>
-                                                <p class="hash-follow">
+                                                <p class="hash-follow hashtag-follow-count-{{hashtag_arr.hashtag_id}}">
                                                     {{hashtag_arr.hashtag_follower_count && hashtag_arr.hashtag_follower_count != '' ? hashtag_arr.hashtag_follower_count+' Followers' : '&nbsp;' }}</p>
-                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
-                                                <a href="#" class="btn-new-1 hashtag-follow-btn-{{hashtag_arr.hashtag_id}}" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                                <div class="hashtag-follow-btn-{{hashtag_arr.hashtag_id}}">
+                                                    <a href="#" class="btn-new-1" ng-if="hashtag_arr.hashtag_follow_status == 0" ng-click="follow_hashtag(hashtag_arr.hashtag_id,$index);">Follow</a>
+                                                    <a href="#" class="btn-new-1" ng-if="hashtag_arr.hashtag_follow_status == 1" ng-click="unfollow_hashtag(hashtag_arr.hashtag_id,$index);">Following</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

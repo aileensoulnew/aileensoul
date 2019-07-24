@@ -53,6 +53,18 @@ app.directive('ngEnter', function() { // custom directive for sending message on
         });
     };
 });
+app.filter('removeLastCharacter', function () {
+    return function (text) {
+        return text.substr(0, text.lastIndexOf(".") + 1);
+        //return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
+    };
+});
+app.filter('removeFirstCharacter', function() {
+    return function(text) {
+        return text.substr(1).toLowerCase();
+        //return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
+    };
+});
 app.directive("editableText", function() {
     return {
         controller: 'EditorController',
