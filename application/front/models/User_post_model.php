@@ -6117,14 +6117,40 @@ class User_post_model extends CI_Model {
         if ($start < 0)
             $start = 0;
 
-        $sql = "SELECT up.*,
+        /*$sql = "SELECT up.*,
                 ((SELECT COUNT(*) AS like_count FROM ailee_user_post_like upl LEFT JOIN ailee_user_login ul ON ul.user_id = upl.user_id WHERE ul.status = '1' AND upl.is_like = '1' AND upl.post_id = up.id) + (SELECT COUNT(*) AS comment_count FROM ailee_user_post_comment upc LEFT JOIN ailee_user_login ul ON ul.user_id = upc.user_id WHERE ul.status = '1' AND upc.is_delete = '0' AND upc.post_id = up.id AND upc.reply_comment_id IS NULL)) AS top_count
                 FROM ailee_user_post up 
                 LEFT JOIN ailee_user_simple_post us ON us.post_id = up.id AND up.post_for = 'simple'
                 LEFT JOIN ailee_user_ask_question uaq ON uaq.post_id = up.id AND up.post_for = 'question'
                 LEFT JOIN ailee_post_article pa ON pa.id_post_article = up.post_id AND up.post_for = 'article'
                 LEFT JOIN ailee_user_opportunity uo ON uo.post_id = up.id AND up.post_for = 'opportunity'
-                WHERE up.status = 'publish' AND up.is_delete = '0' AND (FIND_IN_SET('".$hashtag_id."',us.hashtag) OR FIND_IN_SET('".$hashtag_id."',uaq.hashtag) OR FIND_IN_SET('".$hashtag_id."',pa.hashtag) OR FIND_IN_SET('".$hashtag_id."',uo.hashtag))  HAVING top_count > 0 ORDER BY top_count DESC";
+                WHERE up.status = 'publish' AND up.is_delete = '0' AND (FIND_IN_SET('".$hashtag_id."',us.hashtag) OR FIND_IN_SET('".$hashtag_id."',uaq.hashtag) OR FIND_IN_SET('".$hashtag_id."',pa.hashtag) OR FIND_IN_SET('".$hashtag_id."',uo.hashtag))  HAVING top_count > 0 ORDER BY top_count DESC";*/
+
+        $sql = "SELECT main.* FROM(
+                SELECT up.*,((SELECT COUNT(*) AS like_count FROM ailee_user_post_like upl LEFT JOIN ailee_user_login ul ON ul.user_id = upl.user_id WHERE ul.status = '1' AND upl.is_like = '1' AND upl.post_id = up.id) + (SELECT COUNT(*) AS comment_count FROM ailee_user_post_comment upc LEFT JOIN ailee_user_login ul ON ul.user_id = upc.user_id WHERE ul.status = '1' AND upc.is_delete = '0' AND upc.post_id = up.id AND upc.reply_comment_id IS NULL)) AS top_count
+                                FROM ailee_user_post up 
+                                LEFT JOIN ailee_user_simple_post us ON us.post_id = up.id AND up.post_for = 'simple'
+                                WHERE up.status = 'publish' AND up.is_delete = '0' AND (FIND_IN_SET('".$hashtag_id."',us.hashtag))
+                UNION
+
+                SELECT up.*,((SELECT COUNT(*) AS like_count FROM ailee_user_post_like upl LEFT JOIN ailee_user_login ul ON ul.user_id = upl.user_id WHERE ul.status = '1' AND upl.is_like = '1' AND upl.post_id = up.id) + (SELECT COUNT(*) AS comment_count FROM ailee_user_post_comment upc LEFT JOIN ailee_user_login ul ON ul.user_id = upc.user_id WHERE ul.status = '1' AND upc.is_delete = '0' AND upc.post_id = up.id AND upc.reply_comment_id IS NULL)) AS top_count
+                                FROM ailee_user_post up 
+                                LEFT JOIN ailee_user_ask_question uaq ON uaq.post_id = up.id AND up.post_for = 'question'
+                                WHERE up.status = 'publish' AND up.is_delete = '0' AND (FIND_IN_SET('".$hashtag_id."',uaq.hashtag))                
+                UNION
+
+                SELECT up.*,((SELECT COUNT(*) AS like_count FROM ailee_user_post_like upl LEFT JOIN ailee_user_login ul ON ul.user_id = upl.user_id WHERE ul.status = '1' AND upl.is_like = '1' AND upl.post_id = up.id) + (SELECT COUNT(*) AS comment_count FROM ailee_user_post_comment upc LEFT JOIN ailee_user_login ul ON ul.user_id = upc.user_id WHERE ul.status = '1' AND upc.is_delete = '0' AND upc.post_id = up.id AND upc.reply_comment_id IS NULL)) AS top_count
+                                FROM ailee_user_post up 
+                                LEFT JOIN ailee_post_article pa ON pa.id_post_article = up.post_id AND up.post_for = 'article'
+                                WHERE up.status = 'publish' AND up.is_delete = '0' AND (FIND_IN_SET('".$hashtag_id."',pa.hashtag))
+                                
+                UNION
+
+                SELECT up.*,((SELECT COUNT(*) AS like_count FROM ailee_user_post_like upl LEFT JOIN ailee_user_login ul ON ul.user_id = upl.user_id WHERE ul.status = '1' AND upl.is_like = '1' AND upl.post_id = up.id) + (SELECT COUNT(*) AS comment_count FROM ailee_user_post_comment upc LEFT JOIN ailee_user_login ul ON ul.user_id = upc.user_id WHERE ul.status = '1' AND upc.is_delete = '0' AND upc.post_id = up.id AND upc.reply_comment_id IS NULL)) AS top_count
+                                FROM ailee_user_post up 
+                                LEFT JOIN ailee_user_opportunity uo ON uo.post_id = up.id AND up.post_for = 'opportunity'
+                                WHERE up.status = 'publish' AND up.is_delete = '0' AND (FIND_IN_SET('".$hashtag_id."',uo.hashtag))
+                ) AS main HAVING main.top_count > 0 ORDER BY main.top_count DESC";
         if($limit != '') {
             $sql .= " LIMIT $start,$limit";
         }
@@ -6268,9 +6294,33 @@ class User_post_model extends CI_Model {
     }
 
     public function get_hashtag_top_posts_total_records($hashtag_id){
-        $sql = "SELECT up.*,((SELECT COUNT(*) AS like_count FROM ailee_user_post_like upl LEFT JOIN ailee_user_login ul ON ul.user_id = upl.user_id WHERE ul.status = '1' AND upl.is_like = '1' AND upl.post_id = up.id) + (SELECT COUNT(*) AS comment_count FROM ailee_user_post_comment upc LEFT JOIN ailee_user_login ul ON ul.user_id = upc.user_id WHERE ul.status = '1' AND upc.is_delete = '0' AND upc.post_id = up.id AND upc.reply_comment_id IS NULL)) AS top_count FROM ailee_user_post up LEFT JOIN ailee_user_simple_post us ON us.post_id = up.id AND up.post_for = 'simple' LEFT JOIN ailee_user_ask_question uaq ON uaq.post_id = up.id AND up.post_for = 'question' LEFT JOIN ailee_post_article pa ON pa.id_post_article = up.post_id AND up.post_for = 'article' LEFT JOIN ailee_user_opportunity uo ON uo.post_id = up.id AND up.post_for = 'opportunity' WHERE up.status = 'publish' AND up.is_delete = '0' AND (FIND_IN_SET('".$hashtag_id."',us.hashtag) OR FIND_IN_SET('".$hashtag_id."',uaq.hashtag) OR FIND_IN_SET('".$hashtag_id."',pa.hashtag) OR FIND_IN_SET('".$hashtag_id."',uo.hashtag)) HAVING top_count > 0";        
+        $sql = "SELECT main.* FROM(
+                SELECT up.*,((SELECT COUNT(*) AS like_count FROM ailee_user_post_like upl LEFT JOIN ailee_user_login ul ON ul.user_id = upl.user_id WHERE ul.status = '1' AND upl.is_like = '1' AND upl.post_id = up.id) + (SELECT COUNT(*) AS comment_count FROM ailee_user_post_comment upc LEFT JOIN ailee_user_login ul ON ul.user_id = upc.user_id WHERE ul.status = '1' AND upc.is_delete = '0' AND upc.post_id = up.id AND upc.reply_comment_id IS NULL)) AS top_count
+                                FROM ailee_user_post up 
+                                LEFT JOIN ailee_user_simple_post us ON us.post_id = up.id AND up.post_for = 'simple'
+                                WHERE up.status = 'publish' AND up.is_delete = '0' AND (FIND_IN_SET('".$hashtag_id."',us.hashtag))
+                UNION
+
+                SELECT up.*,((SELECT COUNT(*) AS like_count FROM ailee_user_post_like upl LEFT JOIN ailee_user_login ul ON ul.user_id = upl.user_id WHERE ul.status = '1' AND upl.is_like = '1' AND upl.post_id = up.id) + (SELECT COUNT(*) AS comment_count FROM ailee_user_post_comment upc LEFT JOIN ailee_user_login ul ON ul.user_id = upc.user_id WHERE ul.status = '1' AND upc.is_delete = '0' AND upc.post_id = up.id AND upc.reply_comment_id IS NULL)) AS top_count
+                                FROM ailee_user_post up 
+                                LEFT JOIN ailee_user_ask_question uaq ON uaq.post_id = up.id AND up.post_for = 'question'
+                                WHERE up.status = 'publish' AND up.is_delete = '0' AND (FIND_IN_SET('".$hashtag_id."',uaq.hashtag))                
+                UNION
+
+                SELECT up.*,((SELECT COUNT(*) AS like_count FROM ailee_user_post_like upl LEFT JOIN ailee_user_login ul ON ul.user_id = upl.user_id WHERE ul.status = '1' AND upl.is_like = '1' AND upl.post_id = up.id) + (SELECT COUNT(*) AS comment_count FROM ailee_user_post_comment upc LEFT JOIN ailee_user_login ul ON ul.user_id = upc.user_id WHERE ul.status = '1' AND upc.is_delete = '0' AND upc.post_id = up.id AND upc.reply_comment_id IS NULL)) AS top_count
+                                FROM ailee_user_post up 
+                                LEFT JOIN ailee_post_article pa ON pa.id_post_article = up.post_id AND up.post_for = 'article'
+                                WHERE up.status = 'publish' AND up.is_delete = '0' AND (FIND_IN_SET('".$hashtag_id."',pa.hashtag))
+                                
+                UNION
+
+                SELECT up.*,((SELECT COUNT(*) AS like_count FROM ailee_user_post_like upl LEFT JOIN ailee_user_login ul ON ul.user_id = upl.user_id WHERE ul.status = '1' AND upl.is_like = '1' AND upl.post_id = up.id) + (SELECT COUNT(*) AS comment_count FROM ailee_user_post_comment upc LEFT JOIN ailee_user_login ul ON ul.user_id = upc.user_id WHERE ul.status = '1' AND upc.is_delete = '0' AND upc.post_id = up.id AND upc.reply_comment_id IS NULL)) AS top_count
+                                FROM ailee_user_post up 
+                                LEFT JOIN ailee_user_opportunity uo ON uo.post_id = up.id AND up.post_for = 'opportunity'
+                                WHERE up.status = 'publish' AND up.is_delete = '0' AND (FIND_IN_SET('".$hashtag_id."',uo.hashtag))
+                ) AS main HAVING main.top_count > 0 ORDER BY main.top_count DESC";        
         $query = $this->db->query($sql);
-        $result_array = $query->result_array();
+        $result_array = $query->result_array();        
         return count($result_array);
     }
 

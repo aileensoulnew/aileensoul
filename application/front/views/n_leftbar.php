@@ -123,6 +123,8 @@ $hashtag_list = $this->user_post_model->get_hashtag_sugetion_in_leftbar($leftbox
         <?php }
     }
     endif; ?>
+    <?php
+    if(isset($url) && $url[1] == 'user_post' && $url[2] == 'user_post_main'): ?>
     <div class="follow-box">
         <div class="all-user-list hashtags-left-bar">
             <h4 class="hashtag-h4">
@@ -184,6 +186,8 @@ $hashtag_list = $this->user_post_model->get_hashtag_sugetion_in_leftbar($leftbox
             </data-owl-carousel>
         </div>
     </div>
+    <?php
+    endif; ?>
 	<div class="business-move">
 	</div>
 					
