@@ -6901,16 +6901,16 @@ class User_post_model extends CI_Model {
         // $this->db->where('ht.status', '1');
         $this->db->where('hf.status', '1');
         $this->db->where('hf.user_id', $user_id);
-        $this->db->order_by('ht.hashtag', 'ASC');
+        $this->db->order_by('hf.modify_date', 'DESC');
         if($limit != '') {
             $this->db->limit($limit,$start);
         }
         $query = $this->db->get();
         $result_array = $query->result_array();
         foreach ($result_array as $key => $value) {
-            $follower_counter = $this->get_hashtag_follower_count($value['id']);
+            $follower_count = $this->get_hashtag_follower_count($value['id']);
             $hashtag_follow_status = $this->get_hashtag_follow_status($value['id'],$login_user_id);
-            $follower_count = $this->common->change_number_long_format_to_short((int)$follower_counter);
+            // $follower_count = $this->common->change_number_long_format_to_short((int)$follower_counter);
             $result_array[$key]['hashtag_follower_count'] = $follower_count;
             $result_array[$key]['hashtag_follow_status'] = $hashtag_follow_status;
         }
