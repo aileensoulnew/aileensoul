@@ -4334,7 +4334,7 @@ class User_post extends MY_Controller {
         {
             $page = 1;
         }
-        $limit = 12;//40;
+        $limit = 24;// 12;//40;
         $userid = $this->session->userdata('aileenuser');
         $user_data = $this->user_post_model->get_hashtag_list($userid,$page,$limit,$search_tag);
         echo json_encode($user_data);

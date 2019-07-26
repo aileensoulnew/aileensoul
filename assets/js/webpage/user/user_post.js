@@ -373,7 +373,7 @@ app.config(function ($routeProvider, $locationProvider) {
             });
     $locationProvider.html5Mode(true);
 });
-app.controller('userOppoController', function ($scope, $http,$compile,$location) {
+app.controller('userOppoController', function ($scope, $http,$compile,$location,$window) {
     $scope.today = new Date(); 
     $scope.$parent.active_tab = '1';
     $scope.IsVisible = false;
@@ -5098,8 +5098,10 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         }
     };
 
+    // angular.element($window).bind("scroll", function (e) {
     $('.post-popup-scroll').on('scroll', function () {
-        if($(this).scrollTop() + $(this).innerHeight() >= ($(this)[0].scrollHeight * 0.9)) {
+        if($(this).scrollTop() + $(this).innerHeight() >= ($(this)[0].scrollHeight)) {
+
             var page = $scope.hash_page_number;
             var total_record = $scope.hash_total_record;
             var perpage_record = $scope.hash_perpage_record;

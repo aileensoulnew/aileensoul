@@ -282,15 +282,24 @@
     color: #1b8ab9;
     text-decoration: underline;
 }
+.post-popup-scroll{
+    overflow-y: scroll;
+}
 @media screen and (max-width: 479px) {
     .hash-header-mob .btn-new-1 {
         line-height: 2;
         background: transparent;
+    }
+    .signup-form .new-form .text-left{
+        float: left;
     }
 }
 
 @media screen and (max-width: 991px) {
     .hash-header-mob .btn-new-1 {        
         background: transparent;
+    }
+    .signup-form .new-form .text-left{
+        float: left;
     }
 }

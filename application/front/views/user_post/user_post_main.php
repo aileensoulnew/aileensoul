@@ -3863,18 +3863,30 @@
     <div class="modal-dialog">
         <div class="modal-content">
                 <div class="hashtag-popup">
-                    <div class="popup-top">
+                    <div class="popup-top">                        
                         <div class="row">
-                            <div class="col-md-8 col-sm-6 col-xs-4">
+                            <div class="col-md-3 col-sm-3 col-xs-12 text-center pb10">
                                 <h1>Hashtags</h1>
                             </div>
-                            <div class="col-md-4 col-sm-6 col-xs-8">
+                            <div class="col-md-6 col-sm-6 col-xs-4 text-center">
+                                <span ng-if="hashtag_count < 5">Follow at least 5 Hashtags(Topics).</span>
+                                <a ng-if="hashtag_count > 4" href="#" data-dismiss="modal" class="btn-new-1">Submit</a>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-8">
                                 <div class="hash-search">
                                     <input type="text" ng-model="search_tag" placeholder="Search hashtags" ng-keypress="check_enter_key($event)">
                                     <a href="javascript:void(0);" ng-click="get_hashtag_search();"><img src="<?php echo base_url('assets/n-images/s-s.png'); ?>"></a>
                                 </div>
                             </div>
                         </div>
+                        <!-- <div class="row">
+                            <div class="col-md-8 col-sm-6 col-xs-4">
+                                <span ng-if="hashtag_count < 5">Follow at least 5 Hashtags(Topics).</span>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-8">
+                                <a ng-if="hashtag_count > 4" href="#" data-dismiss="modal" class="btn-new-1">Close</a>
+                            </div>
+                        </div> -->
                     </div>
                     <div class="hashtag-list post-popup-scroll">
                         <ul>
@@ -3902,12 +3914,12 @@
                             </li>
                         </ul>
                     </div>
-                    <div id="hashtag-loader" class="fw post_loader" style="text-align: center;display: none;z-index: 9;">
+                    <div id="hashtag-loader" class="fw post_loader" style="display: none;text-align: center;z-index: 9;position: absolute;bottom: 40px;">
                         <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
                     </div>
                     <div class="hash-box-bottom">
-                        <a ng-if="hashtag_count > 4" href="#" data-dismiss="modal" class="btn-new-1">Close</a>
-                        <span ng-if="hashtag_count < 5">Follow at least 5 Hashtags(Topics).</span>
+                        <!-- <a ng-if="hashtag_count > 4" href="#" data-dismiss="modal" class="btn-new-1">Close</a>
+                        <span ng-if="hashtag_count < 5">Follow at least 5 Hashtags(Topics).</span> -->
                     </div>
                     <div class="clearfix"></div>
                 </div>
