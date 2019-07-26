@@ -3049,7 +3049,8 @@ class Userprofile_page extends MY_Controller {
     {
         $userid = $this->session->userdata('aileenuser');
         $profile_progress = $this->progressbar($userid);
-        $ret_arr = array("success"=>1,"profile_progress"=>$profile_progress);
+        $hashtag_count = $this->user_post_model->get_following_hashtags_total_rec($userid);
+        $ret_arr = array("success"=>1,"profile_progress"=>$profile_progress,"hashtag_count"=>$hashtag_count);
         return $this->output->set_content_type('application/json')->set_output(json_encode($ret_arr));
     }
 

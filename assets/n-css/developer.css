@@ -190,7 +190,8 @@
     background : none
 }
 .hashtag-grd .post-hash-tag a:hover{
-    text-decoration: underline;
+    text-decoration: underline !important;
+    border-bottom: 1px solid #1b8ab9;
 }
 .owl-stage-outer .hash-box{
     border: none;
@@ -276,6 +277,10 @@
 }
 .monetize-payment-detail .new-form input.error {
     border-bottom: 1px solid #ff0000;
+}
+.follow-box .all-user-list h4 a:hover {
+    color: #1b8ab9;
+    text-decoration: underline;
 }
 @media screen and (max-width: 479px) {
     .hash-header-mob .btn-new-1 {

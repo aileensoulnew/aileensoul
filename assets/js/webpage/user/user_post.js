@@ -1372,6 +1372,64 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         });
     }
 
+    $scope.get_user_progress = function(){
+        $http({
+            method: 'POST',
+            url: base_url + 'userprofile_page/get_user_progress',            
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        })
+        .then(function (success) {
+            var hashtag_count = success.data.hashtag_count;
+            $scope.hashtag_count = hashtag_count;
+            var profile_progress = success.data.profile_progress;
+            var count_profile_value = profile_progress.user_process_value;
+            var count_profile = profile_progress.user_process;
+            $scope.progress_status = profile_progress.progress_status;
+            if(count_profile == 100)
+            {
+                $("#edit-profile-move").hide();
+            }
+            if(hashtag_count < 5){
+                $("#hashtag-popup").modal('show');
+            }
+            $scope.set_progress(count_profile_value,count_profile);
+        },function errorCallback(response) {
+            setTimeout(function(){
+                $scope.get_user_progress();
+            },200);
+        });
+    };
+
+    $scope.get_user_progress();
+
+    $scope.set_progress = function(count_profile_value,count_profile){
+        if(count_profile == 100)
+        {
+            $("#progress-txt").html("Hurray! Your profile is complete.");
+            setTimeout(function(){
+                $("#edit-profile-move").hide();
+                $("#profile-progress").hide();
+            },5000);
+        }
+        else
+        {
+            $("#edit-profile-move").show();
+            $("#profile-progress").show();                
+            $("#progress-txt").html("<a href='"+base_url+live_slug+"/details' target='_self'>Complete your profile to get connected with more people.</a>");   
+        }
+        // if($scope.old_count_profile < 100)
+        {
+            $('.second.circle-1').circleProgress({
+                value: count_profile_value //with decimal point
+            }).on('circle-animation-progress', function(event, progress) {
+                $('.progress-bar-custom').width(Math.round(count_profile * progress)+'%');
+                $('.progress-bar-custom span .val').html(Math.round(count_profile * progress)+'%');
+                $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
+            });
+        }
+        $scope.old_count_profile = count_profile;
+    };
+
     getUserPost(pg);
     var isProcessing = false;
 
@@ -1768,7 +1826,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         });
     };
 
-    $scope.removeViewMore = function(mainId,removeViewMore) {    
+    $scope.removeViewMore = function(mainId,removeViewMore) {
         $("#"+mainId).removeClass("view-more-expand");
         $("#"+removeViewMore).remove();
     };
@@ -3056,7 +3114,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         });
     }
 
-    $scope.cmt_handle_paste = function (e) {        
+    $scope.cmt_handle_paste = function (e) {
         e.preventDefault();
         e.stopPropagation();
         var value = e.originalEvent.clipboardData.getData("Text");        
@@ -3085,7 +3143,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         }
     };
 
-    $scope.cmt_handle_paste_edit = function (e) {        
+    $scope.cmt_handle_paste_edit = function (e) {
         e.preventDefault();
         e.stopPropagation();
         var value = e.originalEvent.clipboardData.getData("Text");        
@@ -3113,7 +3171,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         }
     };
 
-    $scope.sendComment = function (post_id, index, post,is_promoted) {        
+    $scope.sendComment = function (post_id, index, post,is_promoted) {
         var commentClassName = $('#comment-icon-' + post_id).attr('class').split(' ')[0];
         var comment = $('#commentTaxBox-' + post_id).html();
         //comment = comment.replace(/^(<br\s*\/?>)+/, '');
@@ -3248,7 +3306,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         }
     }
 
-    $scope.viewAllComment = function (post_id, index, post,is_promoted) {
+    $scope.viewAllComment = function (post_id, index, post,post_type) {
         $http({
             method: 'POST',
             url: base_url + 'user_post/viewAllComment',
@@ -3257,15 +3315,20 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         })
         .then(function (success) {
             data = success.data;
-            if(is_promoted == 1)
+            if(post_type == 1)
+            {
+                $scope.postData[index].post_comment_data = data.all_comment_data;
+                $scope.postData[index].post_comment_count = data.post_comment_count;
+            }
+            if(post_type == 2)//Promoted
             {
                 $scope.promotedPostData[index].post_comment_data = data.all_comment_data;
                 $scope.promotedPostData[index].post_comment_count = data.post_comment_count;
             }
-            else
-            {                
-                $scope.postData[index].post_comment_data = data.all_comment_data;
-                $scope.postData[index].post_comment_count = data.post_comment_count;
+            if(post_type == 3)//Promoted Index10
+            {
+                $scope.promotedPostIndex10Data[index].post_comment_data = data.all_comment_data;
+                $scope.promotedPostIndex10Data[index].post_comment_count = data.post_comment_count;
             }
             
             setTimeout(function(){
@@ -3332,7 +3395,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
 
     }
 
-    $scope.viewLastComment = function (post_id, index, post,is_promoted) {
+    $scope.viewLastComment = function (post_id, index, post,post_type) {
         $http({
             method: 'POST',
             url: base_url + 'user_post/viewLastComment',
@@ -3341,15 +3404,20 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         })
         .then(function (success) {
             data = success.data;
-            if(is_promoted == 1)
+            if(post_type == 1)
+            {
+                $scope.postData[index].post_comment_data = data.comment_data;
+                $scope.postData[index].post_comment_count = data.post_comment_count;
+            }
+            if(post_type == 2)//Promoted
             {
                 $scope.promotedPostData[index].post_comment_data = data.comment_data;
                 $scope.promotedPostData[index].post_comment_count = data.post_comment_count;
             }
-            else
+            if(post_type == 3)//Promoted Index10
             {
-                $scope.postData[index].post_comment_data = data.comment_data;
-                $scope.postData[index].post_comment_count = data.post_comment_count;
+                $scope.promotedPostIndex10Data[index].post_comment_data = data.comment_data;
+                $scope.promotedPostIndex10Data[index].post_comment_count = data.post_comment_count;
             }
             setTimeout(function(){
                 $('[data-toggle="popover"]').popover({
@@ -3561,7 +3629,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         $(".new-comment-"+post_id).hide();
     }
 
-    $scope.edit_post_comment_reply = function (comment_id, post_id, parent_index, cmt_index,cmt_rpl_index) {       
+    $scope.edit_post_comment_reply = function (comment_id, post_id, parent_index, cmt_index,cmt_rpl_index,post_type) {       
         $(".comment-for-post-"+post_id+" .edit-reply-comment").hide();
         $(".comment-for-post-"+post_id+" li[id^=cancel-reply-comment-li-]").hide();
         $(".comment-for-post-"+post_id+" li[id^=edit-comment-li-]").show();
@@ -3570,9 +3638,24 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         $('#edit-comment-li-' + comment_id).hide();
         $('#timeago-reply-comment-li-' + comment_id).hide();
 
-        var editContent = $scope.postData[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
+        if(post_type == 1)
+        {            
+            var editContent = $scope.postData[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        if(post_type == 2)//Promoted
+        {            
+            var editContent = $scope.promotedPostData[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        if(post_type == 3)//Promoted Index10
+        {
+            var editContent = $scope.promotedPostIndex10Data[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
         editContent = editContent.substring(0,cmt_maxlength);
-        $('#edit-reply-comment-' + comment_id).show();
+        $('#edit-reply-comment-' + comment_id).show();        
+        $('#edit-comment-reply-textbox-' + comment_id).show();
         $('#edit-comment-reply-textbox-' + comment_id).html(editContent);
         $('#comment-reply-dis-inner-' + comment_id).hide();
         $('#edit-reply-comment-li-' + comment_id).hide();
@@ -3621,7 +3704,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         $(".new-comment-"+post_id).show();
     }
     
-    $scope.sendEditComment = function (comment_id,post_id,user_id) {
+    $scope.sendEditComment = function (comment_id,post_id,user_id,postIndex, commentIndex,post_type) {
         var comment = $('#editCommentTaxBox-' + comment_id).html();
         comment = comment.replace(/&nbsp;/gi, " ");
         comment = comment.replace(/<br>$/, '');
@@ -3643,12 +3726,28 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                         socket.emit('user notification',user_id);
                     }
                     $('#comment-dis-inner-' + comment_id).show();
-                    $('#comment-dis-inner-' + comment_id).html(comment);
+                    $('#comment-dis-inner-' + comment_id).html(data.comment);
                     $('#edit-comment-' + comment_id).html();
                     $('#edit-comment-' + comment_id).hide();
                     $('#edit-comment-li-' + comment_id).show();
                     $('#cancel-comment-li-' + comment_id).hide();
                     $('.new-comment-'+post_id).show();
+
+                    if(post_type == 1)
+                    {
+                        $scope.postData[postIndex].post_comment_data[commentIndex].comment = data.comment;
+                        // $scope.postData[index].post_comment_count = data.post_comment_count;
+                    }
+                    if(post_type == 2)//Promoted
+                    {
+                        $scope.promotedPostData[postIndex].post_comment_data[commentIndex].comment = data.comment;
+                        // $scope.promotedPostData[index].post_comment_count = data.post_comment_count;
+                    }
+                    if(post_type == 3)//Promoted Index10
+                    {
+                        $scope.promotedPostIndex10Data[postIndex].post_comment_data[commentIndex].comment = data.comment;
+                        // $scope.promotedPostIndex10Data[index].post_comment_count = data.post_comment_count;
+                    }
                 }
             },function errorCallback(response) {
                 setTimeout(function(){
@@ -3799,7 +3898,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         }
     }
 
-    $scope.send_edit_comment_reply = function (reply_comment_id,post_id) {
+    $scope.send_edit_comment_reply = function (reply_comment_id,post_id,postIndex, commentIndex,commentReplyIndex,post_type) {
         var comment = $('#edit-comment-reply-textbox-' + reply_comment_id).html();
         comment = comment.replace(/&nbsp;/gi, " ");
         comment = comment.replace(/<br>$/, '');
@@ -3815,13 +3914,41 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             .then(function (success) {                
                 data = success.data;
                 if (data.message == '1') {
+                    $('#edit-comment-li-' + reply_comment_id).show();
+                    $('#timeago-reply-comment-li-' + reply_comment_id).show();
+                    $('#edit-reply-comment-' + reply_comment_id).hide();
+                    $('#edit-comment-reply-textbox-' + reply_comment_id).html('');
+                    $('#edit-comment-reply-textbox-' + reply_comment_id).hide();
                     $('#comment-reply-dis-inner-' + reply_comment_id).show();
+                    $('#comment-reply-dis-inner-' + reply_comment_id).html(data.comment);
+                    $('#edit-reply-comment-li-' + reply_comment_id).show();
+                    $('#cancel-reply-comment-li-' + reply_comment_id).hide();
+                    $(".new-comment-"+post_id).show();
+
+                    if(post_type == 1)
+                    {
+                        $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data[commentReplyIndex].comment = data.comment;
+                        // $scope.postData[index].post_comment_count = data.post_comment_count;
+                    }
+                    if(post_type == 2)//Promoted
+                    {
+                        $scope.promotedPostData[postIndex].post_comment_data[commentIndex].comment_reply_data[commentReplyIndex].comment = data.comment;
+                        // $scope.promotedPostData[index].post_comment_count = data.post_comment_count;
+                    }
+                    if(post_type == 3)//Promoted Index10
+                    {
+                        $scope.promotedPostIndex10Data[postIndex].post_comment_data[commentIndex].comment_reply_data[commentReplyIndex].comment = data.comment;
+                        // $scope.promotedPostIndex10Data[index].post_comment_count = data.post_comment_count;
+                    }
+
+                    /*$('#comment-reply-dis-inner-' + reply_comment_id).show();
                     $('#comment-reply-dis-inner-' + reply_comment_id).html(comment);
                     $('#edit-comment-reply-textbox-' + reply_comment_id).html();
                     $('#edit-comment-reply-textbox-' + reply_comment_id).hide();
                     $('#edit-comment-li-' + reply_comment_id).show();
+                    $('#edit-reply-comment-' + reply_comment_id).hide();
                     $('#cancel-reply-comment-li-' + reply_comment_id).hide();
-                    $('.new-comment-'+post_id).show();
+                    $('.new-comment-'+post_id).show();*/
                 }                
             },function errorCallback(response) {
                 setTimeout(function(){
@@ -4188,60 +4315,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 },200);
             });
         }
-    };
-
-    $scope.get_user_progress = function(){
-        $http({
-            method: 'POST',
-            url: base_url + 'userprofile_page/get_user_progress',            
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        })
-        .then(function (success) {
-            var profile_progress = success.data.profile_progress;
-            var count_profile_value = profile_progress.user_process_value;
-            var count_profile = profile_progress.user_process;
-            $scope.progress_status = profile_progress.progress_status;
-            if(count_profile == 100)
-            {
-                $("#edit-profile-move").hide();
-            }
-            $scope.set_progress(count_profile_value,count_profile);
-        },function errorCallback(response) {
-            setTimeout(function(){
-                $scope.get_user_progress();
-            },200);
-        });
-    };
-
-    $scope.get_user_progress();
-
-    $scope.set_progress = function(count_profile_value,count_profile){
-        if(count_profile == 100)
-        {
-            $("#progress-txt").html("Hurray! Your profile is complete.");
-            setTimeout(function(){
-                $("#edit-profile-move").hide();
-                $("#profile-progress").hide();
-            },5000);
-        }
-        else
-        {
-            $("#edit-profile-move").show();
-            $("#profile-progress").show();                
-            $("#progress-txt").html("<a href='"+base_url+live_slug+"/details' target='_self'>Complete your profile to get connected with more people.</a>");   
-        }
-        // if($scope.old_count_profile < 100)
-        {
-            $('.second.circle-1').circleProgress({
-                value: count_profile_value //with decimal point
-            }).on('circle-animation-progress', function(event, progress) {
-                $('.progress-bar-custom').width(Math.round(count_profile * progress)+'%');
-                $('.progress-bar-custom span .val').html(Math.round(count_profile * progress)+'%');
-                $(this).find('strong').html(Math.round(count_profile * progress) + '<i>%</i>');
-            });
-        }
-        $scope.old_count_profile = count_profile;
-    };
+    };    
 
     $scope.deleteRecentPost = function (post_id, index) {
         $scope.p_rd_post_id = post_id;
@@ -4604,7 +4678,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         },300);
     };
 
-    $scope.share_post_fnc = function(post_index,is_promoted){        
+    $scope.share_post_fnc = function(post_index,is_promoted){
         $('.post-popup-box').attr('style','pointer-events: none;');
         var description = $("#share_post_text").val();
         var post_id = 0;
@@ -4662,7 +4736,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         });
     };
 
-    $('#post_something,#post_opportunity input'). keydown(function (e) {        
+    $('#post_something,#post_opportunity input'). keydown(function (e) {
         if (e. keyCode == 13 && !$(e.target).is('textarea')) {
             e. preventDefault();
             return false;
@@ -4771,7 +4845,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 items: 2
             },
             768: {
-                items: 2,
+                items: 2
             },
             1280: {
                 items: 2
@@ -4796,7 +4870,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                 items: 3
             },
             768: {
-                items: 3,
+                items: 3
             },
             1280: {
                 items: 3
@@ -4822,7 +4896,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                     items: 1
                 },
                 768: {
-                    items: 1,
+                    items: 1
                 },
                 1280: {
                     items: 1
@@ -4842,6 +4916,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
             if (success.data.status == 1) {
+                $scope.hashtag_count = success.data.hashtag_count;                
                 setTimeout(function(){
                     var $f_html = $(".hashtag-follow-btn-"+hashtag_id).html(success.data.follow_html);
                     $compile($f_html)($scope);
@@ -4852,7 +4927,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
                         var $f_count = $(".hashtag-follow-count-"+hashtag_id).html(success.data.hashtag_follower_count + ' Followers');
                     }
                     $compile($f_count)($scope);
-                },500);                
+                },500);
             }
             $(".hashtag-follow-btn-"+hashtag_id+" a").removeAttr('style');
         }, function (error) {
@@ -4874,6 +4949,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
         }).then(function (success) {
             if (success.data.status == 0) {
                 setTimeout(function(){
+                    $scope.hashtag_count = success.data.hashtag_count;
                     var $f_html = $(".hashtag-follow-btn-"+hashtag_id).html(success.data.follow_html);
                     $compile($f_html)($scope);
                     if(success.data.hashtag_follower_count != '')
@@ -4895,6 +4971,152 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location)
             },500);
         });
     };
+
+    $scope.get_hashtag_list = function(start) {
+        if (isProcessing) {
+            return false;
+        }
+        isProcessing = true;
+        $("#hashtag-loader").show();
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/get_hashtag_list?page='+start,            
+            data: 'search_tag='+$scope.search_tag,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            $("#hashtag-loader").hide();            
+            
+            if (success.data.hashtag_list.length >0 ) {
+                if(start > 1)
+                {
+                    for (var i in success.data.hashtag_list) {                            
+                        //$scope.searchJob.push(data.latestJobs[i]);
+                        //$scope.$apply(function () {
+                            $scope.hashtag_list.push(success.data.hashtag_list[i]);
+                        //});
+                    }
+                }
+                else
+                {
+                    $scope.hashtag_list = success.data.hashtag_list;
+                }
+
+                
+                isProcessing = false;
+
+                // $scope.hashtag_list = success.data.hashtag_list;
+                $scope.hash_page_number = start;
+                $scope.hash_total_record = success.data.total_record;
+                $scope.hash_perpage_record = 12;
+            }
+            else
+            {
+                isProcessing = true;
+                $scope.showLoadmore = false;
+                // $scope.hashtag_list = success.data.hashtag_list;
+                $scope.hash_page_number = start;
+                $scope.hash_total_record = success.data.total_record;
+                $scope.hash_perpage_record = 12;
+            }            
+        }, function (error) {
+            $(".sugg_post_load").hide();
+            setTimeout(function(){
+                $scope.get_hashtag_list(start);
+            },500);
+        }, 
+        function (complete) {
+            $(".sugg_post_load").hide();
+        });
+    };
+
+    $scope.get_hashtag_search = function() {
+        start = 1;
+        if (isProcessing) {
+            return false;
+        }
+        isProcessing = true;
+        $(".sugg_post_load").show();
+        $http({
+            method: 'POST',
+            url: base_url + 'user_post/get_hashtag_list?page='+start,
+            data: 'search_tag='+$scope.search_tag,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function (success) {
+            $(".sugg_post_load").hide();            
+            
+            if (success.data.hashtag_list.length >0 ) {
+                if(start > 1)
+                {
+                    for (var i in success.data.hashtag_list) {                            
+                        //$scope.searchJob.push(data.latestJobs[i]);
+                        //$scope.$apply(function () {
+                            $scope.hashtag_list.push(success.data.hashtag_list[i]);
+                        //});
+                    }
+                }
+                else
+                {
+                    $scope.hashtag_list = success.data.hashtag_list;
+                }
+
+                
+                isProcessing = false;
+
+                // $scope.hashtag_list = success.data.hashtag_list;
+                $scope.hash_page_number = start;
+                $scope.hash_total_record = success.data.total_record;
+                $scope.hash_perpage_record = 12;
+            }
+            else
+            {
+                isProcessing = true;
+                $scope.showLoadmore = false;
+                $scope.hashtag_list = success.data.hashtag_list;
+                $scope.hash_page_number = start;
+                $scope.hash_total_record = success.data.total_record;
+                $scope.hash_perpage_record = 12;
+            }
+            $('#main_loader').hide();
+            // $('#main_page_load').show();
+            $('body').removeClass("body-loader");
+        }, function (error) {
+            $(".sugg_post_load").hide();
+            setTimeout(function(){
+                $scope.get_hashtag_list(start);
+            },500);
+        }, 
+        function (complete) {
+            $(".sugg_post_load").hide();
+        });
+    };
+    $scope.get_hashtag_list(1);
+    $scope.check_enter_key = function($event){
+        var keyCode = $event.which || $event.keyCode;
+        if (keyCode === 13) {
+            isProcessing = false;
+            $scope.get_hashtag_search(1);
+        }
+    };
+
+    $('.post-popup-scroll').on('scroll', function () {
+        if($(this).scrollTop() + $(this).innerHeight() >= ($(this)[0].scrollHeight * 0.9)) {
+            var page = $scope.hash_page_number;
+            var total_record = $scope.hash_total_record;
+            var perpage_record = $scope.hash_perpage_record;
+            if (parseInt(perpage_record * page) <= parseInt(total_record)) {
+                var available_page = total_record / perpage_record;
+                available_page = parseInt(available_page, 10);
+                var mod_page = total_record % perpage_record;
+                if (mod_page > 0) {
+                    available_page = available_page + 1;
+                }
+                if (parseInt(page) <= parseInt(available_page)) {
+                    var pagenum = parseInt($scope.hash_page_number) + 1;
+                    $scope.get_hashtag_list(pagenum);
+                }
+            }
+        }
+    });
 });
 
 app.controller('peopleController', function($scope, $http, $compile, $window,$location) {
@@ -6372,7 +6594,7 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
         }
     }
 
-    $scope.viewAllComment = function (post_id, index, post) {
+    $scope.viewAllComment = function (post_id, index, post,post_type) {
         if(user_id == "" || user_id == undefined)
         {
             $("#regmodal").modal("show");
@@ -6386,8 +6608,21 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
         })
         .then(function (success) {
             data = success.data;
-            $scope.postData[index].post_comment_data = data.all_comment_data;
-            $scope.postData[index].post_comment_count = data.post_comment_count;
+            if(post_type == 1)
+            {
+                $scope.postData[index].post_comment_data = data.all_comment_data;
+                $scope.postData[index].post_comment_count = data.post_comment_count;
+            }
+            if(post_type == 2)//Promoted
+            {
+                $scope.promotedPostData[index].post_comment_data = data.all_comment_data;
+                $scope.promotedPostData[index].post_comment_count = data.post_comment_count;
+            }
+            if(post_type == 3)//Promoted Index10
+            {
+                $scope.promotedPostIndex10Data[index].post_comment_data = data.all_comment_data;
+                $scope.promotedPostIndex10Data[index].post_comment_count = data.post_comment_count;
+            }
             setTimeout(function(){
                 $('[data-toggle="popover"]').popover({
                     trigger: "manual" ,
@@ -6465,8 +6700,21 @@ app.controller('postController', function($scope, $http, $compile, $window,$loca
         })
         .then(function (success) {
             data = success.data;
-            $scope.postData[index].post_comment_data = data.comment_data;
-            $scope.postData[index].post_comment_count = data.post_comment_count;
+            if(post_type == 1)
+            {
+                $scope.postData[index].post_comment_data = data.comment_data;
+                $scope.postData[index].post_comment_count = data.post_comment_count;
+            }
+            if(post_type == 2)//Promoted
+            {
+                $scope.promotedPostData[index].post_comment_data = data.comment_data;
+                $scope.promotedPostData[index].post_comment_count = data.post_comment_count;
+            }
+            if(post_type == 3)//Promoted Index10
+            {
+                $scope.promotedPostIndex10Data[index].post_comment_data = data.comment_data;
+                $scope.promotedPostIndex10Data[index].post_comment_count = data.post_comment_count;
+            }
             setTimeout(function(){
                 $('[data-toggle="popover"]').popover({
                     trigger: "manual" ,

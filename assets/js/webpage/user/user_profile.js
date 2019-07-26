@@ -11151,8 +11151,7 @@ app.controller('followingController', function ($scope, $http, $location, $compi
     $scope.$parent.title = "Following | Aileensoul";
     $scope.page_number = 0;
     $scope.total_record = '';
-    $scope.perpage = 10;
-    console.log($scope.$parent.pade_reload);
+    $scope.perpage = 10;    
 
     $scope.details_in_popup = function(uid,login_user_id,utype,div_id){
         socket.emit('get user card',uid,login_user_id,utype);
