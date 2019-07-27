@@ -3865,20 +3865,25 @@
                 <div class="hashtag-popup">
                     <div class="popup-top">                        
                         <div class="row">
-                            <div class="col-md-3 col-sm-3 col-xs-12 text-center pb10">
+                            <div class="col-md-8 col-sm-6 col-xs-4">
                                 <h1>Hashtags</h1>
                             </div>
-                            <div class="col-md-6 col-sm-6 col-xs-4 text-center">
-                                <span ng-if="hashtag_count < 5">Follow at least 5 Hashtags(Topics).</span>
-                                <a ng-if="hashtag_count > 4" href="#" data-dismiss="modal" class="btn-new-1">Submit</a>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-8">
+                            <div class="col-md-4 col-sm-6 col-xs-8">
                                 <div class="hash-search">
                                     <input type="text" ng-model="search_tag" placeholder="Search hashtags" ng-keypress="check_enter_key($event)">
                                     <a href="javascript:void(0);" ng-click="get_hashtag_search();"><img src="<?php echo base_url('assets/n-images/s-s.png'); ?>"></a>
                                 </div>
                             </div>
                         </div>
+                        <div class="row hashtag-follow-cus">
+                            <div class="col-md-8 col-sm-8 col-xs-9">
+                                <span class="must-follow">Follow at least 5 Hashtags(Topics).</span>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-3">
+                                <a ng-if="hashtag_count > 4" href="#" data-dismiss="modal" class="btn-new-1 pull-right">Submit</a>
+                            </div>
+                        </div>
+
                         <!-- <div class="row">
                             <div class="col-md-8 col-sm-6 col-xs-4">
                                 <span ng-if="hashtag_count < 5">Follow at least 5 Hashtags(Topics).</span>

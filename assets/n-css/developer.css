@@ -285,6 +285,18 @@
 .post-popup-scroll{
     overflow-y: scroll;
 }
+.must-follow{
+    font-size: 14px;
+}
+.hashtag-popup .hashtag-follow-cus{
+    border-top: 1px solid #d2d2d2;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+.hashtag-popup .btn-new-1{
+    font-size: 14px;
+    padding: 0px 20px;
+}
 @media screen and (max-width: 479px) {
     .hash-header-mob .btn-new-1 {
         line-height: 2;
@@ -292,6 +304,16 @@
     }
     .signup-form .new-form .text-left{
         float: left;
+    }
+
+    .hashtag-popup .btn-new-1{
+        font-size: 12px;
+        line-height: 1;
+        padding: 5px 20px;
+    }
+
+    .must-follow{
+        font-size: 12px;
     }
 }
 
