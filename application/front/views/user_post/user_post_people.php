@@ -110,7 +110,7 @@
                 </div>            
             </div>
         </div>
-        <div ng-if="total_record == 0" ng-class="total_record == 0 ? 'no-search-data' : ''">
+        <div ng-if="people_data.length == 0 && total_record == 0" ng-class="total_record == 0 ? 'no-search-data' : ''">
             <div class="custom-user-box no-data-available">
                 <div class='art-img-nn'>
                     <div class='art_no_post_img'>
