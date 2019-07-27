@@ -1,5 +1,5 @@
 <div class="tab-add-991">
-	<?php $this->load->view('banner_add'); ?>
+	<?php //$this->load->view('banner_add'); ?>
     <div class="request-noti-move">
     </div>
 </div>
@@ -120,7 +120,7 @@
             </div>
             <ul class="request-list">
                 <li ng-repeat="notification in contactRequestNotification">
-                    <a href="<?php echo base_url(); ?>{{notification.user_slug}}">
+                    <a href="<?php echo base_url(); ?>{{notification.user_slug}}" target="_self">
                         <div class="post-img">
                             <img src="<?php echo USER_MAIN_UPLOAD_URL ?>{{notification.user_image}}" alt="{{notification.fullname}}" ng-if="notification.user_image != ''">
                             <img ng-if="notification.user_image == '' && notification.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">

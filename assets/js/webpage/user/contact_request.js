@@ -14,6 +14,10 @@ app.directive('ngEnter', function () {
 });
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
+            .when("/contact-request", {
+                templateUrl: base_url + "userprofile_page/contact_request_people",
+                controller: 'contactRequestController'
+            })
             .when("/contact-business", {
                 templateUrl: base_url + "userprofile_page/business_list",
                 controller: 'businessController'
@@ -29,7 +33,7 @@ app.config(function ($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
 });
 app.controller('mainDefaultController', function($scope, $http, $compile) {
-    $scope.active_pg = 1;
+    $scope.active_pg = 0;
 });
 app.controller('contactRequestController', function ($scope, $http,$window ) {
     $scope.$parent.active_pg = 1;
