@@ -552,8 +552,18 @@
                             // add the selected item
                             terms.push( ui.item.value );
                             // add placeholder to get the comma-and-space at the end
-                            terms.push( "" );
-                            this.value = terms.join( " " );
+                            terms.push( "" );                            
+                            if(terms.length > 11)
+                            {
+                                terms = terms.slice(0, 10);
+                                terms.push( "" );
+                                this.value = terms.join( " " );
+                                return false;
+                            }
+                            else
+                            {
+                                this.value = terms.join( " " );
+                            }                            
                             // $("#"+this.id).text(terms.join(" "));
                             // placeCaretAtEnd($("#"+this.id)[0]);
                             return false;

@@ -2865,7 +2865,17 @@ $s3 = new S3(awsAccessKey, awsSecretKey);
                         terms.push( ui.item.value );
                         // add placeholder to get the comma-and-space at the end
                         terms.push( "" );
-                        this.value = terms.join( " " );
+                        if(terms.length > 11)
+                        {
+                            terms = terms.slice(0, 10);
+                            terms.push( "" );
+                            this.value = terms.join( " " );
+                            return false;
+                        }
+                        else
+                        {
+                            this.value = terms.join( " " );
+                        }
                         return false;
                     },
                 });                

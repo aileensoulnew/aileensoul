@@ -84,6 +84,7 @@
                                     </li>
                                 </ul>
                                 <p class="pt20">All content should be creative, helpful and original. There should be no copyright issues in your content. If there will be we will permanently delete your account anytime.</p>
+                                <p class="pt20">Your points will update in 24 to 72 hours. In some case, it will take a little bit more time.</p>
                                 <p class="t-n-c">(<span class="error">*</span>We will keep reviewing the content and if it is found inappropriate or not in accordance with our terms than Aileensoul will hold the right to deduct points or not reward any points for the same.)</p>
                                 <p class="pt20">For any queries, you can contact us on <a href="mailto:inquiry@aileensoul.com">inquiry@aileensoul.com</a> this email.</p>
                             </div>

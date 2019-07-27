@@ -269,17 +269,29 @@ $article_featured_upload_path = $this->config->item('article_featured_upload_pat
                         
                         <div class="form-group">
                             <label>Add hashtag (Topic)</label>                            
-                            <textarea id="article_hashtag" type="text" class="hashtag-textarea"  placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" maxlength="200" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);" style="min-height: auto;"><?php if($articleData['hashtag'] != ''){ echo trim($articleData['hashtag']);}?></textarea>
+                            <textarea id="article_hashtag" type="text" class="hashtag-textarea"  placeholder="Ex:#php #Photography #CEO #JobSearch #Freelancer" onkeyup="autocomplete_hashtag(this.id);" onkeypress="autocomplete_hashtag_keypress(event);" style="min-height: auto;"><?php if($articleData['hashtag'] != ''){ echo trim($articleData['hashtag']);}?></textarea>
                             <div class="article_hashtag all-hashtags-list"></div>
 							<div id="article-post-hashtag" class="tooltip-custom" style="display: none;">Add topic regarding your post that describes your post.</div>
                         </div>
 
 						<div class="mes">
 							<div class="model_ok_cancel">
-		                		<a class="btn1" id="okhashtag" onclick="save_article_hashtag()" href="javascript:void(0);" data-dismiss="modal" title="OK">OK</a>
+		                		<a class="btn1" id="okhashtag" onclick="save_article_hashtag()" href="javascript:void(0);" title="OK">OK</a>
 		                	</div>
 						</div>
 					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade message-box biderror post-error" id="posterrormodal" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="modal-close" data-dismiss="modal">&times;
+                </button>       
+                <div class="modal-body">
+                    <span class="mes"></span>
                 </div>
             </div>
         </div>

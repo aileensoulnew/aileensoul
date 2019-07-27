@@ -1862,11 +1862,18 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
             var check_hashtag = (opp_hashtag != '' && opp_hashtag != undefined ? opp_hashtag.replace(/#/g, "") : '');
             var hashtags_arr = $scope.getHashTags(opp_hashtag);
             
-            if( (fileCountOpp == 0 && (description == '' || description == undefined)) || ((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField == "") || (check_hashtag == undefined || check_hashtag == '' || hashtags_arr.length == 0)))
+            if( (fileCountOpp == 0 && (description == '' || description == undefined)) || ((opptitle == undefined || opptitle == '')  || (job_title == undefined || job_title == '')  || (location == undefined || location == '') || (fields == undefined || fields == '') || (fields == 0 && otherField == "") || (check_hashtag == undefined || check_hashtag == '' || hashtags_arr.length == 0 || hashtags_arr.length > 10)))
             {
-                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                if(check_hashtag != '' && check_hashtag != undefined && (hashtags_arr.length == 0 || hashtags_arr.length > 10))
                 {
-                    $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                    if(hashtags_arr.length > 10)
+                    {
+                        $('#post .mes').html("<div class='pop_content'>You can add only 10 hashtags.");
+                    }
+                    else
+                    {
+                        $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                    }                    
                 }
                 else
                 {
@@ -2322,11 +2329,18 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
             var hashtags_arr = $scope.getHashTags(ask_hashtag);
 
             var fileInput = document.getElementById("fileInput2").files;
-            if (field == '' || description == '' || check_hashtag == '' || hashtags_arr.length == 0)
+            if (field == '' || description == '' || check_hashtag == '' || hashtags_arr.length == 0 || hashtags_arr.length > 10)
             {
-                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                if(check_hashtag != '' && check_hashtag != undefined && (hashtags_arr.length == 0  || hashtags_arr.length > 10))
                 {
-                    $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                    if(hashtags_arr.length > 10)
+                    {                        
+                        $('#post .mes').html("<div class='pop_content'>You can add only 10 hashtags.");
+                    }
+                    else
+                    {
+                        $('#post .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                    }                    
                 }
                 else
                 {
@@ -2516,11 +2530,18 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
             var check_hashtag = (sim_hashtag != '' && sim_hashtag != undefined ? sim_hashtag.replace(/#/g, "") : '');
             var hashtags_arr = $scope.getHashTags(sim_hashtag);
 
-            if((sim_title == '' || sim_title == undefined) || (check_hashtag == '' || check_hashtag == undefined || hashtags_arr.length == 0) || (fileCountSim == 0 && (description == '' || description == undefined)))
+            if((sim_title == '' || sim_title == undefined) || (check_hashtag == '' || check_hashtag == undefined || hashtags_arr.length == 0 || hashtags_arr.length > 10) || (fileCountSim == 0 && (description == '' || description == undefined)))
             {
-                if(check_hashtag != '' && check_hashtag != undefined && hashtags_arr.length == 0)
+                if(check_hashtag != '' && check_hashtag != undefined && (hashtags_arr.length == 0 || hashtags_arr.length > 10))
                 {
-                    $('#posterrormodal .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                    if(hashtags_arr.length > 10)
+                    {
+                        $('#posterrormodal .mes').html("<div class='pop_content'>You can add only 10 hashtags.");
+                    }
+                    else
+                    {
+                        $('#posterrormodal .mes').html("<div class='pop_content'>Hashtags must start with '#'.");
+                    }
                 }
                 else
                 {
@@ -2538,7 +2559,6 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
                 //event.preventDefault();
                 return false;
             } else {
-
                 var allowedExtensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'PNG', 'png', 'bmp', 'BMP'];
                 var allowesvideo = ['mp4', 'webm', 'mov', 'MP4'];
                 var allowesaudio = ['mp3','mpeg'];
