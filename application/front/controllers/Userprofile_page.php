@@ -109,6 +109,7 @@ class Userprofile_page extends MY_Controller {
 
     public function contactRequestNotification() {
         $userid = $this->session->userdata('aileenuser');
+        $contactRequestUpdate = $this->user_model->contact_request_read($userid);
         $contactRequestNotification = $this->user_model->contact_request_accept($userid);
         echo json_encode($contactRequestNotification);
     }

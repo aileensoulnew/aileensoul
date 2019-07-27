@@ -96,11 +96,6 @@
                     }
                 });
             });
-            $(document).ready(function () {
-                if (screen.width <= 991) {
-                    $("#request-noti-move").appendTo($(".request-noti-move"));
-                }
-            });
 
         </script>
         <script src="<?php echo SOCKETSERVER; ?>/socket.io/socket.io.js"></script>

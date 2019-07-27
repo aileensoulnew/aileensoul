@@ -144,3 +144,10 @@
         </div>
     </div> -->
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (screen.width <= 991) {
+            $("#request-noti-move").appendTo($(".request-noti-move"));
+        }
+    });
+</script>

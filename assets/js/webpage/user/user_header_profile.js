@@ -18,7 +18,40 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
 
     function get_notification_unread_count()
     {
-        var url = base_url+'notification/get_notification_unread_count';
+        $.ajax({
+            url: base_url+'notification/get_notification_unread_count',
+            type: "GET",
+            cache: false,
+            dataType: 'json',
+            success: function (data) {
+                // data = JSON.parse(data);
+                if(parseInt(data) > 0)
+                {
+                    $(".noti_count").show();
+                    if(parseInt(data) > 99)
+                    {
+                        $(".noti_count").addClass('not-max');
+                        $(".noti_count").html('99+');
+                    }
+                    else
+                    {
+                        $(".noti_count").removeClass('not-max');
+                        $(".noti_count").html(data);
+                    }
+                }
+                else
+                {
+                    $(".noti_count").hide();
+                    $(".noti_count").html("");
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                setTimeout(function(){
+                    get_notification_unread_count();
+                },500);
+            }
+        });
+        /*var url = base_url+'notification/get_notification_unread_count';
         $.get(url, function(data, status){
             $(".noti_count").show();
             if(parseInt(data) > 0)
@@ -41,12 +74,45 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
             }
         }).fail(function() {
             get_notification_unread_count();
-        });
+        });*/
     }
 
     function unread_message_count()
     {
-        var url = base_url+'cron/unread_message_count_wc';
+        $.ajax({
+            url: base_url+'cron/unread_message_count_wc',
+            type: "GET",
+            cache: false,
+            dataType: 'json',
+            success: function (data) {
+                // data = JSON.parse(data);
+                if(data.unread_user > 0)
+                {
+                    $(".msg-count").show();
+                    if(parseInt(data.unread_user) > 99)
+                    {
+                        $(".msg-count").addClass('not-max');
+                        $(".msg-count").html('99+');
+                    }
+                    else
+                    {
+                        $(".msg-count").removeClass('not-max');
+                        $(".msg-count").html(data.unread_user);
+                    }
+                }
+                else
+                {
+                    $(".msg-count").hide();
+                    $(".msg-count").text('');   
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                setTimeout(function(){
+                    unread_message_count();
+                },500);
+            }
+        });
+        /*var url = base_url+'cron/unread_message_count_wc';
         $.get(url, function(data, status){
             data = JSON.parse(data);            
             if(data.unread_user > 0)
@@ -70,11 +136,46 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
             }
         }).fail(function() {
             unread_message_count();
-        });
+        });*/
     }
 
     function contactRequestCount(){
-        $http({
+        $.ajax({
+            url: base_url + 'userprofile/contactRequestCount',
+            type: "GET",
+            cache: false,
+            dataType: 'json',
+            success: function (data) {
+                // data = JSON.parse(data);
+                contact_request = data;
+                if(contact_request.total > 0)
+                {
+                    $(".con_req_cnt").show();                
+                    if(contact_request.total > 99)
+                    {
+                        $(".con_req_cnt").addClass('not-max');
+                        $(".con_req_cnt").html('99+');
+                    }
+                    else
+                    {
+                        $(".con_req_cnt").removeClass('not-max');
+                        $(".con_req_cnt").html(contact_request.total);
+                    }
+                }
+                else
+                {
+                    $(".con_req_cnt").hide();
+                    $(".con_req_cnt").html('');
+                }
+                $scope.contact_request_count = (contact_request.total > 99 ? '99+' : contact_request.total);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                setTimeout(function(){
+                    contactRequestCount();
+                },500);
+            }
+        });
+        /*$http({
             method: 'POST',
             url: base_url + 'userprofile/contactRequestCount',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -105,7 +206,7 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
             setTimeout(function(){
                 contactRequestCount();
             },500);
-        });
+        });*/
     }
 
     setTimeout(function(){

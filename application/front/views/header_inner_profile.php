@@ -756,6 +756,7 @@ if($browser == "Firefox")
                 type: 'POST',
                 url: '<?php echo base_url() . "notification/not_header" ?>',
                 dataType: 'json',
+                cache: false,
                 data: '',
                 success: function (data) {
                     $("#not_loader").hide();
