@@ -6011,7 +6011,15 @@ class User_post_model extends CI_Model {
         $sql = "SELECT COUNT(hf.hashtag_id) AS follower_count,ht.id,ht.hashtag,ht.status FROM ailee_hashtag_follow hf LEFT JOIN ailee_hashtag ht ON ht.id=hf.hashtag_id WHERE hf.hashtag_id NOT IN(SELECT hashtag_id FROM ailee_hashtag_follow WHERE user_id = '$user_id' AND status = '1')";
         if($search_tag != '')
         {
-            $sql .= " AND hashtag LIKE '".$search_tag."%'";
+            if(strlen($search_tag) == 1 && $search_tag[0] == '#'){}
+            else
+            {
+                if($search_tag[0] == "#")
+                {
+                    $search_tag = substr(trim($search_tag),1);
+                }
+                $sql .= " AND hashtag LIKE '".$search_tag."%'";
+            }
         }
         $sql .= " GROUP BY hf.hashtag_id ORDER BY follower_count DESC";
         if($limit != '') {

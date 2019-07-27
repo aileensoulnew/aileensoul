@@ -66,6 +66,7 @@
         <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/owl.carousel.min.js'); ?>"></script>
         <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/js/jquery-ui-1.12.1.js') ?>"></script>
         <script src="<?php echo base_url('assets/js/classie.js'); ?>"></script>
 
         <script src="<?php echo base_url('assets/js/angular/angular.min-1.6.4.js?ver=' . time()); ?>"></script>
@@ -96,6 +97,65 @@
                     }
                 });
             });
+
+            function split( val ) {
+                    return val.split( / \s*/ );
+                }
+                function extractLast( term ) {
+                    return split( term ).pop();
+                }
+                function autocomplete_hashtag(id)
+                {
+                    /*$("#"+id).keypress(function( e ) {
+                        console.log(e);
+                        var re = /^[a-zA-Z0-9#]+$/; // or /^\w+$/ as mentioned
+                        if (!re.test(e.key)) {
+                            return false;
+                        }                        
+                    })*/
+                    $("#"+id).bind( "keydown", function( event ) {                        
+                        if ( event.keyCode === $.ui.keyCode.TAB &&
+                            $( this ).autocomplete( "instance" ).menu.active ) {
+                            event.preventDefault();
+                        }
+                    })
+                    .autocomplete({
+                        appendTo: "."+id,
+                        minLength: 2,
+                        source: function( request, response ) {                         
+                            var search_key = extractLast( request.term );
+                            if(search_key[0] == "#")
+                            {
+                                search_key = search_key.substr(1);
+                                $.getJSON(base_url +"general/get_hashtag", { term : search_key},response);
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        },
+                        focus: function(event) {
+                            event.preventDefault();
+                            // prevent value inserted on focus
+                            return false;
+                        },
+                        select: function( event, ui ) {
+                            // console.log(this.id);
+                            var terms = split( this.value );
+                            // var terms = split( $("#"+this.id).text() );
+                            // remove the current input
+                            terms.pop();
+                            // add the selected item
+                            terms.push( ui.item.value );
+                            // add placeholder to get the comma-and-space at the end
+                            terms.push( "" );
+                            this.value = terms.join( " " );
+                            // $("#"+this.id).text(terms.join(" "));
+                            // placeCaretAtEnd($("#"+this.id)[0]);
+                            return false;
+                        },
+                    });                
+                }
 
         </script>
         <script src="<?php echo SOCKETSERVER; ?>/socket.io/socket.io.js"></script>

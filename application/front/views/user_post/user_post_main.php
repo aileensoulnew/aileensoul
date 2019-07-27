@@ -3870,7 +3870,8 @@
                             </div>
                             <div class="col-md-4 col-sm-6 col-xs-8">
                                 <div class="hash-search">
-                                    <input type="text" ng-model="search_tag" placeholder="Search hashtags" ng-keypress="check_enter_key($event)">
+                                    <input type="text" id="hashtag-search" ng-model="search_tag" placeholder="Search #hashtags" ng-keypress="check_enter_key($event)" onkeyup="autocomplete_hashtag(this.id);">
+                                    <div class="hashtag-search all-hashtags-list"></div>
                                     <a href="javascript:void(0);" ng-click="get_hashtag_search();"><img src="<?php echo base_url('assets/n-images/s-s.png'); ?>"></a>
                                 </div>
                             </div>
@@ -3921,6 +3922,16 @@
                     </div>
                     <div id="hashtag-loader" class="fw post_loader" style="display: none;text-align: center;z-index: 9;position: absolute;bottom: 40px;">
                         <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
+                    </div>
+                    <div ng-if="hash_total_record == 0 && hashtag_list.length == 0" ng-class="total_record == 0 ? 'no-search-data' : ''">
+                        <div class="custom-user-box no-data-available">
+                            <div class='art-img-nn'>
+                                <div class='art_no_post_img'>
+                                    <img src="<?php echo base_url('assets/img/no-post.png'); ?>" alt="No Hashtag Available">
+                                </div>
+                                <div class='art_no_post_text'>No Hashtag Available.</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="hash-box-bottom">
                         <!-- <a ng-if="hashtag_count > 4" href="#" data-dismiss="modal" class="btn-new-1">Close</a>

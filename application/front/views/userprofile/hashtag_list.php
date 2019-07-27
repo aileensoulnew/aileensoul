@@ -8,7 +8,8 @@
                         </div>
                         <div class="col-md-4 col-sm-6 col-xs-8">
                             <div class="hash-search">
-                                <input type="text" placeholder="Search hash tag" ng-model="search_tag" ng-keypress="check_enter_key($event)" />
+                                <input type="text" id="hashtag-search" placeholder="Search #hashtag" ng-model="search_tag" ng-keypress="check_enter_key($event)" onkeyup="autocomplete_hashtag(this.id);"/>
+                                <div class="hashtag-search all-hashtags-list"></div>
                                 <a href="#" ng-click="get_hashtag_search();"><img src="<?php echo base_url('assets/n-images/s-s.png'); ?>"></a>
                                 
                             </div>
@@ -42,6 +43,16 @@
                 <div id="hashtag-loader" class="fw post_loader" style="text-align: center;display: none;z-index: 9;">
                     <img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" />
                 </div>
+                <div ng-if="total_record == 0 && hashtag_list.length == 0" ng-class="total_record == 0 ? 'no-search-data' : ''">
+                        <div class="custom-user-box no-data-available">
+                            <div class='art-img-nn'>
+                                <div class='art_no_post_img'>
+                                    <img src="<?php echo base_url('assets/img/no-post.png'); ?>" alt="No Hashtag Available">
+                                </div>
+                                <div class='art_no_post_text'>No Hashtag Available.</div>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
         <div class="right-section right-fixed-cus">

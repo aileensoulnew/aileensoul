@@ -432,7 +432,7 @@ app.controller('hashtagController', function ($scope, $http,$window ) {
         $http({
             method: 'POST',
             url: base_url + 'user_post/get_hashtag_list?page='+start,
-            data: 'search_tag='+$scope.search_tag,
+            data: 'search_tag='+$("#hashtag-search").val(),
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
             $(".sugg_post_load").hide();            

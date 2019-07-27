@@ -538,7 +538,8 @@
                                 return false;
                             }
                         },
-                        focus: function() {
+                        focus: function(event) {
+                            event.preventDefault();
                             // prevent value inserted on focus
                             return false;
                         },
