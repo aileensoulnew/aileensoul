@@ -66,7 +66,7 @@
                 <div ng-show="isSet(3)">
                     <div class="tab-inner text-style">
                       <h3>Add Bank Detail</h3>
-                      <div class="ana-tab-box">                            
+                      <div class="ana-tab-box">
                             <div class="monetize-payment-detail">
                                 <form class="pt15 new-form" id="bank_detail" name="bank_detail" ng-submit="submit_bank_info()" ng-validate="bank_info_validate">
                                     <div class="row">

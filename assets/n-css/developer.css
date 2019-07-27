@@ -302,4 +302,7 @@
     .signup-form .new-form .text-left{
         float: left;
     }
+    .modal.message-box span.mes.bank-detail-msg{
+        font-size: 13px;
+    }
 }

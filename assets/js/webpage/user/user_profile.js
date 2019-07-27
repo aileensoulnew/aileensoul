@@ -15650,9 +15650,12 @@ app.controller('monetizationController', function ($scope,$http,$location,$compi
             .then(function (success){
                 $('#bank_info_ajax_load').hide();                
                 if (success.data.status == 1) {
-                    $("#success-bankinfo").show();
+                    $("#posterrormodal .modal-body .mes").addClass("bank-detail-msg");
+                    $("#posterrormodal .modal-body .mes").html("Bank detail changes successfully.");
+                    $("#posterrormodal").modal('show');
+                    /*$("#success-bankinfo").show();
                     $("#success-bankinfo").html("Bank detail changes successfully.")
-                    $("#success-bankinfo").fadeOut(5000);
+                    $("#success-bankinfo").fadeOut(5000);*/
                 } else {
                     
                 }
