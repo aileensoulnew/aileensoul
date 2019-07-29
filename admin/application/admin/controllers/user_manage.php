@@ -1,13 +1,15 @@
 <?php
-
-if (!defined('BASEPATH'))
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
+}
 
-class User_manage extends CI_Controller {
+class User_manage extends CI_Controller
+{
 
     public $data;
 
-    public function __construct() {
+    public function __construct()
+    {
 
         parent::__construct();
 
@@ -15,21 +17,23 @@ class User_manage extends CI_Controller {
             redirect('login', 'refresh');
         }
 
+        $this->load->model('searchelastic_model');
         // Get Site Information
-        $this->data['title'] = 'User Management | Aileensoul';
+        $this->data['title']       = 'User Management | Aileensoul';
         $this->data['module_name'] = 'User Management';
 
         //Loadin Pagination Custome Config File
-        $this->config->load('paging', TRUE);
+        $this->config->load('paging', true);
         $this->paging = $this->config->item('paging');
 
-        include('include.php');
+        include 'include.php';
     }
 
-//for list of all user start
-    public function user() {
+    //for list of all user start
+    public function user()
+    {
         // This is userd for pagination offset and limoi start
-          $limit = $this->paging['per_page'];
+        $limit = $this->paging['per_page'];
         if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
 
             $offset = ($this->uri->segment(5) != '') ? $this->uri->segment(5) : 0;
@@ -47,15 +51,28 @@ class User_manage extends CI_Controller {
             $orderby = 'desc';
 
         }
-  
-        $this->data['offset'] = $offset;
 
-       $data='user_id,first_name ,last_name ,user_email ,user_dob ,user_gender,user_image,status ,created_date,modified_date';
-       $contition_array = array('is_delete' => '0');
-        $this->data['users'] = $this->common->select_data_by_condition('user', $contition_array, $data, $sortby, $orderby, $limit, $offset, $join_str = array(), $groupby = '');
-// This is userd for pagination offset and limoi End
+        $this->data['offset'] = $offset;        
 
-      //echo "<pre>";print_r($this->data['users'] );die();
+        $join_str[0]['table'] = "user_login";
+        $join_str[0]['join_table_id'] = "user_login.user_id";
+        $join_str[0]['from_table_id'] = "user.user_id";
+
+        $join_str[1]['table'] = "user_info";
+        $join_str[1]['join_table_id'] = "user_info.user_id";
+        $join_str[1]['from_table_id'] = "user.user_id";
+
+        $condition_array = array('user_login.email !=' => '');
+
+        $select_data = "user.user_id,user.first_name ,user.last_name ,user_login.email ,user.user_dob ,user.user_gender,user_info.user_image,user_login.status, user_login.is_delete, user.created_date, user.user_slug";
+
+        $this->data['users'] = $this->common->select_data_by_condition('user', $condition_array, $data = $select_data, $short_by = 'user_id', $order_by = 'desc', $limit, $offset, $join_str);
+
+        $total_rows = $this->common->select_data_by_condition('user', $condition_array, $data = $select_data, $short_by = 'user_id', $order_by = 'desc', $limit = "", $offset = "", $join_str);
+
+        // This is userd for pagination offset and limoi End
+
+        //echo "<pre>";print_r($this->data['users'] );die();
 
         //This if and else use for asc and desc while click on any field start
         if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
@@ -79,9 +96,8 @@ class User_manage extends CI_Controller {
         }
         //This if and else use for asc and desc while click on any field End
 
-
-        $contition_array = array( 'is_delete =' => '0');
-        $this->paging['total_rows'] = count($this->common->select_data_by_condition('user', $contition_array, 'user_id'));
+        $contition_array = array('is_delete =' => '0');
+        $this->paging['total_rows'] = count($total_rows);
 
         $this->data['total_rows'] = $this->paging['total_rows'];
 
@@ -91,138 +107,140 @@ class User_manage extends CI_Controller {
 
         $this->data['search_keyword'] = '';
 
-        
         $this->load->view('users/index', $this->data);
     }
     //activate user with ajax Start
-public function active_user() 
-{
-     $user_id = $_POST['user_id'];
-      $data = array(
-            'status' => '1'
+    public function active_user()
+    {
+        $user_id = $_POST['user_id'];
+        $data    = array(
+            'status' => '1',
         );
         $update = $this->common->update_data($data, 'user', 'user_id', $user_id);
 
         $select = '<td id= "active(' . $user_id . ')">';
-        $select = '<button class="btn btn-block btn-primary btn-sm"   onClick="deactive_user(' .  $user_id . ')">
+        $select = '<button class="btn btn-block btn-primary btn-sm"   onClick="deactive_user(' . $user_id . ')">
                               Active
                       </button>';
         $select .= '</td>';
         echo $select;
         die();
-}
-//activate user with ajax End
-//deactivate user with ajax Start
-public function deactive_user() 
-{
-     $user_id = $_POST['user_id'];
-      $data = array(
-            'status' => '0'
+    }
+    //activate user with ajax End
+    //deactivate user with ajax Start
+    public function deactive_user()
+    {
+        $user_id = $_POST['user_id'];
+        $data    = array(
+            'status' => '0',
         );
 
         $update = $this->common->update_data($data, 'user', 'user_id', $user_id);
 
-         $select = '<td id= "active(' . $user_id . ')">';
-         $select .= '<button class="btn btn-block btn-success btn-sm"    onClick="active_user(' .  $user_id . ')">
+        $select = '<td id= "active(' . $user_id . ')">';
+        $select .= '<button class="btn btn-block btn-success btn-sm"    onClick="active_user(' . $user_id . ')">
                               Deactive
                       </button>';
         $select .= '</td>';
 
         echo $select;
-         die();
-}
-//deactivate user with ajax End
+        die();
+    }
+    //deactivate user with ajax End
 
-//Delete user with ajax Start
-public function delete_user() 
-{
-  
-     $user_id = $_POST['user_id'];
-      $data = array(
+    //Delete user with ajax Start
+    public function delete_user()
+    {
+
+        $user_id = $_POST['user_id'];        
+
+        $u_data    = array(
+            'status' => '0',
             'is_delete' => '1'
         );
-       $data1 = array(
+        $update   = $this->common->update_data($u_data, 'user_login', 'user_id', $user_id);
+        
+        $b_data = array(
+            'status' => '0',
             'is_deleted' => '1'
         );
+        $update1 = $this->common->update_data($b_data, 'business_profile', 'user_id', $user_id);
+        $update1 = $this->common->update_data($b_data, 'business_profile_search_tmp', 'user_id', $user_id);
 
-        $update = $this->common->update_data($data, 'user', 'user_id', $user_id);
-        $update1 = $this->common->update_data($data, 'recruiter', 'user_id', $user_id);
-        $update2 = $this->common->update_data($data, 'rec_post', 'user_id', $user_id);
-        $update3 = $this->common->update_data($data, 'job_add_edu', 'user_id', $user_id);
-        $update4 = $this->common->update_data($data, 'job_add_workexp', 'user_id', $user_id);
-        $update5 = $this->common->update_data($data, 'job_apply', 'user_id', $user_id);
-        $update6 = $this->common->update_data($data, 'job_graduation', 'user_id', $user_id);
-        $update7 = $this->common->update_data($data, 'job_reg', 'user_id', $user_id);
-        $update8 = $this->common->update_data($data, 'university', 'user_id', $user_id);
-        $update9 = $this->common->update_data($data, 'job_industry', 'user_id', $user_id);
-        $update10 = $this->common->update_data($data, 'stream', 'user_id', $user_id);
-        $update11 = $this->common->update_data($data, 'degree', 'user_id', $user_id);
-        $update12 = $this->common->update_data($data1, 'business_profile', 'user_id', $user_id);
-        $update13 = $this->common->update_data($data, 'business_profile_post', 'user_id', $user_id);
-        $update14 = $this->common->update_data($data, 'business_profile_post_comment', 'user_id', $user_id);
-        $update15 = $this->common->update_data($data, 'business_profile_save', 'user_id', $user_id);
-        $update16 = $this->common->update_data($data, 'bus_comment_image_like', 'user_id', $user_id);
-        $update17 = $this->common->update_data($data, 'bus_post_image_comment', 'user_id', $user_id);
-        $update18 = $this->common->update_data($data, 'bus_post_image_like', 'user_id', $user_id);
-        $update19 = $this->common->update_data($data, 'artistic_post_comment', 'user_id', $user_id);
-        $update20 = $this->common->update_data($data, 'art_comment_image_like', 'user_id', $user_id);
-        $update21 = $this->common->update_data($data, 'art_post', 'user_id', $user_id);
-        $update22 = $this->common->update_data($data, 'art_post_image_comment', 'user_id', $user_id);
-        $update23 = $this->common->update_data($data, 'art_post_image_like', 'user_id', $user_id);
-        $update24 = $this->common->update_data($data, 'art_reg', 'user_id', $user_id);
-        $update25 = $this->common->update_data($data, 'art_post_save', 'user_id', $user_id);
-        $update26 = $this->common->update_data($data, 'freelancer_apply', 'user_id', $user_id);
-        $update27 = $this->common->update_data($data, 'freelancer_hire_reg', 'user_id', $user_id);
-        $update28 = $this->common->update_data($data, 'freelancer_post', 'user_id', $user_id);
-        $update29 = $this->common->update_data($data, 'freelancer_post_reg', 'user_id', $user_id);
+        $p_data = array(
+            'status' => 'draft',
+            'is_delete' => '1'
+        );
+        $update1 = $this->common->update_data($p_data, 'user_post', 'user_id', $user_id);
+
+        $this->searchelastic_model->delete_people_data($user_id);
+        $this->searchelastic_model->delete_business_data($user_id);
+        $this->searchelastic_model->delete_post_data($user_id);
+        $this->searchelastic_model->delete_opportunity_data($user_id);
+        $this->searchelastic_model->delete_question_data($user_id);
+        $this->searchelastic_model->delete_article_data($user_id);
+
         die();
-}
-//Delete user with ajax End
+    }
+    //Delete user with ajax End
 
-public function search(){
-    
-     if ($this->input->post('search_keyword')) {//echo "222"; die();
+    public function search()
+    {
 
-          $this->data['search_keyword'] = $search_keyword = trim($this->input->post('search_keyword'));
+        if ($this->input->post('search_keyword')) {
+            //echo "222"; die();
 
-         $this->session->set_userdata('user_search_keyword', $search_keyword);
-    
-        $this->data['user_search_keyword'] = $this->session->userdata('user_search_keyword');
-      
-       
-             // This is userd for pagination offset and limoi start
-          $limit = $this->paging['per_page'];
-        if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
+            $this->data['search_keyword'] = $search_keyword = trim($this->input->post('search_keyword'));
 
-            $offset = ($this->uri->segment(5) != '') ? $this->uri->segment(5) : 0;
+            $this->session->set_userdata('user_search_keyword', $search_keyword);
 
-            $sortby = $this->uri->segment(3);
+            $this->data['user_search_keyword'] = $this->session->userdata('user_search_keyword');
 
-            $orderby = $this->uri->segment(4);
+            // This is userd for pagination offset and limoi start
+            $limit = $this->paging['per_page'];
+            if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
 
-        } else {
+                $offset = ($this->uri->segment(5) != '') ? $this->uri->segment(5) : 0;
 
-            $offset = ($this->uri->segment(3) != '') ? $this->uri->segment(3) : 0;
+                $sortby = $this->uri->segment(3);
 
-            $sortby = 'user_id';
+                $orderby = $this->uri->segment(4);
 
-            $orderby = 'asc';
+            } else {
 
-        }
-  
-        $this->data['offset'] = $offset;
-        
-          $data='user_id,first_name ,last_name ,user_email ,user_dob ,user_gender,user_image,status ,created_date,modified_date';
-           $search_condition = "(first_name LIKE '%$search_keyword%' OR user_email LIKE '%$search_keyword%')";
-            $contition_array = array('is_delete' => '0');
-            $this->data['users'] = $this->common->select_data_by_search('user', $search_condition, $contition_array,$data, $sortby, $orderby, $limit, $offset);
- //echo "<pre>";print_r( $this->data['users']);die();
-// This is userd for pagination offset and limoi End
+                $offset = ($this->uri->segment(3) != '') ? $this->uri->segment(3) : 0;
 
-       // echo "<pre>";print_r($this->userdata['users'] );die();
+                $sortby = 'user_id';
 
-        //This if and else use for asc and desc while click on any field start
-        if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
+                $orderby = 'asc';
+
+            }
+
+            $this->data['offset'] = $offset;
+
+            $join_str[0]['table'] = "user_login";
+            $join_str[0]['join_table_id'] = "user_login.user_id";
+            $join_str[0]['from_table_id'] = "user.user_id";
+
+            $join_str[1]['table'] = "user_info";
+            $join_str[1]['join_table_id'] = "user_info.user_id";
+            $join_str[1]['from_table_id'] = "user.user_id";
+
+
+            $data = 'user.user_id,user.first_name ,user.last_name ,user_login.email ,user.user_dob ,user.user_gender,user_info.user_image,user_login.status, user_login.is_delete, user.created_date, user.user_slug';
+
+            $search_condition    = "((CONCAT(ailee_user.first_name,' ',ailee_user.last_name) LIKE '%$search_keyword%' OR CONCAT(ailee_user.last_name,' ',ailee_user.first_name) LIKE '%$search_keyword%') OR ailee_user_login.email LIKE '%$search_keyword%')";
+            $contition_array     = array('ailee_user_login.email != ' => '');
+            $this->data['users'] = $this->common->select_data_by_search('user', $search_condition, $contition_array, $data, $sortby, $orderby, $limit, $offset, $join_str);
+            
+            $total_rows = $this->common->select_data_by_search('user', $search_condition, $contition_array, $data, $sortby, $orderby, $limit = '', $offset = '', $join_str);
+            //echo "<pre>";print_r( $this->data['users']);die();
+            // This is userd for pagination offset and limoi End
+
+            // echo "<pre>";print_r($this->userdata['users'] );die();
+
+            //This if and else use for asc and desc while click on any field start
+            if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
 
                 $this->paging['base_url'] = site_url("user_manage/search/" . $sortby . "/" . $orderby);
 
@@ -231,8 +249,6 @@ public function search(){
                 $this->paging['base_url'] = site_url("user_manage/search/");
 
             }
-
-
 
             if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
 
@@ -244,7 +260,7 @@ public function search(){
 
             }
 
-            $this->paging['total_rows'] = count($this->common->select_data_by_search('user', $search_condition, $contition_array, 'user_id'));
+            $this->paging['total_rows'] = count($total_rows);
 
             //for record display
 
@@ -254,44 +270,53 @@ public function search(){
 
             $this->pagination->initialize($this->paging);
 
-    }
-    else if ($this->session->userdata('user_search_keyword')) {//echo "jii"; die();
+        } else if ($this->session->userdata('user_search_keyword')) {
             $this->data['search_keyword'] = $search_keyword = trim($this->session->userdata('user_search_keyword'));
+            // This is userd for pagination offset and limoi start
+            $limit = $this->paging['per_page'];
+            if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
 
-// echo "<pre>";print_r($search_keyword);die();
-              // This is userd for pagination offset and limoi start
-          $limit = $this->paging['per_page'];
-        if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
+                $offset = ($this->uri->segment(5) != '') ? $this->uri->segment(5) : 0;
 
-            $offset = ($this->uri->segment(5) != '') ? $this->uri->segment(5) : 0;
+                $sortby = $this->uri->segment(3);
 
-            $sortby = $this->uri->segment(3);
+                $orderby = $this->uri->segment(4);
 
-            $orderby = $this->uri->segment(4);
+            } else {
 
-        } else {
+                $offset = ($this->uri->segment(3) != '') ? $this->uri->segment(3) : 0;
 
-            $offset = ($this->uri->segment(3) != '') ? $this->uri->segment(3) : 0;
+                $sortby = 'user_id';
 
-            $sortby = 'user_id';
+                $orderby = 'asc';
 
-            $orderby = 'asc';
+            }
 
-        }
-  
-        $this->data['offset'] = $offset;
-        
-          $data='user_id,first_name ,last_name ,user_email ,user_dob ,user_gender,user_image,status ,created_date,modified_date';
-           $search_condition = "(first_name LIKE '%$search_keyword%' OR user_email LIKE '%$search_keyword%')";
-            $contition_array = array('is_delete' => '0');
-            $this->data['users'] = $this->common->select_data_by_search('user', $search_condition, $contition_array,$data, $sortby, $orderby, $limit, $offset);
- //echo "<pre>";print_r( $this->data['users']);die();
-// This is userd for pagination offset and limoi End
+            $this->data['offset'] = $offset;
 
-       // echo "<pre>";print_r($this->userdata['users'] );die();
+            $join_str[0]['table'] = "user_login";
+            $join_str[0]['join_table_id'] = "user_login.user_id";
+            $join_str[0]['from_table_id'] = "user.user_id";
 
-        //This if and else use for asc and desc while click on any field start
-        if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
+            $join_str[1]['table'] = "user_info";
+            $join_str[1]['join_table_id'] = "user_info.user_id";
+            $join_str[1]['from_table_id'] = "user.user_id";
+
+
+            $data = 'user.user_id,user.first_name ,user.last_name ,user_login.email ,user.user_dob ,user.user_gender,user_info.user_image,user_login.status, user_login.is_delete, user.created_date, user.user_slug';
+
+            $search_condition    = "((CONCAT(ailee_user.first_name,' ',ailee_user.last_name) LIKE '%$search_keyword%' OR CONCAT(ailee_user.last_name,' ',ailee_user.first_name) LIKE '%$search_keyword%') OR ailee_user_login.email LIKE '%$search_keyword%')";
+            $contition_array     = array('ailee_user_login.email != ' => '');
+            $this->data['users'] = $this->common->select_data_by_search('user', $search_condition, $contition_array, $data, $sortby, $orderby, $limit, $offset, $join_str);
+            $total_rows = $this->common->select_data_by_search('user', $search_condition, $contition_array, $data, $sortby, $orderby, $limit = '', $offset = '', $join_str);
+            
+            //echo "<pre>";print_r( $this->data['users']);die();
+            // This is userd for pagination offset and limoi End
+
+            // echo "<pre>";print_r($this->userdata['users'] );die();
+
+            //This if and else use for asc and desc while click on any field start
+            if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
 
                 $this->paging['base_url'] = site_url("user_manage/search/" . $sortby . "/" . $orderby);
 
@@ -300,8 +325,6 @@ public function search(){
                 $this->paging['base_url'] = site_url("user_manage/search/");
 
             }
-
-
 
             if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
 
@@ -313,7 +336,7 @@ public function search(){
 
             }
 
-            $this->paging['total_rows'] = count($this->common->select_data_by_search('user', $search_condition, $contition_array, 'user_id'));
+            $this->paging['total_rows'] = count($total_rows);
 
             //for record display
 
@@ -322,83 +345,82 @@ public function search(){
             $this->data['limit'] = $limit;
 
             $this->pagination->initialize($this->paging);
-    }
+        }
 
         $this->load->view('users/index', $this->data);
-    
-}
 
-//clear search is used for unset session start
-public function clear_search() 
-{ 
-    if ($this->session->userdata('user_search_keyword')) 
+    }
+
+    //clear search is used for unset session start
+    public function clear_search()
     {
-          
+        if ($this->session->userdata('user_search_keyword')) {
+
             $this->session->unset_userdata('user_search_keyword');
-              
-             redirect('user_manage/user','refresh');          
-    } 
-}
-//clear search is used for unset session End
 
+            redirect('user_manage/user', 'refresh');
+        }
+    }
+    //clear search is used for unset session End
 
-public function edit($user_id){
-   
-   $data='user_id,first_name ,last_name ,user_email ,user_dob ,user_gender,user_image'; 
-    $contition_array = array('is_delete' => '0','user_id' => $user_id);
-     $user_data=$this->data['users'] = $this->common->select_data_by_condition('user', $contition_array, $data, $sortby, $orderby, $limit, $offset, $join_str, $groupby);
-     $dob=$user_data[0]['user_dob'];
-     $dob_final=explode('-',$dob);
-     $this->data['year']=$dob_final[0];
-     $this->data['month']=$dob_final[1];
-     $day = $this->data['day'] = $dob_final[2];
-    $this->load->view('users/edit', $this->data); 
-    
-}
-public function edit_insert($id){
-    
-     $date = $this->input->post('select_day');
-      $month = $this->input->post('select_month');
-      $year = $this->input->post('select_year');
-      $dob = $year . '-' . $month . '-' . $date;
-      
-      
-       if (empty($_FILES['profilepic']['name'])) {
-         
-           $user_image= $this->input->post('image_name');
-          // echo $userimage;die();
-           
+    public function edit($user_id)
+    {
+
+        $data                = 'user_id,first_name ,last_name ,user_email ,user_dob ,user_gender,user_image';
+        $contition_array     = array('is_delete' => '0', 'user_id' => $user_id);
+        $user_data           = $this->data['users']           = $this->common->select_data_by_condition('user', $contition_array, $data, $sortby, $orderby, $limit, $offset, $join_str, $groupby);
+        $dob                 = $user_data[0]['user_dob'];
+        $dob_final           = explode('-', $dob);
+        $this->data['year']  = $dob_final[0];
+        $this->data['month'] = $dob_final[1];
+        $day = $this->data['day']= $dob_final[2];
+        $this->load->view('users/edit', $this->data);
+
+    }
+    public function edit_insert($id)
+    {
+
+        $date  = $this->input->post('select_day');
+        $month = $this->input->post('select_month');
+        $year  = $this->input->post('select_year');
+        $dob   = $year . '-' . $month . '-' . $date;
+
+        if (empty($_FILES['profilepic']['name'])) {
+
+            $user_image = $this->input->post('image_name');
+            // echo $userimage;die();
+
         } else {
-         
-            $user_image = '';
-            $user['upload_path'] = $this->config->item('user_main_upload_path');
+
+            $user_image            = '';
+            $user['upload_path']   = $this->config->item('user_main_upload_path');
             $user['allowed_types'] = $this->config->item('user_main_allowed_types');
-            $user['max_size'] = $this->config->item('user_main_max_size');
-            $user['max_width'] = $this->config->item('user_main_max_width');
-            $user['max_height'] = $this->config->item('user_main_max_height');
+            $user['max_size']      = $this->config->item('user_main_max_size');
+            $user['max_width']     = $this->config->item('user_main_max_width');
+            $user['max_height']    = $this->config->item('user_main_max_height');
             $this->load->library('upload');
             $this->upload->initialize($user);
             //Uploading Image
             $this->upload->do_upload('profilepic');
             //Getting Uploaded Image File Data
-            $imgdata = $this->upload->data();
+            $imgdata  = $this->upload->data();
             $imgerror = $this->upload->display_errors();
-           
+
             if ($imgerror == '') {
-                //Configuring Thumbnail 
-                $user_thumb['image_library'] = 'gd2';
-                $user_thumb['source_image'] = $user['upload_path'] . $imgdata['file_name'];
-                $user_thumb['new_image'] = $this->config->item('user_thumb_insert_upload_path') . $imgdata['file_name'];
-                $user_thumb['create_thumb'] = TRUE;
-                $user_thumb['maintain_ratio'] = TRUE;
-                $user_thumb['thumb_marker'] = '';
-                $user_thumb['width'] = $this->config->item('user_thumb_width');
+                //Configuring Thumbnail
+                $user_thumb['image_library']  = 'gd2';
+                $user_thumb['source_image']   = $user['upload_path'] . $imgdata['file_name'];
+                $user_thumb['new_image']      = $this->config->item('user_thumb_insert_upload_path') . $imgdata['file_name'];
+                $user_thumb['create_thumb']   = true;
+                $user_thumb['maintain_ratio'] = true;
+                $user_thumb['thumb_marker']   = '';
+                $user_thumb['width']          = $this->config->item('user_thumb_width');
                 //$user_thumb['height'] = $this->config->item('user_thumb_height');
-                $user_thumb['height'] = 2;
+                $user_thumb['height']     = 2;
                 $user_thumb['master_dim'] = 'width';
-                $user_thumb['quality'] = "100%";
-                $user_thumb['x_axis'] = '0';
-                $user_thumb['y_axis'] = '0';
+                $user_thumb['quality']    = "100%";
+                $user_thumb['x_axis']     = '0';
+                $user_thumb['y_axis']     = '0';
                 //Loading Image Library
                 $this->load->library('image_lib', $user_thumb);
                 $dataimage = $imgdata['file_name'];
@@ -416,51 +438,37 @@ public function edit_insert($id){
             }
             if ($error) {
                 $this->session->set_flashdata('error', $error[0]);
-                $redirect_url = site_url('user_manage/edit/'.$id);
+                $redirect_url = site_url('user_manage/edit/' . $id);
                 redirect($redirect_url, 'refresh');
             } else {
                 $user_image = $imgdata['file_name'];
             }
 
             $data = array(
-            'first_name' => trim($this->input->post('first_name')),
-            'last_name' => trim($this->input->post('last_name')),
-            'user_email' => trim($this->input->post('user_email')),
-            'user_dob' => $dob,
-            'user_gender' => $this->input->post('gender'),
-            'user_image' => $user_image,
-            'modified_date' => date('Y-m-d', time()),
-        );
+                'first_name'    => trim($this->input->post('first_name')),
+                'last_name'     => trim($this->input->post('last_name')),
+                'user_email'    => trim($this->input->post('user_email')),
+                'user_dob'      => $dob,
+                'user_gender'   => $this->input->post('gender'),
+                'user_image'    => $user_image,
+                'modified_date' => date('Y-m-d', time()),
+            );
 
-          //  echo "<pre>"; print_r($data);die();
+            //  echo "<pre>"; print_r($data);die();
             $updatdata = $this->common->update_data($data, 'user', 'user_id', $id);
 
             if ($updatdata) {
-               
-                 redirect('user_manage/user', refresh);
-               
+
+                redirect('user_manage/user', refresh);
+
             } else {
-               
+
                 $this->session->flashdata('error', 'Your data not inserted');
-                redirect('user_manage/edit/'.$id, refresh);
+                redirect('user_manage/edit/' . $id, refresh);
             }
-        
-      
-    
-         
-    
-    
-    
-}
 
+        }
 
-
-
-
-
-
-}
-
-
+    }   
 
 }

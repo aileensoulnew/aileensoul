@@ -9,10 +9,10 @@
         <!-- Open Graph data -->
         <meta property="og:title" content="Aileensoul" />
         <meta  property="og:type" content="Email" />
-        <meta  property="og:image" content="<?php echo SITEURL.('images/favicon.png'); ?>"/>
+        <meta  property="og:image" content="<?php echo SITEURL.('assets/images/favicon.png'); ?>"/>
 
         
-        <link rel="icon" href="<?php echo SITEURL.('images/favicon.png'); ?>">
+        <link rel="icon" href="<?php echo SITEURL.('assets/images/favicon.png'); ?>">
         <title><?= $title; ?></title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">

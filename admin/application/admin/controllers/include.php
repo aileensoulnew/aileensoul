@@ -3,9 +3,9 @@
 
 $adminid =  $this->session->userdata('aileen_admin');
 
-$user_data = $this->common->select_data_by_id('admin', 'admin_id', $this->data['user_id'], $data = '*', $join_str = array());
+$user_data = $this->common->select_data_by_id('admin', 'admin_id', $adminid, $data = '*', $join_str = array());
 
-$this->data['admin_id'] = $this->data['user_id'];
+$this->data['admin_id'] = $adminid;
 $this->data['admin_username'] = $user_data[0]['admin_username'];
 $this->data['admin_email'] = $user_data[0]['admin_email'];
 $this->data['admin_name'] = $user_data[0]['admin_name'];

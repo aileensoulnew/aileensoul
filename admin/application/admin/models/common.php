@@ -65,11 +65,11 @@ class Common extends CI_Model {
         if (!empty($join_str)) {
            // pre($join_str);
             foreach ($join_str as $join) {
-                if ($join['join_type'] == '') {
-                $this->db->join($join['table'], $join['join_table_id'] . '=' . $join['from_table_id']);
+                if (isset($join['join_type']) && $join['join_type'] != '') {
+                    $this->db->join($join['table'], $join['join_table_id'] . '=' . $join['from_table_id'], $join['join_type']);
                 }
                 else{
-                    $this->db->join($join['table'], $join['join_table_id'] . '=' . $join['from_table_id'], $join['join_type']);
+                    $this->db->join($join['table'], $join['join_table_id'] . '=' . $join['from_table_id']);
                 }
             }
         }
