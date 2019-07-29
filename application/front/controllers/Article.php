@@ -695,30 +695,26 @@ class Article extends MY_Controller {
                     if ($insert_id) {
                         $to_email_id = $this->db->select('email')->get_where('user_login', array('user_id' => $to_id))->row()->email;
                         $login_userdata = $this->user_model->getUserData($userid);
-                        $postDetailData = $this->user_post_model->postDetail($post_id, $userid);
-                        if(isset($postDetailData[0]['post_file_data']) && empty($postDetailData[0]['post_file_data']))
+                        $postDetailData = $this->user_post_model->postDetail($post_id, $userid)[0];
+                        if($postDetailData['post_data']['post_for'] == 'opportunity')
                         {
-                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                            $url = base_url().'o/'.$postDetailData['opportunity_data']['oppslug'];
                         }
-                        elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "image")
+                        elseif($postDetailData['post_data']['post_for'] == 'simple')
                         {
-                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/photos/".$postDetailData[0]['post_data']['id'];
+                            $url = base_url().'p/'.$postDetailData['simple_data']['simslug'];
                         }
-                        elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "video")
+                        elseif($postDetailData['post_data']['post_for'] == 'question')
                         {
-                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/videos/".$postDetailData[0]['post_data']['id'];
+                            $url = base_url().'questions/'.$postDetailData['question_data']['id'].'/'.$this->common->create_slug($postDetailData['question_data']['question']);
                         }
-                        elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "audio")
+                        elseif($postDetailData['post_data']['post_for'] == 'article')
                         {
-                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/audios/".$postDetailData[0]['post_data']['id'];
+                            $url = base_url().'article/'.$postDetailData['article_data']['article_slug'];
                         }
-                        elseif(isset($postDetailData[0]['post_file_data']) && $postDetailData[0]['post_file_data'][0]['file_type'] == "pdf")
+                        elseif($postDetailData['post_data']['post_for'] == 'share')
                         {
-                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/pdf/".$postDetailData[0]['post_data']['id'];
-                        }
-                        else
-                        {
-                            $url = base_url().$postDetailData[0]['user_data']['user_slug']."/post/".$postDetailData[0]['post_data']['id'];
+                            $url = base_url().'shp/'.$postDetailData['share_data']['shared_post_slug'];
                         }
 
                         $email_html = '';
@@ -739,20 +735,28 @@ class Article extends MY_Controller {
                                 $login_user_img = base_url('assets/img/female-user.jpg');
                             }
                         }
-                        $email_html .= '<table width="100%" cellpadding="0" cellspacing="0">
+
+                        $email_html .= '<table cellpadding="0" cellspacing="0">
                                         <tr>
-                                            <td style="'.MAIL_TD_1.'">
-                                                <img src="' . $login_user_img . '?ver=' . time() . '" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                            <td class="user-img-td">
+                                                <div class="user-img">
+                                                    <img src="'.$login_user_img.'" width="50" height="50" alt="' . $login_userdata['user_image'] . '">
+                                                </div>
                                             </td>
                                             <td style="padding:5px;">
-                                                <p><b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> liked your aticle.</p>
-                                                <span style="display:block; font-size:13px; padding-top: 1px; color: #646464;">'.date('j F').' at '.date('H:i').'</span>
+                                                <div class="user-content">
+                                                    <p>
+                                                        <b>'.ucwords($login_userdata['first_name']." ".$login_userdata['last_name']) . '</b> liked your post.
+                                                    </p>
+                                                    <span>'.date('j F').' at '.date('H:i').'</span>
+                                                </div>
                                             </td>
-                                            <td style="'.MAIL_TD_3.'">
-                                                <p><a class="btn" href="'.$url.'">view</a></p>
+                                            <td class="mail-btn">
+                                                <a href="'.$url.'" class="btn">View</a>
                                             </td>
                                         </tr>
                                         </table>';
+
                         $subject = ucwords($login_userdata['first_name']." ".$login_userdata['last_name']).' liked your post in Aileensoul.';
 
                         $unsubscribeData = $this->db->select('encrypt_key,user_slug,user_id,is_subscribe,user_verify')->get_where('user', array('user_id' => $to_id))->row();
@@ -760,9 +764,17 @@ class Article extends MY_Controller {
                         $unsubscribe = base_url()."unsubscribe/".md5($unsubscribeData->encrypt_key)."/".md5($unsubscribeData->user_slug)."/".md5($unsubscribeData->user_id);
                         if($unsubscribeData->is_subscribe == 1)// && $unsubscribeData->user_verify == 1)
                         {
-                            if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
+                            $url = base_url()."user_post/send_email_in_background";
+                            $param = array(
+                                "subject"=>$subject,
+                                "email_html"=>$email_html,
+                                "to_email"=>$to_email_id,
+                                "unsubscribe"=>$unsubscribe,
+                            );
+                            $this->inbackground->do_in_background($url, $param);
+                            /*if ($_SERVER['HTTP_HOST'] == "www.aileensoul.com") {
                                 $send_email = $this->email_model->send_email($subject = $subject, $templ = $email_html, $to_email = $to_email_id,$unsubscribe);
-                            }
+                            }*/
                         }
                     }
                 }

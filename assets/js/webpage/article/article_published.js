@@ -1,7 +1,7 @@
 function post_like(post_id,user_id) {
     $('#post-like-' + post_id).attr("style","pointer-events:none");
     $.ajax({
-        url: base_url + "user_post/likePost",
+        url: base_url + "article/likePost",
         type: "POST",
         data: {"post_id": post_id},
         dataType: 'json',
@@ -74,7 +74,7 @@ function post_like(post_id,user_id) {
                     });
                     if(success.likePost_count > parseInt(like_usr_cnt))
                     {
-                        like_content += '<li class="like-img">';
+                        like_content += '<li class="like-img other-like-cus">';
                         like_content += '<a class="ripple" href="javascript:void(0);">+';
                         like_content += parseInt(success.likePost_count) - parseInt(like_usr_cnt)+ " Others";
                         like_content += '</a></li>';  
