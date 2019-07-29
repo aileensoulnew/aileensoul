@@ -418,6 +418,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
 
     $scope.getHashTags = function(inputText) {  
         var regex = /(?:^|\s)(?:#)([a-zA-Z\d]+)/gm;
+        // var regex = /[^\s#]+/g;
         var matches = [];
         var match;
 

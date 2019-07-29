@@ -2519,6 +2519,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
 
     $scope.getHashTags = function(inputText) {  
         var regex = /(?:^|\s)(?:#)([a-zA-Z\d]+)/gm;
+        // var regex = /[^\s#]+/g;
         var matches = [];
         var match;
 
@@ -12230,6 +12231,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
 
     $scope.getHashTags = function(inputText) {  
         var regex = /(?:^|\s)(?:#)([a-zA-Z\d]+)/gm;
+        // var regex = /[^\s#]+/g;
         var matches = [];
         var match;
 
@@ -13251,6 +13253,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
 
     $scope.getHashTags = function(inputText) {  
         var regex = /(?:^|\s)(?:#)([a-zA-Z\d]+)/gm;
+        // var regex = /[^\s#]+/g;
         var matches = [];
         var match;
 
