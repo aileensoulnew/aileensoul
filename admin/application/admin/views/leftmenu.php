@@ -27,6 +27,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="<?php echo base_url('monetize/postlist'); ?>"><i class="fa fa-money"></i>List ALL Monetization</a></li>
+                    <li><a href="<?php echo base_url('monetize/userlist'); ?>"><i class="fa fa-money"></i>User Monetization</a></li>
                     <li><a href="<?php echo base_url('monetize/paymentprocess'); ?>"><i class="fa fa-money"></i>Payment Process</a></li>
                 </ul>
             </li>

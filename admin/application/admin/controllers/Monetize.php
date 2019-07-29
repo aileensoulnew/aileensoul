@@ -303,5 +303,11 @@ class Monetize extends CI_Controller {
         }
         die();
     }
+
+    public function userlist(){
+        $sql = "SELECT SUM(upm.points) as total_point,u.user_id,u.first_name,u.last_name FROM ailee_user_point_mapper upm LEFT JOIN ailee_user u ON u.user_id = upm.user_id WHERE upm.status = '1' GROUP BY upm.user_id ORDER BY total_point DESC";
+        $res = $this->db->query($sql)->result();
+        print_r($res);exit();
+    }
 }
 ?>
