@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+                <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+                <url>
+                <loc>http://aileensoul.localhost/otherpages.xml</loc>
+                <lastmod>2019-07-30</lastmod>
+                </url>
+                <url>
+                <loc>http://aileensoul.localhost/members.xml</loc>
+                <lastmod>2019-07-30</lastmod>
+                </url>                
+                <url>
+                <loc>http://aileensoul.localhost/business.xml</loc>
+                <lastmod>2019-07-30</lastmod>
+                </url>                
+                <url>
+                <loc>http://aileensoul.localhost/opportunity.xml</loc>
+                <lastmod>2019-07-30</lastmod>
+                </url>
+                <url>
+                <loc>http://aileensoul.localhost/questions.xml</loc>
+                <lastmod>2019-07-30</lastmod>
+                </url>                
+                <url>
+                <loc>http://aileensoul.localhost/blog.xml</loc>
+                <lastmod>2019-07-30</lastmod>
+                </url>
+                </urlset>

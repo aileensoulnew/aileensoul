@@ -89,7 +89,7 @@ echo $leftmenu;
                     </div>                    
                     <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
-            </div>
+            </div>            
              <!-- end User Visits List box -->
 
              <!-- start User Visits List box -->
@@ -99,12 +99,15 @@ echo $leftmenu;
                     <div class="inner">
                         <h3>&nbsp;</h3>
                         <p><a href="<?php echo SITEURL.'sitemap/generate_sitemap'; ?>" target="_blank" style="color: #fff;">Generate Sitemap</a></p>
-                        <p>&nbsp;</p>
+                        <?php
+                        $filename = $_SERVER['DOCUMENT_ROOT'].'/sitemap.xml';
+                        ?>
+                        <p>Last generated on <?php echo date('d,M Y',filemtime($filename)); ?></p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-sitemap"></i>
                     </div>                    
-                    <a href="<?php echo SITEURL.'sitemap/generate_sitemap'; ?>" class="small-box-footer" target="_blank">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo SITEURL.'sitemap/generate_sitemap'; ?>" class="small-box-footer" target="_blank">Generate Sitemap <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
              <!-- end User Visits List box -->
