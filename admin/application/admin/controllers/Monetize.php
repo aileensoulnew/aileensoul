@@ -302,12 +302,157 @@ class Monetize extends CI_Controller {
             echo 'Payment Complete';
         }
         die();
+    }    
+
+    public function userlist()
+    {
+        // This is userd for pagination offset and limoi start
+        $limit = $this->paging['per_page'];
+        if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
+
+            $offset = ($this->uri->segment(5) != '') ? $this->uri->segment(5) : 0;
+
+            $sortby = $this->uri->segment(3);
+
+            $orderby = $this->uri->segment(4);
+
+        } else {
+
+            $offset = ($this->uri->segment(3) != '') ? $this->uri->segment(3) : 0;
+
+            $sortby = 'user_id';
+
+            $orderby = 'desc';
+
+        }
+
+        $this->data['offset'] = $offset;        
+
+        $tot_sql = $sql = "SELECT SUM(upm.points) as total_point,u.user_id,u.first_name,u.last_name,ul.email FROM ailee_user_point_mapper upm LEFT JOIN ailee_user u ON u.user_id = upm.user_id LEFT JOIN ailee_user_login ul ON ul.user_id = upm.user_id WHERE upm.status = '1' AND ul.status = '1' AND ul.is_delete = '0' GROUP BY upm.user_id ORDER BY total_point DESC";
+        if($limit != '') {
+            $sql .= " LIMIT $offset,$limit";
+        }
+
+        $this->data['users'] = $this->db->query($sql)->result_array();
+
+        $total_rows = $this->db->query($tot_sql)->result_array();
+        
+        $this->paging['base_url'] = site_url("monetize/userlist/");
+        $this->paging['uri_segment'] = 3;
+        
+        $this->paging['total_rows'] = count($total_rows);
+
+        $this->data['total_rows'] = $this->paging['total_rows'];
+
+        $this->data['limit'] = $limit;
+
+        $this->pagination->initialize($this->paging);
+
+        $this->data['search_keyword'] = '';
+        // print_r($this->data);exit();
+        $this->load->view('monetize/userlist', $this->data);
     }
 
-    public function userlist(){
-        $sql = "SELECT SUM(upm.points) as total_point,u.user_id,u.first_name,u.last_name FROM ailee_user_point_mapper upm LEFT JOIN ailee_user u ON u.user_id = upm.user_id WHERE upm.status = '1' GROUP BY upm.user_id ORDER BY total_point DESC";
-        $res = $this->db->query($sql)->result();
-        print_r($res);exit();
+    public function search()
+    {
+
+        if ($this->input->post('search_keyword')) {
+            //echo "222"; die();
+
+            $this->data['search_keyword'] = $search_keyword = trim($this->input->post('search_keyword'));
+
+            $this->session->set_userdata('monetize_search_keyword', $search_keyword);
+
+            $this->data['monetize_search_keyword'] = $this->session->userdata('monetize_search_keyword');
+
+            // This is userd for pagination offset and limoi start
+            $limit = $this->paging['per_page'];
+            $offset = ($this->uri->segment(3) != '') ? $this->uri->segment(3) : 0;
+
+            $this->data['offset'] = $offset;
+
+            $sql = "SELECT SUM(upm.points) as total_point,u.user_id,u.first_name,u.last_name,ul.email FROM ailee_user_point_mapper upm LEFT JOIN ailee_user u ON u.user_id = upm.user_id LEFT JOIN ailee_user_login ul ON ul.user_id = upm.user_id WHERE upm.status = '1' AND ul.status = '1' AND ul.is_delete = '0' ";
+            if($search_keyword != '')
+            {
+                $sql .= "AND ((CONCAT(u.first_name,' ',u.last_name) LIKE '%$search_keyword%' OR CONCAT(u.last_name,' ',u.first_name) LIKE '%$search_keyword%') OR ul.email LIKE '%$search_keyword%')";                
+            }
+            $sql .= " GROUP BY upm.user_id ORDER BY total_point DESC";
+            $tot_sql = $sql;
+
+            if($limit != '') {
+                $sql .= " LIMIT $offset,$limit";
+            }
+
+            $this->data['users'] = $this->db->query($sql)->result_array();
+
+            $total_rows = $this->db->query($tot_sql)->result_array();            
+
+            //This if and else use for asc and desc while click on any field start
+            $this->paging['base_url'] = site_url("monetize/search/");
+            $this->paging['uri_segment'] = 3;
+
+            $this->paging['total_rows'] = count($total_rows);
+
+            //for record display
+
+            $this->data['total_rows'] = $this->paging['total_rows'];
+
+            $this->data['limit'] = $limit;
+
+            $this->pagination->initialize($this->paging);
+
+        } else if ($this->session->userdata('monetize_search_keyword')) {
+            $this->data['search_keyword'] = $search_keyword = trim($this->session->userdata('monetize_search_keyword'));
+            // This is userd for pagination offset and limoi start
+            $limit = $this->paging['per_page'];
+            $offset = ($this->uri->segment(3) != '') ? $this->uri->segment(3) : 0;
+            $this->data['offset'] = $offset;
+
+            $sql = "SELECT SUM(upm.points) as total_point,u.user_id,u.first_name,u.last_name,ul.email FROM ailee_user_point_mapper upm LEFT JOIN ailee_user u ON u.user_id = upm.user_id LEFT JOIN ailee_user_login ul ON ul.user_id = upm.user_id WHERE upm.status = '1' AND ul.status = '1' AND ul.is_delete = '0' ";
+            if($search_keyword != '')
+            {
+                $sql .= "AND ((CONCAT(u.first_name,' ',u.last_name) LIKE '%$search_keyword%' OR CONCAT(u.last_name,' ',u.first_name) LIKE '%$search_keyword%') OR ul.email LIKE '%$search_keyword%')";                
+            }
+            $sql .= " GROUP BY upm.user_id ORDER BY total_point DESC";
+            $tot_sql = $sql;
+
+            if($limit != '') {
+                $sql .= " LIMIT $offset,$limit";
+            }
+
+            $this->data['users'] = $this->db->query($sql)->result_array();
+
+            $total_rows = $this->db->query($tot_sql)->result_array();
+
+            //This if and else use for asc and desc while click on any field start
+            
+            $this->paging['base_url'] = site_url("monetize/search/");
+            $this->paging['uri_segment'] = 3;
+
+            $this->paging['total_rows'] = count($total_rows);
+
+            //for record display
+
+            $this->data['total_rows'] = $this->paging['total_rows'];
+
+            $this->data['limit'] = $limit;
+
+            $this->pagination->initialize($this->paging);
+        }
+
+        $this->load->view('monetize/userlist', $this->data);
+
+    }
+
+    //clear search is used for unset session start
+    public function clear_search()
+    {
+        if ($this->session->userdata('monetize_search_keyword')) {
+
+            $this->session->unset_userdata('monetize_search_keyword');
+
+            redirect('monetize/userlist', 'refresh');
+        }
     }
 }
 ?>

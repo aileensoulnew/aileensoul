@@ -78,6 +78,9 @@ echo $leftmenu;
                                     <th><i class="fa fa-fw fa-pencil"></i> 
                                         <a href="javascript:void(0);">Created Date</a>
                                     </th>
+                                    <th><i class="fa fa-fw fa-pencil"></i> 
+                                        <a href="javascript:void(0);">Status</a>
+                                    </th>
                                     <th><i class=" fa fa-edit"></i> 
                                         <a href="javascript:void(0);">Action</a>
                                     </th>
@@ -108,31 +111,46 @@ echo $leftmenu;
                                             <td><?php echo substr($_points_list['description'], 0,200); ?></td>
                                          
                                             <td><?php echo $_points_list['created_date']; ?></td>
+                                            <td id="status-<?php echo $_points_list['id_user_point_mapper']; ?>">
+                                                <?php
+                                                if($_points_list['point_status'] == '0'):
+                                                    echo "Pending";
+                                                elseif($_points_list['point_status'] == '1'):
+                                                    echo "Approved";
+                                                elseif($_points_list['point_status'] == '2'):
+                                                    echo "Rejected";
+                                                endif; ?>
+                                            </td>
                                             <td>
                                                 <?php
                                                 if($_points_list['point_status'] == '0'):
                                                 ?>
-                                                    <button title="Approve" class="btn btn-primary btn-xs art-pub-<?php echo $_points_list['id_user_point_mapper']; ?>" onclick="approve_post_point(<?php echo $_points_list['id_user_point_mapper']; ?>);" >
+                                                    <button id="approve-btn-<?php echo $_points_list['id_user_point_mapper']; ?>" title="Approve" class="btn btn-primary btn-xs" onclick="approve_post_point(<?php echo $_points_list['id_user_point_mapper']; ?>);" >
                                                         <i class="fa fa-check"></i>
                                                     </button>
-                                                    <button title="Reject" class="btn btn-danger btn-xs art-pub-<?php echo $_points_list['id_user_point_mapper']; ?>" onclick="reject_post_point(<?php echo $_points_list['id_user_point_mapper']; ?>);">
+                                                    <button id="reject-btn-<?php echo $_points_list['id_user_point_mapper']; ?>" title="Reject" class="btn btn-danger btn-xs art-pub-<?php echo $_points_list['id_user_point_mapper']; ?>" onclick="reject_post_point(<?php echo $_points_list['id_user_point_mapper']; ?>);">
                                                         <i class="fa fa-ban"></i>
                                                     </button>
                                                 <?php 
-                                                elseif($_points_list['point_status'] == '1'):
-                                                    echo "Approve"; ?>
-                                                    <button title="Reject" class="btn btn-danger btn-xs art-pub-<?php echo $_points_list['id_user_point_mapper']; ?>" onclick="reject_post_point(<?php echo $_points_list['id_user_point_mapper']; ?>);">
+                                                elseif($_points_list['point_status'] == '1'):?>
+                                                    <button style="display: none;" id="approve-btn-<?php echo $_points_list['id_user_point_mapper']; ?>" title="Approve" class="btn btn-primary btn-xs" onclick="approve_post_point(<?php echo $_points_list['id_user_point_mapper']; ?>);" >
+                                                        <i class="fa fa-check"></i>
+                                                    </button>
+
+                                                    <button id="reject-btn-<?php echo $_points_list['id_user_point_mapper']; ?>" title="Reject" class="btn btn-danger btn-xs art-pub-<?php echo $_points_list['id_user_point_mapper']; ?>" onclick="reject_post_point(<?php echo $_points_list['id_user_point_mapper']; ?>);">
                                                         <i class="fa fa-ban"></i>
                                                     </button>
                                                 <?php
                                                 elseif($_points_list['point_status'] == '2'):  ?>
-                                                    <button title="Approve" class="btn btn-primary btn-xs art-pub-<?php echo $_points_list['id_user_point_mapper']; ?>" onclick="approve_post_point(<?php echo $_points_list['id_user_point_mapper']; ?>);" >
+                                                    <button id="approve-btn-<?php echo $_points_list['id_user_point_mapper']; ?>" title="Approve" class="btn btn-primary btn-xs art-pub-<?php echo $_points_list['id_user_point_mapper']; ?>" onclick="approve_post_point(<?php echo $_points_list['id_user_point_mapper']; ?>);" >
                                                         <i class="fa fa-check"></i>
                                                     </button>
+
+                                                    <button style="display: none;" id="reject-btn-<?php echo $_points_list['id_user_point_mapper']; ?>" title="Reject" class="btn btn-danger btn-xs" onclick="reject_post_point(<?php echo $_points_list['id_user_point_mapper']; ?>);">
+                                                        <i class="fa fa-ban"></i>
+                                                    </button>
                                                 <?php
-                                                    echo "Reject";
                                                 endif; ?>
-                                                <span id="art-status-<?php echo $_points_list['id_user_point_mapper']; ?>"></span>
                                             </td>
                                         </tr>
                                       <?php
@@ -236,16 +254,17 @@ function approve_post_point(id)
 }
 function approve_point(id) 
 {
-  $('.'+'art-pub-'+id).attr("style","pointer-events: none;");
-   $.ajax({
-      type: 'POST',
-      url: '<?php echo base_url() . "monetize/approve_point" ?>',
-      data: {'id':id},      
-      success: function (response){
-         $('.'+'art-pub-'+id).remove();
-         $('#'+'art-status-'+id).html(response);
-      }
-   });
+    
+    $.ajax({
+        type: 'POST',
+        url: '<?php echo base_url() . "monetize/approve_point" ?>',
+        data: {'id':id},      
+        success: function (response){
+            $('#approve-btn-'+id).hide();
+            $('#reject-btn-'+id).show();
+            $('#status-'+id).html(response);            
+        }
+    });
 }
 //Publish Article End
 
@@ -257,17 +276,17 @@ function reject_post_point(id)
    $("#publishmodal").modal("show");
 }
 function reject_point(id) 
-{
-  $('.'+'art-pub-'+id).attr("style","pointer-events: none;");
-   $.ajax({
-      type: 'POST',
-      url: '<?php echo base_url() . "monetize/reject_point" ?>',
-      data: {'id':id},      
-      success: function (response){
-        $('.art-pub-'+id).remove();
-        $('#art-status-'+id).html(response);
-      }
-   });
+{    
+    $.ajax({
+        type: 'POST',
+        url: '<?php echo base_url() . "monetize/reject_point" ?>',
+        data: {'id':id},      
+        success: function (response){
+            $('#approve-btn-'+id).show();
+            $('#reject-btn-'+id).hide();
+            $('#status-'+id).html(response);            
+        }
+    });
 }
 //Reject Article End
 

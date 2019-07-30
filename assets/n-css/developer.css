@@ -297,6 +297,29 @@
     font-size: 14px;
     padding: 0px 20px;
 }
+.right-reg .right-reg-content p{
+    font-size: 22px !important;
+}
+@media screen and (max-width: 1279px) {
+    .right-reg .right-reg-content p{
+        font-size: 18px !important;
+    }
+}
+@media screen and (max-width: 991px) {
+    .hash-header-mob .btn-new-1 {        
+        background: transparent;
+    }
+    .signup-form .new-form .text-left{
+        float: left;
+    }
+    .modal.message-box span.mes.bank-detail-msg{
+        font-size: 13px;
+    }
+
+    .right-reg .right-reg-content p{
+        font-size: 16px !important;
+    }
+}
 @media screen and (max-width: 479px) {
     .hash-header-mob .btn-new-1 {
         line-height: 2;
@@ -315,16 +338,8 @@
     .must-follow{
         font-size: 12px;
     }
-}
 
-@media screen and (max-width: 991px) {
-    .hash-header-mob .btn-new-1 {        
-        background: transparent;
-    }
-    .signup-form .new-form .text-left{
-        float: left;
-    }
-    .modal.message-box span.mes.bank-detail-msg{
-        font-size: 13px;
+    .right-reg .right-reg-content p{
+        font-size: 14px !important;
     }
 }
