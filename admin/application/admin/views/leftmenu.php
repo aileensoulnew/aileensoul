@@ -46,7 +46,7 @@
             <!--Start user Management-->
             <li <?php if ($this->uri->segment(1) == 'user_manage' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
                 <a href="#">
-                    <i class="fa fa-briefcase margin-r-5"></i> <span>User Management</span>
+                    <i class="fa fa-users margin-r-5"></i> <span>User Management</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
@@ -62,7 +62,7 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url('business/user'); ?>"><i class="fa fa-users"></i>List Business User</a></li>
+                    <li><a href="<?php echo base_url('business/user'); ?>"><i class="fa fa-briefcase"></i>List Business User</a></li>
                 </ul>
             </li>
             <!--End Business Management-->            
@@ -70,11 +70,11 @@
             <!--Start CSV Management-->
             <li <?php if ($this->uri->segment(1) == 'csv_file' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
                 <a href="#">
-                    <i class="fa fa-briefcase margin-r-5"></i> <span>CSV Upload</span>
+                    <i class="fa fa-file margin-r-5"></i> <span>CSV Upload</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url('csv_file/index'); ?>"><i class="fa fa-users"></i>Upload CSV</a></li>
+                    <li><a href="<?php echo base_url('csv_file/index'); ?>"><i class="fa fa-file"></i>Upload CSV</a></li>
                 </ul>
             </li>
             <!--End CSV Management-->
@@ -108,7 +108,7 @@
                 <ul class="treeview-menu">     
 
                  <!--    <li><a href="<?php //echo base_url('blog_tag/blog_list'); ?>"><i class="fa fa-tag" aria-hidden="true"></i></i>Tag List</a></li> -->
-                    <li><a href="<?php echo base_url('blog/blog_list'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>Blog List</a></li>
+                    <li><a href="<?php echo base_url('blog/blog_list'); ?>"><i class="fa fa-rss" aria-hidden="true"></i>Blog List</a></li>
                 </ul>
             </li>
            <!--End Blog-->
@@ -117,18 +117,18 @@
            <!--Start Goverment job-->
             <li <?php if ($this->uri->segment(1) == 'goverment' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
                 <a href="#">
-                    <i class="fa fa-rss" aria-hidden="true"></i><span>Goverment</span>
+                    <i class="fa fa-building" aria-hidden="true"></i><span>Goverment</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">     
-                    <li><a href="<?php echo base_url('goverment/add_gov_category'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>Add Goverment category</a></li>
+                    <li><a href="<?php echo base_url('goverment/add_gov_category'); ?>"><i class="fa fa-building" aria-hidden="true"></i>Add Goverment category</a></li>
 
-                     <li><a href="<?php echo base_url('goverment/view_gov_category'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>View Goverment category</a></li>
+                     <li><a href="<?php echo base_url('goverment/view_gov_category'); ?>"><i class="fa fa-building" aria-hidden="true"></i>View Goverment category</a></li>
 
 
-                     <li><a href="<?php echo base_url('goverment/add_gov_post'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>Add Goverment post</a></li>
+                     <li><a href="<?php echo base_url('goverment/add_gov_post'); ?>"><i class="fa fa-building" aria-hidden="true"></i>Add Goverment post</a></li>
 
-                     <li><a href="<?php echo base_url('goverment/view_gov_post'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>View Goverment post</a></li>
+                     <li><a href="<?php echo base_url('goverment/view_gov_post'); ?>"><i class="fa fa-building" aria-hidden="true"></i>View Goverment post</a></li>
 
                 </ul>
             </li>
@@ -138,14 +138,14 @@
             <!--Start Feedback-->
             <li <?php if ($this->uri->segment(1) == 'feedback' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
                 <a href="#">
-                    <i class="fa fa-rss" aria-hidden="true"></i><span>Feedback</span>
+                    <i class="fa fa-comments-o" aria-hidden="true"></i><span>Feedback</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">     
 
                  <!--    <li><a href="<?php //echo base_url('blog_tag/blog_list'); ?>"><i class="fa fa-tag" aria-hidden="true"></i></i>Tag List</a></li> -->
-                    <li><a href="<?php echo base_url('feedback/user'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>Feedback List</a></li>
-                    <li><a href="<?php echo base_url('feedback/general'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>General Feedback</a></li>
+                    <li><a href="<?php echo base_url('feedback/user'); ?>"><i class="fa fa-comments-o" aria-hidden="true"></i>Feedback List</a></li>
+                    <li><a href="<?php echo base_url('feedback/general'); ?>"><i class="fa fa-comments-o" aria-hidden="true"></i>General Feedback</a></li>
                 </ul>
             </li>
            <!--End Feedback-->
@@ -153,11 +153,11 @@
            <!--Start Advertise With us-->
             <li <?php if ($this->uri->segment(1) == 'advertise_with_us' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
                 <a href="#">
-                    <i class="fa fa-rss" aria-hidden="true"></i><span>Advertise With Us</span>
+                    <i class="fa fa-line-chart" aria-hidden="true"></i><span>Advertise With Us</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">     
-                   <li><a href="<?php echo base_url('advertise_with_us/'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>Advertise With Us List</a></li>
+                   <li><a href="<?php echo base_url('advertise_with_us/'); ?>"><i class="fa fa-line-chart" aria-hidden="true"></i>Advertise With Us List</a></li>
                 </ul>
             </li>
            <!--End Advertise With us-->
@@ -166,13 +166,13 @@
            <!--Start Contact us-->
             <li <?php if ($this->uri->segment(1) == 'contact_us' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
                 <a href="#">
-                    <i class="fa fa-rss" aria-hidden="true"></i><span>Contact Us</span>
+                    <i class="fa fa-address-book" aria-hidden="true"></i><span>Contact Us</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">     
 
                  <!--    <li><a href="<?php //echo base_url('blog_tag/blog_list'); ?>"><i class="fa fa-tag" aria-hidden="true"></i></i>Tag List</a></li> -->
-                    <li><a href="<?php echo base_url('contact_us/user'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>Contact Us List</a></li>
+                    <li><a href="<?php echo base_url('contact_us/user'); ?>"><i class="fa fa-address-book" aria-hidden="true"></i>Contact Us List</a></li>
                 </ul>
             </li>
            <!--End contact us-->
@@ -187,7 +187,7 @@
                 <ul class="treeview-menu">     
 
                  <!--<li><a href="<?php //echo base_url('blog_tag/blog_list'); ?>"><i class="fa fa-tag" aria-hidden="true"></i></i>Tag List</a></li> -->
-                    <li><a href="<?php echo base_url('email/compose/job'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>Compose Mail</a></li>
+                    <li><a href="<?php echo base_url('email/compose/job'); ?>"><i class="fa fa-envelope" aria-hidden="true"></i>Compose Mail</a></li>
                 </ul>
             </li>
            <!--End Blog-->
