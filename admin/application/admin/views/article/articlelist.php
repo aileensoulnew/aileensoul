@@ -84,7 +84,7 @@ echo $leftmenu;
                                     <th style="width: 15%;"><i class="fa fa-fw fa-pencil-square"></i> 
                                         <a href="javascript:void(0);">Title</a>
                                     </th>
-                                    <th  style="width: 25%;"><i class="fa fa-fw fa-pencil-square"></i> 
+                                    <th  style="width: 21%;"><i class="fa fa-fw fa-pencil-square"></i> 
                                         <a href="javascript:void(0);">Description</a>
                                     </th>
                                     <th><i class="fa fa-fw fa-pencil-square"></i> 

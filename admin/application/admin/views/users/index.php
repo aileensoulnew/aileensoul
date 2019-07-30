@@ -116,7 +116,7 @@ echo $leftmenu;
                                     foreach ($users as $user) { ?>
                                         <tr id="delete<?php echo $user['user_id']?>">
                                             <td><?php echo $i++; ?></td>
-                                            <td><?php echo ucfirst($user['first_name']); echo ' ';echo ucfirst($user['last_name']);  ?></td>
+                                            <td><a href="<?php echo SITEURL.$user['user_slug'] ?>" target="_blank"><?php echo ucfirst($user['first_name'].' '.$user['last_name']);  ?></a></td>
                                             <td><?php echo $user['email']; ?></td>
                                             <td><?php echo $user['user_gender']; 
                                                     if($user['user_gender']=="F")
