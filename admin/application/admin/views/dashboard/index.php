@@ -46,8 +46,9 @@ echo $leftmenu;
                 <!-- small box -->
                 <div class="small-box bg-aqua">
                     <div class="inner">
-                        <h3><?php echo count($user_list)?></h3>
+                        <h3><?php echo $user_count; ?></h3>
                         <p>ALL User</p>
+                        <p>&nbsp;</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-users"></i>
@@ -56,134 +57,57 @@ echo $leftmenu;
                 </div>
             </div>
              <!-- end  User List box -->
-              <!-- start  User List box -->
+             
+              <!-- start Businesss User List box -->
             <div class="col-lg-3 col-xs-6">
                 <!-- small box -->
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <h3><?php echo count($pages_list)?></h3>
-                        <p>ALL Pages</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-users"></i>
-                    </div>
-                    <a href="<?php echo base_url('pages/page')?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-             <!-- end  User List box -->
-            <!-- start Job User List box -->
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-aqua">
-                    <div class="inner">
-                        <h3><?php echo count($job_list)?></h3>
-                        <p>Job User</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-users"></i>
-                    </div>
-                    <a href="<?php echo base_url('job/user')?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-             <!-- end Job User List box -->
-            
-            <!-- start Recruiter User List box -->
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-green">
-                    <div class="inner">
-                        <h3><?php echo count($recruiter_list)?></h3>
-                        <p>Recruiter User</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-users"></i>
-                    </div>
-                    <a href="<?php echo base_url('recruiter/user')?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-             <!-- end Recruiter User List box -->
-             
-             
-              <!-- start Freelancer hire User List box -->
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-green">
-                    <div class="inner">
-                        <h3><?php echo count($freelancer_hire_list)?></h3>
-                        <p>Freelancer Hire User</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-users"></i>
-                    </div>
-                    <a href="<?php echo base_url('freelancer_hire/user')?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-             <!-- end Freelancer hire User List box -->
-             
-              <!-- start Freelancer Apply User List box -->
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-aqua">
-                    <div class="inner">
-                        <h3><?php echo count($freelancer_apply_list)?></h3>
-                        <p>Freelancer Apply User</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-users"></i>
-                    </div>
-                    <a href="<?php echo base_url('freelancer_apply/user')?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-             <!-- end Freelancer Apply User List box -->
-             
-              <!-- start Freelancer hire User List box -->
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-green">
-                    <div class="inner">
-                        <h3><?php echo count($business_list)?></h3>
+                        <h3><?php echo $business_count; ?></h3>
                         <p>Business User</p>
+                        <p>&nbsp;</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-users"></i>
                     </div>
-                    <a href="<?php //echo base_url('freelancer_hire/user')?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
-             <!-- end Freelancer hire User List box -->
+             <!-- end Business User List box -->
              
-             
-              <!-- start Freelancer Apply User List box -->
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-aqua">
-                    <div class="inner">
-                        <h3><?php echo count($artistic_list)?></h3>
-                        <p>Artistic User</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-users"></i>
-                    </div>
-                    <a href="<?php //echo base_url('job/user')?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
-             <!-- end Freelancer Apply User List box -->
-             
-               <!-- start Freelancer Apply User List box -->
+            <!-- start User Visits List box -->
             <div class="col-lg-3 col-xs-6">
                 <!-- small box -->
                 <div class="small-box bg-aqua">
                     <div class="inner">
                         <h3><?php echo $count_visit?></h3>
-                        <p>User Counter</p>
+                        <p>User Visit</p>
+                        <p><?php echo date('d,M Y'); ?></p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-users"></i>
-                    </div>
-                    <a href="<?php echo base_url('dashboard/visit_user_date')?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>                    
+                    <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
-             <!-- end Freelancer Apply User List box -->
+             <!-- end User Visits List box -->
+
+             <!-- start User Visits List box -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3>&nbsp;</h3>
+                        <p><a href="<?php echo SITEURL.'sitemap/generate_sitemap'; ?>" target="_blank" style="color: #fff;">Generate Sitemap</a></p>
+                        <p>&nbsp;</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-sitemap"></i>
+                    </div>                    
+                    <a href="<?php echo SITEURL.'sitemap/generate_sitemap'; ?>" class="small-box-footer" target="_blank">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+             <!-- end User Visits List box -->
            
            
         </div><!-- /.row -->

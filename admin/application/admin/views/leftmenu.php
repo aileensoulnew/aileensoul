@@ -53,72 +53,7 @@
                     <li><a href="<?php echo base_url('user_manage/user'); ?>"><i class="fa fa-users"></i>List ALL User</a></li>
                 </ul>
             </li>
-            <!--End user Management-->
-             <!--Start user Management-->
-            <li <?php if ($this->uri->segment(1) == 'pages' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
-                <a href="#">
-                    <i class="fa fa-briefcase margin-r-5"></i> <span>Page Management</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url('Pages/page'); ?>"><i class="fa fa-users"></i>List ALL Pages</a></li>
-                </ul>
-            </li>
-            <!--End user Management-->
-
-
-             <!--Start Job Management-->
-            <li <?php if ($this->uri->segment(1) == 'job' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
-                <a href="#">
-                    <i class="fa fa-briefcase margin-r-5"></i> <span>Job Management</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url('job/user'); ?>"><i class="fa fa-users"></i>List Job User</a></li>
-                </ul>
-            </li>
-            <!--End Job Management-->
-
-             <!--Start Recruiter Management-->
-            <li <?php if ($this->uri->segment(1) == 'recruiter' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
-                <a href="#">
-                    <i class="fa fa-handshake-o margin-r-5"></i> <span>Recruiter Management</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">     
-
-                    <li><a href="<?php echo base_url('recruiter/user'); ?>"><i class="fa fa-users"></i>List Recruiter User</a></li>
-
-                    <li><a href="<?php echo base_url('recruiter/post'); ?>"><i class="fa fa-vcard"></i>Post Recruiter User</a></li>
-                </ul>
-            </li>
-            <!--End Recruiter Management-->
-            
-             <!--Start Freelancer hire Management-->
-            <li <?php if ($this->uri->segment(1) == 'freelancer_hire' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
-                <a href="#">
-                    <i class="fa fa-briefcase margin-r-5"></i> <span>Freelancer Hire</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url('freelancer_hire/user'); ?>"><i class="fa fa-users"></i>List Freelancer Hire User</a></li>
-                    <li><a href="<?php echo base_url('freelancer_hire/project'); ?>"><i class="fa fa-users"></i>List Projects</a></li>
-                </ul>
-            </li>
-            <!--End Freelancer Hire Management-->
-            
-              <!--Start Freelancer hire Management-->
-            <li <?php if ($this->uri->segment(1) == 'freelancer_apply' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
-                <a href="#">
-                    <i class="fa fa-briefcase margin-r-5"></i> <span>Freelancer Apply</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url('freelancer_apply/user'); ?>"><i class="fa fa-users"></i>List Freelancer Apply User</a></li>
-<!--                    <li><a href="<?php //echo base_url('freelancer_hire/project'); ?>"><i class="fa fa-users"></i>List Projects</a></li>-->
-                </ul>
-            </li>
-            <!--End Freelancer Hire Management-->
+            <!--End user Management-->            
 
             <!--Start Business Management-->
             <li <?php if ($this->uri->segment(1) == 'business' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
@@ -130,21 +65,9 @@
                     <li><a href="<?php echo base_url('business/user'); ?>"><i class="fa fa-users"></i>List Business User</a></li>
                 </ul>
             </li>
-            <!--End Business Management-->
+            <!--End Business Management-->            
 
-            <!--Start Artistic Management-->
-            <li <?php if ($this->uri->segment(1) == 'artistic' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
-                <a href="#">
-                    <i class="fa fa-briefcase margin-r-5"></i> <span>Artistic Management</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="<?php echo base_url('artist/user'); ?>"><i class="fa fa-users"></i>List Artistic User</a></li>
-                </ul>
-            </li>
-            <!--End Artistic Management-->
-
-              <!--Start CSV Management-->
+            <!--Start CSV Management-->
             <li <?php if ($this->uri->segment(1) == 'csv_file' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
                 <a href="#">
                     <i class="fa fa-briefcase margin-r-5"></i> <span>CSV Upload</span>
@@ -156,7 +79,8 @@
             </li>
             <!--End CSV Management-->
             
-             <!--Start search keyword  Management-->
+            <!--Start search keyword  Management-->
+            <?php /* ?>
             <li <?php if ($this->uri->segment(1) == 'search_keyword' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
                 <a href="#">
                     <i class="fa fa-briefcase margin-r-5"></i> <span>Search Keyword Display</span>
@@ -172,6 +96,7 @@
                 </ul>
             </li>
             <!--End search keyword Management-->
+            <?php */ ?>
 
 
             <!--Start Blog-->
@@ -182,8 +107,7 @@
                 </a>
                 <ul class="treeview-menu">     
 
-                 <!--    <li><a href="<?php //echo base_url('blog_tag/blog_list'); ?>"><i class="fa fa-tag" aria-hidden="true"></i></i>Tag List</a></li>
- -->
+                 <!--    <li><a href="<?php //echo base_url('blog_tag/blog_list'); ?>"><i class="fa fa-tag" aria-hidden="true"></i></i>Tag List</a></li> -->
                     <li><a href="<?php echo base_url('blog/blog_list'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>Blog List</a></li>
                 </ul>
             </li>
@@ -219,8 +143,7 @@
                 </a>
                 <ul class="treeview-menu">     
 
-                 <!--    <li><a href="<?php //echo base_url('blog_tag/blog_list'); ?>"><i class="fa fa-tag" aria-hidden="true"></i></i>Tag List</a></li>
- -->
+                 <!--    <li><a href="<?php //echo base_url('blog_tag/blog_list'); ?>"><i class="fa fa-tag" aria-hidden="true"></i></i>Tag List</a></li> -->
                     <li><a href="<?php echo base_url('feedback/user'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>Feedback List</a></li>
                     <li><a href="<?php echo base_url('feedback/general'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>General Feedback</a></li>
                 </ul>
@@ -248,8 +171,7 @@
                 </a>
                 <ul class="treeview-menu">     
 
-                 <!--    <li><a href="<?php //echo base_url('blog_tag/blog_list'); ?>"><i class="fa fa-tag" aria-hidden="true"></i></i>Tag List</a></li>
- -->
+                 <!--    <li><a href="<?php //echo base_url('blog_tag/blog_list'); ?>"><i class="fa fa-tag" aria-hidden="true"></i></i>Tag List</a></li> -->
                     <li><a href="<?php echo base_url('contact_us/user'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>Contact Us List</a></li>
                 </ul>
             </li>
@@ -264,8 +186,7 @@
                 </a>
                 <ul class="treeview-menu">     
 
-                 <!--    <li><a href="<?php //echo base_url('blog_tag/blog_list'); ?>"><i class="fa fa-tag" aria-hidden="true"></i></i>Tag List</a></li>
- -->
+                 <!--<li><a href="<?php //echo base_url('blog_tag/blog_list'); ?>"><i class="fa fa-tag" aria-hidden="true"></i></i>Tag List</a></li> -->
                     <li><a href="<?php echo base_url('email/compose/job'); ?>"><i class="fa fa-plus" aria-hidden="true"></i>Compose Mail</a></li>
                 </ul>
             </li>

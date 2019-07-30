@@ -100,17 +100,28 @@ class Article extends CI_Controller {
         $update = $this->db->update('user_post', $data);
         if(isset($monetine_data) && !empty($monetine_data))
         {
-            $inser_point = array(
-                "user_id"       =>  $post_data['user_id'],
-                "post_id"       =>  $post_data['id'],
-                "points"        =>  30,
-                "points_for"    =>  3,
-                "description"   =>  '',
-                "status"        =>  '0',
-                "created_date"  =>  date('Y-m-d H:i:s', time()),
-                "modify_date"   =>  date('Y-m-d H:i:s', time()),
-            );
-            $this->common->insert_data_getid($inser_point, 'user_point_mapper');
+            $sql = "SELECT * FROM ailee_user_point_mapper WHERE user_id = '".$post_data['user_id']."' AND post_id = '".$post_data['id']."' AND points_for ='3'";
+            $monetize_data = $this->db->query($sql)->row_array();
+            if(isset($monetize_data) && !empty($monetize_data))
+            {
+                $m_data = array('status' => '0');
+                $this->db->where('id_user_point_mapper', $monetize_data['id_user_point_mapper']);
+                $update = $this->db->update('user_point_mapper', $m_data);
+            }
+            else
+            {
+                $inser_point = array(
+                    "user_id"       =>  $post_data['user_id'],
+                    "post_id"       =>  $post_data['id'],
+                    "points"        =>  30,
+                    "points_for"    =>  3,
+                    "description"   =>  '',
+                    "status"        =>  '0',
+                    "created_date"  =>  date('Y-m-d H:i:s', time()),
+                    "modify_date"   =>  date('Y-m-d H:i:s', time()),
+                );
+                $this->common->insert_data_getid($inser_point, 'user_point_mapper');
+            }
         }
         // $update = $this->common->update_data($data, 'user_post', 'post_id', $id);
         
@@ -142,10 +153,19 @@ class Article extends CI_Controller {
         $touser = $article_data['email'];
         $user_id = $article_data['user_id'];
         $article_slug = $article_data['article_slug'];
+
+        $sql = "SELECT * FROM ailee_notification WHERE not_type = '11' AND not_from_id = '1' AND not_from = '8' AND not_img = '4' AND not_product_id = '".$id."' AND not_to_id = '".$user_id."'";
+        $not_data = $this->db->query($sql)->result_array();
+        if(isset($not_data) && !empty($not_data))
+        {
+            foreach ($not_data as $key => $value) {
+                $this->common->delete_data('notification','not_id',$value['not_id']);
+            }
+        }
         
         $dataFollow = array(
             'not_type' => '10',//Article Accepted
-            'not_from_id' => 1,
+            'not_from_id' => '1',
             'not_product_id'=>$id,
             'not_to_id' => $user_id,
             'not_read' => '2',                    
@@ -156,7 +176,7 @@ class Article extends CI_Controller {
         );
         $insert_id = $this->common->insert_data_getid($dataFollow, 'notification');
 
-        $img_url = base_url('assets/img/user.jpg');
+        $img_url = SITEURL.'assets/img/user.jpg';
         $data = array(
             'not_id'            => $insert_id,
             'not_title_name'    => 'Admin',
@@ -187,17 +207,21 @@ class Article extends CI_Controller {
     public function reject() {
         // $id = $_POST['id'];
         $id = $this->input->post('id');
-        $data = array(
+        
+        $art_data = array('status' => 'publish');
+        $this->db->where('post_id', $id);
+        $this->db->where('post_for', 'article');
+        $update = $this->db->update('user_post', $art_data);
+
+        /*$data = array(
             'status' => 'reject'
         );
-        $update = $this->common->update_data($data, 'user_post', 'post_id', $id);
+        $update = $this->common->update_data($data, 'user_post', 'post_id', $id);*/
 
         $data = array(
             'status' => 'reject'
         );
         $update1 = $this->common->update_data($data, 'post_article', 'id_post_article', $id);
-
-        
 
         $join_str[0]['table'] = "user_post";
         $join_str[0]['join_table_id'] = "user_post.post_id";
@@ -220,8 +244,31 @@ class Article extends CI_Controller {
         $fullname = ucwords($article_data['first_name']." ".$article_data['last_name']);
         $touser = $article_data['email'];
         $user_id = $article_data['user_id'];
-        $article_slug = $article_data['article_slug'];        
+        $article_slug = $article_data['article_slug'];
+
+        $sql = "SELECT * FROM ailee_notification WHERE not_type = '10' AND not_from_id = '1' AND not_from = '8' AND not_img = '4' AND not_product_id = '".$id."' AND not_to_id = '".$user_id."'";
+        $not_data = $this->db->query($sql)->result_array();
+        if(isset($not_data) && !empty($not_data))
+        {
+            foreach ($not_data as $key => $value) {
+                $this->common->delete_data('notification','not_id',$value['not_id']);
+            }
+        }
         
+        $cond1 = array('post_id' => $id,'post_for' => 'article');
+        $post_data = $this->common->select_data_by_condition('user_post', $cond1, $data = '*', $short_by = '', $order_by = 'desc', $limit, $offset, array())[0];
+
+        $this->searchelastic_model->delete_article_id_data($post_data['id']);
+
+        $sql = "SELECT * FROM ailee_user_point_mapper WHERE user_id = '".$post_data['user_id']."' AND post_id = '".$post_data['id']."' AND points_for ='3'";
+            $monetize_data = $this->db->query($sql)->row_array();
+        if(isset($monetize_data) && !empty($monetize_data))
+        {
+            $m_data = array('status' => '2');
+            $this->db->where('id_user_point_mapper', $monetize_data['id_user_point_mapper']);
+            $update = $this->db->update('user_point_mapper', $m_data);
+        }
+
         $dataFollow = array(
             'not_type' => '11',//Article Rejected
             'not_from_id' => '1',
@@ -235,7 +282,7 @@ class Article extends CI_Controller {
         );
         $insert_id = $this->common->insert_data_getid($dataFollow, 'notification');
 
-        $img_url = base_url('assets/img/user.jpg');
+        $img_url = SITEURL.'assets/img/user.jpg';
         $data = array(
             'not_id'            => $insert_id,
             'not_title_name'    => 'Admin',
@@ -263,15 +310,53 @@ class Article extends CI_Controller {
 
     public function delete() {
         $id = $_POST['id'];
-        $data = array(
+        /*$data = array(
             'is_delete' => '1'
         );
-        $update = $this->common->update_data($data, 'user_post', 'post_id', $id);
+        $update = $this->common->update_data($data, 'user_post', 'post_id', $id);*/
+
+        $art_data = array('status' => 'draft','is_delete'=> '1');
+        $this->db->where('post_id', $id);
+        $this->db->where('post_for', 'article');
+        $update = $this->db->update('user_post', $art_data);
 
         $data = array(
             'status' => 'delete'
         );
         $update1 = $this->common->update_data($data, 'post_article', 'id_post_article', $id);
+
+        $sql_art = "SELECT * FROM ailee_user_post WHERE post_for='article' AND post_id = '".$id."'";
+        $post_data = $this->db->query($sql_art)->row_array();
+        $user_id = $post_data['user_id'];
+
+        $sql = "SELECT * FROM ailee_notification WHERE not_type = '10' AND not_from_id = '1' AND not_from = '8' AND not_img = '4' AND not_product_id = '".$id."' AND not_to_id = '".$user_id."'";
+        $not_data = $this->db->query($sql)->result_array();
+        if(isset($not_data) && !empty($not_data))
+        {
+            foreach ($not_data as $key => $value) {
+                $this->common->delete_data('notification','not_id',$value['not_id']);
+            }
+        }
+
+        $sql = "SELECT * FROM ailee_notification WHERE not_type = '11' AND not_from_id = '1' AND not_from = '8' AND not_img = '4' AND not_product_id = '".$id."' AND not_to_id = '".$user_id."'";
+        $not_data = $this->db->query($sql)->result_array();
+        if(isset($not_data) && !empty($not_data))
+        {
+            foreach ($not_data as $key => $value) {
+                $this->common->delete_data('notification','not_id',$value['not_id']);
+            }
+        }        
+
+        $this->searchelastic_model->delete_article_id_data($post_data['id']);
+
+        $sql = "SELECT * FROM ailee_user_point_mapper WHERE user_id = '".$post_data['user_id']."' AND post_id = '".$post_data['id']."' AND points_for ='3'";
+            $monetize_data = $this->db->query($sql)->row_array();
+        if(isset($monetize_data) && !empty($monetize_data))
+        {
+            $m_data = array('status' => '2');
+            $this->db->where('id_user_point_mapper', $monetize_data['id_user_point_mapper']);
+            $update = $this->db->update('user_point_mapper', $m_data);
+        }
 
         echo 'Deleted';
 

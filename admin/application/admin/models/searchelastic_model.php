@@ -70,7 +70,6 @@ class Searchelastic_model extends CI_Model {
         $searchData = array();
         $search_data = $query['hits'];        
         $people_count = $search_data['total'];
-        echo $people_count."people_count";
         if($people_count > 0)
         {
             $params = [
@@ -105,7 +104,6 @@ class Searchelastic_model extends CI_Model {
         $searchData = array();
         $search_data = $query['hits'];
         $bus_count = $search_data['total'];
-        echo $bus_count."bus_count";
         if($bus_count > 0)
         {
             $bus_data = $search_data['hits'];            
@@ -138,7 +136,6 @@ class Searchelastic_model extends CI_Model {
         $query = $client->search($params_search);        
         $search_data = $query['hits'];
         $post_count = $search_data['total'];
-        echo $post_count."post_count";
         if($post_count > 0){
             $post_data = $search_data['hits'];            
             foreach ($post_data as $key => $value) {                
@@ -170,7 +167,6 @@ class Searchelastic_model extends CI_Model {
         $searchData = array();
         $search_data = $query['hits'];
         $opp_count = $search_data['total'];
-        echo $opp_count."opp_count";
         if($opp_count > 0)
         {
             $opp_data = $search_data['hits'];            
@@ -204,7 +200,6 @@ class Searchelastic_model extends CI_Model {
         $searchData = array();
         $search_data = $query['hits'];
         $que_count = $search_data['total'];
-        echo $que_count."que_count";
         if($que_count > 0)
         {
             $opp_data = $search_data['hits'];            
@@ -237,7 +232,6 @@ class Searchelastic_model extends CI_Model {
         $searchData = array();
         $search_data = $query['hits'];
         $art_count = $search_data['total'];
-        echo $art_count."art_count";
         if($art_count > 0)
         {
             $opp_data = $search_data['hits'];            
@@ -245,6 +239,40 @@ class Searchelastic_model extends CI_Model {
                 $params = ['index' => 'aileensoul_search_article', 'type' => 'aileensoul_search_article', 'id' => $value['_id'], ];
                 $responses = $client->delete($params);
             }
+        }
+
+        return true;
+    }
+
+    public function delete_article_id_data($id = 0)
+    {
+        
+        $client = $this->elasticclient;
+
+        $params_search = [
+            'index' => 'aileensoul_search_article', 
+            'type'  => 'aileensoul_search_article',
+            'body'  => [
+                            "query" =>
+                            [
+                                "match_phrase" => [
+                                    "_id" => $id
+                                ]
+                            ]//query end
+                        ],//body end
+        ];
+        $query = $client->search($params_search);
+        $searchData = array();
+        $search_data = $query['hits'];        
+        $people_count = $search_data['total'];
+        if($people_count > 0)
+        {
+            $params = [
+                        'index' => 'aileensoul_search_article', 
+                        'type' => 'aileensoul_search_article', 
+                        'id' => $id
+                    ];
+            $responses = $client->delete($params);        
         }
 
         return true;

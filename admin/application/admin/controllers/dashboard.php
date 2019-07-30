@@ -24,58 +24,22 @@ class Dashboard extends MY_Controller {
 
 
     }
- public function index()
-     {
+
+    public function index()
+    {
         $adminid =  $this->session->userdata('aileen_admin');
-     
-        //For Count Job Register User Data
-        $condition_array = array('is_delete' => '0','job_step'=>'10');
-        $data="job_id";
-        $this->data['job_list'] = $get_users = $this->common->select_data_by_condition('job_reg', $condition_array, $data, $short_by, $order_by, $limit, $offset, $join_str = array());
 
-        //For Count Recruiter Register User Data
-        $condition_array = array('is_delete' => '0','re_step' =>'3');
-        $data="rec_id";
-        $this->data['recruiter_list'] = $get_users = $this->common->select_data_by_condition('recruiter', $condition_array, $data, $short_by, $order_by, $limit, $offset, $join_str = array());
-        
-        //For count User Data
-        $condition_array = array('is_delete' => '0');
-        $data="user.user_id";
-        $join_str[0]['table'] = 'user_login ul';
-        $join_str[0]['join_table_id'] = 'ul.user_id';
-        $join_str[0]['from_table_id'] = 'user.user_id';
-        $join_str[0]['join_type'] = '';
-        $this->data['user_list'] = $get_users = $this->common->select_data_by_condition('user', $condition_array, $data, $short_by, $order_by, $limit, $offset, $join_str);
-        
-        //For Count Freelancer hire Register User Data
-        $condition_array = array('is_delete' => '0','free_hire_step' =>'3');
-        $data="reg_id";
-        $this->data['freelancer_hire_list'] = $get_users = $this->common->select_data_by_condition('freelancer_hire_reg', $condition_array, $data, $short_by, $order_by, $limit, $offset, $join_str = array());
+        $user_sql = "SELECT COUNT(*) as total_user FROM ailee_user u LEFT JOIN ailee_user_login ul ON ul.user_id = u.user_id WHERE ul.status = '1' AND ul.is_delete = '0'";
+        $this->data['user_count'] = $this->db->query($user_sql)->row()->total_user;
 
-        
-        // For pages Data
-        $data="page_id";
-        $this->data['pages_list'] = $get_users = $this->common->select_data_by_condition('ailee_pages', $condition_array=array(), $data, $short_by, $order_by, $limit, $offset, $join_str = array());
-       
-        //For Count Freelancer apply Register User Data
-        $condition_array = array('is_delete' => '0','free_post_step'=>'7');
-        $data="freelancer_post_reg_id";
-        $this->data['freelancer_apply_list'] = $get_users = $this->common->select_data_by_condition('freelancer_post_reg', $condition_array, $data, $short_by, $order_by, $limit, $offset, $join_str = array());
-
-        //For Count Business Register User Data
-        $condition_array = array('is_deleted' => '0','business_step' => '4');
-        $data="business_profile_id";
-        $this->data['business_list'] = $get_users = $this->common->select_data_by_condition('business_profile', $condition_array, $data, $short_by, $order_by, $limit, $offset, $join_str = array());
-        
-        //For Count Artistic Register User Data
-        $condition_array = array('is_delete' => '0','art_step' =>'4');
-        $data="art_id";
-        $this->data['artistic_list'] = $get_users = $this->common->select_data_by_condition('art_reg', $condition_array, $data, $short_by, $order_by, $limit, $offset, $join_str = array());
-
+        $business_sql = "SELECT COUNT(*) as total_business FROM ailee_business_profile bp LEFT JOIN ailee_user_login ul ON ul.user_id = bp.user_id WHERE ul.status = '1' AND ul.is_delete = '0' AND bp.status = '1' AND bp.is_deleted = '0' AND bp.business_step ='4'";
+        $this->data['business_count'] = $this->db->query($business_sql)->row()->total_business;
 
         $date = date('Y-m-d');
+        $visit_sql = "SELECT COUNT(*) as total_visit FROM ailee_user_visit WHERE insert_date >= '".$date."'";
+        $this->data['user_visit'] = $this->db->query($visit_sql)->row()->total_visit;
 
-        $contition_array = array('insert_date' => $date);
+        $contition_array = array('insert_date >= ' => $date);
         $user_visit = $this->common->select_data_by_condition('user_visit', $contition_array, $data = 'id', $sortby = '', $orderby = '', $limit = '', $offset = '', $join_str = array(), $groupby = '');
         $this->data['count_visit'] = count($user_visit);
         
