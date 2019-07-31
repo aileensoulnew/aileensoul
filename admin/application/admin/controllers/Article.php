@@ -208,7 +208,7 @@ class Article extends CI_Controller {
         // $id = $_POST['id'];
         $id = $this->input->post('id');
         
-        $art_data = array('status' => 'publish');
+        $art_data = array('status' => 'reject');
         $this->db->where('post_id', $id);
         $this->db->where('post_for', 'article');
         $update = $this->db->update('user_post', $art_data);
