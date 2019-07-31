@@ -41,7 +41,7 @@ class Business extends CI_Controller
             $orderby = 'desc';
         }
         $this->data['offset'] = $offset;
-        $data = 'business_profile_id,user_id,contact_person,company_name,contact_email,country ,state,city,created_date,modified_date ,status,is_deleted';
+        $data = 'business_profile_id,user_id,contact_person,business_user_image,company_name,contact_email,country ,state,city,created_date,modified_date ,status,is_deleted';
         $contition_array = array();// array('is_deleted' => '0');
         $this->data['users'] = $this->common->select_data_by_condition('business_profile', $contition_array, $data, $sortby, $orderby, $limit, $offset, $join_str = array(), $groupby = '');
         // This is userd for pagination offset and limoi End
@@ -164,9 +164,9 @@ class Business extends CI_Controller
                 $orderby = 'asc';
             }
             $this->data['offset'] = $offset;
-            $data = 'business_profile_id, user_id, contact_person, company_name, contact_email, country , state,city, business_profile_image, created_date, modified_date , status, is_deleted';
+            $data = 'business_profile_id, user_id, contact_person, company_name, contact_email, country , state,city, business_user_image, created_date, modified_date , status, is_deleted';
             $search_condition = "(company_name LIKE '%$search_keyword%' OR contact_email LIKE '%$search_keyword%')";
-            $contition_array = array('is_deleted' => '0');
+            $contition_array = array();//array('is_deleted' => '0');
             $this->data['users'] = $this->common->select_data_by_search('business_profile', $search_condition, $contition_array, $data, $sortby, $orderby, $limit, $offset);
             // This is userd for pagination offset and limoi End
 
@@ -202,9 +202,9 @@ class Business extends CI_Controller
                 $orderby = 'asc';
             }
             $this->data['offset'] = $offset;
-            $data = 'business_profile_id, user_id, contact_person, company_name, contact_email, country , state, city, business_profile_image, created_date, modified_date , status, is_deleted';
+            $data = 'business_profile_id, user_id, contact_person, company_name, contact_email, country , state, city, business_user_image, created_date, modified_date , status, is_deleted';
             $search_condition = "(company_name LIKE '%$search_keyword%' OR contact_email LIKE '%$search_keyword%')";
-            $contition_array = array('is_deleted' => '0');
+            $contition_array = array();//array('is_deleted' => '0');
             $this->data['users'] = $this->common->select_data_by_search('business_profile', $search_condition, $contition_array, $data, $sortby, $orderby, $limit, $offset);
             // This is userd for pagination offset and limoi End
 

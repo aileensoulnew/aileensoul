@@ -76,7 +76,7 @@ echo $leftmenu;
                                     {
                                         $segment2 = 'search';
                                     } ?>
-                                    <th><i class="fa fa-bullhorn"></i> 
+                                    <th width="5%"><i class="fa fa-bullhorn"></i> 
                                         <a href="javascript:void(0);">ID.</a>
                                     </th>
                                     <th><i class="fa fa-user"></i>
@@ -103,7 +103,7 @@ echo $leftmenu;
                                     <!-- <th><i class="fa fa-fw fa-pencil"></i> 
                                         <a href="javascript:void(0);">Modify Date</a>
                                     </th> -->
-                                    <th><i class=" fa fa-edit"></i> 
+                                    <th width="10%"><i class="fa fa-edit"></i> 
                                         <a href="javascript:void(0);">Action</a>
                                     </th>
                                 </tr>
@@ -126,11 +126,11 @@ echo $leftmenu;
                                                 echo $countryname; ?>
                                             </td>
                                             <td><?php
-                                                if($user['business_profile_image']) 
+                                                if($user['business_user_image']) 
                                                 { ?>
-                                                    <img src="<?php echo SITEURL . $this->config->item('bus_profile_thumb_upload_path') . $user['business_profile_image']; ?>" alt=""  style="height: 70px; width: 70px;">
+                                                    <img src="<?php echo SITEURL . $this->config->item('bus_profile_thumb_upload_path') . $user['business_user_image']; ?>" alt=""  style="height: 50px; width: 50px;">
                                                 <?php }else{ ?>
-                                                    <img alt="" style="height: 70px; width: 70px;" class="img-circle" src="<?php echo SITEURL.(NOIMAGE); ?>" alt="" />
+                                                    <img alt="" style="height: 50px; width: 50px;" class="img-circle" src="<?php echo SITEURL.(NOIMAGE); ?>" alt="" />
                                                 <?php } ?>
                                             </td>
                                             <!-- <td id="active<?php //echo $user['business_profile_id']?>"><?php 
