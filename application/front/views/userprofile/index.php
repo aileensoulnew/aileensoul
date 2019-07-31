@@ -1,4 +1,13 @@
-<?php $user_id = $this->session->userdata('aileenuser'); ?>
+<?php $user_id = $this->session->userdata('aileenuser');
+if ($this->agent->is_mobile())
+{
+    define('USER_MAIN_UPLOAD_URL_NEW', BASEURL . 'uploads/user_profile/mobile/');
+}
+else
+{
+    define('USER_MAIN_UPLOAD_URL_NEW', USER_MAIN_UPLOAD_URL);
+}
+?>
 <!DOCTYPE html>
 <html lang="en" ng-app="userProfileApp" ng-controller="userProfileController">
     <head>
@@ -134,7 +143,7 @@
                     <div class="modal-body">
                         <div class="mes">
                             <?php if($userdata['user_image'] != ""){ ?>
-                                <img src="<?php echo USER_MAIN_UPLOAD_URL . $userdata['user_image']; ?>">
+                                <img src="<?php echo USER_MAIN_UPLOAD_URL_NEW . $userdata['user_image']; ?>">
                             <?php } ?>
                         </div>
                     </div>
@@ -149,7 +158,7 @@
                     <div class="modal-body">
                         <div class="mes">
                             <?php if ($userdata['user_image'] != ''){ ?>
-                                <img src="<?php echo USER_MAIN_UPLOAD_URL . $userdata['user_image']; ?>">
+                                <img src="<?php echo USER_MAIN_UPLOAD_URL_NEW . $userdata['user_image']; ?>">
                             <?php } else if (strtoupper($userdata['user_gender']) == "M"){ ?>
                                 <img src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                             <?php } else{ ?>

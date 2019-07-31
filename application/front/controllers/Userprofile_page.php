@@ -967,13 +967,13 @@ class Userprofile_page extends MY_Controller {
         $data = $_POST['image'];
         list($type, $data) = explode(';', $data);
         list(, $data) = explode(',', $data);
-        $user_bg_path = $this->config->item('user_main_upload_path');
+        $user_main_pro_path = $this->config->item('user_main_upload_path');
         $imageName = time() . '.jpg';
         $data = base64_decode($data);
-        $file = $user_bg_path . $imageName;
-        file_put_contents($user_bg_path . $imageName, $data);
+        $file = $user_main_pro_path . $imageName;
+        file_put_contents($user_main_pro_path . $imageName, $data);
         $success = file_put_contents($file, $data);
-        $main_image = $user_bg_path . $imageName;
+        $main_image = $user_main_pro_path . $imageName;
         $main_image_size = filesize($main_image);
 
         if ($main_image_size > '1000000') {
@@ -999,18 +999,19 @@ class Userprofile_page extends MY_Controller {
         $instanse10 = "image10";
         $this->load->library('image_lib', $pro_pic_config, $instanse10);
         /* RESIZE */
-        
 
         $user_thumb_path = $this->config->item('user_thumb_upload_path');
         $user_thumb_width = $this->config->item('user_thumb_width');
         $user_thumb_height = $this->config->item('user_thumb_height');
 
-        if (!file_exists($user_bg_path . $imageName)) {
+        $this->common->resizeImage($file,$this->config->item('user_mobile_upload_path'),$imageName,60,'','',0);
+
+        if (!file_exists($user_main_pro_path . $imageName)) {
             $imageName = '';
         }
         else
         {
-            $upload_image = $user_bg_path . $imageName;
+            $upload_image = $user_main_pro_path . $imageName;
 
             $thumb_image_uplode = $this->thumb_img_uplode($upload_image, $imageName, $user_thumb_path, $user_thumb_width, $user_thumb_height);
 

@@ -1,5 +1,13 @@
 <?php $user_id = $this->session->userdata('aileenuser');
-$is_user_monetize = $this->common->is_user_monetize(); ?>
+$is_user_monetize = $this->common->is_user_monetize();
+if ($this->agent->is_mobile())
+{
+    define('USER_MAIN_UPLOAD_URL_NEW', BASEURL . 'uploads/user_profile/mobile/');
+}
+else
+{
+    define('USER_MAIN_UPLOAD_URL_NEW', USER_MAIN_UPLOAD_URL);
+} ?>
 <div class="middle-section middle-section-banner">
 
     <div class="container-fluid bnr mob-banner">
@@ -82,27 +90,11 @@ $is_user_monetize = $this->common->is_user_monetize(); ?>
                 <div id="user-profile" class="profile-img">
 
                     <?php
-                    if ($userdata['user_image'] != '') {
-                        $filename = $this->config->item('user_thumb_upload_path') . $userdata['user_image'];
-                        $s3 = new S3(awsAccessKey, awsSecretKey);
-                        $this->data['info'] = $info = $s3->getObjectInfo(bucket, $filename);
-                        //if(file_exists(USER_MAIN_UPLOAD_URL . $userdata['user_image'])){ ?>
+                    if ($userdata['user_image'] != '') { ?>
                             <a class="other-user-profile" hrerf="#" data-toggle="modal" data-target="#other-user-profile-img">
-                                <img src="<?php echo USER_MAIN_UPLOAD_URL . $userdata['user_image']; ?>">
+                                <img src="<?php echo USER_MAIN_UPLOAD_URL_NEW . $userdata['user_image']; ?>">
                             </a>
                         <?php
-                        /*}
-                        else
-                        { ?>
-                            <a class="other-user-profile" hrerf="#">
-                                <?php if(strtoupper($userdata['user_gender']) == "M"): ?>
-                                    <img src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                <?php else: ?>
-                                    <img src="<?php echo base_url('assets/img/female-user.jpg') ?>">
-                                <?php endif; ?>
-                            </a>
-                        <?php   
-                        }*/
                     } else {
                         $a = $userdata['first_name'];
                         $acr = substr($a, 0, 1);
@@ -110,11 +102,7 @@ $is_user_monetize = $this->common->is_user_monetize(); ?>
                         $b = $userdata['last_name'];
                         $acr1 = substr($b, 0, 1);
                         ?>
-                        <!-- <div class="post-img-user"> -->
-                            <?php 
-                            // strtoupper($userdata['user_gender']) == "M"
-                            // strtoupper($userdata['user_gender']) == "F"
-                            //echo ucfirst(strtolower($acr)) . ucfirst(strtolower($acr1)); ?>
+                        <!-- <div class="post-img-user"> -->                            
                             <a class="other-user-profile" hrerf="#">
                                 <?php if(strtoupper($userdata['user_gender']) == "M"): ?>
                                     <img src="<?php echo base_url('assets/img/man-user.jpg') ?>">
@@ -122,7 +110,6 @@ $is_user_monetize = $this->common->is_user_monetize(); ?>
                                     <img src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                 <?php endif; ?>
                             </a>
-
                         <!-- </div> -->
                     <?php } ?>
                     <div ng-if="live_slug == segment2" class="upload-profile">

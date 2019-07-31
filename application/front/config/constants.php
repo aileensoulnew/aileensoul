@@ -63,7 +63,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
 
     define('SOCKETSERVER', 'http://chat.aileensoul.localhost:3000');
 
-    define('PROMOTEDPOST', '12483,15909');
+    define('PROMOTEDPOST', '15909');
     define('PROMOTEDPOSTNEW', '17658');
     error_reporting(0);
 }else if ($_SERVER['HTTP_HOST'] == 'staging.aileensoul.com') {
@@ -87,7 +87,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
 
     define('SOCKETSERVER', 'https://message.aileensoul.com:3000');    
 
-    define('PROMOTEDPOST', '12483,15909');
+    define('PROMOTEDPOST', '15909');
     define('PROMOTEDPOSTNEW', '17658');
     error_reporting(0);
 } else {
@@ -111,7 +111,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['SERVER_ADDR'] == '127.0.0.
 
     define('SOCKETSERVER', 'https://message.aileensoul.com:3000');
 
-    define('PROMOTEDPOST', '12483,15909');
+    define('PROMOTEDPOST', '15909');
     define('PROMOTEDPOSTNEW', '17658');
     error_reporting(0);
 }
