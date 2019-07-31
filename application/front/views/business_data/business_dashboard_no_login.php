@@ -10,6 +10,22 @@ else{
 }
 $contact_email_txt = $business_data[0]['contact_email'];
 $login_user_id = $this->session->userdata('aileenuser');
+if ($this->agent->is_mobile())
+{
+    define('USER_POST_MAIN_UPLOAD_URL_NEW', BASEURL . 'uploads/user_post/mobile/');
+}
+elseif ($this->agent->is_robot())
+{
+    define('USER_POST_MAIN_UPLOAD_URL_NEW', BASEURL . 'uploads/user_post/main/');
+}
+elseif ($this->agent->is_browser())
+{
+    define('USER_POST_MAIN_UPLOAD_URL_NEW', BASEURL . 'uploads/user_post/main/');
+}
+else
+{
+    define('USER_POST_MAIN_UPLOAD_URL_NEW', BASEURL . 'uploads/user_post/main/');
+}
 ?>
 <!DOCTYPE html>
 <html ng-app="businessProfileApp" ng-controller="businessProfileController">
@@ -810,7 +826,7 @@ $login_user_id = $this->session->userdata('aileenuser');
                                                     <div class="mySlides mySlides2{{post.post_data.id}}" ng-if="post.post_data.post_for != 'article'" ng-repeat="_photoData in post.post_file_data">
                                                         <div class="numbertext">{{$index + 1}} / {{post.post_data.total_post_files}}</div>
                                                         <div class="slider_img_p">
-                                                            <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
+                                                            <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL_NEW ?>{{_photoData.filename}}" alt="1Image-{{$index}}" id="element_load_{{$index + 1}}">
                                                         </div>
                                                     </div> 
                                                 </div>

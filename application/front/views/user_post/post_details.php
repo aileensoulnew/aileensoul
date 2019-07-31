@@ -1,3 +1,21 @@
+<?php 
+if ($this->agent->is_mobile())
+{
+    define('USER_POST_MAIN_UPLOAD_URL_NEW', BASEURL . 'uploads/user_post/mobile/');
+}
+elseif ($this->agent->is_robot())
+{
+    define('USER_POST_MAIN_UPLOAD_URL_NEW', BASEURL . 'uploads/user_post/main/');
+}
+elseif ($this->agent->is_browser())
+{
+    define('USER_POST_MAIN_UPLOAD_URL_NEW', BASEURL . 'uploads/user_post/main/');
+}
+else
+{
+    define('USER_POST_MAIN_UPLOAD_URL_NEW', BASEURL . 'uploads/user_post/main/');
+}
+?>
 <!DOCTYPE html>
 <html lang="en" ng-app="postDetailsApp" ng-controller="postDetailsController">
     <head>
@@ -489,7 +507,7 @@
                                                         <div class="mySlides mySlides2{{post.share_data.data.post_data.id}}" ng-repeat="_photoData in post.share_data.data.post_file_data">
                                                             <div class="numbertext">{{$index + 1}} / {{post.share_data.data.post_data.total_post_files}}</div>
                                                             <div class="slider_img_p">
-                                                                <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
+                                                                <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL_NEW ?>{{_photoData.filename}}" alt="1-Image-{{$index}}" id="element_load_{{$index + 1}}">
                                                             </div>
                                                         </div>                                
                                                     </div>
@@ -568,7 +586,7 @@
                                             <div class="mySlides mySlides2{{post.post_data.id}}" ng-repeat="_photoData in post.post_file_data">
                                                 <div class="numbertext">{{$index + 1}} / {{post.post_data.total_post_files}}</div>
                                                 <div class="slider_img_p">
-                                                    <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
+                                                    <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL_NEW ?>{{_photoData.filename}}" alt="2-Image-{{$index}}" id="element_load_{{$index + 1}}">
                                                 </div>
                                             </div>                                
                                         </div>
@@ -1361,7 +1379,7 @@
                                                                 <div class="mySlides mySlides2{{share_post_data.share_data.data.post_data.id}}" ng-repeat="_photoData in share_post_data.share_data.data.post_file_data">
                                                                     <div class="numbertext">{{$index + 1}} / {{share_post_data.share_data.data.post_data.total_post_files}}</div>
                                                                     <div class="slider_img_p">
-                                                                        <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
+                                                                        <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL_NEW ?>{{_photoData.filename}}" alt="3-Image-{{$index}}" id="element_load_{{$index + 1}}">
                                                                     </div>
                                                                 </div>                                
                                                             </div>
@@ -1488,7 +1506,7 @@
                                                 <div class="mySlides mySlides2{{share_post_data.post_data.id}}" ng-repeat="_photoData in share_post_data.post_file_data">
                                                     <div class="numbertext">{{$index + 1}} / {{share_post_data.post_data.total_post_files}}</div>
                                                     <div class="slider_img_p">
-                                                        <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
+                                                        <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL_NEW ?>{{_photoData.filename}}" alt="4-Image-{{$index}}" id="element_load_{{$index + 1}}">
                                                     </div>
                                                 </div>                                
                                             </div>

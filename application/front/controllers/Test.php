@@ -168,5 +168,41 @@ class Test extends MY_Controller {
         
     }
 
+    public function mobile_convert()
+    {
+        $dir = 'uploads/user_post/main/';
+        $file_display = array('jpg', 'jpeg', 'png', 'gif');//array('gif');
+        if ( file_exists( $dir ) == false ) {
+            echo 'Directory \'', $dir, '\' not found!';
+        } else {
+            $dir_contents = scandir( $dir );
+            // print_r($dir_contents);exit();
+            $cnt = 0;
+            foreach ( $dir_contents as $file ) {
+                if($file !== '.' && $file !== '..')
+                {
+                    $ext = explode('.',$file);
+                    $file_type = strtolower(  $ext[count($ext) - 1] );
+                    if (in_array( $file_type, $file_display)) {
+                        $filename = $ext[0];
+                        $upload_path = 'uploads/user_post/mobile/';
+                        $upload_url = 'uploads/user_post/main/'.$file;
+                        if (!file_exists($upload_path.$filename.".jpg")) {
+                            echo $file."====";
+                            $this->common->resizeImage($upload_url,$upload_path,$filename.".jpg",60,'','',0);
+                            echo $cnt."<br>";
+                        }
+                        if($cnt == 1)
+                        {
+                            // break;
+                        }
+                        $cnt++;
+                    }
+                }
+            }
+            // echo $cnt;
+        }
+    }
+
   
 }

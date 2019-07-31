@@ -1,3 +1,21 @@
+<?php 
+if ($this->agent->is_mobile())
+{
+    define('USER_POST_MAIN_UPLOAD_URL_NEW', BASEURL . 'uploads/user_post/mobile/');
+}
+elseif ($this->agent->is_robot())
+{
+    define('USER_POST_MAIN_UPLOAD_URL_NEW', BASEURL . 'uploads/user_post/main/');
+}
+elseif ($this->agent->is_browser())
+{
+    define('USER_POST_MAIN_UPLOAD_URL_NEW', BASEURL . 'uploads/user_post/main/');
+}
+else
+{
+    define('USER_POST_MAIN_UPLOAD_URL_NEW', BASEURL . 'uploads/user_post/main/');
+}
+?>
 <div class="container pt15 main-dashboard">
 
 	<div class="full-box">
@@ -56,7 +74,7 @@
 	 			<div class="slider_img_p">	 				
 	 				<img ng-if="_photoData.filetype == 'profile_picture'" ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
                     <img ng-if="_photoData.filetype == 'cover_picture'" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
-                    <img ng-if="_photoData.filetype == 'image'" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
+                    <img ng-if="_photoData.filetype == 'image'" ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL_NEW ?>{{_photoData.filename}}" alt="Image-{{$index}}" id="element_load_{{$index + 1}}">
 	 			</div>
 	 		</div>	 		
 	 	</div>
