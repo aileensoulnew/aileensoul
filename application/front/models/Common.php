@@ -1093,7 +1093,7 @@ class Common extends CI_Model {
         return true;
     }
 
-    public function resizeImage($sourceImage, $path, $targetImage, $quality = 80, $thumbs_path, $resize1_path,$create_thumb = 1){
+    public function resizeImage($sourceImage, $path, $targetImage, $quality = 80, $thumbs_path, $resize1_path,$create_thumb = 1,$user_width = '',$user_height = ''){
         $mime = getimagesize($sourceImage);
         if ($mime['mime'] == 'image/png') {
             $main_image1 = @imagecreatefrompng($sourceImage);
@@ -1158,6 +1158,14 @@ class Common extends CI_Model {
         // Calculate new image dimensions.
         $newWidth  = (int) $origWidth * $ratio;
         $newHeight = (int) $origHeight * $ratio;
+        if($user_width != '')
+        {
+            $newWidth = $user_width;
+        }
+        if($user_height != '')
+        {
+            $newHeight = $user_height;
+        }
 
         // Create final image with new dimensions.
         $newImage = imagecreatetruecolor($newWidth, $newHeight);
