@@ -174,7 +174,7 @@ class Test extends MY_Controller {
         ini_set("memory_limit","512M");
 
         $dir = 'uploads/user_post/main/';
-        $file_display = array('jpg', 'jpeg', 'png', 'gif');//array('gif');
+        $file_display = array('jpg');//, 'jpeg', 'png', 'gif');//array('gif');
         if ( file_exists( $dir ) == false ) {
             echo 'Directory \'', $dir, '\' not found!';
         } else {
@@ -188,11 +188,12 @@ class Test extends MY_Controller {
                     $file_type = strtolower(  $ext[count($ext) - 1] );
                     if (in_array( $file_type, $file_display)) {
                         $filename = $ext[0];
-                        $upload_path = 'uploads/user_post/mobile/';
-                        $upload_url = 'uploads/user_post/main/'.$file;
-                        if (!file_exists($upload_path.$filename.".jpg")) {
+                        $upload_path = 'uploads/user_post/resize90/';
+                        $upload_url = 'uploads/user_post/main/';
+                        if (!file_exists($upload_path.$file)) {
                             echo $file."====";
-                            $this->common->resizeImage($upload_url,$upload_path,$filename.".jpg",60,'','',0);
+                            // $this->common->resizeImage($upload_url,$upload_path,$filename.".jpg",60,'','',0);
+                            $this->common->createThumbnailHeight($upload_url,$file,$upload_path,92);
                             echo $cnt."<br>";
                         }
                         if($cnt == 1)

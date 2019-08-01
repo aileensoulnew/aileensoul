@@ -1390,9 +1390,9 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
             {
                 $("#edit-profile-move").hide();
             }
-            if(hashtag_count < 5){
+            /*if(hashtag_count < 5){
                 $("#hashtag-popup").modal('show');
-            }
+            }*/
             $scope.set_progress(count_profile_value,count_profile);
         },function errorCallback(response) {
             setTimeout(function(){

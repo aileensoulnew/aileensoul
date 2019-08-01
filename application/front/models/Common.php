@@ -1093,7 +1093,28 @@ class Common extends CI_Model {
         return true;
     }
 
-    public function resizeImage($sourceImage, $path, $targetImage, $quality = 80, $thumbs_path, $resize1_path,$create_thumb = 1,$user_width = '',$user_height = ''){
+    public function createThumbnailHeight($imageDirectory, $imageName, $thumbDirectory, $thumbHeight) {
+        /* read the source image */
+        $source_image = imagecreatefromjpeg("$imageDirectory/$imageName");
+        $width = imagesx($source_image);
+        $height = imagesy($source_image);
+        
+        /* find the "desired height" of this thumbnail, relative to the desired width  */
+        $desired_width = floor($width * ($thumbHeight / $height));
+        
+        /* create a new, "virtual" image */
+        $virtual_image = imagecreatetruecolor($desired_width, $thumbHeight);
+        imageinterlace($virtual_image, true);
+        
+        /* copy source image at a resized size */
+        imagecopyresampled($virtual_image, $source_image, 0, 0, 0, 0, $desired_width, $thumbHeight, $width, $height);
+        
+        /* create the physical thumbnail image to its destination */
+        imagejpeg($virtual_image, "$thumbDirectory/$imageName");
+        return true;
+    }
+
+    public function resizeImage($sourceImage, $path, $targetImage, $quality = 80, $thumbs_path, $resize1_path,$create_thumb = 1,$user_width = '',$user_height = '',$resize2_path = ''){
         $mime = getimagesize($sourceImage);
         if ($mime['mime'] == 'image/png') {
             $main_image1 = @imagecreatefrompng($sourceImage);
@@ -1176,6 +1197,7 @@ class Common extends CI_Model {
         {            
             $this->createThumbnail($path,$targetImage,$thumbs_path,560);//thumb,resize4        
             $this->createThumbnail($path,$targetImage,$resize1_path,280);//resize1,resize2
+            $this->createThumbnailHeight($path,$targetImage,$resize2_path,92);//resize1,resize2
         }
         
         // Free up the memory.

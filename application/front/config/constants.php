@@ -399,6 +399,9 @@ if (IMAGEPATHFROM == 's3bucket') {
     // USER POST THUMBS
     define('USER_POST_THUMB_UPLOAD_URL', BASEURL . 'uploads/user_post/thumbs/');
 
+    // USER POST 90
+    define('USER_POST_90x90_UPLOAD_URL', BASEURL . 'uploads/user_post/resize90/');
+
     // USER POST 335 X 320
     define('USER_POST_RESIZE1_UPLOAD_URL', BASEURL . 'uploads/user_post/resize1/');
 

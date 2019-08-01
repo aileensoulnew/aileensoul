@@ -1607,6 +1607,9 @@ class User_post extends MY_Controller {
 
 
                                 exec("ffmpeg -ss 00:00:05 -i " . $upload_data['full_path'] . " -vframes 1 -q:v 2 " . $upload_data['file_path'] . $upload_data['raw_name'] . ".jpg");
+
+                                $this->common->createThumbnailHeight($this->config->item('user_post_main_upload_path'),$upload_data['raw_name'].".jpg",$this->config->item('user_post_resize90_upload_path'),92);
+
                                 //$fileName = $response['result'][$i]['file_name'] = $upload_data['raw_name'] . "" . $upload_data['file_ext'];
                                 $fileName = $response['result'][$i]['file_name'] = $upload_data['raw_name'] . ".m3u8";
                                 if (IMAGEPATHFROM == 's3bucket') {
@@ -1617,7 +1620,7 @@ class User_post extends MY_Controller {
                             //Main Image
                             if ($file_type == 'image') {
                                 $fileName = $store_file_name;
-                                $this->common->resizeImage($_FILES['postfiles']['tmp_name'],$this->config->item('user_post_main_upload_path'),$fileName,90,$this->config->item('user_post_thumb_upload_path'),$this->config->item('user_post_resize1_upload_path'));
+                                $this->common->resizeImage($_FILES['postfiles']['tmp_name'],$this->config->item('user_post_main_upload_path'),$fileName,90,$this->config->item('user_post_thumb_upload_path'),$this->config->item('user_post_resize1_upload_path'),1,'','',$this->config->item('user_post_resize90_upload_path'));
 
                                 $this->common->resizeImage($_FILES['postfiles']['tmp_name'],$this->config->item('user_post_mobile_upload_path'),$fileName,60,'','',0);
                             }                            

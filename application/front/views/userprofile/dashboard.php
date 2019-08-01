@@ -94,7 +94,6 @@ else
                 <div class="dash-info-box" ng-if="user_skills.length > '0'">
                     <h4>
                         <svg width="17px" height="16px" viewBox="0 0 2133.000000 2133.000000">
-
                         <g transform="translate(0.000000,2133.000000) scale(0.100000,-0.100000)"
                         fill="#5c5c5c" stroke="none">
                         <path d="M8800 21304 c-529 -81 -974 -188 -1470 -354 -1547 -515 -2916 -1458
@@ -192,9 +191,9 @@ else
                 </div>
                 <div class="media-display">
                     <div class="all-meda" ng-repeat="imageData in postImageData | limitTo : 6">
-                        <img ng-if="imageData.filetype == 'profile_picture'" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{imageData.filename}}" alt="Image" ng-click="openModal2('myModalImage');currentSlide2($index + 1,'Image');load_more_photos();">
+                        <img ng-if="imageData.filetype == 'profile_picture'" ng-src="<?php echo USER_PROFILE_80x80_UPLOAD_URL ?>{{imageData.filename}}" alt="Image" ng-click="openModal2('myModalImage');currentSlide2($index + 1,'Image');load_more_photos();">
                         <img ng-if="imageData.filetype == 'cover_picture'" ng-src="<?php echo USER_BG_THUMB_UPLOAD_URL ?>{{imageData.filename}}" alt="Image" ng-click="openModal2('myModalImage');currentSlide2($index + 1,'Image');load_more_photos();">
-                        <img ng-if="imageData.filetype == 'image'" ng-src="<?php echo USER_POST_THUMB_UPLOAD_URL ?>{{imageData.filename}}" alt="Image" ng-click="openModal2('myModalImage');currentSlide2($index + 1,'Image');load_more_photos();">
+                        <img ng-if="imageData.filetype == 'image'" ng-src="<?php echo USER_POST_90x90_UPLOAD_URL ?>{{imageData.filename}}" alt="Image" ng-click="openModal2('myModalImage');currentSlide2($index + 1,'Image');load_more_photos();">
                     </div>
                 </div>
             </div>
@@ -210,7 +209,7 @@ else
                 <div class="media-display">
                     <div class="all-meda" ng-repeat="videoData in postVideoData | limitTo : 6">
                         <a href="#" ng-click="openModal2('myModalVideo');currentSlide2($index + 1,'Video');load_more_videos();">
-                            <img ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{videoData.filename | removeLastCharacter}}jpg" alt="Image">
+                            <img ng-src="<?php echo USER_POST_90x90_UPLOAD_URL ?>{{videoData.filename | removeLastCharacter}}jpg" alt="Image">
                         </a>
                     </div>
                 </div>
@@ -264,7 +263,7 @@ else
                         <?php endif; ?>
                             <label dd-text-collapse dd-text-collapse-max-length="30" dd-text-collapse-text="{{pdfData.description}}" dd-text-collapse-cond="false" class="pdf-title" ng-if="pdfData.post_for == 'simple'">{{pdfData.description}}</label>
                             <label dd-text-collapse dd-text-collapse-max-length="30" dd-text-collapse-text="{{post.simple_data.description}}" dd-text-collapse-cond="false" class="pdf-title" ng-if="pdfData.post_for == 'opportunity'">{{pdfData.opportunity}}</label>
-                            <img ng-src="<?php echo base_url('assets/images/PDF.jpg') ?>">
+                            <img ng-src="<?php echo base_url('assets/images/pdf-92.jpg') ?>">
                         </a>
                     </div>
                 </div>
@@ -462,8 +461,8 @@ else
                                                     
                                     <div class="post-img no-profile-pic" ng-if="post.post_data.post_for != 'question' && post.user_data.user_image == ''">
                                         <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}">
-                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user-50.jpg') ?>">
+                                            <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user-50.jpg') ?>">
                                         </a>
                                     </div>
                                                     
@@ -625,9 +624,9 @@ else
                                                 <div class="post-head">
                                                     <div class="post-img" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.post_data.post_for == 'question'">
                                                         <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" target="_self" ng-if="post.share_data.data.question_data.is_anonymously == '0'" data-toggle="popover" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}">
-                                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.share_data.data.user_data.user_image}}" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image != '' && post.share_data.data.question_data.is_anonymously == '0'">
-                                                            <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image == '' && post.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                                            <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image == '' && post.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                            <img ng-src="<?php echo USER_PROFILE_50x50_UPLOAD_URL ?>{{post.share_data.data.user_data.user_image}}" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image != '' && post.share_data.data.question_data.is_anonymously == '0'">
+                                                            <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image == '' && post.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user-50.jpg') ?>">
+                                                            <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image == '' && post.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user-50.jpg') ?>">
                                                         </a>
                                                                         
                                                         <span class="no-img-post"  ng-if="post.share_data.data.user_data.user_image == '' || post.share_data.data.question_data.is_anonymously == '1'">A</span>
@@ -641,8 +640,8 @@ else
 
                                                     <div class="post-img no-profile-pic" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.post_data.post_for != 'question' && post.share_data.data.user_data.user_image == ''">
                                                         <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" target="_self" data-toggle="popover" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}">
-                                                            <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                                            <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                            <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user-50.jpg') ?>">
+                                                            <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user-50.jpg') ?>">
                                                         </a>
                                                     </div>
 
@@ -979,8 +978,8 @@ else
                                             <li class="like-img" ng-if="post.user_like_list.length > 0" ng-repeat="user_like in post.user_like_list">
                                                 <a class="ripple" href="<?php echo base_url(); ?>{{user_like.user_slug}}" target="_self" title="{{user_like.fullname}}">
                                                     <img ng-if="user_like.user_image" ng-src="<?php echo USER_PROFILE_30x30_UPLOAD_URL; ?>{{user_like.user_image}}">
-                                                    <img ng-if="!user_like.user_image && user_like.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                                    <img ng-if="!user_like.user_image && user_like.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                    <img ng-if="!user_like.user_image && user_like.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user-30.jpg') ?>">
+                                                    <img ng-if="!user_like.user_image && user_like.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user-30.jpg') ?>">
                                                 </a>
                                             </li>                                   
                                             <li class="like-img">
@@ -1041,8 +1040,8 @@ else
                                             </div>
                                             <div class="post-img" ng-if="comment.user_image == ''">
                                                 <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" data-toggle="popover" data-uid="{{comment.commented_user_id}}" data-utype="1">
-                                                    <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                                    <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                    <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user-30.jpg') ?>">
+                                                    <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user-30.jpg') ?>">
                                                 </a>
                                             </div>
                                         </div>
@@ -1095,8 +1094,8 @@ else
                                                 </div>
                                                 <div class="post-img" ng-if="commentreply.user_image == ''">
                                                     <a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self" data-toggle="popover" data-uid="{{commentreply.commented_user_id}}" data-utype="1">
-                                                        <img ng-class="commentreply.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" commentreply.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                                        <img ng-class="commentreply.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" commentreply.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                        <img ng-class="commentreply.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" commentreply.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user-30.jpg') ?>">
+                                                        <img ng-class="commentreply.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" commentreply.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user-30.jpg') ?>">
                                                     </a>
                                                 </div>
                                             </div>
@@ -1145,20 +1144,20 @@ else
                                                 <?php 
                                                 if ($leftbox_data['user_image'] != '')
                                                 { ?> 
-                                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] . '' ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
+                                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_PROFILE_30x30_UPLOAD_URL . $leftbox_data['user_image'] . '' ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
                                                 <?php
                                                 }
                                                 else
                                                 { 
                                                     if($leftbox_data['user_gender'] == "M")
                                                     {?>                                
-                                                        <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                        <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url('assets/img/man-user-30.jpg') ?>">
                                                     <?php
                                                     }
                                                     if($leftbox_data['user_gender'] == "F")
                                                     {
                                                     ?>
-                                                        <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                        <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url('assets/img/female-user-30.jpg') ?>">
                                                     <?php
                                                     }                                
                                                 } ?>
@@ -1195,13 +1194,13 @@ else
                                             { 
                                                 if($leftbox_data['user_gender'] == "M")
                                                 {?>                                
-                                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url('assets/img/man-user-30.jpg') ?>">
                                                 <?php
                                                 }
                                                 if($leftbox_data['user_gender'] == "F")
                                                 {
                                                 ?>
-                                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                    <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url('assets/img/female-user-30.jpg') ?>">
                                                 <?php
                                                 }                                
                                             } ?>
@@ -1313,8 +1312,8 @@ else
                                         </div>
                                         <div class="user-pr-img" ng-if="contact.user_image == ''">
                                             <a href="<?php echo base_url(); ?>{{contact.user_slug}}" >
-                                                <img ng-if="contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                                <img ng-if="contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                <img ng-if="contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user-80.jpg') ?>">
+                                                <img ng-if="contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user-80.jpg') ?>">
                                             </a>
                                         </div>
                                         <div class="user-info-text text-center">
@@ -1784,8 +1783,8 @@ else
                                     <img ng-src="<?php echo USER_PROFILE_50x50_UPLOAD_URL ?>{{userlist.user_image}}">
                                 </a>
                                   <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image == '' || userlist.user_image == null" target="_self" data-toggle="popover" data-uid="{{userlist.user_id}}" data-utype="1">
-                                    <img ng-if="userlist.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                    <img ng-if="userlist.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                    <img ng-if="userlist.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user-50.jpg') ?>">
+                                    <img ng-if="userlist.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user-50.jpg') ?>">
                                 </a>
                                 <div class="like-detail">
                                     <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}" target="_self" data-toggle="popover" data-uid="{{userlist.user_id}}" data-utype="1">{{(userlist.user_id == '<?php echo $user_id; ?>' ? 'You' : userlist.fullname)}}</a></h4>
@@ -1906,20 +1905,20 @@ else
                                     <?php
                                     if ($leftbox_data['user_image'] != '')
                                     { ?>
-                                        <img class="login-user-pro-pic" ng-src="<?php echo USER_THUMB_UPLOAD_URL . $leftbox_data['user_image'] . '' ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
+                                        <img class="login-user-pro-pic" ng-src="<?php echo USER_PROFILE_30x30_UPLOAD_URL . $leftbox_data['user_image'] . '' ?>" alt="<?php echo $leftbox_data['first_name'] ?>">  
                                     <?php
                                     }
                                     else
                                     { 
                                         if($leftbox_data['user_gender'] == "M")
                                         {?>                                
-                                            <img class="login-user-pro-pic" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
+                                            <img class="login-user-pro-pic" ng-src="<?php echo base_url('assets/img/man-user-30.jpg') ?>">
                                         <?php
                                         }
                                         if($leftbox_data['user_gender'] == "F")
                                         {
                                         ?>
-                                            <img class="login-user-pro-pic" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                            <img class="login-user-pro-pic" ng-src="<?php echo base_url('assets/img/female-user-30.jpg') ?>">
                                         <?php
                                         } 
                                     } ?>
@@ -1950,9 +1949,9 @@ else
                                 <div class="post-head" ng-if="share_post_data.post_data.post_for != 'share'">
                                     <div class="post-img" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.post_data.post_for == 'question'">
                                         <a ng-href="<?php echo base_url() ?>{{share_post_data.user_data.user_slug}}" class="post-name" target="_self" ng-if="share_post_data.question_data.is_anonymously == '0'">
-                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{share_post_data.user_data.user_image}}" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.user_data.user_image != '' && share_post_data.question_data.is_anonymously == '0'">
-                                            <img ng-class="share_post_data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.user_data.user_image == '' && share_post_data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                            <img ng-class="share_post_data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.user_data.user_image == '' && share_post_data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                            <img ng-src="<?php echo USER_PROFILE_30x30_UPLOAD_URL ?>{{share_post_data.user_data.user_image}}" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.user_data.user_image != '' && share_post_data.question_data.is_anonymously == '0'">
+                                            <img ng-class="share_post_data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.user_data.user_image == '' && share_post_data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user-30.jpg') ?>">
+                                            <img ng-class="share_post_data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.user_data.user_image == '' && share_post_data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user-30.jpg') ?>">
                                         </a>
                                                         
                                         <span class="no-img-post"  ng-if="share_post_data.user_data.user_image == '' || share_post_data.question_data.is_anonymously == '1'">A</span>
@@ -1960,14 +1959,14 @@ else
 
                                     <div class="post-img" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.post_data.post_for != 'question' && share_post_data.user_data.user_image != ''">
                                         <a ng-href="<?php echo base_url() ?>{{share_post_data.user_data.user_slug}}" class="post-name" target="_self">
-                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{share_post_data.user_data.user_image}}">
+                                            <img ng-src="<?php echo USER_PROFILE_50x50_UPLOAD_URL ?>{{share_post_data.user_data.user_image}}">
                                         </a>
                                     </div>
 
                                     <div class="post-img no-profile-pic" ng-if="share_post_data.post_data.user_type == '1' && share_post_data.post_data.post_for != 'question' && share_post_data.user_data.user_image == ''">
                                         <a ng-href="<?php echo base_url() ?>{{share_post_data.user_data.user_slug}}" class="post-name" target="_self">
-                                            <img ng-class="share_post_data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                            <img ng-class="share_post_data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                            <img ng-class="share_post_data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user-50.jpg') ?>">
+                                            <img ng-class="share_post_data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user-50.jpg') ?>">
                                         </a>
                                     </div>
 
@@ -2094,9 +2093,9 @@ else
                                                 <div class="post-head">
                                                     <div class="post-img" ng-if="share_post_data.share_data.data.post_data.user_type == '1' && share_post_data.share_data.data.post_data.post_for == 'question'">
                                                         <a ng-href="<?php echo base_url() ?>{{share_post_data.share_data.data.user_data.user_slug}}" class="post-name" target="_self" ng-if="share_post_data.share_data.data.question_data.is_anonymously == '0'">
-                                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{share_post_data.share_data.data.user_data.user_image}}" ng-if="share_post_data.share_data.data.post_data.user_type == '1' && share_post_data.share_data.data.user_data.user_image != '' && share_post_data.share_data.data.question_data.is_anonymously == '0'">
-                                                            <img ng-class="share_post_data.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.share_data.data.post_data.user_type == '1' && share_post_data.share_data.data.user_data.user_image == '' && share_post_data.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                                            <img ng-class="share_post_data.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.share_data.data.post_data.user_type == '1' && share_post_data.share_data.data.user_data.user_image == '' && share_post_data.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                            <img ng-src="<?php echo USER_PROFILE_50x50_UPLOAD_URL ?>{{share_post_data.share_data.data.user_data.user_image}}" ng-if="share_post_data.share_data.data.post_data.user_type == '1' && share_post_data.share_data.data.user_data.user_image != '' && share_post_data.share_data.data.question_data.is_anonymously == '0'">
+                                                            <img ng-class="share_post_data.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.share_data.data.post_data.user_type == '1' && share_post_data.share_data.data.user_data.user_image == '' && share_post_data.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user-50.jpg') ?>">
+                                                            <img ng-class="share_post_data.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.share_data.data.post_data.user_type == '1' && share_post_data.share_data.data.user_data.user_image == '' && share_post_data.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user-50.jpg') ?>">
                                                         </a>
                                                                         
                                                         <span class="no-img-post"  ng-if="share_post_data.share_data.data.user_data.user_image == '' || share_post_data.share_data.data.question_data.is_anonymously == '1'">A</span>
@@ -2104,14 +2103,14 @@ else
 
                                                     <div class="post-img" ng-if="share_post_data.share_data.data.post_data.user_type == '1' && share_post_data.share_data.data.post_data.post_for != 'question' && share_post_data.share_data.data.user_data.user_image != ''">
                                                         <a ng-href="<?php echo base_url() ?>{{share_post_data.share_data.data.user_data.user_slug}}" class="post-name" target="_self">
-                                                            <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{share_post_data.share_data.data.user_data.user_image}}">
+                                                            <img ng-src="<?php echo USER_PROFILE_50x50_UPLOAD_URL ?>{{share_post_data.share_data.data.user_data.user_image}}">
                                                         </a>
                                                     </div>
 
                                                     <div class="post-img no-profile-pic" ng-if="share_post_data.share_data.data.post_data.user_type == '1' && share_post_data.share_data.data.post_data.post_for != 'question' && share_post_data.share_data.data.user_data.user_image == ''">
                                                         <a ng-href="<?php echo base_url() ?>{{share_post_data.share_data.data.user_data.user_slug}}" class="post-name" target="_self">
-                                                            <img ng-class="share_post_data.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
-                                                            <img ng-class="share_post_data.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
+                                                            <img ng-class="share_post_data.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user-50.jpg') ?>">
+                                                            <img ng-class="share_post_data.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="share_post_data.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user-50.jpg') ?>">
                                                         </a>
                                                     </div>
 

@@ -929,6 +929,8 @@ $config['user_post_thumb_upload_path'] = 'uploads/user_post/thumbs/';
 $config['user_post_thumb_width'] = '280'; //335
 $config['user_post_thumb_height'] = '220'; //250
 
+$config['user_post_resize90_upload_path'] = 'uploads/user_post/resize90/';
+
 // USER POST 335 X 320
 $config['user_post_resize1_upload_path'] = 'uploads/user_post/resize1/';
 $config['user_post_resize1_width'] = '280'; //335
