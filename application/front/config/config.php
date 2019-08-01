@@ -567,6 +567,9 @@ $config['user_main_max_height'] = '5000';
 // USER PROFILE THUMB IMAGE
 $config['user_thumb_upload_path'] = 'uploads/user_profile/thumbs/';
 $config['user_mobile_upload_path'] = 'uploads/user_profile/mobile/';
+$config['user_80_upload_path'] = 'uploads/user_profile/resize8/';
+$config['user_50_upload_path'] = 'uploads/user_profile/resize5/';
+$config['user_30_upload_path'] = 'uploads/user_profile/resize3/';
 $config['user_thumb_width'] = '160';
 $config['user_thumb_height'] = '160';
 

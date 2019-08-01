@@ -2346,7 +2346,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                         all_html += '<div class="tooltip-user-detail">';
                             all_html += '<div class="tooltip-user-img">';
                                 if(data.user_data.user_image){
-                                    all_html += '<img src="'+user_thumb_upload_url+data.user_data.user_image+'">';
+                                    all_html += '<img src="'+user_profile_80x80_upload_url+data.user_data.user_image+'">';
                                 }
                                 else
                                 {

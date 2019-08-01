@@ -407,6 +407,7 @@ else
             var nobusimage = '<?php echo NOBUSIMAGE; ?>';
             var user_bg_main_upload_url = '<?php echo USER_BG_MAIN_UPLOAD_URL; ?>';
             var user_thumb_upload_url = '<?php echo USER_THUMB_UPLOAD_URL; ?>';
+            var user_profile_80x80_upload_url = '<?php echo USER_PROFILE_80x80_UPLOAD_URL; ?>';
             var message_url = '<?php echo MESSAGE_URL; ?>';
             
             var app = angular.module("userProfileApp", ['ngRoute', 'ui.bootstrap', 'ngTagsInput', 'ngSanitize','ngValidate']);

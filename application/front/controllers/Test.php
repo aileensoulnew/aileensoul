@@ -227,26 +227,39 @@ class Test extends MY_Controller {
                     $file_type = strtolower(  $ext[count($ext) - 1] );
                     if (in_array( $file_type, $file_display)) {
                         $filename = $ext[0];
+                        $upload_path_mobile = 'uploads/user_profile/mobile/';
+                        $upload_url = 'uploads/user_profile/main/'.$file;
+                        if (!file_exists($upload_path_mobile.$filename.".jpg"))
+                        {
+                            echo $file."====";
+                            $this->common->resizeImage($upload_url,$upload_path_mobile,$filename.".jpg",60,'','',0);
+                            echo $cnt."====>";
+                        }
+
                         $upload_path_80 = 'uploads/user_profile/resize8/';
                         $upload_url = 'uploads/user_profile/main/'.$file;
-                        if (!file_exists($upload_path_80.$filename.".jpg")) {
+                        if (!file_exists($upload_path_80.$filename.".jpg"))
+                        {
                             echo $file."====";
                             $this->common->resizeImage($upload_url,$upload_path_80,$filename.".jpg",95,'','',0,80,80);
                             echo $cnt."====>";
                         }
                         $upload_path_50 = 'uploads/user_profile/resize5/';
                         $upload_url = 'uploads/user_profile/main/'.$file;
-                        if (!file_exists($upload_path_50.$filename.".jpg")) {
+                        if (!file_exists($upload_path_50.$filename.".jpg"))
+                        {
                             echo $file."====";
                             $this->common->resizeImage($upload_url,$upload_path_50,$filename.".jpg",95,'','',0,50,50);
                             echo $cnt."====>";
                         }
                         $upload_path_30 = 'uploads/user_profile/resize3/';
-                        if (!file_exists($upload_path_30.$filename.".jpg")) {
+                        if (!file_exists($upload_path_30.$filename.".jpg"))
+                        {
                             echo $file."====";
                             $this->common->resizeImage($upload_url,$upload_path_30,$filename.".jpg",95,'','',0,30,30);
-                            echo $cnt."<br>";
+                            echo $cnt;
                         }
+                        echo "<br>";
                         if($cnt == 0)
                         {
                             // break;

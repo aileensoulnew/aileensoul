@@ -1005,6 +1005,9 @@ class Userprofile_page extends MY_Controller {
         $user_thumb_height = $this->config->item('user_thumb_height');
 
         $this->common->resizeImage($file,$this->config->item('user_mobile_upload_path'),$imageName,60,'','',0);
+        $this->common->resizeImage($file,$this->config->item('user_80_upload_path'),$imageName,95,'','',0,80,80);
+        $this->common->resizeImage($file,$this->config->item('user_50_upload_path'),$imageName,95,'','',0,50,50);
+        $this->common->resizeImage($file,$this->config->item('user_30_upload_path'),$imageName,95,'','',0,30,30);
 
         if (!file_exists($user_main_pro_path . $imageName)) {
             $imageName = '';
