@@ -29,9 +29,9 @@ else
         <!-- <link rel="stylesheet" type="text/css" href="<?php //echo base_url('assets/dragdrop/fileinput.css?ver=' . time()); ?>"> -->
         <!-- <link href="<?php //echo base_url('assets/dragdrop/themes/explorer/theme.css?ver=' . time()) ?>" media="all" rel="stylesheet" type="text/css"/> -->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/as-videoplayer/build/mediaelementplayer.css?ver=' . time()); ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/ng-tags-input.min.css?ver=' . time()) ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css') ?>">
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css?ver=' . time()); ?>" />
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/ng-tags-input.min.css'); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/n-css/component.css'); ?>">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style-main.css'); ?>" />
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-commen.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/n-style.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/n-css/developer.css') ?>">
@@ -360,15 +360,24 @@ else
         <!-- <script src="<?php //echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script> -->
         <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
 
-        <script src="<?php echo base_url('assets/js/angular/angular.min-1.6.4.js?ver=' . time()); ?>"></script>
-        <script data-semver="0.13.0" src="<?php echo base_url('assets/js/angular/ui-bootstrap-tpls-0.13.0.min.js?ver=' . time()); ?>"></script>
+        <!--<script data-semver="0.13.0" src="<?php //echo base_url('assets/js/angular/ui-bootstrap-tpls-0.13.0.min.js?ver=' . time()); ?>"></script>
+
+         <script src="<?php //echo base_url('assets/js/angular/angular.min-1.6.4.js?ver=' . time()); ?>"></script>
+        <script src="<?php //echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
+        <script src="<?php //echo base_url('assets/js/angular/angular-route-1.6.4.min.js?ver=' . time()); ?>"></script>
+        <script src="<?php //echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script>        
+        <script src="<?php //echo base_url('assets/js/angular/angular-sanitize-1.6.4.min.js?ver=' . time()); ?>"></script> -->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular.min.js"></script>
         <script src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
-        <!-- <script src="<?php //echo base_url('assets/js/angular/angular-route-1.6.4.js?ver=' . time()); ?>"></script> -->
-        <script src="<?php echo base_url('assets/js/angular/angular-route-1.6.4.min.js?ver=' . time()); ?>"></script>
-        <script src="<?php echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-route.min.js"></script>
         <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script>        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-sanitize.min.js"></script>
+
+        <!-- <script src="<?php //echo base_url('assets/js/angular/angular-route-1.6.4.js?ver=' . time()); ?>"></script> -->
+        <script src="<?php echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script>
         <!-- <script src="<?php //echo base_url('assets/js/angular/angular-sanitize-1.6.4.js?ver=' . time()); ?>"></script> -->
-        <script src="<?php echo base_url('assets/js/angular/angular-sanitize-1.6.4.min.js?ver=' . time()); ?>"></script>
         <!-- <script src="<?php //echo base_url('8/ninja-slider.js'); ?>" type="text/javascript"></script> -->
         <script src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>        
         <script>
@@ -415,7 +424,8 @@ else
             // var count_profile = '';
         </script>
         
-        <script src="<?php echo SOCKETSERVER; ?>/socket.io/socket.io.js"></script>
+        <!-- <script src="<?php echo SOCKETSERVER; ?>/socket.io/socket.io.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
         <script type="text/javascript">
             var socket = io.connect("<?php echo SOCKETSERVER; ?>");
         </script>
@@ -426,7 +436,7 @@ else
         <!-- <script src="<?php //echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script> -->
         <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js') ?>"></script>
         <script src="<?php echo base_url('assets/js/autosize.js') ?>"></script>
-        <script>    		
+        <script>
     		$(function () {
     			$('a[href="#search"]').on('click', function (event) {
     				event.preventDefault();
@@ -452,182 +462,182 @@ else
             });
 
             function split( val ) {
-                    return val.split( / \s*/ );
-                }
-                function extractLast( term ) {
-                    return split( term ).pop();
-                }
+                return val.split( / \s*/ );
+            }
+            function extractLast( term ) {
+                return split( term ).pop();
+            }
                 
-                function autocomplete_hashtag_keypress(e)
-                {
-                    var re = /^[a-zA-Z0-9#\s]+$/; // or /^\w+$/ as mentioned
-                    if (!re.test(e.key)) {
-                        e.preventDefault();                        
+            function autocomplete_hashtag_keypress(e)
+            {
+                var re = /^[a-zA-Z0-9#\s]+$/; // or /^\w+$/ as mentioned
+                if (!re.test(e.key)) {
+                    e.preventDefault();                        
+                    return false;
+                }
+            }
+
+            function autocomplete_hashtag(id)
+            {
+                $("#"+id).bind( "keydown", function( event ) {
+                    if ( event.keyCode === $.ui.keyCode.TAB &&
+                        $( this ).autocomplete( "instance" ).menu.active ) {
+                        event.preventDefault();
+                    }
+                })
+                .autocomplete({
+                    appendTo: "."+id,
+                    minLength: 2,
+                    source: function( request, response ) {                         
+                        var search_key = extractLast( request.term );
+                        if(search_key[0] == "#")
+                        {
+                            search_key = search_key.substr(1);
+                            $.getJSON(base_url +"general/get_hashtag", { term : search_key},response);
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    },
+                    focus: function() {
+                        // prevent value inserted on focus
                         return false;
+                    },
+                    select: function( event, ui ) {
+                        var terms = split( this.value );
+                        // remove the current input
+                        terms.pop();
+                        // add the selected item
+                        terms.push( ui.item.value );
+                        // add placeholder to get the comma-and-space at the end
+                        terms.push( "" );
+                        this.value = terms.join( " " );
+                        return false;
+                    },
+                });                
+            }
+
+            function placeCaretAtEnd(el) {
+                el.focus();
+                if (typeof window.getSelection != "undefined"
+                        && typeof document.createRange != "undefined") {
+                    var range = document.createRange();
+                    range.selectNodeContents(el);
+                    range.collapse(false);
+                    var sel = window.getSelection();
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                } else if (typeof document.body.createTextRange != "undefined") {
+                    var textRange = document.body.createTextRange();
+                    textRange.moveToElementText(el);
+                    textRange.collapse(false);
+                    textRange.select();
+                }
+            }
+
+            function split_m( val ) {
+                // return val.split( /,\s*/ );
+                return val.split( /@/ );
+            }
+            function extractLast_m( term ) {
+                return split_m( term ).pop();
+            }
+
+            var startTyping = "Start Typing";
+
+            function autocomplete_mention(id)
+            {
+                $("#"+id).bind( "keydown", function( event ) {
+                    if ( event.keyCode === $.ui.keyCode.TAB &&
+                        $( this ).autocomplete( "instance" ).menu.active ) {
+                        event.preventDefault();
                     }
-                }
-
-                function autocomplete_hashtag(id)
-                {
-                    $("#"+id).bind( "keydown", function( event ) {
-                        if ( event.keyCode === $.ui.keyCode.TAB &&
-                            $( this ).autocomplete( "instance" ).menu.active ) {
-                            event.preventDefault();
-                        }
-                    })
-                    .autocomplete({
-                        appendTo: "."+id,
-                        minLength: 2,
-                        source: function( request, response ) {                         
-                            var search_key = extractLast( request.term );
-                            if(search_key[0] == "#")
+                })
+                .autocomplete({
+                    appendTo: "."+id,
+                    minLength: 0,
+                    create: function (event,ui) {                            
+                        $("#"+id).data('ui-autocomplete')._renderItem = function (ul, item) {
+                            if(item.fullname != undefined)
                             {
-                                search_key = search_key.substr(1);
-                                $.getJSON(base_url +"general/get_hashtag", { term : search_key},response);
-                            }
-                            else
-                            {
-                                return false;
-                            }
-                        },
-                        focus: function() {
-                            // prevent value inserted on focus
-                            return false;
-                        },
-                        select: function( event, ui ) {
-                            var terms = split( this.value );
-                            // remove the current input
-                            terms.pop();
-                            // add the selected item
-                            terms.push( ui.item.value );
-                            // add placeholder to get the comma-and-space at the end
-                            terms.push( "" );
-                            this.value = terms.join( " " );
-                            return false;
-                        },
-                    });                
-                }
+                                var content = '<a href="javascript:void(0);" contenteditable="false">';
+                                var img_content = "";
 
-                function placeCaretAtEnd(el) {
-                    el.focus();
-                    if (typeof window.getSelection != "undefined"
-                            && typeof document.createRange != "undefined") {
-                        var range = document.createRange();
-                        range.selectNodeContents(el);
-                        range.collapse(false);
-                        var sel = window.getSelection();
-                        sel.removeAllRanges();
-                        sel.addRange(range);
-                    } else if (typeof document.body.createTextRange != "undefined") {
-                        var textRange = document.body.createTextRange();
-                        textRange.moveToElementText(el);
-                        textRange.collapse(false);
-                        textRange.select();
-                    }
-                }
-
-                function split_m( val ) {
-                    // return val.split( /,\s*/ );
-                    return val.split( /@/ );
-                }
-                function extractLast_m( term ) {
-                    return split_m( term ).pop();
-                }
-
-                var startTyping = "Start Typing";
-
-                function autocomplete_mention(id)
-                {
-                    $("#"+id).bind( "keydown", function( event ) {
-                        if ( event.keyCode === $.ui.keyCode.TAB &&
-                            $( this ).autocomplete( "instance" ).menu.active ) {
-                            event.preventDefault();
-                        }
-                    })
-                    .autocomplete({
-                        appendTo: "."+id,
-                        minLength: 0,
-                        create: function (event,ui) {                            
-                            $("#"+id).data('ui-autocomplete')._renderItem = function (ul, item) {
-                                if(item.fullname != undefined)
+                                if(item.user_image)
                                 {
-                                    var content = '<a href="javascript:void(0);" contenteditable="false">';
-                                    var img_content = "";
-
-                                    if(item.user_image)
-                                    {
-                                        var img_url = "<?php echo USER_THUMB_UPLOAD_URL;?>"+item.user_image;
-                                        img_content = '<img src="'+img_url+'" alt="'+item.first_name+'" onError="this.onerror=null;this.src='+(item.user_gender == "M" ? '\''+base_url+'assets/img/man-user.jpg\'' : '\''+base_url+'assets/img/female-user.jpg\'')+'">';
-                                    }
-                                    else
-                                    {
-                                        if(item.user_gender == "M")
-                                        {
-                                            img_content = '<img src="'+base_url+'assets/img/man-user.jpg'+'">';
-                                        }
-                                        else if(item.user_gender == "F")
-                                        {                                            
-                                            img_content = '<img src="'+base_url+'assets/img/female-user.jpg'+'">';   
-                                        }
-                                    }
-                                    content += '<div class="post-img">'+img_content+'</div>';
-                                    content += '<div class="dropdown-user-detail">';
-                                    content += '<b>'+item.fullname+'</b>';
-                                    content += '<div class="msg-discription">';
-                                    if(item.title_name)
-                                    {
-                                        content += '<span class="time_ago">'+item.title_name+'</span>';
-                                    }
-                                    else if(item.degree_name)
-                                    {
-                                        content += '<span class="time_ago">'+item.degree_name+'</span>';
-                                    }
-                                    else
-                                    {
-                                        content += '<span class="time_ago">Current Work</span>';
-                                    }
-                                    content += '</div>';
-                                    content += '</div>';                                    
-                                    content += '</a>';
-
-                                    return $('<li>').append(content)
-                                        .appendTo(ul);
+                                    var img_url = "<?php echo USER_THUMB_UPLOAD_URL;?>"+item.user_image;
+                                    img_content = '<img src="'+img_url+'" alt="'+item.first_name+'" onError="this.onerror=null;this.src='+(item.user_gender == "M" ? '\''+base_url+'assets/img/man-user.jpg\'' : '\''+base_url+'assets/img/female-user.jpg\'')+'">';
                                 }
-                            };
-                        },
-                        source: function( request, response ) {                            
-                            var term = request.term,
-                                results = [];
-                            if (term.indexOf("@") >= 0) {
-                                term = extractLast_m(request.term);
-                                if (term.length > 0) {
-                                    results = $.getJSON(base_url +"userprofile/get_user_list", { term : term},response);
-                                    response(results);
-                                } else {
-                                    results = [startTyping];
+                                else
+                                {
+                                    if(item.user_gender == "M")
+                                    {
+                                        img_content = '<img src="'+base_url+'assets/img/man-user.jpg'+'">';
+                                    }
+                                    else if(item.user_gender == "F")
+                                    {                                            
+                                        img_content = '<img src="'+base_url+'assets/img/female-user.jpg'+'">';   
+                                    }
                                 }
-                            }                            
-                        },
-                        focus: function() {
-                            // prevent value inserted on focus
-                            return false;
-                        },
-                        select: function( event, ui ) {
-                            if (ui.item.fullname !== startTyping) {
-                                var value = $("#"+this.id).html();
-                                var terms = split_m(value);
-                                terms.pop();
-                                var content = '<a target="_self" contenteditable="false" href="'+base_url+ui.item.user_slug+'" mention="'+window.btoa(ui.item.user_slug)+'">'+ui.item.fullname+'</a>&nbsp;';
-                                terms.push(content);
-                                $("#"+this.id).html(terms.join("@").replace(/@/g, ""));
-                                placeCaretAtEnd($("#"+this.id)[0]);
+                                content += '<div class="post-img">'+img_content+'</div>';
+                                content += '<div class="dropdown-user-detail">';
+                                content += '<b>'+item.fullname+'</b>';
+                                content += '<div class="msg-discription">';
+                                if(item.title_name)
+                                {
+                                    content += '<span class="time_ago">'+item.title_name+'</span>';
+                                }
+                                else if(item.degree_name)
+                                {
+                                    content += '<span class="time_ago">'+item.degree_name+'</span>';
+                                }
+                                else
+                                {
+                                    content += '<span class="time_ago">Current Work</span>';
+                                }
+                                content += '</div>';
+                                content += '</div>';                                    
+                                content += '</a>';
+
+                                return $('<li>').append(content)
+                                    .appendTo(ul);
                             }
-                            return false;
-                        },
-                    });
-                }
+                        };
+                    },
+                    source: function( request, response ) {                            
+                        var term = request.term,
+                            results = [];
+                        if (term.indexOf("@") >= 0) {
+                            term = extractLast_m(request.term);
+                            if (term.length > 0) {
+                                results = $.getJSON(base_url +"userprofile/get_user_list", { term : term},response);
+                                response(results);
+                            } else {
+                                results = [startTyping];
+                            }
+                        }                            
+                    },
+                    focus: function() {
+                        // prevent value inserted on focus
+                        return false;
+                    },
+                    select: function( event, ui ) {
+                        if (ui.item.fullname !== startTyping) {
+                            var value = $("#"+this.id).html();
+                            var terms = split_m(value);
+                            terms.pop();
+                            var content = '<a target="_self" contenteditable="false" href="'+base_url+ui.item.user_slug+'" mention="'+window.btoa(ui.item.user_slug)+'">'+ui.item.fullname+'</a>&nbsp;';
+                            terms.push(content);
+                            $("#"+this.id).html(terms.join("@").replace(/@/g, ""));
+                            placeCaretAtEnd($("#"+this.id)[0]);
+                        }
+                        return false;
+                    },
+                });
+            }
         </script>
-        <script src="<?php echo base_url('assets/js/masonry.pkgd.min.js?ver=' . time()); ?>"></script>
-
+        <!-- <script src="<?php echo base_url('assets/js/masonry.pkgd.min.js?ver=' . time()); ?>"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.2.2/masonry.pkgd.min.js"></script>
     </body>
 </html>
