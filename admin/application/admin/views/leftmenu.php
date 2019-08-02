@@ -19,6 +19,17 @@
                 </a>
             </li>
             <!-- End Dashboard -->
+            <!--Start All Posts-->
+            <li <?php if ($this->uri->segment(1) == 'posts' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
+                <a href="#">
+                    <i class="fa fa-id-card-o margin-r-5"></i> <span>All Posts</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo base_url('posts/list'); ?>"><i class="fa fa-id-card-o"></i>List ALL Posts</a></li>
+                </ul>
+            </li>
+            <!--End All Posts-->
             <!--Start Monetizationt-->
             <li <?php if ($this->uri->segment(1) == 'monetize' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
                 <a href="#">
@@ -32,7 +43,7 @@
                 </ul>
             </li>
             <!--End Monetizationt-->
-            <!--Start Monetizationt-->
+            <!--Start Points-->
             <li <?php if ($this->uri->segment(1) == 'points' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
                 <a href="#">
                     <i class="fa fa-gift margin-r-5"></i><span>Points</span>
@@ -43,7 +54,7 @@
                     <li><a href="<?php echo base_url('points/add_points'); ?>"><i class="fa fa-gift"></i>Add Points</a></li>                    
                 </ul>
             </li>
-            <!--End Monetizationt-->
+            <!--End Points-->
             <!--Start Article Management-->
             <li <?php if ($this->uri->segment(1) == 'article' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
                 <a href="#">
