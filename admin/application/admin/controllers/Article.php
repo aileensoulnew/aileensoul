@@ -110,10 +110,11 @@ class Article extends CI_Controller {
             }
             else
             {
+                $points = $this->common->get_points_from_id('3');//article post
                 $inser_point = array(
                     "user_id"       =>  $post_data['user_id'],
                     "post_id"       =>  $post_data['id'],
-                    "points"        =>  30,
+                    "points"        =>  $points,
                     "points_for"    =>  3,
                     "description"   =>  '',
                     "status"        =>  '0',

@@ -3427,7 +3427,7 @@ else
                                                 </a>
                                             </p>
                                             <p class="hash-follow">&nbsp;</p>
-                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 112px;">View More</a>
+                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 120px;">View More</a>
                                         </div>
                                     </div>           
                                 </div>
@@ -3481,7 +3481,7 @@ else
                                                 </a>
                                             </p>
                                             <p class="hash-follow">&nbsp;</p>
-                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 112px;">View More</a>
+                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 120px;">View More</a>
                                         </div>
                                     </div>           
                                 </div>
@@ -3535,7 +3535,7 @@ else
                                                 </a>
                                             </p>
                                             <p class="hash-follow">&nbsp;</p>
-                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 112px;">View More</a>
+                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 120px;">View More</a>
                                         </div>
                                     </div>           
                                 </div>
@@ -3589,7 +3589,7 @@ else
                                                 </a>
                                             </p>
                                             <p class="hash-follow">&nbsp;</p>
-                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 112px;">View More</a>
+                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 120px;">View More</a>
                                         </div>
                                     </div>           
                                 </div>
@@ -3643,7 +3643,7 @@ else
                                                 </a>
                                             </p>
                                             <p class="hash-follow">&nbsp;</p>
-                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 112px;">View More</a>
+                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 120px;">View More</a>
                                         </div>
                                     </div>           
                                 </div>
@@ -3697,7 +3697,7 @@ else
                                                 </a>
                                             </p>
                                             <p class="hash-follow">&nbsp;</p>
-                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 112px;">View More</a>
+                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 120px;">View More</a>
                                         </div>
                                     </div>           
                                 </div>
@@ -3751,7 +3751,7 @@ else
                                                 </a>
                                             </p>
                                             <p class="hash-follow">&nbsp;</p>
-                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 112px;">View More</a>
+                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 120px;">View More</a>
                                         </div>
                                     </div>           
                                 </div>
@@ -3805,7 +3805,7 @@ else
                                                 </a>
                                             </p>
                                             <p class="hash-follow">&nbsp;</p>
-                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 112px;">View More</a>
+                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 120px;">View More</a>
                                         </div>
                                     </div>           
                                 </div>
@@ -3859,7 +3859,7 @@ else
                                                 </a>
                                             </p>
                                             <p class="hash-follow">&nbsp;</p>
-                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 112px;">View More</a>
+                                            <a class="btn-new-1" href="<?php echo base_url('hashtags') ?>" target="_self" style="width: 120px;">View More</a>
                                         </div>
                                     </div>           
                                 </div>

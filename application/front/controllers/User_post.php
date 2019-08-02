@@ -303,10 +303,11 @@ class User_post extends MY_Controller {
             $is_user_monetize = $this->common->is_user_monetize();            
             if($post_data->user_id != $userid && $is_user_monetize > 0 && count($comment_count_data) == 1 && $post_data->post_for == 'question')
             {
+                $points = $this->common->get_points_from_id('4');//give answer
                 $inser_point = array(
                     "user_id"       =>  $userid,
                     "post_id"       =>  $post_id,
-                    "points"        =>  20,
+                    "points"        =>  $points,
                     "points_for"    =>  4,
                     "description"   =>  $comment,
                     "status"        =>  '0',
@@ -1477,11 +1478,11 @@ class User_post extends MY_Controller {
 
                 if($is_user_monetize > 0)
                 {
-
+                    $points = $this->common->get_points_from_id('1');//opportunity
                     $inser_point = array(
                         "user_id"       =>  $userid,
                         "post_id"       =>  $user_post_id,
-                        "points"        =>  50,
+                        "points"        =>  $points,
                         "points_for"    =>  1,
                         "description"   =>  $description,
                         "status"        =>  '0',
@@ -1526,10 +1527,12 @@ class User_post extends MY_Controller {
 
                     $update_post_data['is_monetize'] = '1';
 
+                    $points = $this->common->get_points_from_id('5');//question
+
                     $inser_point = array(
                         "user_id"       =>  $userid,
                         "post_id"       =>  $user_post_id,
-                        "points"        =>  5,
+                        "points"        =>  $points,
                         "points_for"    =>  5,
                         "description"   =>  $ask_description,
                         "status"        =>  '0',
@@ -1648,10 +1651,11 @@ class User_post extends MY_Controller {
                 // echo $file_type;exit();
 
                 if ($is_user_monetize > 0 && $post_for == 'simple' && $file_type == 'image') {
+                    $points = $this->common->get_points_from_id('6');//post image
                     $inser_point = array(
                         "user_id"       =>  $userid,
                         "post_id"       =>  $user_post_id,
-                        "points"        =>  5,
+                        "points"        =>  $points,
                         "points_for"    =>  6,
                         "description"   =>  '',
                         "status"        =>  '0',
@@ -1661,10 +1665,11 @@ class User_post extends MY_Controller {
                     $this->common->insert_data_getid($inser_point, 'user_point_mapper');
                 }
                 else if ($is_user_monetize > 0 && $post_for == 'simple' && $file_type == 'video') {
+                    $points = $this->common->get_points_from_id('2');//post video
                     $inser_point = array(
                         "user_id"       =>  $userid,
                         "post_id"       =>  $user_post_id,
-                        "points"        =>  50,
+                        "points"        =>  $points,
                         "points_for"    =>  2,
                         "description"   =>  '',
                         "status"        =>  '0',

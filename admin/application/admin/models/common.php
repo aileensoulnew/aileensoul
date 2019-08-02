@@ -368,5 +368,11 @@ class Common extends CI_Model {
         $slug = trim($slug, '-');
         return $slug;
     }
-    
+
+    public function get_points_from_id($point_id){
+        $sql = "SELECT points FROM ailee_points WHERE id_points = '".$point_id."'";
+        $query = $this->db->query($sql);
+        $result_array = $query->row_array();
+        return $result_array['points'];
+    }
 }
