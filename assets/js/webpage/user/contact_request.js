@@ -35,7 +35,7 @@ app.config(function ($routeProvider, $locationProvider) {
 app.controller('mainDefaultController', function($scope, $http, $compile) {
     $scope.active_pg = 0;
 });
-app.controller('contactRequestController', function ($scope, $http,$window ) {
+app.controller('contactRequestController', function ($scope, $http,$window,$location) {
     $scope.$parent.active_pg = 1;
     $scope.today = new Date();
     $scope.$parent.title = "Contact Request | Aileensoul";
@@ -50,7 +50,7 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
     var isProcessing = false;
     
     angular.element($window).bind("scroll", function (e) {
-        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.4) {
+        if (($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.4) && $location.url().substr(1) == 'contact-request') {
             // isLoadingData = true;
             var page = $scope.jobs.page_number;
             var total_record = $scope.jobs.total_record;
@@ -232,7 +232,7 @@ app.controller('contactRequestController', function ($scope, $http,$window ) {
         });
     }
 });
-app.controller('businessController', function ($scope, $http,$window ) {
+app.controller('businessController', function ($scope, $http,$window,$location) {
     $scope.$parent.active_pg = 2;
     $scope.today = new Date();
     $scope.$parent.title = "Business | Aileensoul";
@@ -243,7 +243,7 @@ app.controller('businessController', function ($scope, $http,$window ) {
     var isProcessing = false;
     
     angular.element($window).bind("scroll", function (e) {
-        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.4) {
+        if (($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.4) && $location.url().substr(1) == 'contact-business') {
             // isLoadingData = true;
             var page = $scope.page_number;
             var total_record = $scope.total_record;
@@ -325,7 +325,7 @@ app.controller('businessController', function ($scope, $http,$window ) {
     };
     $scope.get_business_list(1);
 });
-app.controller('hashtagController', function ($scope, $http,$window ) {
+app.controller('hashtagController', function ($scope, $http,$window,$location) {
     $scope.$parent.active_pg = 3;
     $scope.today = new Date();
     $scope.$parent.title = "Hashtags | Aileensoul";
@@ -336,7 +336,7 @@ app.controller('hashtagController', function ($scope, $http,$window ) {
     var isProcessing = false;
     
     angular.element($window).bind("scroll", function (e) {
-        if ($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.4) {
+        if (($(window).scrollTop() >= ($(document).height() - $(window).height()) * 0.4) && $location.url().substr(1) == 'hashtags') {
             // isLoadingData = true;
             var page = $scope.page_number;
             var total_record = $scope.total_record;
