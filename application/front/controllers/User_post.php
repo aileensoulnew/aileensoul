@@ -1664,7 +1664,7 @@ class User_post extends MY_Controller {
                     $inser_point = array(
                         "user_id"       =>  $userid,
                         "post_id"       =>  $user_post_id,
-                        "points"        =>  30,
+                        "points"        =>  50,
                         "points_for"    =>  2,
                         "description"   =>  '',
                         "status"        =>  '0',

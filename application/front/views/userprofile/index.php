@@ -41,7 +41,8 @@ else
         </style>
     </head>
         <!-- <script src="<?php //echo base_url('assets/js/jquery.min.js?ver=' . time()) ?>"></script> -->
-        <script src="<?php echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/jquery-3.2.1.min.js?ver=' . time()) ?>"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         
     <?php $this->load->view('adsense'); ?>
 
@@ -347,18 +348,24 @@ else
         {            
             $this->load->view('mobile_side_slide');
         }?>
-        <script src="<?php echo base_url('assets/js/croppie.js'); ?>"></script>  
-        <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
-        <script src="<?php echo base_url('assets/js/owl.carousel.min.js'); ?>"></script>
-        <script src="<?php echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js'); ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/croppie.js'); ?>"></script>   -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.js"></script>  
+        <!-- <script src="<?php //echo base_url('assets/js/bootstrap.min.js'); ?>"></script> -->
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/owl.carousel.min.js'); ?>"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/jquery.mCustomScrollbar.concat.min.js'); ?>"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
         <!-- <script src="<?php //echo base_url('assets/dragdrop/js/plugins/sortable.js?ver=' . time()) ?>"></script>
         <script src="<?php //echo base_url('assets/dragdrop/js/fileinput.js?ver=' . time()) ?>"></script>
         <script src="<?php //echo base_url('assets/dragdrop/js/locales/fr.js?ver=' . time()) ?>"></script>
         <script src="<?php //echo base_url('assets/dragdrop/js/locales/es.js?ver=' . time()) ?>"></script>
         <script src="<?php //echo base_url('assets/dragdrop/themes/explorer/theme.js?ver=' . time()) ?>"></script> -->
-        <script src="<?php echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js?ver=' . time()); ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/as-videoplayer/build/mediaelement-and-player.js?ver=' . time()); ?>"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.6/mediaelement-and-player.min.js"></script>
         <!-- <script src="<?php //echo base_url('assets/as-videoplayer/demo.js?ver=' . time()); ?>"></script> -->
-        <script src="<?php echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/jquery.validate.min.js?ver=' . time()); ?>"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
 
         <!--<script data-semver="0.13.0" src="<?php //echo base_url('assets/js/angular/ui-bootstrap-tpls-0.13.0.min.js?ver=' . time()); ?>"></script>
 
@@ -368,18 +375,19 @@ else
         <script src="<?php //echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script>        
         <script src="<?php //echo base_url('assets/js/angular/angular-sanitize-1.6.4.min.js?ver=' . time()); ?>"></script> -->
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.js"></script>
         <script src="<?php echo base_url('assets/js/angular-validate.min.js?ver=' . time()) ?>"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-route.min.js"></script>
-        <script src="<?php echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script>        
+        <!-- <script src="<?php //echo base_url('assets/js/angular/angular-tooltips.min.js?ver=' . time()); ?>"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.4/angular-sanitize.min.js"></script>
 
         <!-- <script src="<?php //echo base_url('assets/js/angular/angular-route-1.6.4.js?ver=' . time()); ?>"></script> -->
-        <script src="<?php echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/ng-tags-input.min.js?ver=' . time()); ?>"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.2.0/ng-tags-input.min.js"></script>
         <!-- <script src="<?php //echo base_url('assets/js/angular/angular-sanitize-1.6.4.js?ver=' . time()); ?>"></script> -->
         <!-- <script src="<?php //echo base_url('8/ninja-slider.js'); ?>" type="text/javascript"></script> -->
-        <script src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>        
+        <script src="<?php echo base_url('assets/js/progressloader.js?ver=' . time()); ?>"></script>
         <script>
             var base_url = '<?php echo base_url(); ?>';
             //var user_slug = '<?php echo $this->uri->segment(2); ?>';
@@ -434,8 +442,10 @@ else
         <script src="<?php echo base_url('assets/js/webpage/user/user_profile.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/webpage/notification.js?ver=' . time()) ?>"></script>
         <!-- <script src="<?php //echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script> -->
-        <script src="<?php echo base_url('assets/js/jquery-ui.min-1.12.1.js') ?>"></script>
-        <script src="<?php echo base_url('assets/js/autosize.js') ?>"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/jquery-ui.min-1.12.1.js') ?>"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <!-- <script src="<?php //echo base_url('assets/js/autosize.js') ?>"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/autosize.js/4.0.2/autosize.min.js"></script>
         <script>
     		$(function () {
     			$('a[href="#search"]').on('click', function (event) {

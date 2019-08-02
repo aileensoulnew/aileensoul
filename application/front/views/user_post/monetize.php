@@ -67,8 +67,8 @@
                                     <li><b>50 points</b>  -  Post opportunity
                                         <p>Opportunity should be for anyone. (example job seekers, freelancers, doctors, CEOs, entrepreneurs, plumbers, artists, photographers, cooks, etc.) ....<a data-toggle="modal" href="#" data-target="#opp-point"> Learn more.</a></p> 
                                     </li>
-                                    <li><b>30 points</b>  -  Post video 
-                                        <p>All types of videos acceptable. ( Example: Informative Videos, Learning Videos, Entertainment Videos..).... <a data-toggle="modal" href="#" data-target="#video-point">Learn more.</a></p>
+                                    <li><b>50 points</b>  -  Post video 
+                                        <p>All types of videos acceptable. Video should be more then 2 minutes. ( Example: Informative Videos, Learning Videos, Entertainment Videos..).... <a data-toggle="modal" href="#" data-target="#video-point">Learn more.</a></p>
                                     </li>
                                     <li><b>30 ponts</b>  -  Post article
                                         <p>All types of article acceptable. ( Example: Informative Articles, Learning Articles..).... <a data-toggle="modal" href="#" data-target="#article-point">Learn more.</a></p>

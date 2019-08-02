@@ -300,6 +300,12 @@
 .right-reg .right-reg-content p{
     font-size: 22px !important;
 }
+.all-contact .all-user-list .owl-nav .owl-prev,.all-contact .all-user-list .owl-nav .owl-next{
+    background: none;
+}
+.all-contact .all-user-list .owl-dots{
+    display: none;
+}
 @media screen and (max-width: 1279px) {
     .right-reg .right-reg-content p{
         font-size: 18px !important;
