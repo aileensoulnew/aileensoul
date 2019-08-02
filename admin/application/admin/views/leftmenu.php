@@ -32,6 +32,18 @@
                 </ul>
             </li>
             <!--End Monetizationt-->
+            <!--Start Monetizationt-->
+            <li <?php if ($this->uri->segment(1) == 'points' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
+                <a href="#">
+                    <i class="fa fa-gift margin-r-5"></i><span>Points</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="<?php echo base_url('points'); ?>"><i class="fa fa-gift"></i>List Points</a></li>                    
+                    <li><a href="<?php echo base_url('points/add_points'); ?>"><i class="fa fa-gift"></i>Add Points</a></li>                    
+                </ul>
+            </li>
+            <!--End Monetizationt-->
             <!--Start Article Management-->
             <li <?php if ($this->uri->segment(1) == 'article' || $this->uri->segment(1) == '') { ?> class="active treeview" <?php } else { ?> class="treeview"   <?php } ?>>
                 <a href="#">
