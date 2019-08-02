@@ -81,10 +81,9 @@ echo $leftmenu;
                                 </tr>
                                 <?php
                                 if (count($points_data) != 0){
-                                    $i=1;
                                     foreach ($points_data as $_points_data) {?>
                                         <tr id="row<?php echo $_points_data['id_points'];?>">
-                                            <td><?php echo $i++; ?></td>
+                                            <td><?php echo $_points_data['id_points']; ?></td>
                                             <td><?php
                                                 if($_points_data['post_type'] == '1'){
                                                     echo "Opportunity";

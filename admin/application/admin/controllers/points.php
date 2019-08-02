@@ -26,7 +26,7 @@ class Points extends CI_Controller
         $this->data['title'] = 'Points Management | Aileensoul';
         $this->data['module_name'] = 'Points Management';
         $this->data['section_title'] = 'Points Management';        
-        $sql = "SELECT * FROM ailee_points WHERE status = '1' ORDER BY id_points DESC";
+        $sql = "SELECT * FROM ailee_points WHERE status = '1' ORDER BY id_points ASC";
         $this->data['points_data'] = $this->db->query($sql)->result_array();
         $this->load->view('points/list_points', $this->data);   
     }
