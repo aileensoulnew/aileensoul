@@ -18,7 +18,7 @@ echo $leftmenu;
                     Home
                 </a>
             </li>
-            <li class="active">Article</li>
+            <li class="active">Post List</li>
         </ol>        
     </section>
 
@@ -44,9 +44,9 @@ echo $leftmenu;
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Article</h3>
+                        <h3 class="box-title">Post List</h3>
                         <div class="box-tools">
-                            <?php echo form_open('article/search', array('method' => 'post', 'id' => 'search_frm', 'class' => 'form-inline','autocomplete' => 'off')); ?>
+                            <?php echo form_open('posts/search', array('method' => 'post', 'id' => 'search_frm', 'class' => 'form-inline','autocomplete' => 'off')); ?>
                             <div class="input-group input-group-sm" >
                                 <input type="text" class="form-control input-sm" value="<?php echo $search_keyword; ?>" placeholder="Search" name="search_keyword" id="search_keyword">
                                 <div class="input-group-btn">
@@ -55,7 +55,7 @@ echo $leftmenu;
                                 <?php echo form_close(); 
                                 if ($this->session->userdata('user_search_keyword'))
                                 {?>
-                                    <a href="<?php echo base_url('article/clear_search') ?>">Clear Search</a>
+                                    <a href="<?php echo base_url('posts/clear_search') ?>" style="padding: 5px 0;float: left;">Clear Search</a>
                                 <?php
                                 } ?>
                             </div><!--input-group input-group-sm-->
@@ -103,38 +103,112 @@ echo $leftmenu;
                                     foreach ($post_list as $_post_list) {?>
                                         <tr id="delete<?php echo $_post_list['id'];?>">
                                             <td><?php echo $i++; ?></td>
-                                            <td><a href="<?php echo SITEURL.$_post_list['user_data']['user_slug'] ?>" target="_blank"><?php echo ucwords($_post_list['user_data']['first_name'].' '.$_post_list['user_data']['last_name']); ?></a></td>
-                                            <td><?php echo $_post_list['user_data']['email']; ?></td>
+                                            <td>
+                                                <?php
+                                                if($_post_list['user_type'] == '1'){ ?>
+                                                    <a href="<?php echo SITEURL.$_post_list['user_data']['user_slug'] ?>" target="_blank">
+                                                        <?php echo ucwords($_post_list['user_data']['first_name'].' '.$_post_list['user_data']['last_name']); ?>
+                                                    </a>
+                                                <?php
+                                                }
+                                                else{ ?>
+                                                    <a href="<?php echo SITEURL.'company/'.$_post_list['user_data']['business_slug'].'-'.($_post_list['user_data']['city_name'] != '' ? $_post_list['user_data']['city_name'] : ($_post_list['user_data']['state_name'] != '' ? $_post_list['user_data']['state_name'] : $_post_list['user_data']['country_name'])) ?>" target="_blank">
+                                                        <?php echo ucwords($_post_list['user_data']['company_name']); ?>
+                                                    </a>
+                                                <?php
+                                                } ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $_post_list['user_data']['email']; ?>
+                                            </td>
                                             <td>
                                                 <?php 
-                                                    if($_post_list['post_for'] == 'opportunity'){
-                                                        echo $_post_list['opportunity_data']['opptitle'];
+                                                    if($_post_list['post_for'] == 'opportunity'){?>
+                                                        <a href="<?php echo SITEURL.'o/'.$_post_list['opportunity_data']['oppslug']; ?>" target="_blank">
+                                                        <?php
+                                                            echo $_post_list['opportunity_data']['opptitle'];
+                                                        ?>
+                                                        </a>
+                                                    <?php 
                                                     }
-                                                    elseif($_post_list['post_for'] == 'simple'){
-                                                        echo $_post_list['simple_data']['sim_title'];
+                                                    elseif($_post_list['post_for'] == 'simple'){ ?>
+                                                        <a href="<?php echo SITEURL.'p/'.$_post_list['simple_data']['simslug']; ?>" target="_blank">
+                                                        <?php
+                                                            echo $_post_list['simple_data']['sim_title'];
+                                                        ?>
+                                                        </a>
+                                                    <?php
                                                     }
                                                     elseif($_post_list['post_for'] == 'question'){
+                                                        $question_slug = $this->common->create_slug($_post_list['question_data']['question']);
+                                                        ?>
+                                                        <a href="<?php echo SITEURL.'questions/'.$_post_list['question_data']['id'].'/'.$question_slug; ?>" target="_blank">
+                                                        <?php
                                                         echo $_post_list['question_data']['question'];
+                                                        ?>
+                                                        </a>
+                                                    <?php
                                                     }
-                                                    elseif($_post_list['post_for'] == 'article'){
+                                                    elseif($_post_list['post_for'] == 'article'){ ?>
+                                                        <a href="<?php echo SITEURL.'article/'.$_post_list['article_data']['article_slug']; ?>" target="_blank">
+                                                        <?php
                                                         echo $_post_list['article_data']['article_title'];
+                                                        ?>
+                                                        </a>
+                                                        <?php
                                                     }
                                                     elseif($_post_list['post_for'] == 'share'){
+                                                    ?>
+                                                        <a href="<?php echo SITEURL.'shp/'.$_post_list['share_data']['shared_post_slug']; ?>" target="_blank">
+                                                        <?php
                                                         echo $_post_list['share_data']['shared_post_slug'];
+                                                        ?>
+                                                        </a>
+                                                        <?php
                                                     }
                                                 ?>
                                             </td>
                                             
                                             <td><?php echo $_post_list['post_for']; ?></td>
 
-                                            <td class="art-status-<?php echo $_post_list['id']; ?>">
+                                            <td id="status-<?php echo $_post_list['id']; ?>">
                                                 <?php 
-                                                echo "status"; ?>
+                                                if($_post_list['status'] == 'publish' && $_post_list['is_delete'] == '0'){
+                                                    echo "Active";
+                                                }
+                                                elseif($_post_list['is_delete'] == '1'){
+                                                    echo "Deleted";
+                                                }
+                                                elseif($_post_list['status'] == 'reject'){
+                                                    echo "Rejected";
+                                                }
+                                                elseif($_post_list['status'] == 'draft' && $_post_list['is_delete'] == '0'){
+                                                    echo "Pending";
+                                                }
+                                                ?>
                                             </td>
                                             <td><?php echo $_post_list['created_date']; ?></td>
                                             <td>
-                                                <a class="btn btn-success btn-xs" href="#" title="View">
-                                                    <i class="fa fa-eye"></i>
+                                                <?php 
+                                                if($_post_list['status'] == 'publish' && $_post_list['is_delete'] == '0'){
+                                                    $is_pub = "style='display:none'";
+                                                    $is_del = "";
+                                                }
+                                                elseif($_post_list['is_delete'] == '1'){
+                                                    $is_pub = "";
+                                                    $is_del = "style='display:none'";
+                                                }
+                                                else
+                                                {
+                                                    $is_pub = "style='display:none'";
+                                                    $is_del = "style='display:none'";
+                                                }
+                                                ?>
+                                                <a id="del-btn-<?php echo $_post_list['id']; ?>" class="btn btn-danger btn-xs" href="javascript:void(0);" title="Delete" <?php echo $is_del; ?> onclick="delete_post(<?php echo $_post_list['id']; ?>)">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                                <a id="rev-btn-<?php echo $_post_list['id']; ?>" class="btn btn-info btn-xs" href="javascript:void(0);" title="Revoke" <?php echo $is_pub; ?> onclick="revoke_post(<?php echo $_post_list['id']; ?>)">
+                                                    <i class="fa fa-reply"></i>
                                                 </a>
                                             </td>
                                         </tr><?php
@@ -193,7 +267,7 @@ echo $leftmenu;
     </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
 <!-- Model Popup Start -->
-<div class="modal fade message-box biderror" id="publishmodal" role="dialog" data-backdrop="static" data-keyboard="false">
+<div class="modal fade message-box biderror" id="action-modal" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lm">
         <div class="modal-content message">
             <button type="button" class="modal-close" data-dismiss="modal">&times;</button>
@@ -225,100 +299,46 @@ echo $leftmenu;
 </script>
 
 <script>
-//Publish Article Start
-function publish_article(id) 
-{
-    $("#publishmodal .mes .msg").html("Are you sure want to publish article ?");
-    $("#okbtn").attr("onclick","article_publish("+id+")");
-    $("#publishmodal").modal("show");
-}
-function article_publish(id) 
-{
-    $.ajax({
-        type: 'POST',
-        url: '<?php echo base_url() . "article/publish" ?>',
-        data: {'id':id},      
-        success: function (response){
-            // $('.'+'art-pub-'+id).remove();
-            $('#pub-art-'+id).hide();
-            $('#rej-art-'+id).show();
-            $('.'+'art-status-'+id).html(response);
-        }
-    });
-}
-//Publish Article End
+    function delete_post(id){
+        $("#action-modal .mes .msg").html("Are you sure want to delete this post ?");
+        $("#okbtn").attr("onclick","post_delete("+id+")");
+        $("#action-modal").modal("show");
+    }
+    function post_delete(id) 
+    {
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url() . "posts/post_delete" ?>',
+            cache: false,
+            data: {'id':id},
+            success: function (response){
+                // $('.'+'art-pub-'+id).remove();
+                $('#del-btn-'+id).hide();
+                $('#rev-btn-'+id).show();
+                $('#status-'+id).html("Deleted");
+            }
+        });
+    }
 
-//Reject Article Start
-function reject_article(id) 
-{
-    $("#publishmodal .mes .msg").html("Are you sure want to reject article ?");
-    $("#okbtn").attr("onclick","article_reject("+id+")");
-    $("#publishmodal").modal("show");
-}
-function article_reject(id) 
-{
-    // $('.'+'art-pub-'+id).attr("style","pointer-events: none;");
-    $.ajax({
-        type: 'POST',
-        url: '<?php echo base_url() . "article/reject" ?>',
-        data: {'id':id},      
-        success: function (response){
-            // $('.art-pub-'+id).remove();
-            $('#pub-art-'+id).show();
-            $('#rej-art-'+id).hide();
-            $('.art-status-'+id).html(response);
-        }
-    });
-}
-//Reject Article End
+    function revoke_post(id){
+        $("#action-modal .mes .msg").html("Are you sure want to get back this post ?");
+        $("#okbtn").attr("onclick","post_revoke("+id+")");
+        $("#action-modal").modal("show");
+    }
 
-//Reject Article Start
-function delete_article(id) 
-{
-    $("#publishmodal .mes .msg").html("Are you sure want to delete article ?");
-    $("#okbtn").attr("onclick","article_delete("+id+")");
-    $("#publishmodal").modal("show");
-}
-function article_delete(id) 
-{
-    // $('.'+'art-pub-'+id).attr("style","pointer-events: none;");
-    $.ajax({
-        type: 'POST',
-        url: '<?php echo base_url() . "article/delete" ?>',
-        data: {'id':id},      
-        success: function (response){
-            // $('.art-pub-'+id).remove();
-            $('#pub-art-'+id).hide();
-            $('#rej-art-'+id).hide();
-            $('#del-art-'+id).hide();
-            $('.art-status-'+id).html(response);
-        }
-    });
-}
-//Reject Article End
-
-//Enable search button when user write something on textbox Start
-$(document).ready(function(){
-    $('#search_btn').attr('disabled',true);
-
-    $('#search_keyword').keyup(function()
-    {  
-        if($(this).val().length !=0)
-        {
-            $('#search_btn').attr('disabled', false);
-        }
-        else
-        {  
-            $('#search_btn').attr('disabled', true);        
-        }
-    })
-
-    $('body').on('keydown', '#search_keyword', function(e) {
-        console.log(this.value);
-        if (e.which === 32 &&  e.target.selectionStart === 0) {
-          return false;
-        }  
-    });
-});
-//Enable search button when user write something on textbox End
+    function post_revoke(id) 
+    {
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url() . "posts/post_revoke" ?>',
+            cache: false,
+            data: {'id':id},
+            success: function (response){
+                // $('.'+'art-pub-'+id).remove();
+                $('#rev-btn-'+id).hide();
+                $('#del-btn-'+id).show();
+                $('#status-'+id).html("Active");
+            }
+        });
+    }
 </script>
