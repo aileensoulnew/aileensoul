@@ -17,7 +17,7 @@
                         <div class="arti-profile-box">
                             <div class="user-cover-img">
                                 <a href="<?php echo BASEURL ?>company/{{business.business_slug}}" target="_self">
-                                    <img ng-if="business.profile_background" ng-src="<?php echo BUS_BG_MAIN_UPLOAD_URL ?>{{business.profile_background}}" on-error-src="<?php echo BASEURL.WHITEIMAGE ?>">
+                                    <img ng-if="business.profile_background" ng-src="<?php echo BUS_BG_THUMB_UPLOAD_URL ?>{{business.profile_background}}" on-error-src="<?php echo BASEURL.WHITEIMAGE ?>">
                                     <div ng-if="business.profile_background" class="gradient-bg">
                                     </div>
                                 </a>

@@ -1756,4 +1756,63 @@ class Business_model extends CI_Model {
         return $jobCity;
     }
 
+    function business_userlist_new($user_id = '', $limit = '', $offset = '') {
+
+        $sql = "SELECT ul.email, bp.business_profile_id, bp.company_name, bp.country, bp.state, bp.city, bp.contact_email, bp.user_id, bp.business_user_image, bp.profile_background, bp.business_slug, bp.other_industrial, ct.city_name, st.state_name, cr.country_name, it.industry_name, IF (bp.city != '',CONCAT(bp.business_slug, '-', ct.city_name),IF(st.state_name != '',CONCAT(bp.business_slug, '-', st.state_name),CONCAT(bp.business_slug, '-', cr.country_name))) as business_slug
+            FROM ailee_business_profile bp
+            LEFT JOIN ailee_user_login ul ON ul.user_id = bp.user_id
+            LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal
+            LEFT JOIN ailee_cities ct ON ct.city_id = bp.city
+            LEFT JOIN ailee_states st ON st.state_id = bp.state
+            LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
+            WHERE bp.user_id != '". $user_id ."'
+            AND bp.business_step = '4'
+            AND bp.is_deleted = '0'
+            AND bp.status = '1'
+            AND ul.status = '1'
+            AND ul.is_delete = '0'
+            AND bp.user_id NOT IN (select follow_to from ailee_user_follow where follow_from='" . $user_id . "' AND follow_type = '2' AND status = '1') ORDER BY business_profile_id DESC";
+        
+        if ($limit != '') {
+            $sql .= " Limit ". $offset . "," . $limit;
+        }
+        // echo $sql;exit;
+        $query = $this->db->query($sql);
+        $result_array = $query->result_array();
+        foreach ($result_array as $key => $value) {
+            if($user_id != '')
+            {
+                $follow_detail = $this->db->select('follow_from,follow_to,status')->from('user_follow')->where('(follow_to =' . $value['user_id'] . ' AND follow_from =' . $user_id . ') AND follow_type = "2" ')->get()->row_array();
+                $result_array[$key]['follow_status'] = $follow_detail['status'];
+            }
+            else
+            {
+                $result_array[$key]['follow_status'] = '';
+            }
+        }
+        return $result_array;
+    }
+
+    function business_userlist_new_total_row($user_id = '') {
+
+        $sql = "SELECT COUNT(*) as total_row
+            FROM ailee_business_profile bp
+            LEFT JOIN ailee_user_login ul ON ul.user_id = bp.user_id
+            LEFT JOIN ailee_industry_type it ON it.industry_id = bp.industriyal
+            LEFT JOIN ailee_cities ct ON ct.city_id = bp.city
+            LEFT JOIN ailee_states st ON st.state_id = bp.state
+            LEFT JOIN ailee_countries cr ON cr.country_id = bp.country 
+            WHERE bp.user_id != '". $user_id ."'
+            AND bp.business_step = '4'
+            AND bp.is_deleted = '0'
+            AND bp.status = '1'
+            AND ul.status = '1'
+            AND ul.is_delete = '0'
+            AND bp.user_id NOT IN (select follow_to from ailee_user_follow where follow_from='" . $user_id . "' AND follow_type = '2' AND status = '1') ORDER BY business_profile_id DESC";
+        // echo $sql;exit;
+        $query = $this->db->query($sql);
+        $result_array = $query->row_array();        
+        return $result_array['total_row'];
+    }
+
 }

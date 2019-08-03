@@ -3909,12 +3909,10 @@ class User_post extends MY_Controller {
         // $limit = 50;
         $limit = $perpage;
         $offset = $start;
-        $location_id = "";
-        $category_id = "";
-        $userlist = $this->business_model->business_userlist($userid, $sortby = 'business_profile_id', $orderby = 'desc', $limit, $offset,$category_id,$location_id);
+        $userlist = $this->business_model->business_userlist_new($userid, $limit, $offset);
         if (empty($_GET["total_record"])) {
-            $userlist1 = $this->business_model->business_userlist($userid, $sortby = 'business_profile_id', $orderby = 'desc');
-            $total_record = count($userlist1);
+            $userlist1 = $this->business_model->business_userlist_new_total_row($userid);
+            $total_record = $userlist1;
         }
         else
         {

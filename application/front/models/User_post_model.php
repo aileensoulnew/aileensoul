@@ -202,11 +202,7 @@ class User_post_model extends CI_Model {
     }
 
     public function getContactAllSuggetion_total_rec($user_id = '') {
-        
-
-        $this->db->distinct();
-        
-        $this->db->select("u.user_id,CONCAT(u.first_name,' ',u.last_name) as fullname,u.user_gender,u.user_slug,up.designation,us.current_study")->from("user u");
+        $this->db->select("COUNT(DISTINCT `u`.`user_id`) AS total_record")->from("user u");
         //jt.name as title_name,d.degree_name
         // $this->db->join('user_info ui', 'ui.user_id = u.user_id', 'left');
         // $this->db->join('user_login ul', 'ul.user_id = u.user_id', 'left');
@@ -230,8 +226,8 @@ class User_post_model extends CI_Model {
         $this->db->order_by('u.user_id', 'DESC');
        
         $query = $this->db->get();
-        $result_array = $query->result_array();
-        return count($result_array);
+        $result_array = $query->row_array();
+        return $result_array['total_record'];
     }
 
     public function checkContact($user_id = '', $to_user_id = '') {
