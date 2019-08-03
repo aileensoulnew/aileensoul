@@ -155,7 +155,7 @@ app.controller('contactRequestController', function ($scope, $http,$window,$loca
 
     $scope.not_page = 0;
     $scope.not_total_record = 0;
-    $scope.not_perpage = 5;
+    $scope.not_perpage = 10;
     var is_processing = false;
     $scope.contact_request_notification = [];
     $scope.contactRequestNotification = function(pagenum) {
