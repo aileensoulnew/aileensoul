@@ -68,9 +68,9 @@ echo $leftmenu;
                         <p>&nbsp;</p>
                     </div>
                     <div class="icon">
-                        <i class="fa fa-users"></i>
+                        <i class="fa fa-briefcase"></i>
                     </div>
-                    <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url('business/user')?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
              <!-- end Business User List box -->

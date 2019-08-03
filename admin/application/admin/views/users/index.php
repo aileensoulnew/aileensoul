@@ -130,12 +130,21 @@ echo $leftmenu;
                                                     }?>
                                             </td>
                                             <td><?php
-                                            if($user['user_image']) 
-                                            { ?>
-                                                <img src="<?php echo SITEURL . $this->config->item('user_thumb_upload_path') . $user['user_image']; ?>" alt=""  style="height: 50px; width: 50px;">
-                                            <?php }else{ ?>
-                                                <img alt="" style="height: 50px; width: 50px;" class="img-circle" src="<?php echo SITEURL.(NOIMAGE); ?>" alt="" />
-                                            <?php } ?>
+                                                if($user['user_image']) 
+                                                { ?>
+                                                    <img src="<?php echo SITEURL . $this->config->item('user_thumb_upload_path') . $user['user_image']; ?>" alt=""  style="height: 50px; width: 50px;"><?php 
+                                                }else{ 
+                                                    if($user['user_gender']=="F")
+                                                    { ?>
+                                                        <img alt="" style="height: 50px; width: 50px;" class="img-circle" src="<?php echo SITEURL.'assets/img/female-user.jpg'; ?>" alt="" />
+                                                    <?php
+                                                    }
+                                                    if($user['user_gender']=="M")
+                                                    { ?>
+                                                        <img alt="" style="height: 50px; width: 50px;" class="img-circle" src="<?php echo SITEURL.'assets/img/man-user.jpg'; ?>" alt="" />
+                                                    <?php
+                                                    }
+                                                } ?>
                                         </td>
                     
                                         <!-- <td id="active<?php echo $user['user_id']?>">

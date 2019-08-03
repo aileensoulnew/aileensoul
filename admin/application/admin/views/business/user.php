@@ -130,7 +130,7 @@ echo $leftmenu;
                                                 { ?>
                                                     <img src="<?php echo SITEURL . $this->config->item('bus_profile_thumb_upload_path') . $user['business_user_image']; ?>" alt=""  style="height: 50px; width: 50px;">
                                                 <?php }else{ ?>
-                                                    <img alt="" style="height: 50px; width: 50px;" class="img-circle" src="<?php echo SITEURL.(NOIMAGE); ?>" alt="" />
+                                                    <img alt="" style="height: 50px; width: 50px;" class="img-circle" src="<?php echo SITEURL.'uploads/nobusimage.jpg'; ?>" alt="" />
                                                 <?php } ?>
                                             </td>
                                             <!-- <td id="active<?php //echo $user['business_profile_id']?>"><?php 
