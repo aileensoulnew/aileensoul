@@ -9,19 +9,19 @@
         <div class="sugg-list">
             <div class="fw post_loader req_post_load" style="text-align:center; display: none;">
                 <img ng-src="<?php echo base_url('assets/images/loader.gif')?>" alt="Loader" />
-            </div>                                
+            </div>
             <ul class="pendin-req" ng-class="pending_contact_request_data.length < '3' ? 'first-pending-req' : ''">
                 <li id="pending-con-{{$index + 1}}" ng-repeat="contact in pending_contact_request_data">
                     <div class="arti-profile-box">
                     	<div class="user-cover-img">
 							<a href="<?php echo base_url();?>{{contact.user_slug}}" target="_self">
-								<img ng-if="contact.profile_background" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{contact.profile_background}}">
+								<img ng-if="contact.profile_background" ng-src="<?php echo USER_BG_THUMB_UPLOAD_URL ?>{{contact.profile_background}}">
 								<div ng-if="!contact.profile_background" class="gradient-bg" style="height: 100%"></div>
 							</a>
 						</div>
 						<div class="user-pr-img">
 							<a href="<?php echo base_url();?>{{contact.user_slug}}" target="_self">
-								<img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{contact.user_image}}" ng-if="contact.user_image">                                                
+								<img ng-src="<?php echo USER_PROFILE_80x80_UPLOAD_URL ?>{{contact.user_image}}" ng-if="contact.user_image">                                                
                                 <img ng-if="!contact.user_image && contact.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                 <img ng-if="!contact.user_image && contact.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
 							</a>
@@ -66,13 +66,13 @@
 					<div class="arti-profile-box">
 						<div class="user-cover-img">
 							<a href="<?php echo base_url();?>{{suggest.user_slug}}" target="_self">
-								<img ng-if="suggest.profile_background" ng-src="<?php echo USER_BG_MAIN_UPLOAD_URL ?>{{suggest.profile_background}}">
+								<img ng-if="suggest.profile_background" ng-src="<?php echo USER_BG_THUMB_UPLOAD_URL ?>{{suggest.profile_background}}">
 								<div ng-if="!suggest.profile_background" class="gradient-bg" style="height: 100%"></div>
 							</a>
 						</div>
 						<div class="user-pr-img">
 							<a href="<?php echo base_url();?>{{suggest.user_slug}}" target="_self" data-toggle="popover" data-uid="{{suggest.user_id}}" data-utype="1">
-								<img ng-src="<?php echo USER_MAIN_UPLOAD_URL ?>{{suggest.user_image}}" ng-if="suggest.user_image">
+								<img ng-src="<?php echo USER_PROFILE_80x80_UPLOAD_URL ?>{{suggest.user_image}}" ng-if="suggest.user_image">
                                 <img ng-if="!suggest.user_image && suggest.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                 <img ng-if="!suggest.user_image && suggest.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
 							</a>
@@ -107,22 +107,22 @@
 </div>
 <div class="right-add">
 	<?php $this->load->view('right_add_box'); ?>
-    <div id="request-noti-move" class="request-noti">
+    <div id="request-noti-move" class="request-noti" style="position: relative;">
         <div class="right-title">
             Contact Request Notifications
         </div>
-        <div class="content custom-scroll">
-            <div class="no-data-box" ng-if="contactRequestNotification.length == '0'">
+        <div class="content req-not-scroll">
+            <div class="no-data-box" ng-if="contact_request_notification.length == '0'">
                 <div class="no-data-content">
                     <p><img src="<?php echo base_url('assets/img/No_Contact_Request.png') ?>"></p>
                     <p class="pt20">No Contact Request Notification</p>
                 </div>
             </div>
             <ul class="request-list">
-                <li ng-repeat="notification in contactRequestNotification">
+                <li ng-repeat="notification in contact_request_notification">
                     <a href="<?php echo base_url(); ?>{{notification.user_slug}}" target="_self">
                         <div class="post-img">
-                            <img src="<?php echo USER_MAIN_UPLOAD_URL ?>{{notification.user_image}}" alt="{{notification.fullname}}" ng-if="notification.user_image != ''">
+                            <img src="<?php echo USER_PROFILE_80x80_UPLOAD_URL ?>{{notification.user_image}}" alt="{{notification.fullname}}" ng-if="notification.user_image != ''">
                             <img ng-if="notification.user_image == '' && notification.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                             <img ng-if="notification.user_image == '' && notification.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                         </div>
@@ -135,6 +135,9 @@
                     </a>
                 </li>
             </ul>
+        </div>
+        <div id="not-req-loader" class="fw" style="text-align: center;display: none;position: absolute;bottom: 1px;background: #fff;width: 95%;">
+            <img ng-src="<?php echo base_url('assets/images/loader.gif')?>" alt="Loader" />
         </div>
     </div>
     <?php echo $left_footer_list_view; ?>

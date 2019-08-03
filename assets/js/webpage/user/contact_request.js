@@ -40,11 +40,10 @@ app.controller('contactRequestController', function ($scope, $http,$window,$loca
     $scope.today = new Date();
     $scope.$parent.title = "Contact Request | Aileensoul";
     $scope.user_id = user_id;
-    pending_contact_request();
+    
     var offset = "40";
     var processing = false;
-    getContactSuggetion(1);
-    contactRequestNotification();
+    
     $scope.jobs = {};
 
     var isProcessing = false;
@@ -84,7 +83,7 @@ app.controller('contactRequestController', function ($scope, $http,$window,$loca
         $http({
             method: 'POST',
             url: base_url + 'user_post/getContactAllSuggetion?page='+start,            
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         }).then(function (success) {
             $(".sugg_post_load").hide();            
             
@@ -138,7 +137,9 @@ app.controller('contactRequestController', function ($scope, $http,$window,$loca
         $http({
             method: 'POST',
             url: base_url + 'userprofile_page/pending_contact_request',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            async : true,
+            cache : false,
         }).then(function (success) {
             $(".req_post_load").hide();
             $("#contactlist").show();
@@ -151,21 +152,65 @@ app.controller('contactRequestController', function ($scope, $http,$window,$loca
             },500);
         });
     }
-    function contactRequestNotification() {
+
+    $scope.not_page = 0;
+    $scope.not_total_record = 0;
+    $scope.not_perpage = 5;
+    var is_processing = false;
+    $scope.contact_request_notification = [];
+    $scope.contactRequestNotification = function(pagenum) {
+        if(is_processing)
+        {
+            return false;
+        }
+        is_processing = true;
+        $("#not-req-loader").show();
         $http({
             method: 'POST',
             url: base_url + 'userprofile_page/contactRequestNotification',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).then(function (success) {
-            contactRequestNotification = success.data;
-            $scope.contactRequestNotification = contactRequestNotification;
+            data: 'page='+pagenum,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},            
+        }).then(function (success) {            
+            if(success.data.request_notification)
+            {                
+                for (var i in success.data.request_notification) {
+                    $scope.contact_request_notification.push(success.data.request_notification[i]);
+                }
+                $scope.not_page = success.data.page;
+                $scope.not_total_record = success.data.total_record;
+                is_processing = false;
+            }
+            $("#not-req-loader").hide();
+            // contact_request_notification = success.data;
+            // $scope.contact_request_notification = contact_request_notification;
         }, function (error) {
             $(".sugg_post_load").hide();
             setTimeout(function(){
-                contactRequestNotification();
+                $scope.contactRequestNotification(pagenum);
             },500);
         });
-    }
+    };
+    
+    $('.req-not-scroll').on('scroll', function () {
+        if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+            var page = $scope.not_page;
+            var total_record = $scope.not_total_record;
+            var perpage_record = $scope.not_perpage;
+            if (parseInt(perpage_record * page) <= parseInt(total_record)) {
+                var available_page = total_record / perpage_record;
+                available_page = parseInt(available_page, 10);
+                var mod_page = total_record % perpage_record;
+                if (mod_page > 0) {
+                    available_page = available_page + 1;
+                }
+                if (parseInt(page) <= parseInt(available_page)) {
+                    var pagenum = parseInt($scope.not_page) + 1;
+                    $scope.contactRequestNotification(pagenum);
+                }
+            }
+        }
+    });
+
     $scope.confirmContact = function (from_id, index) {
         $http({
             method: 'POST',
@@ -231,6 +276,10 @@ app.controller('contactRequestController', function ($scope, $http,$window,$loca
             },500);
         });
     }
+
+    pending_contact_request();
+    getContactSuggetion(1);
+    $scope.contactRequestNotification(1);
 });
 app.controller('businessController', function ($scope, $http,$window,$location) {
     $scope.$parent.active_pg = 2;

@@ -268,7 +268,10 @@ class User_model extends CI_Model {
         return $result_array;
     }
 
-    public function contact_request_accept($user_id = '') {
+    public function contact_request_accept($user_id = '', $page = "",$limit = "40") {
+        $start = ($page - 1) * $limit;
+        if ($start < 0)
+            $start = 0;
        // $this->db->select("uc.from_id,uc.to_id,uc.modify_date,uc.status,uc.not_read,CONCAT(u.first_name,' ', u.last_name) as fullname")->from("user_contact uc");
        // $this->db->join('user u', 'u.user_id = (CASE WHEN uc.from_id=' . $user_id . ' THEN uc.to_id ELSE uc.from_id END)');
         $this->db->select("uc.to_id,uc.modify_date,uc.status,uc.not_read,CONCAT(u.first_name,' ', u.last_name) as fullname, u.first_name, u.last_name, u.user_gender , u.user_slug,ui.user_image,jt.name as designation,d.degree_name as degree")->from("user_contact uc");
@@ -280,14 +283,38 @@ class User_model extends CI_Model {
         $this->db->join('degree d', 'd.degree_id = us.current_study', 'left');
         $this->db->where("uc.from_id", $user_id);
         $this->db->where('uc.status', 'confirm');
-        $this->db->order_by('uc.modify_date', 'desc');
+        $this->db->order_by('uc.modify_date', 'desc');        
+        if($limit != '') {
+            $this->db->limit($limit,$start);
+        }
         $query = $this->db->get();
         $result_array = $query->result_array();
         foreach ($result_array as $key => $value) {
             $result_array[$key]['time_string'] = $this->common->time_elapsed_string($value['modify_date']);    
         }
-        
-        return $result_array;
+
+        $ret_array['request_notification'] = $result_array;
+        $ret_array['page'] = $page;
+        $ret_array['total_record'] =$this->contact_request_accept_total_rec($user_id);
+
+        return $ret_array;
+    }
+
+    public function contact_request_accept_total_rec($user_id)
+    {
+        $this->db->select("COUNT(*) as total_record")->from("user_contact uc");
+        $this->db->join('user u', 'u.user_id = uc.to_id');
+        $this->db->join('user_info ui', 'ui.user_id = uc.to_id');
+        $this->db->join('user_profession up', 'up.user_id = uc.to_id', 'left');
+        $this->db->join('job_title jt', 'jt.title_id = up.designation', 'left');
+        $this->db->join('user_student us', 'us.user_id = uc.to_id', 'left');
+        $this->db->join('degree d', 'd.degree_id = us.current_study', 'left');
+        $this->db->where("uc.from_id", $user_id);
+        $this->db->where('uc.status', 'confirm');
+        $this->db->order_by('uc.modify_date', 'desc');
+        $query = $this->db->get();
+        $result_array = $query->row_array();
+        return $result_array['total_record'];
     }
 
     public function contactRequestCount($user_id = '') {
@@ -303,8 +330,8 @@ class User_model extends CI_Model {
 
     public function contact_request($user_id = '') {
         $contact_request_pending = $this->contact_request_pending($user_id);
-        $contact_request_accept = $this->contact_request_accept($user_id);
-        $result_array = array_merge($contact_request_pending, $contact_request_accept);
+        $contact_request_accept = $this->contact_request_accept($user_id,0,10);
+        $result_array = array_merge($contact_request_pending, $contact_request_accept['request_notification']);
 
         return $result_array;
     }

@@ -109,8 +109,16 @@ class Userprofile_page extends MY_Controller {
 
     public function contactRequestNotification() {
         $userid = $this->session->userdata('aileenuser');
+        if (!empty($this->input->post("page")) && $this->input->post("page") != 'undefined') {
+            $page = $this->input->post("page");
+        }
+        else
+        {
+            $page = 1;
+        }
+        $limit = 10;//40;
         $contactRequestUpdate = $this->user_model->contact_request_read($userid);
-        $contactRequestNotification = $this->user_model->contact_request_accept($userid);
+        $contactRequestNotification = $this->user_model->contact_request_accept($userid,$page,$limit);
         echo json_encode($contactRequestNotification);
     }
 

@@ -246,7 +246,14 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
             data: 'from_id=' + from_id + '&action=confirm',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
-            $scope.contact_request_data.splice(index, 1);
+            if($scope.contact_request_data.length > 1)
+            {
+                $scope.contact_request_data.splice(index, 1);
+            }
+            else
+            {
+                $scope.contact_request_data = [];
+            }
         }, function (error) {
             setTimeout(function(){
                 $scope.confirmContactRequest(from_id,index);
@@ -261,7 +268,14 @@ app.controller('headerCtrl', function ($scope, $http,$timeout) {
             data: 'from_id=' + from_id + '&action=reject',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).then(function (success) {
-            $scope.contact_request_data.splice(index, 1);
+            if($scope.contact_request_data.length > 1)
+            {
+                $scope.contact_request_data.splice(index, 1);
+            }
+            else
+            {
+                $scope.contact_request_data = [];
+            }
         }, function (error) {
             setTimeout(function(){
                 $scope.rejectContactRequest(from_id,index);
