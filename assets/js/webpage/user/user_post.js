@@ -903,7 +903,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
         });
     });
 
-    $scope.removeFile = function(rmId) {        
+    $scope.removeFile = function(rmId) {
         fileCountSim--;
         $("#fileCountSim").text(fileCountSim);
         if(fileCountSim <= 0)
@@ -1009,7 +1009,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
         formFileDataOpp.delete("myfiles_"+rmId);
     };
 
-    $(document).on('change','#fileInput2', function(e){        
+    $(document).on('change','#fileInput2', function(e){
         $.each($('#fileInput2')[0].files, function(i, f) {
             if(fileNamesArrQue.indexOf(f.name) < 0)
             {
@@ -1106,36 +1106,36 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
     $("#ask_field").focusout(function(){
         $('#ask_fieldtooltip').hide();
     });
-	
-	$("#sim_title").focusin(function(){
+    
+    $("#sim_title").focusin(function(){
         $('#simple-post-title').show();
     });
     $("#sim_title").focusout(function(){
         $('#simple-post-title').hide();
     });
-	
-	$("#sim_hashtag").focusin(function(){
+    
+    $("#sim_hashtag").focusin(function(){
         $('#simple-post-hashtag').show();
     });
     $("#sim_hashtag").focusout(function(){
         $('#simple-post-hashtag').hide();
     });
-	
-	$("#opp_hashtag").focusin(function(){
+    
+    $("#opp_hashtag").focusin(function(){
         $('#opp-post-hashtag').show();
     });
     $("#opp_hashtag").focusout(function(){
         $('#opp-post-hashtag').hide();
     });
-	
-	$("#company_name").focusin(function(){
+    
+    $("#company_name").focusin(function(){
         $('#op-post-company').show();
     });
     $("#company_name").focusout(function(){
         $('#op-post-company').hide();
     });
 
-	$("#ask_hashtag").focusin(function(){
+    $("#ask_hashtag").focusin(function(){
         $('#ask-post-hashtag').show();
     });
     $("#ask_hashtag").focusout(function(){
@@ -1235,8 +1235,27 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
     function getUserPromotedPost() {
         $http.get(base_url + "user_post/getUserPromotedPost").then(function (success) {            
             $('body').removeClass("body-loader");
-            if (success.data) {                
-                $scope.promotedPostData = success.data; 
+            if (success.data) {
+                if(success.data.promoted_post_data_1.length > 0)
+                {
+                    $scope.promotedPostData1 = success.data.promoted_post_data_1; 
+                }
+                if(success.data.promoted_post_data_2.length > 0)
+                {
+                    $scope.promotedPostData2 = success.data.promoted_post_data_2; 
+                }
+                if(success.data.promoted_post_data_3.length > 0)
+                {
+                    $scope.promotedPostData3 = success.data.promoted_post_data_3; 
+                }
+                if(success.data.promoted_post_data_4.length > 0)
+                {
+                    $scope.promotedPostData4 = success.data.promoted_post_data_4; 
+                }
+                if(success.data.promoted_post_data_5.length > 0)
+                {
+                    $scope.promotedPostData5 = success.data.promoted_post_data_5; 
+                }
                 setTimeout(function(){
                     $('[data-toggle="popover"]').popover({
                         trigger: "manual" ,
@@ -1300,14 +1319,32 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
         }, function (error) {
             getUserPromotedPost();
         });
-    }
-
-    $scope.promotedPostIndex10Data = [];
+    };
+    
     function getUserPromotedPostIndex10() {
         $http.get(base_url + "user_post/getUserPromotedPostIndex10").then(function (success) {            
             $('body').removeClass("body-loader");
-            if (success.data) {                
-                $scope.promotedPostIndex10Data = success.data; 
+            if (success.data) {
+                if(success.data.promoted_post_data_6.length > 0)
+                {
+                    $scope.promotedPostData6 = success.data.promoted_post_data_6; 
+                }
+                if(success.data.promoted_post_data_7.length > 0)
+                {
+                    $scope.promotedPostData7 = success.data.promoted_post_data_7; 
+                }
+                if(success.data.promoted_post_data_8.length > 0)
+                {
+                    $scope.promotedPostData8 = success.data.promoted_post_data_8; 
+                }
+                if(success.data.promoted_post_data_9.length > 0)
+                {
+                    $scope.promotedPostData9 = success.data.promoted_post_data_9; 
+                }
+                if(success.data.promoted_post_data_10.length > 0)
+                {
+                    $scope.promotedPostData10 = success.data.promoted_post_data_10; 
+                }
                 setTimeout(function(){
                     $('[data-toggle="popover"]').popover({
                         trigger: "manual" ,
@@ -1370,6 +1407,225 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
             }           
         }, function (error) {
             getUserPromotedPostIndex10();
+        });
+    }
+
+    function getUserPromotedPostIndex15() {
+        $http.get(base_url + "user_post/getUserPromotedPostIndex15").then(function (success) {            
+            $('body').removeClass("body-loader");
+            if (success.data) {
+                if(success.data.promoted_post_data_15.length > 0)
+                {
+                    $scope.promotedPostData15 = success.data.promoted_post_data_15; 
+                }
+                setTimeout(function(){
+                    $('[data-toggle="popover"]').popover({
+                        trigger: "manual" ,
+                        html: true, 
+                        animation:false,
+                        template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                        content: function () {
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
+                            // return $('#popover-content').html();
+                        },
+                        placement: function (context, element) {
+
+                            var $this = $(element);
+                            var offset = $this.offset();
+                            var width = $this.width();
+                            var height = $this.height();
+
+                            var centerX = offset.left + width / 2;
+                            var centerY = offset.top + height / 2;
+                            var position = $(element).position();
+                            
+                            if(centerY > $(window).scrollTop())
+                            {
+                                scroll_top = $(window).scrollTop();
+                                scroll_center = centerY;
+                            }
+                            if($(window).scrollTop() > centerY)
+                            {
+                                scroll_top = centerY;
+                                scroll_center = $(window).scrollTop();
+                            }
+                            
+                            if (parseInt(scroll_center - scroll_top) < 340){
+                                return "bottom";
+                            }                        
+                            return "top";
+                        }
+                    }).on("mouseenter", function () {
+                        var _this = this;
+                        $(this).popover("show");
+                        $(".popover").on("mouseleave", function () {
+                            $(_this).popover('hide');
+                        });
+                    }).on("mouseleave", function () {
+                        var _this = this;
+                        setTimeout(function () {
+                            if (!$(".popover:hover").length) {
+                                $(_this).popover("hide");
+                            }
+                        }, 100);
+                    });
+                },500);
+
+            } else {
+                isLoadingData = true;
+            }           
+        }, function (error) {
+            getUserPromotedPostIndex15();
+        });
+    }
+
+    function getUserPromotedPostIndex20() {
+        $http.get(base_url + "user_post/getUserPromotedPostIndex20").then(function (success) {            
+            $('body').removeClass("body-loader");
+            if (success.data) {
+                if(success.data.promoted_post_data_20.length > 0)
+                {
+                    $scope.promotedPostData20 = success.data.promoted_post_data_20; 
+                }
+                setTimeout(function(){
+                    $('[data-toggle="popover"]').popover({
+                        trigger: "manual" ,
+                        html: true, 
+                        animation:false,
+                        template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                        content: function () {
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
+                            // return $('#popover-content').html();
+                        },
+                        placement: function (context, element) {
+
+                            var $this = $(element);
+                            var offset = $this.offset();
+                            var width = $this.width();
+                            var height = $this.height();
+
+                            var centerX = offset.left + width / 2;
+                            var centerY = offset.top + height / 2;
+                            var position = $(element).position();
+                            
+                            if(centerY > $(window).scrollTop())
+                            {
+                                scroll_top = $(window).scrollTop();
+                                scroll_center = centerY;
+                            }
+                            if($(window).scrollTop() > centerY)
+                            {
+                                scroll_top = centerY;
+                                scroll_center = $(window).scrollTop();
+                            }
+                            
+                            if (parseInt(scroll_center - scroll_top) < 340){
+                                return "bottom";
+                            }                        
+                            return "top";
+                        }
+                    }).on("mouseenter", function () {
+                        var _this = this;
+                        $(this).popover("show");
+                        $(".popover").on("mouseleave", function () {
+                            $(_this).popover('hide');
+                        });
+                    }).on("mouseleave", function () {
+                        var _this = this;
+                        setTimeout(function () {
+                            if (!$(".popover:hover").length) {
+                                $(_this).popover("hide");
+                            }
+                        }, 100);
+                    });
+                },500);
+
+            } else {
+                isLoadingData = true;
+            }           
+        }, function (error) {
+            getUserPromotedPostIndex20();
+        });
+    }
+
+    function getUserPromotedPostIndex25() {
+        $http.get(base_url + "user_post/getUserPromotedPostIndex25").then(function (success) {            
+            $('body').removeClass("body-loader");
+            if (success.data) {
+                if(success.data.promoted_post_data_25.length > 0)
+                {
+                    $scope.promotedPostData25 = success.data.promoted_post_data_25; 
+                }
+                setTimeout(function(){
+                    $('[data-toggle="popover"]').popover({
+                        trigger: "manual" ,
+                        html: true, 
+                        animation:false,
+                        template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                        content: function () {
+                            // return $($(this).data('tooltip-content')).html();
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);
+                            // return $('#popover-content').html();
+                        },
+                        placement: function (context, element) {
+
+                            var $this = $(element);
+                            var offset = $this.offset();
+                            var width = $this.width();
+                            var height = $this.height();
+
+                            var centerX = offset.left + width / 2;
+                            var centerY = offset.top + height / 2;
+                            var position = $(element).position();
+                            
+                            if(centerY > $(window).scrollTop())
+                            {
+                                scroll_top = $(window).scrollTop();
+                                scroll_center = centerY;
+                            }
+                            if($(window).scrollTop() > centerY)
+                            {
+                                scroll_top = centerY;
+                                scroll_center = $(window).scrollTop();
+                            }
+                            
+                            if (parseInt(scroll_center - scroll_top) < 340){
+                                return "bottom";
+                            }                        
+                            return "top";
+                        }
+                    }).on("mouseenter", function () {
+                        var _this = this;
+                        $(this).popover("show");
+                        $(".popover").on("mouseleave", function () {
+                            $(_this).popover('hide');
+                        });
+                    }).on("mouseleave", function () {
+                        var _this = this;
+                        setTimeout(function () {
+                            if (!$(".popover:hover").length) {
+                                $(_this).popover("hide");
+                            }
+                        }, 100);
+                    });
+                },500);
+
+            } else {
+                isLoadingData = true;
+            }           
+        }, function (error) {
+            getUserPromotedPostIndex20();
         });
     }
 
@@ -1681,9 +1937,21 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
                 $scope.showLoadmore = false;
             }
 
-            if(pg == 2)
+            if(pg == 2)//6 to 10
             {
                 getUserPromotedPostIndex10();
+            }
+            if(pg == 3)// 15
+            {
+                getUserPromotedPostIndex15();
+            }
+            if(pg == 4)// 20
+            {
+                getUserPromotedPostIndex20();
+            }
+            if(pg == 5)// 25
+            {
+                getUserPromotedPostIndex25();
             }
             setTimeout(function(){
                 var mediaElements = document.querySelectorAll('video, audio'), i, total = mediaElements.length;
@@ -1783,9 +2051,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
                 getUserPostLoadMore(pg)
             },200);
         });
-    }
-
-    
+    }    
 
     getFieldList();
     function getFieldList() {
@@ -3121,7 +3387,55 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
                 }
                 if(is_promoted == 1)
                 {
-                    $scope.promotedPostData[parent_index].user_like_list = success.data.user_like_list;
+                    $scope.promotedPostData1[parent_index].user_like_list = success.data.user_like_list;
+                }
+                else if(is_promoted == 2)
+                {
+                    $scope.promotedPostData2[parent_index].user_like_list = success.data.user_like_list;
+                }
+                else if(is_promoted == 3)
+                {
+                    $scope.promotedPostData3[parent_index].user_like_list = success.data.user_like_list;
+                }
+                else if(is_promoted == 4)
+                {
+                    $scope.promotedPostData4[parent_index].user_like_list = success.data.user_like_list;
+                }
+                else if(is_promoted == 5)
+                {
+                    $scope.promotedPostData5[parent_index].user_like_list = success.data.user_like_list;
+                }
+                else if(is_promoted == 6)
+                {
+                    $scope.promotedPostData6[parent_index].user_like_list = success.data.user_like_list;
+                }
+                else if(is_promoted == 7)
+                {
+                    $scope.promotedPostData7[parent_index].user_like_list = success.data.user_like_list;
+                }
+                else if(is_promoted == 8)
+                {
+                    $scope.promotedPostData8[parent_index].user_like_list = success.data.user_like_list;
+                }
+                else if(is_promoted == 9)
+                {
+                    $scope.promotedPostData9[parent_index].user_like_list = success.data.user_like_list;
+                }
+                else if(is_promoted == 10)
+                {
+                    $scope.promotedPostData10[parent_index].user_like_list = success.data.user_like_list;
+                }
+                else if(is_promoted == 15)
+                {
+                    $scope.promotedPostData15[parent_index].user_like_list = success.data.user_like_list;
+                }
+                else if(is_promoted == 20)
+                {
+                    $scope.promotedPostData20[parent_index].user_like_list = success.data.user_like_list;
+                }
+                else if(is_promoted == 25)
+                {
+                    $scope.promotedPostData25[parent_index].user_like_list = success.data.user_like_list;
                 }
                 else
                 {
@@ -3222,11 +3536,131 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
                         {
                             if(socket)
                             {
-                                socket.emit('user notification',$scope.promotedPostData[index].post_data.user_id);
+                                socket.emit('user notification',$scope.promotedPostData1[index].post_data.user_id);
                             }
 
-                            $scope.promotedPostData[index].post_comment_data.splice(0, 1);
-                            $scope.promotedPostData[index].post_comment_data.push(data.comment_data[0]);
+                            $scope.promotedPostData1[index].post_comment_data.splice(0, 1);
+                            $scope.promotedPostData1[index].post_comment_data.push(data.comment_data[0]);
+                        }
+                        else if(is_promoted == 2)
+                        {
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData2[index].post_data.user_id);
+                            }
+
+                            $scope.promotedPostData2[index].post_comment_data.splice(0, 1);
+                            $scope.promotedPostData2[index].post_comment_data.push(data.comment_data[0]);
+                        }
+                        else if(is_promoted == 3)
+                        {
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData3[index].post_data.user_id);
+                            }
+
+                            $scope.promotedPostData3[index].post_comment_data.splice(0, 1);
+                            $scope.promotedPostData3[index].post_comment_data.push(data.comment_data[0]);
+                        }
+                        else if(is_promoted == 4)
+                        {
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData4[index].post_data.user_id);
+                            }
+
+                            $scope.promotedPostData4[index].post_comment_data.splice(0, 1);
+                            $scope.promotedPostData4[index].post_comment_data.push(data.comment_data[0]);
+                        }
+                        else if(is_promoted == 5)
+                        {
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData5[index].post_data.user_id);
+                            }
+
+                            $scope.promotedPostData5[index].post_comment_data.splice(0, 1);
+                            $scope.promotedPostData5[index].post_comment_data.push(data.comment_data[0]);
+                        }
+                        else if(is_promoted == 6)
+                        {
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData6[index].post_data.user_id);
+                            }
+
+                            $scope.promotedPostData6[index].post_comment_data.splice(0, 1);
+                            $scope.promotedPostData6[index].post_comment_data.push(data.comment_data[0]);
+                        }
+                        else if(is_promoted == 7)
+                        {
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData7[index].post_data.user_id);
+                            }
+
+                            $scope.promotedPostData7[index].post_comment_data.splice(0, 1);
+                            $scope.promotedPostData7[index].post_comment_data.push(data.comment_data[0]);
+                        }
+                        else if(is_promoted == 8)
+                        {
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData8[index].post_data.user_id);
+                            }
+
+                            $scope.promotedPostData8[index].post_comment_data.splice(0, 1);
+                            $scope.promotedPostData8[index].post_comment_data.push(data.comment_data[0]);
+                        }
+                        else if(is_promoted == 9)
+                        {
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData9[index].post_data.user_id);
+                            }
+
+                            $scope.promotedPostData9[index].post_comment_data.splice(0, 1);
+                            $scope.promotedPostData9[index].post_comment_data.push(data.comment_data[0]);
+                        }
+                        else if(is_promoted == 10)
+                        {
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData10[index].post_data.user_id);
+                            }
+
+                            $scope.promotedPostData10[index].post_comment_data.splice(0, 1);
+                            $scope.promotedPostData10[index].post_comment_data.push(data.comment_data[0]);
+                        }
+                        else if(is_promoted == 15)
+                        {
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData15[index].post_data.user_id);
+                            }
+
+                            $scope.promotedPostData15[index].post_comment_data.splice(0, 1);
+                            $scope.promotedPostData15[index].post_comment_data.push(data.comment_data[0]);
+                        }
+                        else if(is_promoted == 20)
+                        {
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData20[index].post_data.user_id);
+                            }
+
+                            $scope.promotedPostData20[index].post_comment_data.splice(0, 1);
+                            $scope.promotedPostData20[index].post_comment_data.push(data.comment_data[0]);
+                        }
+                        else if(is_promoted == 25)
+                        {
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData25[index].post_data.user_id);
+                            }
+
+                            $scope.promotedPostData25[index].post_comment_data.splice(0, 1);
+                            $scope.promotedPostData25[index].post_comment_data.push(data.comment_data[0]);
                         }
                         else
                         {
@@ -3238,6 +3672,7 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
                             $scope.postData[index].post_comment_data.splice(0, 1);
                             $scope.postData[index].post_comment_data.push(data.comment_data[0]);
                         }
+
                         if(data.comment_count > 0)
                         {
                             $('.post-comment-count-' + post_id).show();
@@ -3336,20 +3771,75 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
         })
         .then(function (success) {
             data = success.data;
-            if(post_type == 1)
+            if(post_type == 1)//Promoted
+            {
+                $scope.promotedPostData1[index].post_comment_data = data.all_comment_data;
+                $scope.promotedPostData1[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 2)//Promoted
+            {
+                $scope.promotedPostData2[index].post_comment_data = data.all_comment_data;
+                $scope.promotedPostData2[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 3)//Promoted
+            {
+                $scope.promotedPostData3[index].post_comment_data = data.all_comment_data;
+                $scope.promotedPostData3[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 4)//Promoted
+            {
+                $scope.promotedPostData4[index].post_comment_data = data.all_comment_data;
+                $scope.promotedPostData4[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 5)//Promoted
+            {
+                $scope.promotedPostData5[index].post_comment_data = data.all_comment_data;
+                $scope.promotedPostData5[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 6)//Promoted
+            {
+                $scope.promotedPostData6[index].post_comment_data = data.all_comment_data;
+                $scope.promotedPostData6[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 7)//Promoted
+            {
+                $scope.promotedPostData7[index].post_comment_data = data.all_comment_data;
+                $scope.promotedPostData7[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 8)//Promoted
+            {
+                $scope.promotedPostData8[index].post_comment_data = data.all_comment_data;
+                $scope.promotedPostData8[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 9)//Promoted
+            {
+                $scope.promotedPostData9[index].post_comment_data = data.all_comment_data;
+                $scope.promotedPostData9[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 10)//Promoted
+            {
+                $scope.promotedPostData10[index].post_comment_data = data.all_comment_data;
+                $scope.promotedPostData10[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 15)//Promoted
+            {
+                $scope.promotedPostData15[index].post_comment_data = data.all_comment_data;
+                $scope.promotedPostData15[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 20)//Promoted
+            {
+                $scope.promotedPostData20[index].post_comment_data = data.all_comment_data;
+                $scope.promotedPostData20[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 25)//Promoted
+            {
+                $scope.promotedPostData25[index].post_comment_data = data.all_comment_data;
+                $scope.promotedPostData25[index].post_comment_count = data.post_comment_count;
+            }
+            else
             {
                 $scope.postData[index].post_comment_data = data.all_comment_data;
                 $scope.postData[index].post_comment_count = data.post_comment_count;
-            }
-            if(post_type == 2)//Promoted
-            {
-                $scope.promotedPostData[index].post_comment_data = data.all_comment_data;
-                $scope.promotedPostData[index].post_comment_count = data.post_comment_count;
-            }
-            if(post_type == 3)//Promoted Index10
-            {
-                $scope.promotedPostIndex10Data[index].post_comment_data = data.all_comment_data;
-                $scope.promotedPostIndex10Data[index].post_comment_count = data.post_comment_count;
             }
             
             setTimeout(function(){
@@ -3425,20 +3915,75 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
         })
         .then(function (success) {
             data = success.data;
-            if(post_type == 1)
+            if(post_type == 1)//Promoted
+            {
+                $scope.promotedPostData1[index].post_comment_data = data.comment_data;
+                $scope.promotedPostData1[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 2)//Promoted
+            {
+                $scope.promotedPostData2[index].post_comment_data = data.comment_data;
+                $scope.promotedPostData2[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 3)//Promoted
+            {
+                $scope.promotedPostData3[index].post_comment_data = data.comment_data;
+                $scope.promotedPostData3[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 4)//Promoted
+            {
+                $scope.promotedPostData4[index].post_comment_data = data.comment_data;
+                $scope.promotedPostData4[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 5)//Promoted
+            {
+                $scope.promotedPostData5[index].post_comment_data = data.comment_data;
+                $scope.promotedPostData5[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 6)//Promoted
+            {
+                $scope.promotedPostData6[index].post_comment_data = data.comment_data;
+                $scope.promotedPostData6[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 7)//Promoted
+            {
+                $scope.promotedPostData7[index].post_comment_data = data.comment_data;
+                $scope.promotedPostData7[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 8)//Promoted
+            {
+                $scope.promotedPostData8[index].post_comment_data = data.comment_data;
+                $scope.promotedPostData8[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 9)//Promoted
+            {
+                $scope.promotedPostData9[index].post_comment_data = data.comment_data;
+                $scope.promotedPostData9[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 10)//Promoted
+            {
+                $scope.promotedPostData10[index].post_comment_data = data.comment_data;
+                $scope.promotedPostData10[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 15)//Promoted
+            {
+                $scope.promotedPostData15[index].post_comment_data = data.comment_data;
+                $scope.promotedPostData15[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 20)//Promoted
+            {
+                $scope.promotedPostData20[index].post_comment_data = data.comment_data;
+                $scope.promotedPostData20[index].post_comment_count = data.post_comment_count;
+            }
+            else if(post_type == 25)//Promoted
+            {
+                $scope.promotedPostData25[index].post_comment_data = data.comment_data;
+                $scope.promotedPostData25[index].post_comment_count = data.post_comment_count;
+            }
+            else
             {
                 $scope.postData[index].post_comment_data = data.comment_data;
                 $scope.postData[index].post_comment_count = data.post_comment_count;
-            }
-            if(post_type == 2)//Promoted
-            {
-                $scope.promotedPostData[index].post_comment_data = data.comment_data;
-                $scope.promotedPostData[index].post_comment_count = data.post_comment_count;
-            }
-            if(post_type == 3)//Promoted Index10
-            {
-                $scope.promotedPostIndex10Data[index].post_comment_data = data.comment_data;
-                $scope.promotedPostIndex10Data[index].post_comment_count = data.post_comment_count;
             }
             setTimeout(function(){
                 $('[data-toggle="popover"]').popover({
@@ -3514,7 +4059,8 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
         $('#delete_model').modal('show');
     }
 
-    $scope.deleteComment = function (comment_id, post_id, parent_index, index, post,is_promoted) {
+    $scope.deleteComment = function (comment_id, post_id, parent_index, index, post,is_promoted)
+    {
         var commentClassName = $('#comment-icon-' + post_id).attr('class').split(' ')[0];
         $http({
             method: 'POST',
@@ -3529,11 +4075,131 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
                 {
                     if(socket)
                     {
-                        socket.emit('user notification',$scope.promotedPostData[index].post_data.user_id);
+                        socket.emit('user notification',$scope.promotedPostData1[index].post_data.user_id);
                     }
 
-                    $scope.promotedPostData[parent_index].post_comment_data.splice(0, 1);
-                    $scope.promotedPostData[parent_index].post_comment_data.push(data.comment_data[0]);
+                    $scope.promotedPostData1[parent_index].post_comment_data.splice(0, 1);
+                    $scope.promotedPostData1[parent_index].post_comment_data.push(data.comment_data[0]);
+                }
+                else if(is_promoted == 2)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData2[index].post_data.user_id);
+                    }
+
+                    $scope.promotedPostData2[parent_index].post_comment_data.splice(0, 1);
+                    $scope.promotedPostData2[parent_index].post_comment_data.push(data.comment_data[0]);
+                }
+                else if(is_promoted == 3)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData3[index].post_data.user_id);
+                    }
+
+                    $scope.promotedPostData3[parent_index].post_comment_data.splice(0, 1);
+                    $scope.promotedPostData3[parent_index].post_comment_data.push(data.comment_data[0]);
+                }
+                else if(is_promoted == 4)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData4[index].post_data.user_id);
+                    }
+
+                    $scope.promotedPostData4[parent_index].post_comment_data.splice(0, 1);
+                    $scope.promotedPostData4[parent_index].post_comment_data.push(data.comment_data[0]);
+                }
+                else if(is_promoted == 5)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData5[index].post_data.user_id);
+                    }
+
+                    $scope.promotedPostData5[parent_index].post_comment_data.splice(0, 1);
+                    $scope.promotedPostData5[parent_index].post_comment_data.push(data.comment_data[0]);
+                }
+                else if(is_promoted == 6)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData6[index].post_data.user_id);
+                    }
+
+                    $scope.promotedPostData6[parent_index].post_comment_data.splice(0, 1);
+                    $scope.promotedPostData6[parent_index].post_comment_data.push(data.comment_data[0]);
+                }
+                else if(is_promoted == 7)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData7[index].post_data.user_id);
+                    }
+
+                    $scope.promotedPostData7[parent_index].post_comment_data.splice(0, 1);
+                    $scope.promotedPostData7[parent_index].post_comment_data.push(data.comment_data[0]);
+                }
+                else if(is_promoted == 8)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData8[index].post_data.user_id);
+                    }
+
+                    $scope.promotedPostData8[parent_index].post_comment_data.splice(0, 1);
+                    $scope.promotedPostData8[parent_index].post_comment_data.push(data.comment_data[0]);
+                }
+                else if(is_promoted == 9)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData9[index].post_data.user_id);
+                    }
+
+                    $scope.promotedPostData9[parent_index].post_comment_data.splice(0, 1);
+                    $scope.promotedPostData9[parent_index].post_comment_data.push(data.comment_data[0]);
+                }
+                else if(is_promoted == 10)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData10[index].post_data.user_id);
+                    }
+
+                    $scope.promotedPostData10[parent_index].post_comment_data.splice(0, 1);
+                    $scope.promotedPostData10[parent_index].post_comment_data.push(data.comment_data[0]);
+                }
+                else if(is_promoted == 15)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData15[index].post_data.user_id);
+                    }
+
+                    $scope.promotedPostData15[parent_index].post_comment_data.splice(0, 1);
+                    $scope.promotedPostData15[parent_index].post_comment_data.push(data.comment_data[0]);
+                }
+                else if(is_promoted == 20)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData20[index].post_data.user_id);
+                    }
+
+                    $scope.promotedPostData20[parent_index].post_comment_data.splice(0, 1);
+                    $scope.promotedPostData20[parent_index].post_comment_data.push(data.comment_data[0]);
+                }
+                else if(is_promoted == 25)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData25[index].post_data.user_id);
+                    }
+
+                    $scope.promotedPostData25[parent_index].post_comment_data.splice(0, 1);
+                    $scope.promotedPostData25[parent_index].post_comment_data.push(data.comment_data[0]);
                 }
                 else
                 {
@@ -3555,9 +4221,105 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
                 {
                     if(socket)
                     {
-                        socket.emit('user notification',$scope.promotedPostData[index].post_data.user_id);
+                        socket.emit('user notification',$scope.promotedPostData1[index].post_data.user_id);
                     }
-                    $scope.promotedPostData[parent_index].post_comment_data.splice(index, 1);
+                    $scope.promotedPostData1[parent_index].post_comment_data.splice(index, 1);
+                }
+                else if(is_promoted == 2)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData2[index].post_data.user_id);
+                    }
+                    $scope.promotedPostData2[parent_index].post_comment_data.splice(index, 1);
+                }
+                else if(is_promoted == 3)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData3[index].post_data.user_id);
+                    }
+                    $scope.promotedPostData3[parent_index].post_comment_data.splice(index, 1);
+                }
+                else if(is_promoted == 4)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData4[index].post_data.user_id);
+                    }
+                    $scope.promotedPostData4[parent_index].post_comment_data.splice(index, 1);
+                }
+                else if(is_promoted == 5)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData5[index].post_data.user_id);
+                    }
+                    $scope.promotedPostData5[parent_index].post_comment_data.splice(index, 1);
+                }
+                else if(is_promoted == 6)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData6[index].post_data.user_id);
+                    }
+                    $scope.promotedPostData6[parent_index].post_comment_data.splice(index, 1);
+                }
+                else if(is_promoted == 7)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData7[index].post_data.user_id);
+                    }
+                    $scope.promotedPostData7[parent_index].post_comment_data.splice(index, 1);
+                }
+                else if(is_promoted == 8)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData8[index].post_data.user_id);
+                    }
+                    $scope.promotedPostData8[parent_index].post_comment_data.splice(index, 1);
+                }
+                else if(is_promoted == 9)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData9[index].post_data.user_id);
+                    }
+                    $scope.promotedPostData9[parent_index].post_comment_data.splice(index, 1);
+                }
+                else if(is_promoted == 10)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData10[index].post_data.user_id);
+                    }
+                    $scope.promotedPostData10[parent_index].post_comment_data.splice(index, 1);
+                }
+                else if(is_promoted == 15)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData15[index].post_data.user_id);
+                    }
+                    $scope.promotedPostData15[parent_index].post_comment_data.splice(index, 1);
+                }
+                else if(is_promoted == 20)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData20[index].post_data.user_id);
+                    }
+                    $scope.promotedPostData20[parent_index].post_comment_data.splice(index, 1);
+                }
+                else if(is_promoted == 25)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData25[index].post_data.user_id);
+                    }
+                    $scope.promotedPostData25[parent_index].post_comment_data.splice(index, 1);
                 }
                 else
                 {
@@ -3634,7 +4396,67 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
         // var editContent = $('#comment-dis-inner-' + comment_id).text();
         if(is_promoted == 1)
         {
-            var editContent = $scope.promotedPostData[parent_index].post_comment_data[index].comment;
+            var editContent = $scope.promotedPostData1[parent_index].post_comment_data[index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(is_promoted == 2)
+        {
+            var editContent = $scope.promotedPostData2[parent_index].post_comment_data[index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(is_promoted == 3)
+        {
+            var editContent = $scope.promotedPostData3[parent_index].post_comment_data[index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(is_promoted == 4)
+        {
+            var editContent = $scope.promotedPostData4[parent_index].post_comment_data[index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(is_promoted == 5)
+        {
+            var editContent = $scope.promotedPostData5[parent_index].post_comment_data[index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(is_promoted == 6)
+        {
+            var editContent = $scope.promotedPostData6[parent_index].post_comment_data[index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(is_promoted == 7)
+        {
+            var editContent = $scope.promotedPostData7[parent_index].post_comment_data[index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(is_promoted == 8)
+        {
+            var editContent = $scope.promotedPostData8[parent_index].post_comment_data[index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(is_promoted == 9)
+        {
+            var editContent = $scope.promotedPostData9[parent_index].post_comment_data[index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(is_promoted == 10)
+        {
+            var editContent = $scope.promotedPostData10[parent_index].post_comment_data[index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(is_promoted == 15)
+        {
+            var editContent = $scope.promotedPostData15[parent_index].post_comment_data[index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(is_promoted == 20)
+        {
+            var editContent = $scope.promotedPostData20[parent_index].post_comment_data[index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(is_promoted == 25)
+        {
+            var editContent = $scope.promotedPostData25[parent_index].post_comment_data[index].comment;
             editContent = editContent.substring(0,cmt_maxlength);
         }
         else
@@ -3659,19 +4481,74 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
         $('#edit-comment-li-' + comment_id).hide();
         $('#timeago-reply-comment-li-' + comment_id).hide();
 
-        if(post_type == 1)
+        if(post_type == 1)//Promoted
+        {            
+            var editContent = $scope.promotedPostData1[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(post_type == 2)//Promoted
+        {            
+            var editContent = $scope.promotedPostData2[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(post_type == 3)//Promoted
+        {            
+            var editContent = $scope.promotedPostData3[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(post_type == 4)//Promoted
+        {            
+            var editContent = $scope.promotedPostData4[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(post_type == 5)//Promoted
+        {            
+            var editContent = $scope.promotedPostData5[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(post_type == 6)//Promoted
+        {            
+            var editContent = $scope.promotedPostData6[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(post_type == 7)//Promoted
+        {            
+            var editContent = $scope.promotedPostData7[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(post_type == 8)//Promoted
+        {            
+            var editContent = $scope.promotedPostData8[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(post_type == 9)//Promoted
+        {            
+            var editContent = $scope.promotedPostData9[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(post_type == 10)//Promoted
+        {            
+            var editContent = $scope.promotedPostData10[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(post_type == 15)//Promoted
+        {            
+            var editContent = $scope.promotedPostData15[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(post_type == 20)//Promoted
+        {            
+            var editContent = $scope.promotedPostData20[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else if(post_type == 25)//Promoted
+        {            
+            var editContent = $scope.promotedPostData25[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
+            editContent = editContent.substring(0,cmt_maxlength);
+        }
+        else
         {            
             var editContent = $scope.postData[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
-            editContent = editContent.substring(0,cmt_maxlength);
-        }
-        if(post_type == 2)//Promoted
-        {            
-            var editContent = $scope.promotedPostData[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
-            editContent = editContent.substring(0,cmt_maxlength);
-        }
-        if(post_type == 3)//Promoted Index10
-        {
-            var editContent = $scope.promotedPostIndex10Data[parent_index].post_comment_data[cmt_index].comment_reply_data[cmt_rpl_index].comment;
             editContent = editContent.substring(0,cmt_maxlength);
         }
         editContent = editContent.substring(0,cmt_maxlength);
@@ -3754,20 +4631,75 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
                     $('#cancel-comment-li-' + comment_id).hide();
                     $('.new-comment-'+post_id).show();
 
-                    if(post_type == 1)
+                    if(post_type == 1)//Promoted
+                    {
+                        $scope.promotedPostData1[postIndex].post_comment_data[commentIndex].comment = data.comment;
+                        // $scope.promotedPostData1[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 2)//Promoted
+                    {
+                        $scope.promotedPostData2[postIndex].post_comment_data[commentIndex].comment = data.comment;
+                        // $scope.promotedPostData2[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 3)//Promoted
+                    {
+                        $scope.promotedPostData3[postIndex].post_comment_data[commentIndex].comment = data.comment;
+                        // $scope.promotedPostData3[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 4)//Promoted
+                    {
+                        $scope.promotedPostData4[postIndex].post_comment_data[commentIndex].comment = data.comment;
+                        // $scope.promotedPostData4[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 5)//Promoted
+                    {
+                        $scope.promotedPostData5[postIndex].post_comment_data[commentIndex].comment = data.comment;
+                        // $scope.promotedPostData5[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 6)//Promoted
+                    {
+                        $scope.promotedPostData6[postIndex].post_comment_data[commentIndex].comment = data.comment;
+                        // $scope.promotedPostData6[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 7)//Promoted
+                    {
+                        $scope.promotedPostData7[postIndex].post_comment_data[commentIndex].comment = data.comment;
+                        // $scope.promotedPostData7[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 8)//Promoted
+                    {
+                        $scope.promotedPostData8[postIndex].post_comment_data[commentIndex].comment = data.comment;
+                        // $scope.promotedPostData8[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 9)//Promoted
+                    {
+                        $scope.promotedPostData9[postIndex].post_comment_data[commentIndex].comment = data.comment;
+                        // $scope.promotedPostData9[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 10)//Promoted
+                    {
+                        $scope.promotedPostData10[postIndex].post_comment_data[commentIndex].comment = data.comment;
+                        // $scope.promotedPostData10[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 15)//Promoted
+                    {
+                        $scope.promotedPostData15[postIndex].post_comment_data[commentIndex].comment = data.comment;
+                        // $scope.promotedPostData15[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 20)//Promoted
+                    {
+                        $scope.promotedPostData20[postIndex].post_comment_data[commentIndex].comment = data.comment;
+                        // $scope.promotedPostData20[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 25)//Promoted
+                    {
+                        $scope.promotedPostData25[postIndex].post_comment_data[commentIndex].comment = data.comment;
+                        // $scope.promotedPostData25[index].post_comment_count = data.post_comment_count;
+                    }
+                    else
                     {
                         $scope.postData[postIndex].post_comment_data[commentIndex].comment = data.comment;
                         // $scope.postData[index].post_comment_count = data.post_comment_count;
-                    }
-                    if(post_type == 2)//Promoted
-                    {
-                        $scope.promotedPostData[postIndex].post_comment_data[commentIndex].comment = data.comment;
-                        // $scope.promotedPostData[index].post_comment_count = data.post_comment_count;
-                    }
-                    if(post_type == 3)//Promoted Index10
-                    {
-                        $scope.promotedPostIndex10Data[postIndex].post_comment_data[commentIndex].comment = data.comment;
-                        // $scope.promotedPostIndex10Data[index].post_comment_count = data.post_comment_count;
                     }
                 }
             },function errorCallback(response) {
@@ -3815,10 +4747,106 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
                         // $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data.splice(commentIndex, 1);
                         if(is_promoted == 1)
                         {
-                            $scope.promotedPostData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            $scope.promotedPostData1[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
                             if(socket)
                             {
-                                socket.emit('user notification',$scope.promotedPostData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                                socket.emit('user notification',$scope.promotedPostData1[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 2)
+                        {
+                            $scope.promotedPostData2[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData2[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 3)
+                        {
+                            $scope.promotedPostData3[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData3[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 4)
+                        {
+                            $scope.promotedPostData4[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData4[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 5)
+                        {
+                            $scope.promotedPostData5[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData5[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 6)
+                        {
+                            $scope.promotedPostData6[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData6[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 7)
+                        {
+                            $scope.promotedPostData7[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData7[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 8)
+                        {
+                            $scope.promotedPostData8[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData8[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 9)
+                        {
+                            $scope.promotedPostData9[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData9[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 10)
+                        {
+                            $scope.promotedPostData10[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData10[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 15)
+                        {
+                            $scope.promotedPostData15[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData15[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 20)
+                        {
+                            $scope.promotedPostData20[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData20[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 25)
+                        {
+                            $scope.promotedPostData25[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData25[postIndex].post_comment_data[commentIndex].commented_user_id);
                             }
                         }
                         else
@@ -3834,10 +4862,106 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
                     } else {
                         if(is_promoted == 1)
                         {
-                            $scope.promotedPostData[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            $scope.promotedPostData1[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
                             if(socket)
                             {
-                                socket.emit('user notification',$scope.promotedPostData[postIndex].post_comment_data[commentIndex].commented_user_id);
+                                socket.emit('user notification',$scope.promotedPostData1[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 2)
+                        {
+                            $scope.promotedPostData2[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData2[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 3)
+                        {
+                            $scope.promotedPostData3[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData3[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 4)
+                        {
+                            $scope.promotedPostData4[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData4[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 5)
+                        {
+                            $scope.promotedPostData5[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData5[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 6)
+                        {
+                            $scope.promotedPostData6[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData6[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 7)
+                        {
+                            $scope.promotedPostData7[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData7[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 8)
+                        {
+                            $scope.promotedPostData8[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData8[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 9)
+                        {
+                            $scope.promotedPostData9[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData9[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 10)
+                        {
+                            $scope.promotedPostData10[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData10[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 15)
+                        {
+                            $scope.promotedPostData15[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData15[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 20)
+                        {
+                            $scope.promotedPostData20[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData20[postIndex].post_comment_data[commentIndex].commented_user_id);
+                            }
+                        }
+                        else if(is_promoted == 25)
+                        {
+                            $scope.promotedPostData25[postIndex].post_comment_data[commentIndex].comment_reply_data = data.comment_reply_data;
+                            if(socket)
+                            {
+                                socket.emit('user notification',$scope.promotedPostData25[postIndex].post_comment_data[commentIndex].commented_user_id);
                             }
                         }
                         else
@@ -3946,20 +5070,75 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
                     $('#cancel-reply-comment-li-' + reply_comment_id).hide();
                     $(".new-comment-"+post_id).show();
 
-                    if(post_type == 1)
+                    if(post_type == 1)//Promoted
+                    {
+                        $scope.promotedPostData1[postIndex].post_comment_data[commentIndex].comment_reply_data[commentReplyIndex].comment = data.comment;
+                        // $scope.promotedPostData1[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 2)//Promoted
+                    {
+                        $scope.promotedPostData2[postIndex].post_comment_data[commentIndex].comment_reply_data[commentReplyIndex].comment = data.comment;
+                        // $scope.promotedPostData2[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 3)//Promoted
+                    {
+                        $scope.promotedPostData3[postIndex].post_comment_data[commentIndex].comment_reply_data[commentReplyIndex].comment = data.comment;
+                        // $scope.promotedPostData3[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 4)//Promoted
+                    {
+                        $scope.promotedPostData4[postIndex].post_comment_data[commentIndex].comment_reply_data[commentReplyIndex].comment = data.comment;
+                        // $scope.promotedPostData4[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 5)//Promoted
+                    {
+                        $scope.promotedPostData5[postIndex].post_comment_data[commentIndex].comment_reply_data[commentReplyIndex].comment = data.comment;
+                        // $scope.promotedPostData5[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 6)//Promoted
+                    {
+                        $scope.promotedPostData6[postIndex].post_comment_data[commentIndex].comment_reply_data[commentReplyIndex].comment = data.comment;
+                        // $scope.promotedPostData6[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 7)//Promoted
+                    {
+                        $scope.promotedPostData7[postIndex].post_comment_data[commentIndex].comment_reply_data[commentReplyIndex].comment = data.comment;
+                        // $scope.promotedPostData7[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 8)//Promoted
+                    {
+                        $scope.promotedPostData8[postIndex].post_comment_data[commentIndex].comment_reply_data[commentReplyIndex].comment = data.comment;
+                        // $scope.promotedPostData8[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 9)//Promoted
+                    {
+                        $scope.promotedPostData9[postIndex].post_comment_data[commentIndex].comment_reply_data[commentReplyIndex].comment = data.comment;
+                        // $scope.promotedPostData9[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 10)//Promoted
+                    {
+                        $scope.promotedPostData10[postIndex].post_comment_data[commentIndex].comment_reply_data[commentReplyIndex].comment = data.comment;
+                        // $scope.promotedPostData10[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 15)//Promoted
+                    {
+                        $scope.promotedPostData15[postIndex].post_comment_data[commentIndex].comment_reply_data[commentReplyIndex].comment = data.comment;
+                        // $scope.promotedPostData15[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 20)//Promoted
+                    {
+                        $scope.promotedPostData20[postIndex].post_comment_data[commentIndex].comment_reply_data[commentReplyIndex].comment = data.comment;
+                        // $scope.promotedPostData20[index].post_comment_count = data.post_comment_count;
+                    }
+                    else if(post_type == 25)//Promoted
+                    {
+                        $scope.promotedPostData25[postIndex].post_comment_data[commentIndex].comment_reply_data[commentReplyIndex].comment = data.comment;
+                        // $scope.promotedPostData25[index].post_comment_count = data.post_comment_count;
+                    }
+                    else
                     {
                         $scope.postData[postIndex].post_comment_data[commentIndex].comment_reply_data[commentReplyIndex].comment = data.comment;
                         // $scope.postData[index].post_comment_count = data.post_comment_count;
-                    }
-                    if(post_type == 2)//Promoted
-                    {
-                        $scope.promotedPostData[postIndex].post_comment_data[commentIndex].comment_reply_data[commentReplyIndex].comment = data.comment;
-                        // $scope.promotedPostData[index].post_comment_count = data.post_comment_count;
-                    }
-                    if(post_type == 3)//Promoted Index10
-                    {
-                        $scope.promotedPostIndex10Data[postIndex].post_comment_data[commentIndex].comment_reply_data[commentReplyIndex].comment = data.comment;
-                        // $scope.promotedPostIndex10Data[index].post_comment_count = data.post_comment_count;
                     }
 
                     /*$('#comment-reply-dis-inner-' + reply_comment_id).show();
@@ -4603,7 +5782,55 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
             {
                 if(is_promoted == 1)
                 {
-                    $scope.promotedPostData[index].is_user_saved_post = result.status;
+                    $scope.promotedPostData1[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 2)
+                {
+                    $scope.promotedPostData2[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 3)
+                {
+                    $scope.promotedPostData3[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 4)
+                {
+                    $scope.promotedPostData4[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 5)
+                {
+                    $scope.promotedPostData5[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 6)
+                {
+                    $scope.promotedPostData6[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 7)
+                {
+                    $scope.promotedPostData7[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 8)
+                {
+                    $scope.promotedPostData8[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 9)
+                {
+                    $scope.promotedPostData9[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 10)
+                {
+                    $scope.promotedPostData10[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 15)
+                {
+                    $scope.promotedPostData15[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 20)
+                {
+                    $scope.promotedPostData20[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 25)
+                {
+                    $scope.promotedPostData25[index].is_user_saved_post = result.status;
                 }
                 else
                 {
@@ -4614,7 +5841,55 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
             {
                 if(is_promoted == 1)
                 {
-                    $scope.promotedPostData[index].is_user_saved_post = result.status;
+                    $scope.promotedPostData1[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 2)
+                {
+                    $scope.promotedPostData2[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 3)
+                {
+                    $scope.promotedPostData3[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 4)
+                {
+                    $scope.promotedPostData4[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 5)
+                {
+                    $scope.promotedPostData5[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 6)
+                {
+                    $scope.promotedPostData6[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 7)
+                {
+                    $scope.promotedPostData7[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 8)
+                {
+                    $scope.promotedPostData8[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 9)
+                {
+                    $scope.promotedPostData9[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 10)
+                {
+                    $scope.promotedPostData10[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 15)
+                {
+                    $scope.promotedPostData15[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 20)
+                {
+                    $scope.promotedPostData20[index].is_user_saved_post = result.status;
+                }
+                else if(is_promoted == 25)
+                {
+                    $scope.promotedPostData25[index].is_user_saved_post = result.status;
                 }
                 else
                 {
@@ -4655,7 +5930,55 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
     $scope.share_post = function(post_id,index,postData,is_promoted){
         if(is_promoted == 1)
         {
-            $scope.share_post_data = $scope.promotedPostData[index];
+            $scope.share_post_data = $scope.promotedPostData1[index];
+        }
+        else if(is_promoted == 2)
+        {
+            $scope.share_post_data = $scope.promotedPostData2[index];
+        }
+        else if(is_promoted == 3)
+        {
+            $scope.share_post_data = $scope.promotedPostData3[index];
+        }
+        else if(is_promoted == 4)
+        {
+            $scope.share_post_data = $scope.promotedPostData4[index];
+        }
+        else if(is_promoted == 5)
+        {
+            $scope.share_post_data = $scope.promotedPostData5[index];
+        }
+        else if(is_promoted == 6)
+        {
+            $scope.share_post_data = $scope.promotedPostData6[index];
+        }
+        else if(is_promoted == 7)
+        {
+            $scope.share_post_data = $scope.promotedPostData7[index];
+        }
+        else if(is_promoted == 8)
+        {
+            $scope.share_post_data = $scope.promotedPostData8[index];
+        }
+        else if(is_promoted == 9)
+        {
+            $scope.share_post_data = $scope.promotedPostData9[index];
+        }
+        else if(is_promoted == 10)
+        {
+            $scope.share_post_data = $scope.promotedPostData10[index];
+        }
+        else if(is_promoted == 15)
+        {
+            $scope.share_post_data = $scope.promotedPostData15[index];
+        }
+        else if(is_promoted == 20)
+        {
+            $scope.share_post_data = $scope.promotedPostData20[index];
+        }
+        else if(is_promoted == 25)
+        {
+            $scope.share_post_data = $scope.promotedPostData25[index];
         }
         else
         {
@@ -4731,9 +6054,105 @@ app.controller('userOppoController', function ($scope, $http,$compile,$location,
                 {
                     if(socket)
                     {
-                        socket.emit('user notification',$scope.promotedPostData[post_index].post_data.user_id);
+                        socket.emit('user notification',$scope.promotedPostData1[post_index].post_data.user_id);
                     }
-                    $scope.promotedPostData[post_index].post_share_count = result.post_share_count;
+                    $scope.promotedPostData1[post_index].post_share_count = result.post_share_count;
+                }
+                else if(is_promoted == 2)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData2[post_index].post_data.user_id);
+                    }
+                    $scope.promotedPostData2[post_index].post_share_count = result.post_share_count;
+                }
+                else if(is_promoted == 3)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData3[post_index].post_data.user_id);
+                    }
+                    $scope.promotedPostData3[post_index].post_share_count = result.post_share_count;
+                }
+                else if(is_promoted == 4)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData4[post_index].post_data.user_id);
+                    }
+                    $scope.promotedPostData4[post_index].post_share_count = result.post_share_count;
+                }
+                else if(is_promoted == 5)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData5[post_index].post_data.user_id);
+                    }
+                    $scope.promotedPostData5[post_index].post_share_count = result.post_share_count;
+                }
+                else if(is_promoted == 6)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData6[post_index].post_data.user_id);
+                    }
+                    $scope.promotedPostData6[post_index].post_share_count = result.post_share_count;
+                }
+                else if(is_promoted == 7)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData7[post_index].post_data.user_id);
+                    }
+                    $scope.promotedPostData7[post_index].post_share_count = result.post_share_count;
+                }
+                else if(is_promoted == 8)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData8[post_index].post_data.user_id);
+                    }
+                    $scope.promotedPostData8[post_index].post_share_count = result.post_share_count;
+                }
+                else if(is_promoted == 9)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData9[post_index].post_data.user_id);
+                    }
+                    $scope.promotedPostData9[post_index].post_share_count = result.post_share_count;
+                }
+                else if(is_promoted == 10)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData10[post_index].post_data.user_id);
+                    }
+                    $scope.promotedPostData10[post_index].post_share_count = result.post_share_count;
+                }
+                else if(is_promoted == 15)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData15[post_index].post_data.user_id);
+                    }
+                    $scope.promotedPostData15[post_index].post_share_count = result.post_share_count;
+                }
+                else if(is_promoted == 20)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData20[post_index].post_data.user_id);
+                    }
+                    $scope.promotedPostData20[post_index].post_share_count = result.post_share_count;
+                }
+                else if(is_promoted == 25)
+                {
+                    if(socket)
+                    {
+                        socket.emit('user notification',$scope.promotedPostData25[post_index].post_data.user_id);
+                    }
+                    $scope.promotedPostData25[post_index].post_share_count = result.post_share_count;
                 }
                 else
                 {

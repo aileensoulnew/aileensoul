@@ -592,6 +592,50 @@
 		    $("#studjob_title").focusout(function(){
 		        $('#iftooltip').hide();
 		    });
+
+		    $("#basicinfo").validate({
+                rules: {
+                    first_name: {
+                        required: true,
+                    },
+                    last_name: {
+                        required: true,
+                    },
+                    email_profile: {
+                        required: true,
+                    },
+                    selday: {
+                        required: true,
+                    },
+                    selmonth: {
+                        required: true,
+                    },
+                    selyear: {
+                        required: true,
+                    }
+                },
+                messages: {
+                    first_name: {
+                        required: "Enter Firstname",
+                    },
+                    last_name: {
+                        required: "Enter Lastname",
+                    },
+                    email_profile: {
+                        required: "Enter email id",
+                    },
+                    selday: {
+                        required:  "Select Birthday",
+                    },
+                    selmonth: {
+                        required:  "Select Birthday",
+                    },
+                    selyear: {
+                        required:  "Select Birthday",
+                    }
+                }
+
+            });
         </script>
     </body>
 </html>

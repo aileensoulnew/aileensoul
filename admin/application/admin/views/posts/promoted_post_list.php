@@ -44,22 +44,7 @@ echo $leftmenu;
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Post List</h3>
-                        <div class="box-tools">
-                            <?php echo form_open('posts/search', array('method' => 'post', 'id' => 'search_frm', 'class' => 'form-inline','autocomplete' => 'off')); ?>
-                            <div class="input-group input-group-sm" >
-                                <input type="text" class="form-control input-sm" value="<?php echo $search_keyword; ?>" placeholder="Search" name="search_keyword" id="search_keyword">
-                                <div class="input-group-btn">
-                                    <button type="submit" class="btn btn-default" id="search_btn"><i class="fa fa-search"></i></button>
-                                </div><!--input-group-btn-->
-                                <?php echo form_close(); 
-                                if ($this->session->userdata('user_search_keyword'))
-                                {?>
-                                    <a href="<?php echo base_url('posts/clear_search') ?>" style="padding: 5px 0;float: left;">Clear Search</a>
-                                <?php
-                                } ?>
-                            </div><!--input-group input-group-sm-->
-                        </div><!--box-tools-->
+                        <h3 class="box-title">Post List</h3>                        
                     </div><!-- box-header -->
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover table-bordered">
@@ -84,87 +69,96 @@ echo $leftmenu;
                                     <th style="width: 15%;"><i class="fa fa-fw fa-pencil-square"></i> 
                                         <a href="javascript:void(0);">Title</a>
                                     </th>
-                                    <th  style="width: 21%;"><i class="fa fa-fw fa-pencil-square"></i> 
+                                    <th><i class="fa fa-fw fa-pencil-square"></i> 
                                         <a href="javascript:void(0);">Post Type</a>
                                     </th>
+                                    <th><i class="fa fa-fw fa-external-link"></i> 
+                                        <a href="javascript:void(0);">Url</a>
+                                    </th>
                                     <th><i class="fa fa-fw fa-bullhorn"></i> 
-                                        <a href="javascript:void(0);">Promote</a>
+                                        <a href="javascript:void(0);">Priority</a>
+                                    </th>
+                                    <th><i class="fa fa-fw fa-bullhorn"></i> 
+                                        <a href="javascript:void(0);">Change Priority</a>
                                     </th>
                                     <th><i class="fa fa-fw fa-pencil-square"></i> 
                                         <a href="javascript:void(0);">Status</a>
                                     </th>
                                     <th><i class="fa fa-fw fa-pencil"></i> 
-                                        <a href="javascript:void(0);">Created Date</a>
+                                        <a href="javascript:void(0);">Date</a>
+                                    </th>
+                                    <th><i class="fa fa-fw fa-pencil"></i> 
+                                        <a href="javascript:void(0);">Show Label</a>
                                     </th>
                                     <th><i class=" fa fa-edit"></i> 
                                         <a href="javascript:void(0);">Action</a>
                                     </th>
                                 </tr>
                                 <?php
-                                if (count($post_list) != 0){
+                                if (count($promoted_post_list) != 0){
                                     $i = $offset + 1; 
-                                    foreach ($post_list as $_post_list) {?>
-                                        <tr id="delete<?php echo $_post_list['id'];?>">
+                                    foreach ($promoted_post_list as $_promoted_post_list) {?>
+                                        <tr id="delete<?php echo $_promoted_post_list['id'];?>">
                                             <td><?php echo $i++; ?></td>
                                             <td>
                                                 <?php
-                                                if($_post_list['user_type'] == '1'){ ?>
-                                                    <a href="<?php echo SITEURL.$_post_list['user_data']['user_slug'] ?>" target="_blank">
-                                                        <?php echo ucwords($_post_list['user_data']['first_name'].' '.$_post_list['user_data']['last_name']); ?>
+                                                if($_promoted_post_list['user_type'] == '1'){ ?>
+                                                    <a href="<?php echo SITEURL.$_promoted_post_list['user_data']['user_slug'] ?>" target="_blank">
+                                                        <?php echo ucwords($_promoted_post_list['user_data']['first_name'].' '.$_promoted_post_list['user_data']['last_name']); ?>
                                                     </a>
                                                 <?php
                                                 }
                                                 else{ ?>
-                                                    <a href="<?php echo SITEURL.'company/'.$_post_list['user_data']['business_slug'].'-'.($_post_list['user_data']['city_name'] != '' ? $_post_list['user_data']['city_name'] : ($_post_list['user_data']['state_name'] != '' ? $_post_list['user_data']['state_name'] : $_post_list['user_data']['country_name'])) ?>" target="_blank">
-                                                        <?php echo ucwords($_post_list['user_data']['company_name']); ?>
+                                                    <a href="<?php echo SITEURL.'company/'.$_promoted_post_list['user_data']['business_slug'].'-'.($_promoted_post_list['user_data']['city_name'] != '' ? $_promoted_post_list['user_data']['city_name'] : ($_promoted_post_list['user_data']['state_name'] != '' ? $_promoted_post_list['user_data']['state_name'] : $_promoted_post_list['user_data']['country_name'])) ?>" target="_blank">
+                                                        <?php echo ucwords($_promoted_post_list['user_data']['company_name']); ?>
                                                     </a>
                                                 <?php
                                                 } ?>
                                             </td>
                                             <td>
-                                                <?php echo $_post_list['user_data']['email']; ?>
+                                                <?php echo $_promoted_post_list['user_data']['email']; ?>
                                             </td>
                                             <td>
                                                 <?php 
-                                                    if($_post_list['post_for'] == 'opportunity'){?>
-                                                        <a href="<?php echo SITEURL.'o/'.$_post_list['opportunity_data']['oppslug']; ?>" target="_blank">
+                                                    if($_promoted_post_list['post_for'] == 'opportunity'){?>
+                                                        <a href="<?php echo SITEURL.'o/'.$_promoted_post_list['opportunity_data']['oppslug']; ?>" target="_blank">
                                                         <?php
-                                                            echo $_post_list['opportunity_data']['opptitle'];
+                                                            echo $_promoted_post_list['opportunity_data']['opptitle'];
                                                         ?>
                                                         </a>
                                                     <?php 
                                                     }
-                                                    elseif($_post_list['post_for'] == 'simple'){ ?>
-                                                        <a href="<?php echo SITEURL.'p/'.$_post_list['simple_data']['simslug']; ?>" target="_blank">
+                                                    elseif($_promoted_post_list['post_for'] == 'simple'){ ?>
+                                                        <a href="<?php echo SITEURL.'p/'.$_promoted_post_list['simple_data']['simslug']; ?>" target="_blank">
                                                         <?php
-                                                            echo $_post_list['simple_data']['sim_title'];
+                                                            echo $_promoted_post_list['simple_data']['sim_title'];
                                                         ?>
                                                         </a>
                                                     <?php
                                                     }
-                                                    elseif($_post_list['post_for'] == 'question'){
-                                                        $question_slug = $this->common->create_slug($_post_list['question_data']['question']);
+                                                    elseif($_promoted_post_list['post_for'] == 'question'){
+                                                        $question_slug = $this->common->create_slug($_promoted_post_list['question_data']['question']);
                                                         ?>
-                                                        <a href="<?php echo SITEURL.'questions/'.$_post_list['question_data']['id'].'/'.$question_slug; ?>" target="_blank">
+                                                        <a href="<?php echo SITEURL.'questions/'.$_promoted_post_list['question_data']['id'].'/'.$question_slug; ?>" target="_blank">
                                                         <?php
-                                                        echo $_post_list['question_data']['question'];
+                                                        echo $_promoted_post_list['question_data']['question'];
                                                         ?>
                                                         </a>
                                                     <?php
                                                     }
-                                                    elseif($_post_list['post_for'] == 'article'){ ?>
-                                                        <a href="<?php echo SITEURL.'article/'.$_post_list['article_data']['article_slug']; ?>" target="_blank">
+                                                    elseif($_promoted_post_list['post_for'] == 'article'){ ?>
+                                                        <a href="<?php echo SITEURL.'article/'.$_promoted_post_list['article_data']['article_slug']; ?>" target="_blank">
                                                         <?php
-                                                        echo $_post_list['article_data']['article_title'];
+                                                        echo $_promoted_post_list['article_data']['article_title'];
                                                         ?>
                                                         </a>
                                                         <?php
                                                     }
-                                                    elseif($_post_list['post_for'] == 'share'){
+                                                    elseif($_promoted_post_list['post_for'] == 'share'){
                                                     ?>
-                                                        <a href="<?php echo SITEURL.'shp/'.$_post_list['share_data']['shared_post_slug']; ?>" target="_blank">
+                                                        <a href="<?php echo SITEURL.'shp/'.$_promoted_post_list['share_data']['shared_post_slug']; ?>" target="_blank">
                                                         <?php
-                                                        echo $_post_list['share_data']['shared_post_slug'];
+                                                        echo $_promoted_post_list['share_data']['shared_post_slug'];
                                                         ?>
                                                         </a>
                                                         <?php
@@ -172,66 +166,68 @@ echo $leftmenu;
                                                 ?>
                                             </td>
                                             
-                                            <td><?php echo $_post_list['post_for']; ?></td>
-
+                                            <td><?php echo $_promoted_post_list['post_for']; ?></td>
                                             <td>
-                                                <?php 
-                                                if($_post_list['status'] == 'publish' && $_post_list['is_delete'] == '0' && ($_post_list['post_for'] == 'opportunity' || $_post_list['post_for'] == 'simple' || $_post_list['post_for'] == 'question' || $_post_list['post_for'] == 'article')){
-                                                    if($_post_list['is_promoted'] == '1' || $_post_list['is_promoted'] == '2')
-                                                    {
-                                                        $is_promoted = 'checked="checked"';
-                                                    }
-                                                    else
-                                                    {
-                                                        $is_promoted = '';
-                                                    }
-                                                    ?>  
-                                                    <form name="promote-post" id="promote-post" action="<?php echo base_url('posts/promote_post'); ?>" method="post">
-                                                        <input type="hidden" name="post_id" id="post_id" value="<?php echo $_post_list['id'];?>">
-                                                        <input type="checkbox" name="check_post" id="check_post" onChange="this.form.submit()" value="1" <?php echo $is_promoted; ?> style="cursor: pointer;">
-                                                    </form>
-                                                <?php 
-                                                } ?>
+                                                <input type="text" name="link_url_<?php echo $_promoted_post_list['id']; ?>" id="link_url_<?php echo $_promoted_post_list['id']; ?>" value="<?php echo $_promoted_post_list['link_url']; ?>">
+                                            </td>
+                                            <td>
+                                                <?php echo $_promoted_post_list['priority']; ?>
                                             </td>
 
-                                            <td id="status-<?php echo $_post_list['id']; ?>">
+                                            <td>
+                                                <select name="set_priority_<?php echo $_promoted_post_list['id']; ?>" id="set_priority_<?php echo $_promoted_post_list['id']; ?>">
+                                                    <option value="">0</option>
+
+                                                    <option value="1" <?php echo $_promoted_post_list['priority'] == '1' ? 'selected="selected"' : ''; ?>>1</option>
+
+                                                    <option value="2" <?php echo $_promoted_post_list['priority'] == '2' ? 'selected="selected"' : ''; ?>>2</option>
+
+                                                    <option value="3" <?php echo $_promoted_post_list['priority'] == '3' ? 'selected="selected"' : ''; ?>>3</option>
+
+                                                    <option value="4" <?php echo $_promoted_post_list['priority'] == '4' ? 'selected="selected"' : ''; ?>>4</option>
+
+                                                    <option value="5" <?php echo $_promoted_post_list['priority'] == '5' ? 'selected="selected"' : ''; ?>>5</option>
+
+                                                    <option value="6" <?php echo $_promoted_post_list['priority'] == '6' ? 'selected="selected"' : ''; ?>>6</option>
+
+                                                    <option value="7" <?php echo $_promoted_post_list['priority'] == '7' ? 'selected="selected"' : ''; ?>>7</option>
+
+                                                    <option value="8" <?php echo $_promoted_post_list['priority'] == '8' ? 'selected="selected"' : ''; ?>>8</option>
+
+                                                    <option value="9" <?php echo $_promoted_post_list['priority'] == '9' ? 'selected="selected"' : ''; ?>>9</option>
+
+                                                    <option value="10" <?php echo $_promoted_post_list['priority'] == '10' ? 'selected="selected"' : ''; ?>>10</option>
+
+                                                    <option value="15" <?php echo $_promoted_post_list['priority'] == '15' ? 'selected="selected"' : ''; ?>>15</option>
+
+                                                    <option value="20" <?php echo $_promoted_post_list['priority'] == '20' ? 'selected="selected"' : ''; ?>>20</option>
+
+                                                    <option value="25" <?php echo $_promoted_post_list['priority'] == '25' ? 'selected="selected"' : ''; ?>>25</option>
+
+                                                </select>
+                                            </td>
+
+                                            <td id="status-<?php echo $_promoted_post_list['id']; ?>">
                                                 <?php 
-                                                if($_post_list['status'] == 'publish' && $_post_list['is_delete'] == '0'){
-                                                    echo "Active";
+                                                if($_promoted_post_list['promoted_status'] == '1')
+                                                {
+                                                    echo "Promoted";
                                                 }
-                                                elseif($_post_list['is_delete'] == '1'){
-                                                    echo "Deleted";
-                                                }
-                                                elseif($_post_list['status'] == 'reject'){
-                                                    echo "Rejected";
-                                                }
-                                                elseif($_post_list['status'] == 'draft' && $_post_list['is_delete'] == '0'){
+                                                elseif($_promoted_post_list['promoted_status'] == '2'){
                                                     echo "Pending";
                                                 }
                                                 ?>
                                             </td>
-                                            <td><?php echo $_post_list['created_date']; ?></td>
+                                            <td><?php echo $_promoted_post_list['created_date']; ?></td>
                                             <td>
-                                                <?php 
-                                                if($_post_list['status'] == 'publish' && $_post_list['is_delete'] == '0'){
-                                                    $is_pub = "style='display:none'";
-                                                    $is_del = "";
-                                                }
-                                                elseif($_post_list['is_delete'] == '1'){
-                                                    $is_pub = "";
-                                                    $is_del = "style='display:none'";
-                                                }
-                                                else
-                                                {
-                                                    $is_pub = "style='display:none'";
-                                                    $is_del = "style='display:none'";
-                                                }
-                                                ?>
-                                                <a id="del-btn-<?php echo $_post_list['id']; ?>" class="btn btn-danger btn-xs" href="javascript:void(0);" title="Delete" <?php echo $is_del; ?> onclick="delete_post(<?php echo $_post_list['id']; ?>)">
-                                                    <i class="fa fa-trash-o"></i>
-                                                </a>
-                                                <a id="rev-btn-<?php echo $_post_list['id']; ?>" class="btn btn-info btn-xs" href="javascript:void(0);" title="Revoke" <?php echo $is_pub; ?> onclick="revoke_post(<?php echo $_post_list['id']; ?>)">
-                                                    <i class="fa fa-reply"></i>
+                                                <select name="set_show_label_<?php echo $_promoted_post_list['id']; ?>" id="set_show_label_<?php echo $_promoted_post_list['id']; ?>">  
+                                                    <option value="1" <?php echo $_promoted_post_list['show_label'] == '1' ? 'selected="selected"' : ''; ?>>Yes</option>
+                                                    <option value="0" <?php echo $_promoted_post_list['show_label'] == '0' ? 'selected="selected"' : ''; ?>>No</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <a id="save-btn-<?php echo $_promoted_post_list['id']; ?>" class="btn btn-primary btn-xs" href="javascript:void(0);" title="Set Priority" onclick="set_post_priority(<?php echo $_promoted_post_list['id']; ?>,<?php echo $_promoted_post_list['id_promoted_post']; ?>)">
+                                                    <i class="fa fa-save"></i>
                                                 </a>
                                             </td>
                                         </tr><?php
@@ -322,46 +318,22 @@ echo $leftmenu;
 </script>
 
 <script>
-    function delete_post(id){
-        $("#action-modal .mes .msg").html("Are you sure want to delete this post ?");
-        $("#okbtn").attr("onclick","post_delete("+id+")");
-        $("#action-modal").modal("show");
-    }
-    function post_delete(id) 
-    {
+    function set_post_priority(id,id_promoted_post){
+        var priority = $("#set_priority_"+id).val();
+        var link_url = $("#link_url_"+id).val();
+        var set_show_label = $("#set_show_label_"+id).val();
+        if(priority == 0 || priority == '')
+        {
+            return false;
+        }
         $.ajax({
             type: 'POST',
-            url: '<?php echo base_url() . "posts/post_delete" ?>',
+            url: '<?php echo base_url() . "posts/set_post_priority" ?>',
             cache: false,
-            data: {'id':id},
+            data: {'post_id':id,'priority':priority,'id_promoted_post':id_promoted_post,'link_url':link_url,'set_show_label':set_show_label},
             success: function (response){
-                // $('.'+'art-pub-'+id).remove();
-                $('#del-btn-'+id).hide();
-                $('#rev-btn-'+id).show();
-                $('#status-'+id).html("Deleted");
+                window.location.reload();
             }
         });
-    }
-
-    function revoke_post(id){
-        $("#action-modal .mes .msg").html("Are you sure want to get back this post ?");
-        $("#okbtn").attr("onclick","post_revoke("+id+")");
-        $("#action-modal").modal("show");
-    }
-
-    function post_revoke(id) 
-    {
-        $.ajax({
-            type: 'POST',
-            url: '<?php echo base_url() . "posts/post_revoke" ?>',
-            cache: false,
-            data: {'id':id},
-            success: function (response){
-                // $('.'+'art-pub-'+id).remove();
-                $('#rev-btn-'+id).hide();
-                $('#del-btn-'+id).show();
-                $('#status-'+id).html("Active");
-            }
-        });
-    }
+    }    
 </script>

@@ -917,14 +917,45 @@ class User_post extends MY_Controller {
     }
     public function getUserPromotedPost() {
         $userid = $this->session->userdata('aileenuser');
-        $post_data = $this->user_post_model->user_promoted_post($userid,PROMOTEDPOST);
-        echo json_encode($post_data);
+        $return_data = array();
+        $return_data['promoted_post_data_1'] = $this->user_post_model->user_promoted_post($userid,1);
+        $return_data['promoted_post_data_2'] = $this->user_post_model->user_promoted_post($userid,2);
+        $return_data['promoted_post_data_3'] = $this->user_post_model->user_promoted_post($userid,3);
+        $return_data['promoted_post_data_4'] = $this->user_post_model->user_promoted_post($userid,4);
+        $return_data['promoted_post_data_5'] = $this->user_post_model->user_promoted_post($userid,5);        
+        echo json_encode($return_data);
     }
 
     public function getUserPromotedPostIndex10() {
         $userid = $this->session->userdata('aileenuser');
-        $post_data = $this->user_post_model->user_promoted_post($userid,PROMOTEDPOSTNEW);
-        echo json_encode($post_data);
+        $return_data = array();
+        $return_data['promoted_post_data_6'] = $this->user_post_model->user_promoted_post($userid,6);
+        $return_data['promoted_post_data_7'] = $this->user_post_model->user_promoted_post($userid,7);
+        $return_data['promoted_post_data_8'] = $this->user_post_model->user_promoted_post($userid,8);
+        $return_data['promoted_post_data_9'] = $this->user_post_model->user_promoted_post($userid,9);
+        $return_data['promoted_post_data_10'] = $this->user_post_model->user_promoted_post($userid,10);        
+        echo json_encode($return_data);
+    }
+
+    public function getUserPromotedPostIndex15() {
+        $userid = $this->session->userdata('aileenuser');
+        $return_data = array();
+        $return_data['promoted_post_data_15'] = $this->user_post_model->user_promoted_post($userid,15);
+        echo json_encode($return_data);
+    }
+
+    public function getUserPromotedPostIndex20() {
+        $userid = $this->session->userdata('aileenuser');
+        $return_data = array();
+        $return_data['promoted_post_data_20'] = $this->user_post_model->user_promoted_post($userid,20);
+        echo json_encode($return_data);
+    }
+
+    public function getUserPromotedPostIndex25() {
+        $userid = $this->session->userdata('aileenuser');
+        $return_data = array();
+        $return_data['promoted_post_data_25'] = $this->user_post_model->user_promoted_post($userid,25);        
+        echo json_encode($return_data);
     }
 
     public function getUserDashboardPost() {

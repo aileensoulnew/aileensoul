@@ -47,6 +47,10 @@ class Profile extends CI_Controller {
         $this->form_validation->set_rules('email_profile', ' EmailId', 'required|valid_email');
 
         $this->form_validation->set_rules('gender', ' gender', 'required');
+        if ($this->form_validation->run() == FALSE)
+        {
+            redirect('edit-profile');
+        }
 
         $post_data = $this->input->post();
         $date = $this->input->post('selday');

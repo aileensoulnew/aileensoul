@@ -54,7 +54,7 @@ class Posts extends CI_Controller
         } else {
             $this->paging['uri_segment'] = 3;
         }
-        $this->data['post_list'] =  $this->post_model->get_all_post($offset,$limit);
+        $this->data['post_list'] =  $this->post_model->get_all_post($offset,$limit);        
         $total_rows =  $this->post_model->get_all_post_total();
 
         $this->paging['total_rows'] = $total_rows;
@@ -182,5 +182,118 @@ class Posts extends CI_Controller
         $this->pagination->initialize($this->paging);        
         // print_r($this->data['article_list']);exit();        
         $this->load->view('posts/list', $this->data);
+    }
+
+    public function promote_post()
+    {
+        $post_id = $this->input->post('post_id');
+        $check_post = $this->input->post('check_post');
+
+        if($check_post == 1)
+        {
+            $sql = "SELECT * FROM ailee_promoted_post WHERE post_id = '".$post_id."'";
+            $promote_post = $this->db->query($sql)->row_array();
+            if(isset($promote_post) && !empty($promote_post))
+            {
+                $update_data = array(
+                    "status" => '2',
+                    "priority" => '0',
+                    "modify_date" => date('Y-m-d H:i:s', time()),
+                );
+                $this->db->where('id_promoted_post', $promote_post['id_promoted_post']);
+                $updatdata = $this->db->update('promoted_post', $update_data);
+                if ($updatdata) {
+                    $this->session->set_flashdata('success', 'Post successfully added to promoted list.');
+                    redirect('posts/list');
+                } else {
+                    $this->session->flashdata('error', 'Sorry!! Your data not updated');
+                    redirect('posts/list');
+                }
+            }
+            else
+            {
+                $data = array(
+                    'post_id' => $post_id,
+                    'status' => '2',
+                    "priority" => '0',
+                    'created_date' => date('Y-m-d H:i:s', time()),
+                    'modify_date' => date('Y-m-d H:i:s', time())
+                );
+                $insert_id = $this->common->insert_data_getid($data, 'promoted_post');
+                if ($insert_id) {
+                    $this->session->set_flashdata('success', 'Post successfully added to promoted list.');
+                    redirect('posts/list');
+                } else {
+                    $this->session->flashdata('error', 'Sorry!! Your data not inserted');
+                    redirect('posts/list');
+                }
+            }
+        }
+        else
+        {
+            $sql = "SELECT * FROM ailee_promoted_post WHERE post_id = '".$post_id."'";
+            $promote_post = $this->db->query($sql)->row_array();
+            if(isset($promote_post) && !empty($promote_post))
+            {
+                $update_data = array(
+                    "status" => '0',
+                    "priority" => '0',
+                    "modify_date" => date('Y-m-d H:i:s', time()),
+                );
+                $this->db->where('id_promoted_post', $promote_post['id_promoted_post']);
+                $updatdata = $this->db->update('promoted_post', $update_data);
+                if ($updatdata) {
+                    $this->session->set_flashdata('success', 'Post successfully remove from promoted list.');
+                    redirect('posts/list');
+                } else {
+                    $this->session->flashdata('error', 'Sorry!! Your data not updated');
+                    redirect('posts/list');
+                }
+            }
+            else
+            {
+                $data = array(
+                    'post_id' => $post_id,
+                    'status' => '0',
+                    "priority" => '0',
+                    'created_date' => date('Y-m-d H:i:s', time()),
+                    'modify_date' => date('Y-m-d H:i:s', time())
+                );
+                $insert_id = $this->common->insert_data_getid($data, 'promoted_post');
+                if ($insert_id) {
+                    $this->session->set_flashdata('success', 'Post successfully remove from promoted list.');
+                    redirect('posts/list');
+                } else {
+                    $this->session->flashdata('error', 'Sorry!! Your data not inserted');
+                    redirect('posts/list');
+                }
+            }
+        }
+    }
+
+    public function promoted_posts()
+    {
+        $this->data['promoted_post_list'] = $this->post_model->get_promoted_posts();
+        $this->load->view('posts/promoted_post_list', $this->data);
+    }
+
+    public function set_post_priority()
+    {
+        $post_id = $this->input->post('post_id');
+        $priority = $this->input->post('priority');
+        $link_url = $this->input->post('link_url');
+        $set_show_label = $this->input->post('set_show_label');
+        $id_promoted_post = $this->input->post('id_promoted_post');
+        $update_data = array(
+            "status" => '1',
+            "priority" => $priority,
+            "link_url" => $link_url,
+            "show_label" => $set_show_label,
+            "modify_date" => date('Y-m-d H:i:s', time()),
+        );
+        $this->db->where('post_id', $post_id);
+        $this->db->where('id_promoted_post', $id_promoted_post);
+        $updatdata = $this->db->update('promoted_post', $update_data);
+        echo "1";
     }
 }

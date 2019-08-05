@@ -27,6 +27,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="<?php echo base_url('posts/list'); ?>"><i class="fa fa-id-card-o"></i>List ALL Posts</a></li>
+                    <li><a href="<?php echo base_url('posts/promoted_posts'); ?>"><i class="fa fa-id-card-o"></i>Promoted Posts List</a></li>
                 </ul>
             </li>
             <!--End All Posts-->

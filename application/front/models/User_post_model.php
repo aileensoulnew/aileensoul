@@ -1472,7 +1472,7 @@ class User_post_model extends CI_Model {
                     UNION
 
                     SELECT main6.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS main6
-                ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE main.user_id != $user_id AND ul.status = '1' AND ul.is_delete = '0' AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND  main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ";
+                ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE main.user_id != $user_id AND ul.status = '1' AND ul.is_delete = '0' AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main.id NOT IN(SELECT post_id FROM ailee_promoted_post WHERE status = '1') ";
             }
 
             if($getUserStudentData)
@@ -1523,7 +1523,7 @@ class User_post_model extends CI_Model {
                     UNION
 
                     SELECT main6.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS main6
-                ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE main.user_id != $user_id AND main.status = 'publish' AND main.is_delete = '0' AND ul.status = '1' AND ul.is_delete = '0' AND main.post_for != '' AND main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ";
+                ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE main.user_id != $user_id AND main.status = 'publish' AND main.is_delete = '0' AND ul.status = '1' AND ul.is_delete = '0' AND main.post_for != '' AND main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main.id NOT IN(SELECT post_id FROM ailee_promoted_post WHERE status = '1') ";
             }
         }
         if($new_signup == 0)
@@ -1680,7 +1680,7 @@ class User_post_model extends CI_Model {
 
                         ) as main2 WHERE main2.user_id != $user_id AND main2.status = 'publish' AND main2.is_delete = '0' AND main2.post_for != '' AND  main2.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main2.created_date < NOW() - INTERVAL 4 DAY ORDER BY RAND(DATE_FORMAT(main2.created_date, 'Ymd')) LIMIT $total_record
                     ) as inner2
-                ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE ul.status = '1' AND ul.is_delete = '0'";
+                ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE ul.status = '1' AND ul.is_delete = '0' AND main.id NOT IN(SELECT post_id FROM ailee_promoted_post WHERE status = '1') ";
             }
 
             if($getUserStudentData)
@@ -1787,14 +1787,14 @@ class User_post_model extends CI_Model {
                             SELECT main26.* FROM (SELECT up.* FROM ailee_user_follow uf JOIN ailee_user_post up  ON up.user_id = uf.follow_to WHERE uf.follow_from =  $user_id AND up.status = 'publish' AND up.is_delete = '0' AND uf.follow_type = '2' AND up.user_type = '2' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) AS main26
                         ) as main2 WHERE main2.user_id != $user_id AND main2.status = 'publish' AND main2.is_delete = '0' AND main2.post_for != '' AND main2.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main2.created_date < NOW() - INTERVAL 4 DAY
                     ) as inner2
-                ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE ul.status = '1' AND ul.is_delete = '0'  ORDER BY RAND(DATE_FORMAT(main.created_date, 'Ymd'))";
+                ) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE ul.status = '1' AND ul.is_delete = '0' AND main.id NOT IN(SELECT post_id FROM ailee_promoted_post WHERE status = '1') ORDER BY RAND(DATE_FORMAT(main.created_date, 'Ymd'))";
             }
         }
         //End New Feed After 09-04-2019
         
         if($user_id == 103 || $user_id == 29112)
         {
-            $sql = "SELECT main.* FROM (SELECT up.* FROM ailee_user_post up WHERE up.`user_id` != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE ul.status = '1' AND ul.is_delete = '0' AND main.user_id != $user_id AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND main.post_for != 'profile_update' AND main.post_for != 'cover_update' AND main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) ORDER BY main.created_date DESC";   
+            $sql = "SELECT main.* FROM (SELECT up.* FROM ailee_user_post up WHERE up.`user_id` != $user_id AND up.status = 'publish' AND up.is_delete = '0' AND up.post_for != '' AND up.post_for != 'profile_update' AND up.post_for != 'cover_update' ORDER BY up.created_date DESC LIMIT $total_record) as main LEFT JOIN ailee_user_login ul ON ul.user_id = main.user_id WHERE ul.status = '1' AND ul.is_delete = '0' AND main.user_id != $user_id AND main.status = 'publish' AND main.is_delete = '0' AND main.post_for != '' AND main.post_for != 'profile_update' AND main.post_for != 'cover_update' AND main.id NOT IN(SELECT post_id FROM ailee_user_post_delete WHERE user_id = $user_id) AND main.id NOT IN(SELECT post_id FROM ailee_promoted_post WHERE status = '1') ORDER BY main.created_date DESC";   
         }
         if($limit != '') {
             $sql .= " LIMIT $start,$limit";
@@ -4707,23 +4707,19 @@ class User_post_model extends CI_Model {
         return $bank_data;
     }
 
-    public function user_promoted_post($user_id = '',$promoted_ids) {
-        $getDeleteUserPost = $this->deletePostUser($user_id);
+    public function user_promoted_post($user_id = '',$priority = '1') {        
         $result_array = array();
-        $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type")->from("user_post up");//UNIX_TIMESTAMP(STR_TO_DATE(up.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
-        $this->db->where_in('up.id', explode(",",$promoted_ids));
+        $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id,up.user_type")->from("user_post up");
+        $this->db->join('user_login ul', 'ul.user_id = up.user_id', 'left');
+        $this->db->where("up.id IN (SELECT post_id FROM ailee_promoted_post WHERE priority = '".$priority."' AND status = '1')");
         $this->db->where('up.status', 'publish');
-        // $this->db->where('up.post_for != ', 'question');
         $this->db->where('up.is_delete', '0');
-        if ($getDeleteUserPost) {
-            $this->db->where('up.id NOT IN (' . $getDeleteUserPost . ')');
-        }
+        $this->db->where('ul.status', '1');
+        $this->db->where('ul.is_delete', '0');
         $this->db->order_by('up.id', 'desc');
         
-        $query = $this->db->get();
-        
+        $query = $this->db->get();        
         $user_post = $query->result_array();
-        
         foreach ($user_post as $key => $value) {
             $user_post[$key]['time_string'] = $this->common->time_elapsed_string(date('Y-m-d H:i:s', strtotime($user_post[$key]['created_date'])));
             $result_array[$key]['post_data'] = $user_post[$key];
@@ -4830,6 +4826,13 @@ class User_post_model extends CI_Model {
                 $article_data = $query->row_array();                
                 $result_array[$key]['article_data'] = $article_data;
             }
+
+            $this->db->select("link_url")->from("promoted_post");
+            $this->db->where('post_id', $value['id']);
+            $query = $this->db->get();
+            $cover_update = $query->row_array();
+            $result_array[$key]['promoted_data'] = $cover_update;
+
             $this->db->select("upf.file_type,upf.filename")->from("user_post_file upf");
             $this->db->where('upf.post_id', $value['id']);
             $query = $this->db->get();
