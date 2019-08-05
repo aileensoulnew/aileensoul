@@ -664,7 +664,8 @@ else
         </div>
         <?php        
         echo $login_footer;
-        echo $footer;        
+        echo $footer;
+        $this->load->view('mobile_side_slide');
         ?>
         <div class="modal fade message-box" id="delete_model" role="dialog">
             <div class="modal-dialog modal-lm">
@@ -764,7 +765,7 @@ else
         <script src="<?php echo base_url('assets/js/webpage/user/post_details.js?ver=' . time()) ?>"></script>
         <script src="<?php echo base_url('assets/js/classie.js?ver=' . time()) ?>"></script>
         <script>
-            var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
+            /*var menuRight = document.getElementById( 'cbp-spmenu-s2' ),
                 showRight = document.getElementById( 'showRight' ),
                 body = document.body;
 
@@ -779,7 +780,7 @@ else
                 if( button !== 'showRight' ) {
                     classie.toggle( showRight, 'disabled' );
                 }
-            }
+            }*/
             
             $(function () {
                 $('a[href="#search"]').on('click', function (event) {
