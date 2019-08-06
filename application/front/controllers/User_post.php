@@ -4074,4 +4074,18 @@ class User_post extends MY_Controller {
         $return_array = array("page"=>$page,"total_record"=>$total_record,"peopleData" => $post_data);
         return $this->output->set_content_type('application/json')->set_output(json_encode($return_array));
     }
+
+    public function is_mutual(){
+        $user_id = $this->input->post('user_id');
+        $login_user_id = $this->session->userdata('aileenuser');
+        $count_mutual = $this->common->check_is_mutual($login_user_id,$user_id);
+        if($count_mutual > 0)
+        {
+            echo "1";
+        }
+        else
+        {
+            echo "0";
+        }
+    }
 }

@@ -1220,4 +1220,12 @@ class Common extends CI_Model {
         $result_array = $query->row_array();
         return $result_array['points'];
     }
+
+    public function check_is_mutual($login_user_id,$user_id)
+    {
+        $sql = "SELECT COUNT(*) as total_record FROM ailee_user_contact uc LEFT JOIN ailee_user AS u ON u.user_id = (CASE WHEN uc.from_id='$user_id' THEN uc.to_id ELSE uc.from_id END) LEFT JOIN ailee_user_info ui ON ui.user_id = u.user_id WHERE (uc.from_id = '$user_id' OR uc.to_id = '$user_id') AND uc.status = 'confirm' AND u.user_id IN(SELECT u.user_id FROM ailee_user_contact uc LEFT JOIN ailee_user AS u ON u.user_id = (CASE WHEN uc.from_id='$login_user_id' THEN uc.to_id ELSE uc.from_id END) WHERE (uc.from_id = '$login_user_id' OR uc.to_id = '$login_user_id') AND uc.status = 'confirm') ORDER BY uc.modify_date DESC";
+        $query = $this->db->query($sql);
+        $result_array = $query->row_array();
+        return $result_array['total_record'];
+    }
 }
