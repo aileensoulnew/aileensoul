@@ -4827,11 +4827,11 @@ class User_post_model extends CI_Model {
                 $result_array[$key]['article_data'] = $article_data;
             }
 
-            $this->db->select("link_url")->from("promoted_post");
+            $this->db->select("link_url,show_label")->from("promoted_post");
             $this->db->where('post_id', $value['id']);
             $query = $this->db->get();
-            $cover_update = $query->row_array();
-            $result_array[$key]['promoted_data'] = $cover_update;
+            $promoted_data = $query->row_array();
+            $result_array[$key]['promoted_data'] = $promoted_data;
 
             $this->db->select("upf.file_type,upf.filename")->from("user_post_file upf");
             $this->db->where('upf.post_id', $value['id']);

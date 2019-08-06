@@ -20,6 +20,7 @@ class Article extends MY_Controller {
         $this->load->library('upload');
         $this->load->library("pagination");
         $this->load->library('encryption');
+        $this->load->library('inbackground');
         
         include ('main_profile_link.php');
         include ('include.php');

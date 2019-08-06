@@ -581,13 +581,15 @@ else
                                     <span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
                                     <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.post_data.user_type == '1' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.post_data.user_type == '2' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
                                                 
                                 <div class="fw" ng-if="post.post_data.post_for != 'question'">
                                     <a ng-if="post.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-if="post.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
 
                                 <div class="fw" ng-if="post.post_data.user_type == '1' && post.post_data.post_for == 'question'">
@@ -1395,13 +1397,15 @@ else
                                     <span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
                                     <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.post_data.user_type == '1' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.post_data.user_type == '2' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
                                                 
                                 <div class="fw" ng-if="post.post_data.post_for != 'question'">
                                     <a ng-if="post.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-if="post.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
 
                                 <div class="fw" ng-if="post.post_data.user_type == '1' && post.post_data.post_for == 'question'">
@@ -2210,13 +2214,15 @@ else
                                     <span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
                                     <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.post_data.user_type == '1' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.post_data.user_type == '2' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
                                                 
                                 <div class="fw" ng-if="post.post_data.post_for != 'question'">
                                     <a ng-if="post.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-if="post.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
 
                                 <div class="fw" ng-if="post.post_data.user_type == '1' && post.post_data.post_for == 'question'">
@@ -3025,13 +3031,15 @@ else
                                     <span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
                                     <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.post_data.user_type == '1' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.post_data.user_type == '2' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
                                                 
                                 <div class="fw" ng-if="post.post_data.post_for != 'question'">
                                     <a ng-if="post.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-if="post.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
 
                                 <div class="fw" ng-if="post.post_data.user_type == '1' && post.post_data.post_for == 'question'">
@@ -3840,13 +3848,15 @@ else
                                     <span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
                                     <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.post_data.user_type == '1' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.post_data.user_type == '2' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
                                                 
                                 <div class="fw" ng-if="post.post_data.post_for != 'question'">
                                     <a ng-if="post.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-if="post.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
 
                                 <div class="fw" ng-if="post.post_data.user_type == '1' && post.post_data.post_for == 'question'">
@@ -4655,13 +4665,15 @@ else
                                     <span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
                                     <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.post_data.user_type == '1' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.post_data.user_type == '2' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
                                                 
                                 <div class="fw" ng-if="post.post_data.post_for != 'question'">
                                     <a ng-if="post.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-if="post.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
 
                                 <div class="fw" ng-if="post.post_data.user_type == '1' && post.post_data.post_for == 'question'">
@@ -5470,13 +5482,15 @@ else
                                     <span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
                                     <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.post_data.user_type == '1' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.post_data.user_type == '2' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
                                                 
                                 <div class="fw" ng-if="post.post_data.post_for != 'question'">
                                     <a ng-if="post.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-if="post.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
 
                                 <div class="fw" ng-if="post.post_data.user_type == '1' && post.post_data.post_for == 'question'">
@@ -6285,13 +6299,15 @@ else
                                     <span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
                                     <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.post_data.user_type == '1' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.post_data.user_type == '2' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
                                                 
                                 <div class="fw" ng-if="post.post_data.post_for != 'question'">
                                     <a ng-if="post.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-if="post.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
 
                                 <div class="fw" ng-if="post.post_data.user_type == '1' && post.post_data.post_for == 'question'">
@@ -7101,13 +7117,15 @@ else
                                     <span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
                                     <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.post_data.user_type == '1' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.post_data.user_type == '2' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
                                                 
                                 <div class="fw" ng-if="post.post_data.post_for != 'question'">
                                     <a ng-if="post.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-if="post.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
 
                                 <div class="fw" ng-if="post.post_data.user_type == '1' && post.post_data.post_for == 'question'">
@@ -7916,13 +7934,15 @@ else
                                     <span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
                                     <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.post_data.user_type == '1' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.post_data.user_type == '2' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
                                                 
                                 <div class="fw" ng-if="post.post_data.post_for != 'question'">
                                     <a ng-if="post.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-if="post.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
 
                                 <div class="fw" ng-if="post.post_data.user_type == '1' && post.post_data.post_for == 'question'">
@@ -8730,13 +8750,15 @@ else
                                     <span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
                                     <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.post_data.user_type == '1' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.post_data.user_type == '2' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
                                                 
                                 <div class="fw" ng-if="post.post_data.post_for != 'question'">
                                     <a ng-if="post.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-if="post.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
 
                                 <div class="fw" ng-if="post.post_data.user_type == '1' && post.post_data.post_for == 'question'">
@@ -9545,13 +9567,15 @@ else
                                     <span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
                                     <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.post_data.user_type == '1' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.post_data.user_type == '2' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
                                                 
                                 <div class="fw" ng-if="post.post_data.post_for != 'question'">
                                     <a ng-if="post.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-if="post.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
 
                                 <div class="fw" ng-if="post.post_data.user_type == '1' && post.post_data.post_for == 'question'">
@@ -10360,13 +10384,15 @@ else
                                     <span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
                                     <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.post_data.user_type == '1' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.post_data.user_type == '2' && post.question_data.is_anonymously == '0'" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
                                                 
                                 <div class="fw" ng-if="post.post_data.post_for != 'question'">
                                     <a ng-if="post.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
                                     <a ng-if="post.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" target="_self" data-toggle="popover" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <span class="post-time">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '1'">Promoted</span>
+                                    <span class="post-time" ng-if="post.promoted_data.show_label == '0'">{{post.post_data.time_string}}</span>
                                 </div>
 
                                 <div class="fw" ng-if="post.post_data.user_type == '1' && post.post_data.post_for == 'question'">
