@@ -226,8 +226,12 @@ echo $leftmenu;
                                                 </select>
                                             </td>
                                             <td>
-                                                <a id="save-btn-<?php echo $_promoted_post_list['id']; ?>" class="btn btn-primary btn-xs" href="javascript:void(0);" title="Set Priority" onclick="set_post_priority(<?php echo $_promoted_post_list['id']; ?>,<?php echo $_promoted_post_list['id_promoted_post']; ?>)">
+                                                <a id="save-btn-<?php echo $_promoted_post_list['id']; ?>" class="btn btn-primary btn-xs" href="javascript:void(0);" title="Save Priority" onclick="set_post_priority(<?php echo $_promoted_post_list['id']; ?>,<?php echo $_promoted_post_list['id_promoted_post']; ?>)">
                                                     <i class="fa fa-save"></i>
+                                                </a>
+
+                                                <a id="remove-btn-<?php echo $_promoted_post_list['id']; ?>" class="btn btn-danger btn-xs" href="javascript:void(0);" title="Remove Promote Post" onclick="remove_promote_post(<?php echo $_promoted_post_list['id']; ?>,<?php echo $_promoted_post_list['id_promoted_post']; ?>)">
+                                                    <i class="fa fa-trash"></i>
                                                 </a>
                                             </td>
                                         </tr><?php
@@ -312,8 +316,8 @@ echo $leftmenu;
 
 <script language="javascript" type="text/javascript">
     $(document).ready(function () {
-        $('.callout-danger').delay(3000).hide('700');
-        $('.callout-success').delay(3000).hide('700');
+        $('.callout-danger').delay(5000).hide('1000');
+        $('.callout-success').delay(5000).hide('1000');
     });
 </script>
 
@@ -335,5 +339,24 @@ echo $leftmenu;
                 window.location.reload();
             }
         });
-    }    
+    }
+
+    function remove_promote_post(post_id){
+        $("#action-modal .mes .msg").html("Are you sure want to remove promoted post ?");
+        $("#okbtn").attr("onclick","remove_post_promote("+post_id+")");
+        $("#action-modal").modal("show");
+    }
+
+    function remove_post_promote(post_id) 
+    {
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url() . "posts/remove_promote_post" ?>',
+            cache: false,
+            data: {'post_id':post_id},
+            success: function (response){
+                window.location.reload();
+            }
+        });
+    }
 </script>

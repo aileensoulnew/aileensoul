@@ -296,4 +296,48 @@ class Posts extends CI_Controller
         $updatdata = $this->db->update('promoted_post', $update_data);
         echo "1";
     }
+
+    public function remove_promote_post()
+    {
+        $post_id = $this->input->post('post_id');        
+        
+        $sql = "SELECT * FROM ailee_promoted_post WHERE post_id = '".$post_id."'";
+        $promote_post = $this->db->query($sql)->row_array();
+        if(isset($promote_post) && !empty($promote_post))
+        {
+            $update_data = array(
+                "status" => '0',
+                "priority" => '0',
+                "modify_date" => date('Y-m-d H:i:s', time()),
+            );
+            $this->db->where('id_promoted_post', $promote_post['id_promoted_post']);
+            $updatdata = $this->db->update('promoted_post', $update_data);
+            if ($updatdata) {
+                $this->session->set_flashdata('success', 'Post successfully remove from promoted list.');
+                echo '1';
+            } else {
+                $this->session->flashdata('error', 'Sorry!! Your data not updated');
+                echo '1';
+            }
+        }
+        else
+        {
+            $data = array(
+                'post_id' => $post_id,
+                'status' => '0',
+                "priority" => '0',
+                'created_date' => date('Y-m-d H:i:s', time()),
+                'modify_date' => date('Y-m-d H:i:s', time())
+            );
+            $insert_id = $this->common->insert_data_getid($data, 'promoted_post');
+            if ($insert_id) {
+                $this->session->set_flashdata('success', 'Post successfully remove from promoted list.');
+                echo '1';
+            } else {
+                $this->session->flashdata('error', 'Sorry!! Your data not inserted');
+                echo '1';
+            }
+        }
+        
+    }
 }
