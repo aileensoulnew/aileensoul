@@ -112,7 +112,7 @@
                                                     $fullname = $value['first_name'].' '.$value['last_name'];   
                                                 }
                                                 ?>
-                                                <li><a href="<?php echo base_url().$value['user_slug']; ?>" title="<?php echo $fullname; ?>"><img src="<?php echo $user_img; ?>" alt="<?php echo $fullname; ?>"></a></li>
+                                                <li><a href="<?php echo base_url().$value['user_slug']; ?>" target="_self" title="<?php echo $fullname; ?>"><img src="<?php echo $user_img; ?>" alt="<?php echo $fullname; ?>"></a></li>
                                             <?php
                                             } ?>
                                         </ul>

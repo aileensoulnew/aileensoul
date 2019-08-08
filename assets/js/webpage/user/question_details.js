@@ -341,7 +341,75 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
             $('body').removeClass("body-loader");
             $scope.postData = success.data;
             setTimeout(function(){
-                $('[data-toggle="popover"]').popover({
+                var originalLeave = $.fn.popover.Constructor.prototype.leave;
+                $.fn.popover.Constructor.prototype.leave = function(obj){
+                    var self = obj instanceof this.constructor ?
+                    obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type)
+                    var container, timeout;
+
+                    originalLeave.call(this, obj);
+
+                    if(obj.currentTarget) {
+                        container = $(obj.currentTarget).siblings('.popover')
+                        timeout = self.timeout;
+                        container.one('mouseenter', function(){
+                            //We entered the actual popover – call off the dogs
+                            clearTimeout(timeout);
+                            //Let's monitor popover content instead
+                            container.one('mouseleave', function(){
+                                $.fn.popover.Constructor.prototype.leave.call(self, self);
+                            });
+                        })
+                    }
+                };
+
+                $('body').popover({
+                    selector: '[data-popover]',
+                    animation: true,
+                    trigger: "click hover" ,
+                    delay: {show: 1000, hide: 50},
+                    html: true, 
+                    animation:false,
+                    template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                    content: function () {
+                        // return $($(this).data('tooltip-content')).html();
+                        // console.log($(this).data('tooltip-url'));
+                        var uid = $(this).data('uid');
+                        var utype = $(this).data('utype');
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);//$(this).data('tooltip-url'),div_id);
+                        // return $('#popover-content').html();
+                    },
+                    // placement: 'auto',
+                    placement: function (context, element) {
+
+                        var $this = $(element);
+                        var offset = $this.offset();
+                        var width = $this.width();
+                        var height = $this.height();
+
+                        var centerX = offset.left + width / 2;
+                        var centerY = offset.top + height / 2;
+                        var position = $(element).position();
+                        
+                        if(centerY > $(window).scrollTop())
+                        {
+                            scroll_top = $(window).scrollTop();
+                            scroll_center = centerY;
+                        }
+                        if($(window).scrollTop() > centerY)
+                        {
+                            scroll_top = centerY;
+                            scroll_center = $(window).scrollTop();
+                        }
+                        
+                        if (parseInt(scroll_center - scroll_top) < 340){
+                            return "bottom";
+                        }                        
+                        return "top";
+                    }
+                });
+                /*$('[data-toggle="popover"]').popover({
                     trigger: "manual" ,
                     html: true, 
                     animation:false,
@@ -394,7 +462,7 @@ app.controller('questionDetailsController', function($scope, $http, $window, $fi
                             $(_this).popover("hide");
                         }
                     }, 100);
-                });
+                });*/
             },500);
         }, function(error) {});
     }

@@ -83,14 +83,14 @@
         <div class="availabel-data-box">
             <div class="search-profiles" ng-repeat="searchProfile in searchProfileData">
                 <div class="profile-img post-img">
-                    <a href="<?php echo base_url() ?>{{searchProfile.user_slug}}" target="_self" data-toggle="popover" data-uid="{{searchProfile.user_id}}" data-utype="1">
+                    <a href="<?php echo base_url() ?>{{searchProfile.user_slug}}" target="_self" data-popover="true" data-uid="{{searchProfile.user_id}}" data-utype="1">
                         <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{searchProfile.user_image}}" alt="{{searchProfile.fullname}}" ng-if="searchProfile.user_image">
                         <img ng-if="!searchProfile.user_image && searchProfile.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                         <img ng-if="!searchProfile.user_image && searchProfile.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                     </a>
                 </div>
                 <div class="profile-data">
-                    <p><a href="<?php echo base_url() ?>{{searchProfile.user_slug}}" ng-bind="searchProfile.fullname | capitalize" target="_self" data-toggle="popover" data-uid="{{searchProfile.user_id}}" data-utype="1"></a></p>
+                    <p><a href="<?php echo base_url() ?>{{searchProfile.user_slug}}" ng-bind="searchProfile.fullname | capitalize" target="_self" data-popover="true" data-uid="{{searchProfile.user_id}}" data-utype="1"></a></p>
                     <span ng-if="searchProfile.degree_name == null && searchProfile.title_name != null">{{searchProfile.title_name.length < 30 ? searchProfile.title_name : ((searchProfile.title_name | limitTo:30)+'...') }}</span>
                     <span ng-if="searchProfile.degree_name != null && searchProfile.title_name == null">{{searchProfile.degree_name.length < 30 ? searchProfile.degree_name : ((searchProfile.degree_name | limitTo:30)+'...') }}</span>
                     <span ng-if="searchProfile.degree_name == null && searchProfile.title_name == null">Current work</span>

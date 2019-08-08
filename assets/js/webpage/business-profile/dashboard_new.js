@@ -364,9 +364,9 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     all_html += '</div>';
                 }
                 // console.log(data);
-                setTimeout(function(){
-                    $('#'+div_id).html(all_html);
-                },1000);
+                /*setTimeout(function(){
+                },1000);*/
+                $('#'+div_id).html(all_html);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
@@ -2293,8 +2293,75 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                         });
                     }
                 }
+                var originalLeave = $.fn.popover.Constructor.prototype.leave;
+                $.fn.popover.Constructor.prototype.leave = function(obj){
+                var self = obj instanceof this.constructor ?
+                obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type)
+                var container, timeout;
 
-                $('[data-toggle="popover"]').popover({
+                originalLeave.call(this, obj);
+
+                if(obj.currentTarget) {
+                    container = $(obj.currentTarget).siblings('.popover')
+                    timeout = self.timeout;
+                    container.one('mouseenter', function(){
+                        //We entered the actual popover – call off the dogs
+                        clearTimeout(timeout);
+                        //Let's monitor popover content instead
+                        container.one('mouseleave', function(){
+                            $.fn.popover.Constructor.prototype.leave.call(self, self);
+                        });
+                    })
+                }
+            };
+
+            $('body').popover({
+                selector: '[data-popover]',
+                animation: true,
+                trigger: "click hover" ,
+                delay: {show: 1000, hide: 50},
+                html: true, 
+                animation:false,
+                template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                content: function () {
+                    // return $($(this).data('tooltip-content')).html();
+                    // console.log($(this).data('tooltip-url'));
+                    var uid = $(this).data('uid');
+                    var utype = $(this).data('utype');
+                    var div_id =  "tmp-id-" + $.now();
+                    return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);//$(this).data('tooltip-url'),div_id);
+                    // return $('#popover-content').html();
+                },
+                // placement: 'auto',
+                placement: function (context, element) {
+
+                    var $this = $(element);
+                    var offset = $this.offset();
+                    var width = $this.width();
+                    var height = $this.height();
+
+                    var centerX = offset.left + width / 2;
+                    var centerY = offset.top + height / 2;
+                    var position = $(element).position();
+                    
+                    if(centerY > $(window).scrollTop())
+                    {
+                        scroll_top = $(window).scrollTop();
+                        scroll_center = centerY;
+                    }
+                    if($(window).scrollTop() > centerY)
+                    {
+                        scroll_top = centerY;
+                        scroll_center = $(window).scrollTop();
+                    }
+                    
+                    if (parseInt(scroll_center - scroll_top) < 340){
+                        return "bottom";
+                    }                        
+                    return "top";
+                }
+            });
+                /*$('[data-toggle="popover"]').popover({
                     trigger: "manual" ,
                     html: true, 
                     animation:false,
@@ -2347,7 +2414,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                             $(_this).popover("hide");
                         }
                     }, 100);
-                });
+                });*/
             },1000);
         }, function (error) {
             setTimeout(function(){
@@ -2434,7 +2501,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     }
                 }
 
-                $('[data-toggle="popover"]').popover({
+                /*$('[data-toggle="popover"]').popover({
                     trigger: "manual" ,
                     html: true, 
                     animation:false,
@@ -2487,7 +2554,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                             $(_this).popover("hide");
                         }
                     }, 100);
-                });
+                });*/
             },1000);
 
             // setTimeout(function(){$('video,audio').mediaelementplayer({'pauseOtherPlayers': true}/* Options */);},300);
@@ -2684,7 +2751,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                     $("#cmt-btn-"+post_id).removeAttr("style");
                     $("#cmt-btn-"+post_id).removeAttr("disabled");
 
-                    $('[data-toggle="popover"]').popover({
+                    /*$('[data-toggle="popover"]').popover({
                         trigger: "manual" ,
                         html: true, 
                         animation:false,
@@ -2737,7 +2804,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                                 $(_this).popover("hide");
                             }
                         }, 100);
-                    });
+                    });*/
                 },1000);
             }, function (error) {
                 setTimeout(function(){
@@ -2761,7 +2828,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             $scope.postData[index].post_comment_data = data.all_comment_data;
             $scope.postData[index].post_comment_count = data.post_comment_count;
             setTimeout(function(){
-                $('[data-toggle="popover"]').popover({
+                /*$('[data-toggle="popover"]').popover({
                     trigger: "manual" ,
                     html: true, 
                     animation:false,
@@ -2814,7 +2881,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                             $(_this).popover("hide");
                         }
                     }, 100);
-                });
+                });*/
             },500);
         }, function (error) {
             setTimeout(function(){
@@ -2836,7 +2903,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
             $scope.postData[index].post_comment_data = data.comment_data;
             $scope.postData[index].post_comment_count = data.post_comment_count;
             setTimeout(function(){
-                $('[data-toggle="popover"]').popover({
+                /*$('[data-toggle="popover"]').popover({
                     trigger: "manual" ,
                     html: true, 
                     animation:false,
@@ -2889,7 +2956,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                             $(_this).popover("hide");
                         }
                     }, 100);
-                });
+                });*/
             },500);
         }, function (error) {
             setTimeout(function(){
@@ -3152,7 +3219,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                         $('.editable_text').html('');
                     }
                     setTimeout(function(){
-                        $('[data-toggle="popover"]').popover({
+                        /*$('[data-toggle="popover"]').popover({
                             trigger: "manual" ,
                             html: true, 
                             animation:false,
@@ -3205,7 +3272,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                                     $(_this).popover("hide");
                                 }
                             }, 100);
-                        });
+                        });*/
                     },500);
                 }
             }, function (error) {
@@ -3309,7 +3376,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 $('#likeusermodal').modal('show');
 
                 setTimeout(function(){
-                    $('[data-toggle="popover"]').popover({
+                    /*$('[data-toggle="popover"]').popover({
                         trigger: "manual" ,
                         html: true, 
                         animation:false,
@@ -3362,7 +3429,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                                 $(_this).popover("hide");
                             }
                         }, 100);
-                    });
+                    });*/
                 },500);
             }
         }, function (error) {
@@ -3401,7 +3468,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                 $scope.l_total_record = success.data.countlike;
                 
                 setTimeout(function(){
-                    $('[data-toggle="popover"]').popover({
+                    /*$('[data-toggle="popover"]').popover({
                         trigger: "manual" ,
                         html: true, 
                         animation:false,
@@ -3454,7 +3521,7 @@ app.controller('businessProfileController', function ($scope, $http, $location, 
                                 $(_this).popover("hide");
                             }
                         }, 100);
-                    });
+                    });*/
                 },500);
                 is_processing = false;
             }

@@ -16,19 +16,19 @@
                 <div class="custom-user-box" ng-if="contats_data != '0'" ng-repeat="contacts in contactData">
                    
                     <div class="post-img" ng-if="contacts.user_image != '' && contacts.user_image != null">
-                        <a href="<?php echo base_url();?>{{contacts.user_slug}}" target="_self" data-toggle="popover" data-uid="{{contacts.user_id}}" data-utype="1">
+                        <a href="<?php echo base_url();?>{{contacts.user_slug}}" target="_self" data-popover="true" data-uid="{{contacts.user_id}}" data-utype="1">
                             <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{contacts.user_image}}">
                         </a>
                     </div>
                     <div class="post-img" ng-if="contacts.user_image == '' || contacts.user_image == null">
-                        <a href="<?php echo base_url();?>{{contacts.user_slug}}" target="_self" data-toggle="popover" data-uid="{{contacts.user_id}}" data-utype="1">
+                        <a href="<?php echo base_url();?>{{contacts.user_slug}}" target="_self" data-popover="true" data-uid="{{contacts.user_id}}" data-utype="1">
                             <img ng-if="contacts.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                             <img ng-if="contacts.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                         </a>
                     </div>
                     <div class="custom-user-detail">
                         <h4>
-                            <a href="<?php echo base_url();?>{{contacts.user_slug}}" target="_self" ng-bind="(contacts.first_name | limitTo:1 | uppercase) + (contacts.first_name.substr(1) | lowercase) + ' ' + (contacts.last_name | limitTo:1 |uppercase) + (contacts.last_name.substr(1) | lowercase)" data-toggle="popover" data-uid="{{contacts.user_id}}" data-utype="1"></a>
+                            <a href="<?php echo base_url();?>{{contacts.user_slug}}" target="_self" ng-bind="(contacts.first_name | limitTo:1 | uppercase) + (contacts.first_name.substr(1) | lowercase) + ' ' + (contacts.last_name | limitTo:1 |uppercase) + (contacts.last_name.substr(1) | lowercase)" data-popover="true" data-uid="{{contacts.user_id}}" data-utype="1"></a>
                         </h4>
                         <p ng-if="contacts.title_name != null && contacts.degree_name == null">{{contacts.title_name}}</p>
                         <p ng-if="contacts.degree_name != null && contacts.title_name == null">{{contacts.degree_name}}</p>

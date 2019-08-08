@@ -115,27 +115,27 @@
                             </div>
                         </div>
                         <div class="post-img" ng-if="follow.follow_type == 1 && follow.user_image != '' && follow.user_image != null">
-                            <a href="<?php echo base_url();?>{{follow.user_slug}}" target="_self" data-toggle="popover" data-uid="{{follow.user_id}}" data-utype="{{follow.follow_type}}">
+                            <a href="<?php echo base_url();?>{{follow.user_slug}}" target="_self" data-popover="true" data-uid="{{follow.user_id}}" data-utype="{{follow.follow_type}}">
                                 <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{follow.user_image}}">
                             </a>
                         </div>
 
                         <div class="post-img" ng-if="follow.follow_type == 2">
-                            <a href="<?php echo base_url();?>company/{{follow.business_data.business_slug}}" target="_self" data-toggle="popover" data-uid="{{follow.user_id}}" data-utype="{{follow.follow_type}}">
+                            <a href="<?php echo base_url();?>company/{{follow.business_data.business_slug}}" target="_self" data-popover="true" data-uid="{{follow.user_id}}" data-utype="{{follow.follow_type}}">
                                 <img ng-if="follow.business_data.business_user_image" ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL; ?>{{follow.business_data.business_user_image}}">
                                 <img ng-if="!follow.business_data.business_user_image" ng-src="<?php echo base_url(NOBUSIMAGE); ?>">
                             </a>
                         </div>
 
                         <div class="post-img" ng-if="follow.follow_type == 1 && follow.user_image == '' || follow.user_image == null">
-                            <a href="<?php echo base_url();?>{{follow.user_slug}}" target="_self" data-toggle="popover" data-uid="{{follow.user_id}}" data-utype="{{follow.follow_type}}">
+                            <a href="<?php echo base_url();?>{{follow.user_slug}}" target="_self" data-popover="true" data-uid="{{follow.user_id}}" data-utype="{{follow.follow_type}}">
                                 <img ng-if="follow.follow_type == 1 && follow.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                 <img ng-if="follow.follow_type == 1 && follow.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                             </a>
                         </div>
                         <div class="custom-user-detail" ng-if="follow.follow_type == 1">
                             <h4>
-                                <a href="<?php echo base_url();?>{{follow.user_slug}}"  target="_self" ng-bind="(follow.first_name | limitTo:1 | uppercase) + (follow.first_name.substr(1) | lowercase) + ' ' + (follow.last_name | limitTo:1 |uppercase) + (follow.last_name.substr(1) | lowercase)" data-toggle="popover" data-uid="{{follow.user_id}}" data-utype="{{follow.follow_type}}"></a>
+                                <a href="<?php echo base_url();?>{{follow.user_slug}}"  target="_self" ng-bind="(follow.first_name | limitTo:1 | uppercase) + (follow.first_name.substr(1) | lowercase) + ' ' + (follow.last_name | limitTo:1 |uppercase) + (follow.last_name.substr(1) | lowercase)" data-popover="true" data-uid="{{follow.user_id}}" data-utype="{{follow.follow_type}}"></a>
                             </h4>
                             <p ng-if="follow.title_name && !follow.degree_name">{{follow.title_name}}</p>
                             <p ng-if="follow.degree_name && !follow.title_name">{{follow.degree_name}}</p>
@@ -144,7 +144,7 @@
                         </div>
                         <div class="custom-user-detail" ng-if="follow.follow_type == 2">
                             <h4>
-                                <a href="<?php echo base_url();?>company/{{follow.business_data.business_slug}}"  target="_self" ng-bind="(follow.business_data.company_name | limitTo:1 | uppercase) + (follow.business_data.company_name.substr(1) | lowercase)" data-toggle="popover" data-uid="{{follow.user_id}}" data-utype="{{follow.follow_type}}"></a>
+                                <a href="<?php echo base_url();?>company/{{follow.business_data.business_slug}}"  target="_self" ng-bind="(follow.business_data.company_name | limitTo:1 | uppercase) + (follow.business_data.company_name.substr(1) | lowercase)" data-popover="true" data-uid="{{follow.user_id}}" data-utype="{{follow.follow_type}}"></a>
                             </h4>
                             <p ng-if="follow.business_data.industry_name">{{follow.business_data.industry_name}}</p>
                         </div>

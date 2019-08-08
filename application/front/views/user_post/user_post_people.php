@@ -72,14 +72,14 @@
         <div ng-if="people_data.length != '0'">
             <div class="search-profiles" ng-repeat="people in people_data">
                 <div class="profile-img post-img">
-                    <a href="<?php echo base_url() ?>{{people.user_slug}}" target="_self" data-toggle="popover" data-uid="{{people.user_id}}" data-utype="1">
+                    <a href="<?php echo base_url() ?>{{people.user_slug}}" target="_self" data-popover="true" data-uid="{{people.user_id}}" data-utype="1">
                         <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{people.user_image}}" alt="{{people.fullname}}" ng-if="people.user_image">                                    
                         <img ng-if="!people.user_image && people.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                         <img ng-if="!people.user_image && people.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                     </a>
                 </div>
                 <div class="profile-data">
-                    <p><a href="<?php echo base_url() ?>{{people.user_slug}}" ng-bind="people.fullname | capitalize" target="_self" data-toggle="popover" data-uid="{{people.user_id}}" data-utype="1"></a></p>
+                    <p><a href="<?php echo base_url() ?>{{people.user_slug}}" ng-bind="people.fullname | capitalize" target="_self" data-popover="true" data-uid="{{people.user_id}}" data-utype="1"></a></p>
                     <span ng-if="people.degree_name == null && people.title_name != null">{{people.title_name.length < 30 ? people.title_name : ((people.title_name | limitTo:30)+'...') }}</span>
                     <span ng-if="people.degree_name != null && people.title_name == null">{{people.degree_name.length < 30 ? people.degree_name : ((people.degree_name | limitTo:30)+'...') }}</span>
                     <span ng-if="people.degree_name == null && people.title_name == null">Current work</span>

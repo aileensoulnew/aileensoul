@@ -2463,9 +2463,10 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                         all_html += '</div>';
                     all_html += '</div>';
                 }            
-                setTimeout(function(){
+                /*setTimeout(function(){
                     $('#'+div_id).html(all_html);
-                },1000);
+                },1000);*/
+                $('#'+div_id).html(all_html);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
@@ -3234,7 +3235,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                     }
                 }
                 // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
-                $('[data-toggle="popover"]').popover({
+                /*$('[data-toggle="popover"]').popover({
                     trigger: "manual" ,
                     html: true, 
                     animation:false,
@@ -3287,7 +3288,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                             $(_this).popover("hide");
                         }
                     }, 100);
-                });
+                });*/
             },1000);
         }, function (error) {
             setTimeout(function(){
@@ -3914,7 +3915,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                     $("#cmt-btn-mob-"+post_id).removeAttr("disabled");
                     $("#cmt-btn-"+post_id).removeAttr("style");
                     $("#cmt-btn-"+post_id).removeAttr("disabled");
-                    $('[data-toggle="popover"]').popover({
+                    /*$('[data-toggle="popover"]').popover({
                         trigger: "manual" ,
                         html: true, 
                         animation:false,
@@ -3967,7 +3968,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                                 $(_this).popover("hide");
                             }
                         }, 100);
-                    });
+                    });*/
                 },1000);
             }, function (error) {
                 setTimeout(function(){
@@ -3996,7 +3997,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $scope.postData[index].post_comment_data = data.all_comment_data;
             $scope.postData[index].post_comment_count = data.post_comment_count;
             setTimeout(function(){
-                $('[data-toggle="popover"]').popover({
+                /*$('[data-toggle="popover"]').popover({
                     trigger: "manual" ,
                     html: true, 
                     animation:false,
@@ -4049,7 +4050,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                             $(_this).popover("hide");
                         }
                     }, 100);
-                });
+                });*/
             },500);
         }, function (error) {
             setTimeout(function(){
@@ -4075,7 +4076,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             $scope.postData[index].post_comment_data = data.comment_data;
             $scope.postData[index].post_comment_count = data.post_comment_count;
             setTimeout(function(){
-                $('[data-toggle="popover"]').popover({
+                /*$('[data-toggle="popover"]').popover({
                     trigger: "manual" ,
                     html: true, 
                     animation:false,
@@ -4128,7 +4129,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                             $(_this).popover("hide");
                         }
                     }, 100);
-                });
+                });*/
             },500);
         }, function (error) {
             setTimeout(function(){
@@ -4466,7 +4467,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                         $('.editable_text').html('');
                     }
                     setTimeout(function(){
-                        $('[data-toggle="popover"]').popover({
+                        /*$('[data-toggle="popover"]').popover({
                             trigger: "manual" ,
                             html: true, 
                             animation:false,
@@ -4519,7 +4520,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                                     $(_this).popover("hide");
                                 }
                             }, 100);
-                        });
+                        });*/
                     },500);
                 }
             }, function (error) {
@@ -4634,7 +4635,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 $scope.l_total_record = success.data.countlike;
                 $('#likeusermodal').modal('show');
                 setTimeout(function(){
-                    $('[data-toggle="popover"]').popover({
+                    /*$('[data-toggle="popover"]').popover({
                         trigger: "manual" ,
                         html: true, 
                         animation:false,
@@ -4687,7 +4688,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                                 $(_this).popover("hide");
                             }
                         }, 100);
-                    });
+                    });*/
                 },500);
             }
         }, function (error) {
@@ -4725,7 +4726,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 $scope.l_total_record = success.data.countlike;
                 
                 setTimeout(function(){
-                    $('[data-toggle="popover"]').popover({
+                    /*$('[data-toggle="popover"]').popover({
                         trigger: "manual" ,
                         html: true, 
                         animation:false,
@@ -4778,7 +4779,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                                 $(_this).popover("hide");
                             }
                         }, 100);
-                    });
+                    });*/
                 },500);
                 is_processing = false;
             }
@@ -4995,7 +4996,75 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             // check_no_post_data();
 
             setTimeout(function(){
-                $('[data-toggle="popover"]').popover({
+                var originalLeave = $.fn.popover.Constructor.prototype.leave;
+                $.fn.popover.Constructor.prototype.leave = function(obj){
+                    var self = obj instanceof this.constructor ?
+                    obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type)
+                    var container, timeout;
+
+                    originalLeave.call(this, obj);
+
+                    if(obj.currentTarget) {
+                        container = $(obj.currentTarget).siblings('.popover')
+                        timeout = self.timeout;
+                        container.one('mouseenter', function(){
+                            //We entered the actual popover – call off the dogs
+                            clearTimeout(timeout);
+                            //Let's monitor popover content instead
+                            container.one('mouseleave', function(){
+                                $.fn.popover.Constructor.prototype.leave.call(self, self);
+                            });
+                        })
+                    }
+                };
+
+                $('body').popover({
+                    selector: '[data-popover]',
+                    animation: true,
+                    trigger: "click hover" ,
+                    delay: {show: 1000, hide: 50},
+                    html: true, 
+                    animation:false,
+                    template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                    content: function () {
+                        // return $($(this).data('tooltip-content')).html();
+                        // console.log($(this).data('tooltip-url'));
+                        var uid = $(this).data('uid');
+                        var utype = $(this).data('utype');
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);//$(this).data('tooltip-url'),div_id);
+                        // return $('#popover-content').html();
+                    },
+                    // placement: 'auto',
+                    placement: function (context, element) {
+
+                        var $this = $(element);
+                        var offset = $this.offset();
+                        var width = $this.width();
+                        var height = $this.height();
+
+                        var centerX = offset.left + width / 2;
+                        var centerY = offset.top + height / 2;
+                        var position = $(element).position();
+                        
+                        if(centerY > $(window).scrollTop())
+                        {
+                            scroll_top = $(window).scrollTop();
+                            scroll_center = centerY;
+                        }
+                        if($(window).scrollTop() > centerY)
+                        {
+                            scroll_top = centerY;
+                            scroll_center = $(window).scrollTop();
+                        }
+                        
+                        if (parseInt(scroll_center - scroll_top) < 340){
+                            return "bottom";
+                        }                        
+                        return "top";
+                    }
+                });
+                /*$('[data-toggle="popover"]').popover({
                     trigger: "manual" ,
                     html: true, 
                     animation:false,
@@ -5048,7 +5117,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                             $(_this).popover("hide");
                         }
                     }, 100);
-                });
+                });*/
             },500);
             
             getUserDashboardImage();
@@ -10264,9 +10333,10 @@ app.controller('contactsController', function ($scope, $http, $location, $window
                         all_html += '</div>';
                     all_html += '</div>';
                 }            
-                setTimeout(function(){
+                /*setTimeout(function(){
                     $('#'+div_id).html(all_html);
-                },1000);
+                },1000);*/
+                $('#'+div_id).html(all_html);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
@@ -10496,7 +10566,75 @@ app.controller('contactsController', function ($scope, $http, $location, $window
                     $scope.contactData = response.data.contactrecord;
                 }
                 setTimeout(function(){
-                    $('[data-toggle="popover"]').popover({
+                    var originalLeave = $.fn.popover.Constructor.prototype.leave;
+                    $.fn.popover.Constructor.prototype.leave = function(obj){
+                        var self = obj instanceof this.constructor ?
+                        obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type)
+                        var container, timeout;
+
+                        originalLeave.call(this, obj);
+
+                        if(obj.currentTarget) {
+                            container = $(obj.currentTarget).siblings('.popover')
+                            timeout = self.timeout;
+                            container.one('mouseenter', function(){
+                                //We entered the actual popover – call off the dogs
+                                clearTimeout(timeout);
+                                //Let's monitor popover content instead
+                                container.one('mouseleave', function(){
+                                    $.fn.popover.Constructor.prototype.leave.call(self, self);
+                                });
+                            })
+                        }
+                    };
+
+                    $('body').popover({
+                        selector: '[data-popover]',
+                        animation: true,
+                        trigger: "click hover" ,
+                        delay: {show: 1000, hide: 50},
+                        html: true, 
+                        animation:false,
+                        template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                        content: function () {
+                            // return $($(this).data('tooltip-content')).html();
+                            // console.log($(this).data('tooltip-url'));
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);//$(this).data('tooltip-url'),div_id);
+                            // return $('#popover-content').html();
+                        },
+                        // placement: 'auto',
+                        placement: function (context, element) {
+
+                            var $this = $(element);
+                            var offset = $this.offset();
+                            var width = $this.width();
+                            var height = $this.height();
+
+                            var centerX = offset.left + width / 2;
+                            var centerY = offset.top + height / 2;
+                            var position = $(element).position();
+                            
+                            if(centerY > $(window).scrollTop())
+                            {
+                                scroll_top = $(window).scrollTop();
+                                scroll_center = centerY;
+                            }
+                            if($(window).scrollTop() > centerY)
+                            {
+                                scroll_top = centerY;
+                                scroll_center = $(window).scrollTop();
+                            }
+                            
+                            if (parseInt(scroll_center - scroll_top) < 340){
+                                return "bottom";
+                            }                        
+                            return "top";
+                        }
+                    });
+                    /*$('[data-toggle="popover"]').popover({
                         trigger: "manual" ,
                         html: true, 
                         animation:false,
@@ -10549,7 +10687,7 @@ app.controller('contactsController', function ($scope, $http, $location, $window
                                 $(_this).popover("hide");
                             }
                         }, 100);
-                    });
+                    });*/
                 },500);
             } else {
                 $scope.showLoadmore = false;
@@ -10823,9 +10961,10 @@ app.controller('followersController', function ($scope, $http, $location, $compi
                     all_html += '</div>';
                 }
                 
-                setTimeout(function(){
+                /*setTimeout(function(){
                     $('#'+div_id).html(all_html);
-                },1000);
+                },1000);*/
+                $('#'+div_id).html(all_html);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
@@ -11009,7 +11148,75 @@ app.controller('followersController', function ($scope, $http, $location, $compi
                     $scope.perpage = response.data.pagedata.perpage_record;
                 }
                 setTimeout(function(){
-                    $('[data-toggle="popover"]').popover({
+                    var originalLeave = $.fn.popover.Constructor.prototype.leave;
+                    $.fn.popover.Constructor.prototype.leave = function(obj){
+                        var self = obj instanceof this.constructor ?
+                        obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type)
+                        var container, timeout;
+
+                        originalLeave.call(this, obj);
+
+                        if(obj.currentTarget) {
+                            container = $(obj.currentTarget).siblings('.popover')
+                            timeout = self.timeout;
+                            container.one('mouseenter', function(){
+                                //We entered the actual popover – call off the dogs
+                                clearTimeout(timeout);
+                                //Let's monitor popover content instead
+                                container.one('mouseleave', function(){
+                                    $.fn.popover.Constructor.prototype.leave.call(self, self);
+                                });
+                            })
+                        }
+                    };
+
+                    $('body').popover({
+                        selector: '[data-popover]',
+                        animation: true,
+                        trigger: "click hover" ,
+                        delay: {show: 1000, hide: 50},
+                        html: true, 
+                        animation:false,
+                        template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                        content: function () {
+                            // return $($(this).data('tooltip-content')).html();
+                            // console.log($(this).data('tooltip-url'));
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);//$(this).data('tooltip-url'),div_id);
+                            // return $('#popover-content').html();
+                        },
+                        // placement: 'auto',
+                        placement: function (context, element) {
+
+                            var $this = $(element);
+                            var offset = $this.offset();
+                            var width = $this.width();
+                            var height = $this.height();
+
+                            var centerX = offset.left + width / 2;
+                            var centerY = offset.top + height / 2;
+                            var position = $(element).position();
+                            
+                            if(centerY > $(window).scrollTop())
+                            {
+                                scroll_top = $(window).scrollTop();
+                                scroll_center = centerY;
+                            }
+                            if($(window).scrollTop() > centerY)
+                            {
+                                scroll_top = centerY;
+                                scroll_center = $(window).scrollTop();
+                            }
+                            
+                            if (parseInt(scroll_center - scroll_top) < 340){
+                                return "bottom";
+                            }                        
+                            return "top";
+                        }
+                    });
+                    /*$('[data-toggle="popover"]').popover({
                         trigger: "manual" ,
                         html: true, 
                         animation:false,
@@ -11062,7 +11269,7 @@ app.controller('followersController', function ($scope, $http, $location, $compi
                                 $(_this).popover("hide");
                             }
                         }, 100);
-                    });
+                    });*/
                 },500);
             } else {
                 $scope.showLoadmore = false;
@@ -11358,9 +11565,10 @@ app.controller('followingController', function ($scope, $http, $location, $compi
                     all_html += '</div>';
                 }
                 
-                setTimeout(function(){
+                /*setTimeout(function(){
                     $('#'+div_id).html(all_html);
-                },1000);
+                },1000);*/
+                $('#'+div_id).html(all_html);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
@@ -11544,7 +11752,75 @@ app.controller('followingController', function ($scope, $http, $location, $compi
                     $scope.perpage = response.data.pagedata.perpage_record;
                 }
                 setTimeout(function(){
-                    $('[data-toggle="popover"]').popover({
+                    var originalLeave = $.fn.popover.Constructor.prototype.leave;
+                    $.fn.popover.Constructor.prototype.leave = function(obj){
+                        var self = obj instanceof this.constructor ?
+                        obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type)
+                        var container, timeout;
+
+                        originalLeave.call(this, obj);
+
+                        if(obj.currentTarget) {
+                            container = $(obj.currentTarget).siblings('.popover')
+                            timeout = self.timeout;
+                            container.one('mouseenter', function(){
+                                //We entered the actual popover – call off the dogs
+                                clearTimeout(timeout);
+                                //Let's monitor popover content instead
+                                container.one('mouseleave', function(){
+                                    $.fn.popover.Constructor.prototype.leave.call(self, self);
+                                });
+                            })
+                        }
+                    };
+
+                    $('body').popover({
+                        selector: '[data-popover]',
+                        animation: true,
+                        trigger: "click hover" ,
+                        delay: {show: 1000, hide: 50},
+                        html: true, 
+                        animation:false,
+                        template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                        content: function () {
+                            // return $($(this).data('tooltip-content')).html();
+                            // console.log($(this).data('tooltip-url'));
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);//$(this).data('tooltip-url'),div_id);
+                            // return $('#popover-content').html();
+                        },
+                        // placement: 'auto',
+                        placement: function (context, element) {
+
+                            var $this = $(element);
+                            var offset = $this.offset();
+                            var width = $this.width();
+                            var height = $this.height();
+
+                            var centerX = offset.left + width / 2;
+                            var centerY = offset.top + height / 2;
+                            var position = $(element).position();
+                            
+                            if(centerY > $(window).scrollTop())
+                            {
+                                scroll_top = $(window).scrollTop();
+                                scroll_center = centerY;
+                            }
+                            if($(window).scrollTop() > centerY)
+                            {
+                                scroll_top = centerY;
+                                scroll_center = $(window).scrollTop();
+                            }
+                            
+                            if (parseInt(scroll_center - scroll_top) < 340){
+                                return "bottom";
+                            }                        
+                            return "top";
+                        }
+                    });
+                    /*$('[data-toggle="popover"]').popover({
                         trigger: "manual" ,
                         html: true, 
                         animation:false,
@@ -11597,7 +11873,7 @@ app.controller('followingController', function ($scope, $http, $location, $compi
                                 $(_this).popover("hide");
                             }
                         }, 100);
-                    });
+                    });*/
                 },500);
             } else {
                 $scope.showLoadmore = false;
@@ -12213,9 +12489,10 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                     all_html += '</div>';
                 }
                 
-                setTimeout(function(){
+                /*setTimeout(function(){
                     $('#'+div_id).html(all_html);
-                },1000);
+                },1000);*/
+                $('#'+div_id).html(all_html);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
@@ -12411,7 +12688,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                 $scope.l_total_record = success.data.countlike;
                 $('#likeusermodal').modal('show');
                 setTimeout(function(){
-                    $('[data-toggle="popover"]').popover({
+                    /*$('[data-toggle="popover"]').popover({
                         trigger: "manual" ,
                         html: true, 
                         animation:false,
@@ -12464,7 +12741,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                                 $(_this).popover("hide");
                             }
                         }, 100);
-                    });
+                    });*/
                 },500);
             }
         }, function (error) {
@@ -12502,7 +12779,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                 $scope.l_total_record = success.data.countlike;
                 
                 setTimeout(function(){
-                    $('[data-toggle="popover"]').popover({
+                    /*$('[data-toggle="popover"]').popover({
                         trigger: "manual" ,
                         html: true, 
                         animation:false,
@@ -12555,7 +12832,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                                 $(_this).popover("hide");
                             }
                         }, 100);
-                    });
+                    });*/
                 },500);
                 is_processing = false;
             }
@@ -12618,7 +12895,75 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                     $scope.questionData = response.data;
                 }
                 setTimeout(function(){
-                    $('[data-toggle="popover"]').popover({
+                    var originalLeave = $.fn.popover.Constructor.prototype.leave;
+                    $.fn.popover.Constructor.prototype.leave = function(obj){
+                        var self = obj instanceof this.constructor ?
+                        obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type)
+                        var container, timeout;
+
+                        originalLeave.call(this, obj);
+
+                        if(obj.currentTarget) {
+                            container = $(obj.currentTarget).siblings('.popover')
+                            timeout = self.timeout;
+                            container.one('mouseenter', function(){
+                                //We entered the actual popover – call off the dogs
+                                clearTimeout(timeout);
+                                //Let's monitor popover content instead
+                                container.one('mouseleave', function(){
+                                    $.fn.popover.Constructor.prototype.leave.call(self, self);
+                                });
+                            })
+                        }
+                    };
+
+                    $('body').popover({
+                        selector: '[data-popover]',
+                        animation: true,
+                        trigger: "click hover" ,
+                        delay: {show: 1000, hide: 50},
+                        html: true, 
+                        animation:false,
+                        template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                        content: function () {
+                            // return $($(this).data('tooltip-content')).html();
+                            // console.log($(this).data('tooltip-url'));
+                            var uid = $(this).data('uid');
+                            var utype = $(this).data('utype');
+                            var div_id =  "tmp-id-" + $.now();
+                            return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);//$(this).data('tooltip-url'),div_id);
+                            // return $('#popover-content').html();
+                        },
+                        // placement: 'auto',
+                        placement: function (context, element) {
+
+                            var $this = $(element);
+                            var offset = $this.offset();
+                            var width = $this.width();
+                            var height = $this.height();
+
+                            var centerX = offset.left + width / 2;
+                            var centerY = offset.top + height / 2;
+                            var position = $(element).position();
+                            
+                            if(centerY > $(window).scrollTop())
+                            {
+                                scroll_top = $(window).scrollTop();
+                                scroll_center = centerY;
+                            }
+                            if($(window).scrollTop() > centerY)
+                            {
+                                scroll_top = centerY;
+                                scroll_center = $(window).scrollTop();
+                            }
+                            
+                            if (parseInt(scroll_center - scroll_top) < 340){
+                                return "bottom";
+                            }                        
+                            return "top";
+                        }
+                    });
+                    /*$('[data-toggle="popover"]').popover({
                         trigger: "manual" ,
                         html: true, 
                         animation:false,
@@ -12671,7 +13016,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                                 $(_this).popover("hide");
                             }
                         }, 100);
-                    });
+                    });*/
                 },500);
             } else {
                 if(pagenum == '' || pagenum == 0 || pagenum == undefined)
@@ -13098,9 +13443,10 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                     all_html += '</div>';
                 }
                 
-                setTimeout(function(){
+                /*setTimeout(function(){
                     $('#'+div_id).html(all_html);
-                },1000);
+                },1000);*/
+                $('#'+div_id).html(all_html);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
@@ -13829,7 +14175,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             },1000);
             setTimeout(function(){
-                $('[data-toggle="popover"]').popover({
+                /*$('[data-toggle="popover"]').popover({
                     trigger: "manual" ,
                     html: true, 
                     animation:false,
@@ -13882,7 +14228,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                             $(_this).popover("hide");
                         }
                     }, 100);
-                });
+                });*/
             },500);
         }, function (error) {
             setTimeout(function(){
@@ -14266,7 +14612,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                     $("#cmt-btn-"+post_id).removeAttr("style");
                     $("#cmt-btn-"+post_id).removeAttr("disabled");
                     
-                    $('[data-toggle="popover"]').popover({
+                    /*$('[data-toggle="popover"]').popover({
                         trigger: "manual" ,
                         html: true, 
                         animation:false,
@@ -14319,7 +14665,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                                 $(_this).popover("hide");
                             }
                         }, 100);
-                    });
+                    });*/
             
                 },1000);
             }, function (error) {
@@ -14349,7 +14695,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
             $scope.postData[index].post_comment_data = data.all_comment_data;
             $scope.postData[index].post_comment_count = data.post_comment_count;
             setTimeout(function(){
-                $('[data-toggle="popover"]').popover({
+                /*$('[data-toggle="popover"]').popover({
                     trigger: "manual" ,
                     html: true, 
                     animation:false,
@@ -14402,7 +14748,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                             $(_this).popover("hide");
                         }
                     }, 100);
-                });
+                });*/
             },500);
         }, function (error) {
             setTimeout(function(){
@@ -14428,7 +14774,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
             $scope.postData[index].post_comment_data = data.comment_data;
             $scope.postData[index].post_comment_count = data.post_comment_count;
             setTimeout(function(){
-                $('[data-toggle="popover"]').popover({
+                /*$('[data-toggle="popover"]').popover({
                     trigger: "manual" ,
                     html: true, 
                     animation:false,
@@ -14481,7 +14827,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                             $(_this).popover("hide");
                         }
                     }, 100);
-                });
+                });*/
             },500);
         }, function (error) {
             setTimeout(function(){
@@ -14740,7 +15086,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                         $('.editable_text').html('');
                     }
                     setTimeout(function(){
-                        $('[data-toggle="popover"]').popover({
+                        /*$('[data-toggle="popover"]').popover({
                             trigger: "manual" ,
                             html: true, 
                             animation:false,
@@ -14793,7 +15139,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                                     $(_this).popover("hide");
                                 }
                             }, 100);
-                        });
+                        });*/
                     },500);
                 }
             }, function (error) {
@@ -14909,7 +15255,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 $scope.l_total_record = success.data.countlike;
                 $('#likeusermodal').modal('show');
                 setTimeout(function(){
-                    $('[data-toggle="popover"]').popover({
+                    /*$('[data-toggle="popover"]').popover({
                         trigger: "manual" ,
                         html: true, 
                         animation:false,
@@ -14962,7 +15308,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                                 $(_this).popover("hide");
                             }
                         }, 100);
-                    });
+                    });*/
                 },500);
             }
         }, function (error) {
@@ -15000,7 +15346,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 $scope.l_total_record = success.data.countlike;
                 
                 setTimeout(function(){
-                    $('[data-toggle="popover"]').popover({
+                    /*$('[data-toggle="popover"]').popover({
                         trigger: "manual" ,
                         html: true, 
                         animation:false,
@@ -15053,7 +15399,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                                 $(_this).popover("hide");
                             }
                         }, 100);
-                    });
+                    });*/
                 },500);
                 is_processing = false;
             }
@@ -15215,7 +15561,75 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             },1000);
             setTimeout(function(){
-                $('[data-toggle="popover"]').popover({
+                var originalLeave = $.fn.popover.Constructor.prototype.leave;
+                $.fn.popover.Constructor.prototype.leave = function(obj){
+                    var self = obj instanceof this.constructor ?
+                    obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type)
+                    var container, timeout;
+
+                    originalLeave.call(this, obj);
+
+                    if(obj.currentTarget) {
+                        container = $(obj.currentTarget).siblings('.popover')
+                        timeout = self.timeout;
+                        container.one('mouseenter', function(){
+                            //We entered the actual popover – call off the dogs
+                            clearTimeout(timeout);
+                            //Let's monitor popover content instead
+                            container.one('mouseleave', function(){
+                                $.fn.popover.Constructor.prototype.leave.call(self, self);
+                            });
+                        })
+                    }
+                };
+
+                $('body').popover({
+                    selector: '[data-popover]',
+                    animation: true,
+                    trigger: "click hover" ,
+                    delay: {show: 1000, hide: 50},
+                    html: true, 
+                    animation:false,
+                    template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
+                    content: function () {
+                        // return $($(this).data('tooltip-content')).html();
+                        // console.log($(this).data('tooltip-url'));
+                        var uid = $(this).data('uid');
+                        var utype = $(this).data('utype');
+                        var div_id =  "tmp-id-" + $.now();
+                        return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);//$(this).data('tooltip-url'),div_id);
+                        // return $('#popover-content').html();
+                    },
+                    // placement: 'auto',
+                    placement: function (context, element) {
+
+                        var $this = $(element);
+                        var offset = $this.offset();
+                        var width = $this.width();
+                        var height = $this.height();
+
+                        var centerX = offset.left + width / 2;
+                        var centerY = offset.top + height / 2;
+                        var position = $(element).position();
+                        
+                        if(centerY > $(window).scrollTop())
+                        {
+                            scroll_top = $(window).scrollTop();
+                            scroll_center = centerY;
+                        }
+                        if($(window).scrollTop() > centerY)
+                        {
+                            scroll_top = centerY;
+                            scroll_center = $(window).scrollTop();
+                        }
+                        
+                        if (parseInt(scroll_center - scroll_top) < 340){
+                            return "bottom";
+                        }                        
+                        return "top";
+                    }
+                });
+                /*$('[data-toggle="popover"]').popover({
                     trigger: "manual" ,
                     html: true, 
                     animation:false,
@@ -15268,7 +15682,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                             $(_this).popover("hide");
                         }
                     }, 100);
-                });
+                });*/
             },500);
         }, function (error) {
             setTimeout(function(){

@@ -122,7 +122,7 @@
                         <?php
                         $popover = '';
                         if($usre_id){ 
-                            $popover = 'data-toggle="popover" data-uid="{{business.user_id}}" data-utype="2"';
+                            $popover = 'data-popover="true" data-uid="{{business.user_id}}" data-utype="2"';
                          } ?>
                         <div class="all-job-box search-business">
                             <div class="search-business-top">

@@ -312,9 +312,9 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                     all_html += '</div>';
                 }
                 // console.log(data);
-                setTimeout(function(){
+                /*setTimeout(function(){
+                },1000);*/
                     $('#'+div_id).html(all_html);
-                },1000);
             }
         });
         return '<div id="'+ div_id +'"><div class="user-tooltip" style="background: transparent;box-shadow: none;"><div class="fw text-center" style="padding-top:85px;min-height:200px"></div></div></div>';
@@ -355,9 +355,34 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                     });
                 }
 
-                $('[data-toggle="popover"]').popover({
+                // $('body').popover({ selector: '[data-popover]', trigger: 'click hover', placement: 'auto', delay: {show: 50, hide: 400}});
+                var originalLeave = $.fn.popover.Constructor.prototype.leave;
+                $.fn.popover.Constructor.prototype.leave = function(obj){
+                    var self = obj instanceof this.constructor ?
+                    obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type)
+                    var container, timeout;
+
+                    originalLeave.call(this, obj);
+
+                    if(obj.currentTarget) {
+                        container = $(obj.currentTarget).siblings('.popover')
+                        timeout = self.timeout;
+                        container.one('mouseenter', function(){
+                            //We entered the actual popover – call off the dogs
+                            clearTimeout(timeout);
+                            //Let's monitor popover content instead
+                            container.one('mouseleave', function(){
+                                $.fn.popover.Constructor.prototype.leave.call(self, self);
+                            });
+                        })
+                    }
+                };
+
+                $('body').popover({
+                    selector: '[data-popover]',
                     animation: true,
-                    trigger: "manual" ,
+                    trigger: "click hover" ,
+                    delay: {show: 1000, hide: 50},
                     html: true, 
                     animation:false,
                     template: '<div class="popover cus-tooltip" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>',
@@ -370,6 +395,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                         return $scope.details_in_popup(uid,$scope.user_id,utype,div_id);//$(this).data('tooltip-url'),div_id);
                         // return $('#popover-content').html();
                     },
+                    // placement: 'auto',
                     placement: function (context, element) {
 
                         var $this = $(element);
@@ -397,7 +423,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                         }                        
                         return "top";
                     }
-                }).on("mouseenter", function () {
+                });/*.on("mouseenter", function () {
                     var _this = this;
                     $(this).popover("show");
                     $(".popover").on("mouseleave", function () {
@@ -410,7 +436,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                             $(_this).popover("hide");
                         }
                     }, 100);
-                });
+                });*/
                 // $('video,audio').mediaelementplayer({'pauseOtherPlayers': true});
             },1000);
         }, function(error) {});
@@ -695,7 +721,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                     $("#cmt-btn-" + post_id).removeAttr("style");
                     $("#cmt-btn-" + post_id).removeAttr("disabled");
 
-                    $('[data-toggle="popover"]').popover({
+                    /*$('[data-toggle="popover"]').popover({
                         trigger: "manual" ,
                         html: true, 
                         animation:false,
@@ -748,7 +774,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                                 $(_this).popover("hide");
                             }
                         }, 100);
-                    });
+                    });*/
                 }, 1000);
             });
         } else {
@@ -768,7 +794,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             $scope.postData[index].post_comment_data = data.all_comment_data;
             $scope.postData[index].post_comment_count = data.post_comment_count;
             setTimeout(function(){
-                $('[data-toggle="popover"]').popover({
+                /*$('[data-toggle="popover"]').popover({
                     trigger: "manual" ,
                     html: true, 
                     animation:false,
@@ -821,7 +847,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                             $(_this).popover("hide");
                         }
                     }, 100);
-                });
+                });*/
             },500);
         });
     }
@@ -838,7 +864,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
             $scope.postData[index].post_comment_data = data.comment_data;
             $scope.postData[index].post_comment_count = data.post_comment_count;
             setTimeout(function(){
-                $('[data-toggle="popover"]').popover({
+                /*$('[data-toggle="popover"]').popover({
                     trigger: "manual" ,
                     html: true, 
                     animation:false,
@@ -891,7 +917,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                             $(_this).popover("hide");
                         }
                     }, 100);
-                });
+                });*/
             },500);
         });
     }
@@ -1129,7 +1155,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                 $scope.l_total_record = success.data.countlike;
                 $('#likeusermodal').modal('show');
                 setTimeout(function(){
-                    $('[data-toggle="popover"]').popover({
+                    /*$('[data-toggle="popover"]').popover({
                         trigger: "manual" ,
                         html: true, 
                         animation:false,
@@ -1182,7 +1208,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                                 $(_this).popover("hide");
                             }
                         }, 100);
-                    });
+                    });*/
                 },500);
             }
         });
@@ -1216,7 +1242,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                 $scope.l_total_record = success.data.countlike;
                 
                 setTimeout(function(){
-                    $('[data-toggle="popover"]').popover({
+                    /*$('[data-toggle="popover"]').popover({
                         trigger: "manual" ,
                         html: true, 
                         animation:false,
@@ -1269,7 +1295,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                                 $(_this).popover("hide");
                             }
                         }, 100);
-                    });
+                    });*/
                 },500);
                 is_processing = false;
             }
@@ -1385,7 +1411,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                         $('.editable_text').html('');
                     }
                     setTimeout(function(){
-                        $('[data-toggle="popover"]').popover({
+                        /*$('[data-toggle="popover"]').popover({
                             trigger: "manual" ,
                             html: true, 
                             animation:false,
@@ -1438,7 +1464,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                                     $(_this).popover("hide");
                                 }
                             }, 100);
-                        });
+                        });*/
                     },500);
                 }
             });

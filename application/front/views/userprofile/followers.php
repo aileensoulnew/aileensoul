@@ -15,20 +15,20 @@
                 
                 <div class="custom-user-box" ng-if="pagecntctData.pagedata.total_record != '0'" ng-repeat="follow in followersData">
                     <div class="post-img" ng-if="follow.user_image != '' && follow.user_image != null">
-                        <a href="<?php echo base_url();?>{{follow.user_slug}}" target="_self" data-toggle="popover" data-uid="{{follow.user_id}}" data-utype="1">
+                        <a href="<?php echo base_url();?>{{follow.user_slug}}" target="_self" data-popover="true" data-uid="{{follow.user_id}}" data-utype="1">
                             <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{follow.user_image}}">
                         </a>
                     </div>
 
                     <div class="post-img" ng-if="follow.user_image == '' || follow.user_image == null">
-                        <a href="<?php echo base_url();?>{{follow.user_slug}}" target="_self" data-toggle="popover" data-uid="{{follow.user_id}}" data-utype="1">
+                        <a href="<?php echo base_url();?>{{follow.user_slug}}" target="_self" data-popover="true" data-uid="{{follow.user_id}}" data-utype="1">
                             <img ng-if="follow.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                             <img ng-if="follow.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                         </a>
                     </div>
                     <div class="custom-user-detail">
                         <h4>
-                            <a href="<?php echo base_url();?>{{follow.user_slug}}" target="_self" ng-bind="(follow.first_name | limitTo:1 | uppercase) + (follow.first_name.substr(1) | lowercase) + ' ' + (follow.last_name | limitTo:1 | uppercase) + (follow.last_name.substr(1) | lowercase)" data-toggle="popover" data-uid="{{follow.user_id}}" data-utype="1"></a>
+                            <a href="<?php echo base_url();?>{{follow.user_slug}}" target="_self" ng-bind="(follow.first_name | limitTo:1 | uppercase) + (follow.first_name.substr(1) | lowercase) + ' ' + (follow.last_name | limitTo:1 | uppercase) + (follow.last_name.substr(1) | lowercase)" data-popover="true" data-uid="{{follow.user_id}}" data-utype="1"></a>
                         </h4>
                         <p ng-if="follow.title_name && !follow.degree_name">{{follow.title_name}}</p>
                         <p ng-if="follow.degree_name && !follow.title_name">{{follow.degree_name}}</p>
