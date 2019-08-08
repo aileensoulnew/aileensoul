@@ -97,10 +97,10 @@ echo $leftmenu;
                                         <i class="fa fa-fw fa-image"></i> 
                                         <a href="javascript:void(0);">Profile Image</a>
                                     </th>
-                                    <!-- <th>
+                                    <th>
                                         <i class="fa fa-fw fa-pencil-square"></i> 
-                                        <a href="javascript:void(0);">Status</a>
-                                    </th> -->
+                                        <a href="javascript:void(0);">Verify</a>
+                                    </th>
                                     <th>
                                         <i class="fa fa-fw fa-pencil"></i> 
                                         <a href="javascript:void(0);">Created Date</a>
@@ -147,17 +147,29 @@ echo $leftmenu;
                                                 } ?>
                                         </td>
                     
-                                        <!-- <td id="active<?php echo $user['user_id']?>">
+                                        <td id="verify-<?php echo $user['user_id']?>">
                                             <?php
-                                                /*if ($user['status'] == '1' && $user['is_delete'] == '0') 
-                                                {
-                                                    echo "Active";
+                                            if ($user['status'] == '1' && $user['is_delete'] == '0') 
+                                            {
+                                                if($user['user_verify'] == '0')
+                                                { ?>
+                                                    <button id="user_verify_mail_<?php echo $user['user_id']; ?>" class="btn btn-info btn-xs" onclick="send_verify_mail_user(<?php echo $user['user_id']; ?>);" title="Send Verify Email">
+                                                        <i class="fa fa-envelope"></i>
+                                                    </button>
+                                                    <button id="user_manual_verify_<?php echo $user['user_id']; ?>" class="btn btn-primary btn-xs" onclick="manual_verify_user(<?php echo $user['user_id']; ?>);" title="Manual Verify">
+                                                        <i class="fa fa-check "></i>
+                                                    </button>
+                                                    <?php
                                                 }
-                                                else if ($user['status'] == '0' && $user['is_delete'] == '1') 
+                                                else
                                                 {
-                                                    echo "Deleted";
-                                                }*/ ?>
-                                        </td> -->
+                                                    echo "Verifed";
+                                                }
+                                            }
+                                            else{
+                                                echo "Deleted";
+                                            } ?>
+                                        </td>
 
                                         <td><?php echo $user['created_date']; ?></td>
                                         <td id="action-<?php echo $user['user_id']; ?>">
@@ -260,69 +272,7 @@ echo $leftmenu;
     });
 </script>
 
-<script>
-    //deactive user Start
-   function deactive_user(user_id) 
-   {
-       $.fancybox.open('<div class="message"><h2>Are you Sure you want to  deactive this User?</h2><button id="activate" class="mesg_link btn btn1">OK</a><button data-fancybox-close="" class="btn btn1">Cancel</button></div>');
-        $('.message #activate').on('click', function () 
-        {
-            $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url() . "user_manage/deactive_user" ?>',
-                    data: 'user_id=' + user_id,
-                    success: function (response) 
-                    {    
-                        $.fancybox.close();
-                        $('#' + 'active' + user_id).html(response);
-                    }
-            });   
-        });
-    }
-    //deactive user End
-
-    //active user Start
-   function active_user(user_id) 
-   {
-    
-       $.fancybox.open('<div class="message"><h2>Are you Sure you want to  active this User?</h2><button id="deactivate" class="mesg_link btn btn1">OK</a><button data-fancybox-close="" class="btn btn1">Cancel</button></div>');
-
-        $('.message #deactivate').on('click', function () 
-        {
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url() . "user_manage/active_user" ?>',
-                data: 'user_id=' + user_id,
-                success: function (response) 
-                {        
-                    $.fancybox.close();  
-                    $('#' + 'active' + user_id).html(response);
-                }
-            });   
-        });
-    }
-    //active user End\
-
-    //Delete user Start
-   /*function delete_user(user_id) 
-   {
-
-       $.fancybox.open('<div class="message"><h2>Are you Sure you want to Delete this User?</h2><button id="delete" class="mesg_link btn btn1">OK</a><button data-fancybox-close="" class="btn btn1">Cancel</button></div>');
-
-        $('.message #delete').on('click', function () 
-        {
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url() . "user_manage/delete_user" ?>',
-                data: 'user_id=' + user_id,
-                cache: false,
-                success: function (response) 
-                {          
-                    window.location.reload();
-                }
-            });   
-        });
-    }*/
+<script type="text/javascript">    
     function delete_user(user_id) 
     {
       $("#deletemodal .mes .msg").html("Are you sure want to delete user ?");
@@ -339,6 +289,7 @@ echo $leftmenu;
             {
                 $("#user_delete_"+user_id).remove();
                 $("#action-"+user_id).html("Deleted");
+                $("#verify-"+user_id).html("Deleted");
                 // window.location.reload();
             }
         });
@@ -370,7 +321,34 @@ echo $leftmenu;
     });
     //Enable search button when user write something on textbox End
 
-// $(function() {
- 
-// });
+    //Verification Email
+    function send_verify_mail_user(user_id){
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url() . "user_manage/send_verify_mail_user" ?>',
+            data: 'user_id=' + user_id,
+            cache: false,
+            success: function (response) 
+            {                
+                window.location.reload();
+            }
+        });
+    }
+
+    //Manual Verification
+    function manual_verify_user(user_id){
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo base_url() . "user_manage/manual_verify_user" ?>',
+            data: 'user_id=' + user_id,
+            cache: false,
+            success: function (response) 
+            {
+                if(response == '1')
+                {
+                    $("#verify-"+user_id).html("Verifed");
+                }
+            }
+        });
+    }
 </script>

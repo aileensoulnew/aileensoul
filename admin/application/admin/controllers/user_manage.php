@@ -18,6 +18,7 @@ class User_manage extends CI_Controller
         }
 
         $this->load->model('searchelastic_model');
+        $this->load->model('email_model');
         // Get Site Information
         $this->data['title']       = 'User Management | Aileensoul';
         $this->data['module_name'] = 'User Management';
@@ -64,7 +65,7 @@ class User_manage extends CI_Controller
 
         $condition_array = array('user_login.email !=' => '');
 
-        $select_data = "user.user_id,user.first_name ,user.last_name ,user_login.email ,user.user_dob ,user.user_gender,user_info.user_image,user_login.status, user_login.is_delete, user.created_date, user.user_slug";
+        $select_data = "user.user_id,user.first_name ,user.last_name ,user_login.email ,user.user_dob ,user.user_verify ,user.user_gender, user_info.user_image, user_login.status, user_login.is_delete, user.created_date, user.user_slug";
 
         $this->data['users'] = $this->common->select_data_by_condition('user', $condition_array, $data = $select_data, $short_by = 'user_id', $order_by = 'desc', $limit, $offset, $join_str);
 
@@ -366,11 +367,11 @@ class User_manage extends CI_Controller
     public function edit($user_id)
     {
 
-        $data                = 'user_id,first_name ,last_name ,user_email ,user_dob ,user_gender,user_image';
-        $contition_array     = array('is_delete' => '0', 'user_id' => $user_id);
-        $user_data           = $this->data['users']           = $this->common->select_data_by_condition('user', $contition_array, $data, $sortby, $orderby, $limit, $offset, $join_str, $groupby);
-        $dob                 = $user_data[0]['user_dob'];
-        $dob_final           = explode('-', $dob);
+        $data = 'user_id,first_name ,last_name ,user_email ,user_dob ,user_gender,user_image';
+        $contition_array = array('is_delete' => '0', 'user_id' => $user_id);
+        $user_data = $this->data['users'] = $this->common->select_data_by_condition('user', $contition_array, $data, $sortby, $orderby, $limit, $offset, $join_str, $groupby);
+        $dob = $user_data[0]['user_dob'];
+        $dob_final = explode('-', $dob);
         $this->data['year']  = $dob_final[0];
         $this->data['month'] = $dob_final[1];
         $day = $this->data['day']= $dob_final[2];
@@ -468,7 +469,66 @@ class User_manage extends CI_Controller
             }
 
         }
+    }
 
-    }   
+    public function send_verify_mail_user()
+    {
+        $user_id = $this->input->post('user_id');
+        $sql = "SELECT u.first_name,u.last_name,ul.email FROM ailee_user u LEFT JOIN ailee_user_login ul ON ul.user_id = u.user_id WHERE u.user_id = '".$user_id."'";
+        $user_data = $this->db->query($sql)->row_array();
+        $first_name = $user_data['first_name'];
+        $last_name = $user_data['last_name'];
+        $to_email = $user_data['email'];
+        $email_html = "";
+        $email_html .= '<table cellpadding="0" cellspacing="0">
+                    <tr>                                
+                        <td class="reg-user-pad-cus">
+                            <div class="user-content">
+                                <p>
+                                    <b>Hi '.ucwords($first_name). ' ' . ucwords($last_name). ',</b> please verify your email address.
+                                </p>
+                                <span>'.date('j F').' at '.date('H:i').'</span>
+                            </div>
+                        </td>
+                        <td class="mail-btn">
+                            <a href="' . base_url() . 'registration/verify/' . $user_insert . '" class="btn">View</a>
+                        </td>
+                    </tr>
+                </table>';
 
+        $this->data['main_part'] = $email_html;
+        $this->data['unsubscribe_link'] = '';
+
+        $email_html = $this->load->view('email_template/all_mail',$this->data,TRUE);
+
+        $subject = ucwords($first_name).", Verify your Aileensoul Account";
+        $send_email = $this->email_model->send_email_template($subject, $email_html, $to_email,$unsubscribe);
+        if($send_email){
+            $this->session->set_flashdata('success', 'Verification mail send successfully.');
+            echo "1";
+        }
+        else
+        {
+            $this->session->set_flashdata('error', 'Please try again leter.');
+            echo "0";
+        }
+    }
+
+    public function manual_verify_user()
+    {
+        $user_id = $this->input->post('user_id');
+        $data = array(
+            'user_verify' => '1',
+            'verify_date' => date('Y-m-d h:i:s', time()),
+        );
+        $updatdata = $this->common->update_data($data, 'user', 'user_id', $user_id);
+        if($updatdata)
+        {
+            echo "1";
+        }
+        else
+        {
+            echo "0";
+        }
+    }
 }
