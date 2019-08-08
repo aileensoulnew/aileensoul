@@ -59,7 +59,7 @@ echo $leftmenu;
                                 </div>
                                 <?php echo form_close();
                                 if ($this->session->userdata('user_search_keyword')){ ?>
-                                    <a href="<?php echo base_url('user_manage/clear_search') ?>">Clear Search</a>
+                                    <a href="<?php echo base_url('user_manage/clear_search') ?>" style="padding: 4px 0;float: left;">Clear Search</a>
                                     <?php 
                                 } ?>
                             </div><!--input-group input-group-sm-->

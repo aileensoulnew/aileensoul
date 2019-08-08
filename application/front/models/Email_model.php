@@ -107,12 +107,12 @@ class Email_model extends CI_Model {
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
         
-        $mail->Username = 'notifications@staging.aileensoul.com';// 'notification.aileensoul@gmail.com';//Amazon SES SMTP user name.        
-        $mail->Password = 'QAZplm1092';// 'aileensoul@123';//Amazon SES SMTP password.
+        $mail->Username = 'notification@messages.aileensoul.com';// 'notification.aileensoul@gmail.com';//Amazon SES SMTP user name.        
+        $mail->Password = 'zxzxZX912912';// 'aileensoul@123';//Amazon SES SMTP password.
         $mail->Host = 'smtpdm-ap-southeast-1.aliyun.com';//'smtp.gmail.com';
-        $mail->setFrom('notifications@staging.aileensoul.com', 'Aileensoul Notification');
+        $mail->setFrom('notification@messages.aileensoul.com', 'Aileensoul Notification');
         //Set an alternative reply-to address
-        $mail->addReplyTo('notifications@staging.aileensoul.com', 'Aileensoul Notification');
+        $mail->addReplyTo('notification@messages.aileensoul.com', 'Aileensoul Notification');
         // $mail->addBCC('dm.aileensoul@gmail.com');
         //Set who the message is to be sent to
         $mail->addAddress($to_email);
@@ -230,12 +230,12 @@ class Email_model extends CI_Model {
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
         
-        $mail->Username = 'notifications@staging.aileensoul.com';// 'notification.aileensoul@gmail.com';//Amazon SES SMTP user name.        
-        $mail->Password = 'QAZplm1092';//Amazon SES SMTP password.
+        $mail->Username = 'notification@messages.aileensoul.com';// 'notification.aileensoul@gmail.com';//Amazon SES SMTP user name.        
+        $mail->Password = 'zxzxZX912912';//Amazon SES SMTP password.
         $mail->Host = 'smtpdm-ap-southeast-1.aliyun.com';// 'smtp.gmail.com';
-        $mail->setFrom('notifications@staging.aileensoul.com', 'Aileensoul Notification');
+        $mail->setFrom('notification@messages.aileensoul.com', 'Aileensoul Notification');
         //Set an alternative reply-to address
-        $mail->addReplyTo('notifications@staging.aileensoul.com', 'Aileensoul Notification');
+        $mail->addReplyTo('notification@messages.aileensoul.com', 'Aileensoul Notification');
         // $mail->addBCC('dm.aileensoul@gmail.com');
         //Set who the message is to be sent to
         $mail->addAddress($to_email);
@@ -316,12 +316,12 @@ class Email_model extends CI_Model {
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
         // $mail->SMTPDebug = 2;
-        $mail->Username = 'notifications@staging.aileensoul.com';// 'notification.aileensoul@gmail.com';//'apikey' //Amazon SES SMTP user name.        
-        $mail->Password = 'QAZplm1092';//'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'; //Amazon SES SMTP password.
+        $mail->Username = 'notification@messages.aileensoul.com';// 'notification.aileensoul@gmail.com';//'apikey' //Amazon SES SMTP user name.        
+        $mail->Password = 'zxzxZX912912';//'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'; //Amazon SES SMTP password.
         $mail->Host = 'smtpdm-ap-southeast-1.aliyun.com';//'smtp.sendgrid.net';// 'smtp.gmail.com';
-        $mail->setFrom('notifications@staging.aileensoul.com', 'Aileensoul Notification');
+        $mail->setFrom('notification@messages.aileensoul.com', 'Aileensoul Notification');
         //Set an alternative reply-to address
-        $mail->addReplyTo('notifications@staging.aileensoul.com', 'Aileensoul Notification');
+        $mail->addReplyTo('notification@messages.aileensoul.com', 'Aileensoul Notification');
         // $mail->addBCC('dm.aileensoul@gmail.com');
         //Set who the message is to be sent to
         $mail->addAddress($to_email);
@@ -480,12 +480,12 @@ class Email_model extends CI_Model {
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
         // $mail->SMTPDebug = 2;
-        $mail->Username = 'notifications@staging.aileensoul.com';// 'pratik.aileensoul@gmail.com';// 'notification.aileensoul@gmail.com';//'apikey' //Amazon SES SMTP user name.        
-        $mail->Password = 'QAZplm1092'; //'pratik@aileensoul';// 'aileensoul@123';//'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'; //Amazon SES SMTP password.
+        $mail->Username = 'notification@messages.aileensoul.com';// 'pratik.aileensoul@gmail.com';// 'notification.aileensoul@gmail.com';//'apikey' //Amazon SES SMTP user name.        
+        $mail->Password = 'zxzxZX912912'; //'pratik@aileensoul';// 'aileensoul@123';//'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'; //Amazon SES SMTP password.
         $mail->Host = 'smtpdm-ap-southeast-1.aliyun.com';//'smtp.gmail.com';//'smtp.sendgrid.net';// 'smtp.gmail.com';
-        $mail->setFrom('notifications@staging.aileensoul.com', 'Aileensoul Notification');
+        $mail->setFrom('notification@messages.aileensoul.com', 'Aileensoul Notification');
         //Set an alternative reply-to address
-        $mail->addReplyTo('notifications@staging.aileensoul.com', 'Aileensoul Notification');
+        $mail->addReplyTo('notification@messages.aileensoul.com', 'Aileensoul Notification');
         // $mail->addBCC('dm.aileensoul@gmail.com');
         //Set who the message is to be sent to
         $mail->addAddress($to_email);
@@ -526,12 +526,12 @@ class Email_model extends CI_Model {
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
         // $mail->SMTPDebug = 2;
-        $mail->Username = 'notifications@staging.aileensoul.com';// 'notification.aileensoul@gmail.com';//'apikey' //Amazon SES SMTP user name.        
-        $mail->Password = 'QAZplm1092';// 'aileensoul@123';//'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'; //Amazon SES SMTP password.
+        $mail->Username = 'notification@messages.aileensoul.com';// 'notification.aileensoul@gmail.com';//'apikey' //Amazon SES SMTP user name.        
+        $mail->Password = 'zxzxZX912912';// 'aileensoul@123';//'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'; //Amazon SES SMTP password.
         $mail->Host = 'smtpdm-ap-southeast-1.aliyun.com';//'smtp.sendgrid.net';// 'smtp.gmail.com';
-        $mail->setFrom('notifications@staging.aileensoul.com', 'Aileensoul Notification');
+        $mail->setFrom('notification@messages.aileensoul.com', 'Aileensoul Notification');
         //Set an alternative reply-to address
-        $mail->addReplyTo('notifications@staging.aileensoul.com', 'Aileensoul Notification');
+        $mail->addReplyTo('notification@messages.aileensoul.com', 'Aileensoul Notification');
         // $mail->addBCC('dm.aileensoul@gmail.com');
         //Set who the message is to be sent to
         $mail->addAddress($to_email);

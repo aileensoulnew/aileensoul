@@ -3,7 +3,7 @@
     <div class="all-detail-custom">
         <div class="custom-user-list">
 			
-			<div class="dtl-add-mob">
+			<div class="detail-cus dtl-add-mob">
 				<div class="right-add-box">
 					<div class="dtl-box p10 dtl-adv">
                         <?php
@@ -20,7 +20,7 @@
                 </div>
 				
 				<!-- 02  advertize  -->
-                <div class="gallery-item tab-add">
+                <!-- <div class="gallery-item tab-add">
 					<div class="right-add-box">
 						<div class="dtl-box p10 dtl-adv">
                             <?php
@@ -28,7 +28,7 @@
                             $this->load->view('ads_box',$data); ?>
 						</div> 
 					</div>
-                </div>
+                </div> -->
 				
                 <!-- 01 Profile Overview Start-->
                 <div class="gallery-item">

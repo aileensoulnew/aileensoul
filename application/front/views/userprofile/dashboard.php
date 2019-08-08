@@ -423,10 +423,9 @@ else
     				</div>
     			</div>
     			
-    			<div class="tab-add">
-
-    				<?php $this->load->view('infeed_add'); ?>
-    			</div>
+    			<!-- <div class="tab-add">
+    				<?php //$this->load->view('infeed_add'); ?>
+    			</div> -->
     			<div id="move-middle">
     			</div>
     			<div id="move-middle1">
