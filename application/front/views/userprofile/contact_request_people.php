@@ -1,8 +1,8 @@
-<div class="tab-add-991">
+<!-- <div class="tab-add-991">
 	<?php //$this->load->view('banner_add'); ?>
     <div class="request-noti-move">
     </div>
-</div>
+</div> -->
 <div class="custom-user-list">
     <div class="list-box-custom" ng-if="pending_contact_request_data.length > '0'">
         <h3 class="mob-border-top-1">Pending Contact Request</h3>

@@ -41,9 +41,9 @@
 <div class="main-section">
      <div class="container mobp0">
           <div class="custom-user-list">
-               <div class="tab-add-991">
-                    <?php $this->load->view('banner_add'); ?>
-               </div>
+               <!-- <div class="tab-add-991">
+                    <?php //$this->load->view('banner_add'); ?>
+               </div> -->
                <div class="common-form">
                     <div class="job-saved-box">
                          <h3>View Notification</h3>
@@ -63,9 +63,9 @@
                          </div>
                     </div>
                </div>
-               <div class="banner-add">
-                    <?php $this->load->view('banner_add'); ?>
-               </div>
+               <!-- <div class="banner-add">
+                    <?php //$this->load->view('banner_add'); ?>
+               </div> -->
           </div>
           <div class="right-add">
                <?php $this->load->view('right_add_box'); ?>
