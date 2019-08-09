@@ -88,11 +88,11 @@ header('Cache-Control: public, max-age=30');
 					</div>
 				</div>
 			</div>
-			<div class="container">
+			<!-- <div class="container">
 				<div class="banner-add">
-					<?php $this->load->view('banner_add'); ?>
+					<?php //$this->load->view('banner_add'); ?>
 				</div>
-			</div>
+			</div> -->
 
             <div class="container">
                 <div class="add-content">
@@ -164,11 +164,11 @@ header('Cache-Control: public, max-age=30');
 				<p class="text-center more-support">For more support <a href="mailto:inquiry@aileensoul.com">inquiry@aileensoul.com</a>
 				<p class="text-center more-support">Call : <a href="tel:9879907399">+91 9879907399</a><p>
 			</div>
-			<div class="container">
+			<!-- <div class="container">
 				<div class="banner-add">
-					<?php $this->load->view('banner_add'); ?>
+					<?php //$this->load->view('banner_add'); ?>
 				</div>
-			</div>
+			</div> -->
         </div>
         <div class="modal fade message-box biderror" id="bidmodal" role="dialog"  >
             <div class="modal-dialog modal-lm" >

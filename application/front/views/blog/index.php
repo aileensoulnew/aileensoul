@@ -283,9 +283,9 @@ if($category_page == 1)
                 <?php } ?>
                 <div class="container">
                     <div class="custom-user-list">
-						<div class="tab-add">
-							<?php $this->load->view('banner_add'); ?>
-						</div>
+						<!-- <div class="tab-add">
+							<?php //$this->load->view('banner_add'); ?>
+						</div> -->
 						<div class="clearfix"></div>
                         <?php if($category_name != ""){ ?>
                             <h3 style="border: 1px solid #d9d9d9;color: #5c5c5c;text-align: center;margin-bottom: 20px; border-radius:4px;"><?php
@@ -352,9 +352,9 @@ if($category_page == 1)
                         <div class="fw pt20 text-center">
                             <?php echo $links; ?>
                         </div> 
-						<div class="banner-add">
-							<?php $this->load->view('banner_add'); ?>
-						</div>
+						<!-- <div class="banner-add">
+							<?php //$this->load->view('banner_add'); ?>
+						</div> -->
 
                         <!-- <ul>
                           <li ng-repeat="todo in filteredTodos">{{todo.text}}</li>

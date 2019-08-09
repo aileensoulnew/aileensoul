@@ -80,11 +80,11 @@
 					</div>
 				</div>
 			</div>
-			<div class="container">
+			<!-- <div class="container">
 				<div class="banner-add">
-					<?php $this->load->view('banner_add'); ?>
+					<?php //$this->load->view('banner_add'); ?>
 				</div>
-			</div>
+			</div> -->
 			<div class="container">
 				<div class="report-middle-box">
 					<p class="text-center">We believe in providing value to each of our members. If you found any issues like spam, abusive, fake news or account, phishing, malware that violates our 
@@ -122,11 +122,11 @@
 					</form>
 				</div>
 			</div>
-			<div class="container">
+			<!-- <div class="container">
 				<div class="banner-add">
-					<?php $this->load->view('banner_add'); ?>
+					<?php //$this->load->view('banner_add'); ?>
 				</div>
-			</div>
+			</div> -->
 			<?php $this->load->view('mobile_side_slide'); ?>
 			<?php echo $login_footer ?>
 		</div>
