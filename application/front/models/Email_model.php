@@ -149,9 +149,6 @@ class Email_model extends CI_Model {
         //echo "<pre>"; print_r($to_email); die();
         //Loading E-mail Class
         $this->load->library('email');
-
-        $emailsetting = $this->common->select_data_by_condition('email_settings', array(), '*');
-        //echo '<pre>';        print_r($emailsetting); die();
         $mail_html = '<!DOCTYPE html>
                     <html>
                     <head>

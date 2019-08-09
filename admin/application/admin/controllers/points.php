@@ -69,7 +69,7 @@ class Points extends CI_Controller
                 $this->session->set_flashdata('success', 'New Points Added successfully');
                 redirect('points');
             } else {
-                $this->session->flashdata('error', 'Sorry!! Your data not inserted');
+                $this->session->set_flashdata('error', 'Sorry!! Your data not inserted');
                 redirect('points/add_points');
             }
         }
@@ -87,7 +87,7 @@ class Points extends CI_Controller
                 $this->session->set_flashdata('success', 'Points updated successfully');
                  redirect('points');
             } else {
-                $this->session->flashdata('error', 'Sorry!! Your data not updated');
+                $this->session->set_flashdata('error', 'Sorry!! Your data not updated');
                 redirect('points/edit_points/'.$id);
             }
         }

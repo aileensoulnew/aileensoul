@@ -212,6 +212,7 @@
 
                  <!--<li><a href="<?php //echo base_url('blog_tag/blog_list'); ?>"><i class="fa fa-tag" aria-hidden="true"></i></i>Tag List</a></li> -->
                     <li><a href="<?php echo base_url('email/compose/job'); ?>"><i class="fa fa-envelope" aria-hidden="true"></i>Compose Mail</a></li>
+                    <li><a href="<?php echo base_url('email/setting'); ?>"><i class="fa fa-envelope" aria-hidden="true"></i>Mail Setting</a></li>
                 </ul>
             </li>
            <!--End Blog-->
