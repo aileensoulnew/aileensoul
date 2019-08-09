@@ -587,6 +587,7 @@ class Userprofile_model extends CI_Model {
 
     public function questionData($question_id = '', $user_id = '') {
         $getDeleteUserPost = $this->deletePostUser($user_id);
+        $login_user_id = $this->session->userdata('aileenuser');
 
         $result_array = array();
         $this->db->select("up.id,up.user_id,up.post_for,up.created_date,up.post_id,,up.user_type")->from("user_post up");//UNIX_TIMESTAMP(STR_TO_DATE(up.created_date, '%Y-%m-%d %H:%i:%s')) as created_date
@@ -667,22 +668,21 @@ class Userprofile_model extends CI_Model {
             $post_file_data = $query->result_array();
             $result_array[$key]['post_file_data'] = $post_file_data;
 
-            $result_array[$key]['post_monetize'] = $this->common->is_post_monetize($value['id'],$user_id);
+            $result_array[$key]['post_monetize'] = $this->common->is_post_monetize($value['id'],$login_user_id);
 
             $result_array[$key]['user_like_list'] = $this->get_user_like_list($value['id']);
             $post_like_data = $this->postLikeData($value['id']);
             $post_like_count = $this->likepost_count($value['id']);
             $result_array[$key]['post_like_count'] = $post_like_count;
-            $result_array[$key]['is_userlikePost'] = $this->is_userlikePost($user_id, $value['id']);
-            $result_array[$key]['is_user_saved_post'] = $this->is_user_saved_post($user_id, $value['id']);
+            $result_array[$key]['is_userlikePost'] = $this->is_userlikePost($login_user_id, $value['id']);
+            $result_array[$key]['is_user_saved_post'] = $this->is_user_saved_post($login_user_id, $value['id']);
             if ($post_like_count > 1) {
                 $result_array[$key]['post_like_data'] = $post_like_data['username'] . ' and ' . ($post_like_count - 1) . ' other';
             } elseif ($post_like_count == 1) {
                 $result_array[$key]['post_like_data'] = $post_like_data['username'];
             }
             $result_array[$key]['post_comment_count'] = $this->user_post_model->postCommentCount($value['id']);
-            $postCommentData = $this->user_post_model->postCommentData($value['id']);
-            
+            $postCommentData = $this->user_post_model->postCommentData($value['id'],$login_user_id);
 
             $result_array[$key]['post_comment_data'] = $postCommentData;
 
