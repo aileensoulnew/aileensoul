@@ -1,11 +1,11 @@
 <div class="pt20 fw">
     <div class="container mobp0 following-page">
         <div class="custom-user-list">
-    		<div class="tab-add-991 ads">
+    		<!-- <div class="tab-add-991 ads">
                 <?php
-                $data['data'] = 'ads';
-                $this->load->view('ads_box',$data); ?>			
-    		</div>
+                // $data['data'] = 'ads';
+                // $this->load->view('ads_box',$data); ?>			
+    		</div> -->
             <ul class="nav nav-tabs" role="tablist">
                 <li class="active"><a href="#">People</a></li>
                 <li><a href="<?php echo base_url(); ?>{{user_slug}}/hashtags" ng-click='makeActive("hashtags")'>Hashtags</a></li>
@@ -180,11 +180,11 @@
                     </div>
                 </div>
             </div>
-    		<div class="tab-add ads">
+    		<!-- <div class="tab-add ads">
                 <?php
-                $data['data'] = 'ads';
-                $this->load->view('ads_box',$data); ?>
-    		</div>
+                // $data['data'] = 'ads';
+                // $this->load->view('ads_box',$data); ?>
+    		</div> -->
         </div>
         <div class="right-add">
             <?php $this->load->view('right_add_box'); ?>

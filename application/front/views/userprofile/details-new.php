@@ -24,8 +24,8 @@
 					<div class="right-add-box">
 						<div class="dtl-box p10 dtl-adv">
                             <?php
-                            $data['data'] = 'dtl-adv';
-                            $this->load->view('ads_box',$data); ?>
+                            //$data['data'] = 'dtl-adv';
+                            //$this->load->view('ads_box',$data); ?>
 						</div> 
 					</div>
                 </div> -->

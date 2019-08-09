@@ -327,6 +327,11 @@
         font-size: 16px !important;
     }
 }
+@media screen and (max-width: 767px){
+    .detail-cus.dtl-add-mob{
+        display: none;
+    }
+}
 @media screen and (max-width: 479px) {
     .hash-header-mob .btn-new-1 {
         line-height: 2;

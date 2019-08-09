@@ -1,11 +1,11 @@
 <div class="pt20 fw">
 <div class="container mobp0 contacts-page">
     <div class="custom-user-list">
-		<div class="tab-add-991 ads">
+		<!-- <div class="tab-add-991 ads">
             <?php
-            $data['data'] = 'ads';
-            $this->load->view('ads_box',$data); ?>
-		</div>
+            // $data['data'] = 'ads';
+            // $this->load->view('ads_box',$data); ?>
+		</div> -->
         <div class="list-box-custom">
             <h3 class="mob-border-top-1">Contacts </h3>
             <div class="list-cus fw mobp0" id="nocontact">
@@ -70,11 +70,11 @@
                 </div>
             </div>
         </div>
-		<div class="tab-add ads">
+		<!-- <div class="tab-add ads">
             <?php
-            $data['data'] = 'ads';
-            $this->load->view('ads_box',$data); ?>
-		</div>
+            // $data['data'] = 'ads';
+            // $this->load->view('ads_box',$data); ?>
+		</div> -->
     </div>
     <div class="right-add">
         <?php $this->load->view('right_add_box'); ?>

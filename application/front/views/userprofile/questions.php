@@ -2,11 +2,11 @@
 <div class="pt20 fw">
 <div class="container mobp0">
     <div class="custom-user-list question-page">
-		<div class="tab-add-991 ads">
+		<!-- <div class="tab-add-991 ads">
             <?php
-            $data['data'] = 'ads';
-            $this->load->view('ads_box',$data); ?>
-		</div>
+            // $data['data'] = 'ads';
+            // $this->load->view('ads_box',$data); ?>
+		</div> -->
         <div class="list-box-custom">
             <h3 class="border-none mob-border-top-1">Questions</h3>
             <div class="custom-user-box no-data-available" ng-if="questionData.length == 0 ">
@@ -147,11 +147,11 @@
                 </div>
             </div>
         </div>
-		<div class="tab-add ads">
+		<!-- <div class="tab-add ads">
             <?php
-            $data['data'] = 'ads';
-            $this->load->view('ads_box',$data); ?>
-		</div>
+            // $data['data'] = 'ads';
+            // $this->load->view('ads_box',$data); ?>
+		</div> -->
         <div class="fw post_loader loadmore" style="text-align:center; display: none;"><img ng-src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) . '?ver=' . time() ?>" alt="Loader" /></div>
     </div>
     <div class="right-add">
