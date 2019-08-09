@@ -30,20 +30,20 @@ $user_id = $this->session->userdata('aileenuser'); ?>
         </div>
         <div class="middle-part">
             
-            <div class="bs-example">
+            <!-- <div class="bs-example">
                 <div class="progress progress-striped" id="progress_div" style="display: none;">
                     <div class="progress-bar" style="width: 0%;">
                         <span class="sr-only">0%</span>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <?php
             $all_c_no_login = "";
             if($user_id == ""){
                 $all_c_no_login = "hide";
             }
             ?>
-			<div class="mob-progressbar fw <?php echo $all_c_no_login; ?>" ng-if="live_slug == user_slug">
+			<!-- <div class="mob-progressbar fw <?php echo $all_c_no_login; ?>" ng-if="live_slug == user_slug">
 				<p>Complete your profile to get connected with more people.</p>
 				<p class="mob-edit-pro">
 					<a ng-href="<?php echo base_url() ?>{{user_slug}}/details" target="_self"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a>
@@ -53,12 +53,11 @@ $user_id = $this->session->userdata('aileenuser'); ?>
 						<span class="skill"><i class="val">0%</i></span>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			
-			<div class="tab-add">
-
-				<?php $this->load->view('infeed_add'); ?>
-			</div>
+			<!-- <div class="tab-add">
+				<?php //$this->load->view('infeed_add'); ?>
+			</div> -->
 			<div id="move-middle">
 			</div>
 			<div id="move-middle1">
