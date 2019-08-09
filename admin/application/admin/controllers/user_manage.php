@@ -531,4 +531,72 @@ class User_manage extends CI_Controller
             echo "0";
         }
     }
+
+    public function visitor()
+    {
+        // This is userd for pagination offset and limoi start
+        $this->paging['per_page'] = 20;
+        $limit = $this->paging['per_page'];
+        if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
+
+            $offset = ($this->uri->segment(5) != '') ? $this->uri->segment(5) : 0;
+
+            $sortby = $this->uri->segment(3);
+
+            $orderby = $this->uri->segment(4);
+
+        } else {
+
+            $offset = ($this->uri->segment(3) != '') ? $this->uri->segment(3) : 0;
+
+            $sortby = 'user_id';
+
+            $orderby = 'desc';
+
+        }
+
+        $this->data['offset'] = $offset;  
+
+        
+        $sql = "SELECT COUNT(*) AS visitor,DATE_FORMAT(insert_date,'%Y-%m-%d') AS visit_date FROM ailee_user_visit GROUP BY DATE_FORMAT(insert_date,'%Y-%m-%d') ORDER BY visit_date DESC LIMIT $offset,$limit";
+        $this->data['site_visitor'] =  $this->db->query($sql)->result_array();
+
+        $tot_sql = "SELECT COUNT(*) AS visitor,DATE_FORMAT(insert_date,'%Y-%m-%d') AS visit_date FROM ailee_user_visit GROUP BY DATE_FORMAT(insert_date,'%Y-%m-%d') ORDER BY visit_date DESC";
+        $total_rows =  $this->db->query($tot_sql)->result_array();
+        // This is userd for pagination offset and limoi End
+
+        //echo "<pre>";print_r($this->data['users'] );die();
+
+        //This if and else use for asc and desc while click on any field start
+        if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
+
+            $this->paging['base_url'] = site_url("user_manage/visitor/" . $short_by . "/" . $order_by);
+
+        } else {
+
+            $this->paging['base_url'] = site_url("user_manage/visitor/");
+
+        }
+
+        if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
+
+            $this->paging['uri_segment'] = 5;
+
+        } else {
+
+            $this->paging['uri_segment'] = 3;
+
+        }
+        //This if and else use for asc and desc while click on any field End
+
+        $contition_array = array('is_delete =' => '0');
+        $this->paging['total_rows'] = count($total_rows);
+
+        $this->data['total_rows'] = $this->paging['total_rows'];
+
+        $this->data['limit'] = $limit;
+
+        $this->pagination->initialize($this->paging);
+        $this->load->view('users/user_visit', $this->data);
+    }
 }

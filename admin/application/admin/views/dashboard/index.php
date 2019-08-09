@@ -87,7 +87,7 @@ echo $leftmenu;
                     <div class="icon">
                         <i class="fa fa-users"></i>
                     </div>                    
-                    <a href="javascript:void(0);" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?php echo base_url('user_manage/visitor') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>            
              <!-- end User Visits List box -->

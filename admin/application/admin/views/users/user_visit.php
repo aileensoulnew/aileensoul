@@ -19,10 +19,10 @@ echo $leftmenu;
                     Home
                 </a>
             </li>
-            <li class="active">ALL User</li>
+            <li class="active">User Visit</li>
         </ol>
         <!-- <div class="fr">
-                         <button name="Add" class="btn bg-orange btn-flat margin" ><i class="fa fa-fw fa-user-plus" aria-hidden="true"></i> Add User</button>
+            <button name="Add" class="btn bg-orange btn-flat margin" ><i class="fa fa-fw fa-user-plus" aria-hidden="true"></i> Add User</button>
         </div> -->
     </section>
 
@@ -49,21 +49,7 @@ echo $leftmenu;
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">ALL User</h3>
-                        <div class="box-tools">
-                           <?php echo form_open('user_manage/search', array('method' => 'post', 'id' => 'search_frm', 'class' => 'form-inline','autocomplete' => 'off')); ?>
-                            <div class="input-group input-group-sm" >
-                                <input type="text" class="form-control input-sm" value="<?php echo $search_keyword; ?>" placeholder="Search" name="search_keyword" id="search_keyword">
-                                <div class="input-group-btn">
-                                    <button type="submit" class="btn btn-default" id="search_btn"><i class="fa fa-search"></i></button>
-                                </div>
-                                <?php echo form_close();
-                                if ($this->session->userdata('user_search_keyword')){ ?>
-                                    <a href="<?php echo base_url('user_manage/clear_search') ?>" style="padding: 4px 0;float: left;">Clear Search</a>
-                                    <?php 
-                                } ?>
-                            </div><!--input-group input-group-sm-->
-                        </div><!--box-tools-->
+                        <h3 class="box-title">User Visit</h3>                        
                     </div><!-- box-header -->
 
                     <div class="box-body table-responsive no-padding">
@@ -79,121 +65,32 @@ echo $leftmenu;
                                     <th>
                                         <i class="fa fa-bullhorn"></i>
                                         <a href="javascript:void(0);">ID.</a>
+                                    </th>                                    
+                                    <th>
+                                        <i class="fa fa-clock-o"></i>
+                                        <a href="javascript:void(0);">Visit Date</a>
                                     </th>
                                     <th>
-                                        <i class="fa fa-user"></i>
-                                        <a href="<?php echo ( $this->uri->segment(3) == 'first_name' && $this->uri->segment(4) == 'ASC') ? site_url($this->uri->segment(1) . '/' . $segment2 . '/first_name/DESC/' . $offset) : site_url($this->uri->segment(1) . '/' . $segment2 . '/first_name/ASC/' . $offset); ?>"> Name</a>
-                                        <?php echo ( $this->uri->segment(3) == 'first_name' && $this->uri->segment(4) == 'ASC' ) ? '<i class="glyphicon glyphicon-arrow-up">' : (( $this->uri->segment(3) == 'first_name' && $this->uri->segment(4) == 'DESC' ) ? '<i class="glyphicon glyphicon-arrow-down">' : '' ); ?>
-                                    </th>
-                                    <th>
-                                        <i class="fa fa-envelope"></i> 
-                                        <a href="javascript:void(0);">Email</a>
-                                    </th>
-                                    <th>
-                                        <i class="fa fa-fw fa-venus"></i> 
-                                        <a href="javascript:void(0);">Gender</a>
-                                    </th>
-                                    <th>
-                                        <i class="fa fa-fw fa-image"></i> 
-                                        <a href="javascript:void(0);">Profile Image</a>
-                                    </th>
-                                    <th>
-                                        <i class="fa fa-fw fa-pencil-square"></i> 
-                                        <a href="javascript:void(0);">Verify</a>
-                                    </th>
-                                    <th>
-                                        <i class="fa fa-fw fa-pencil"></i> 
-                                        <a href="javascript:void(0);">Created Date</a>
-                                    </th>
-                                    <th>
-                                        <i class=" fa fa-edit"></i> 
-                                        <a href="javascript:void(0);">Action</a>
+                                        <i class="fa fa-fw fa-user-md"></i> 
+                                        <a href="javascript:void(0);">Visitor</a>
                                     </th>
                                 </tr>
                                 <?php
                                 if ($total_rows != 0) {
                                     $i = $offset + 1; 
-                                    foreach ($users as $user) { ?>
-                                        <tr id="delete<?php echo $user['user_id']?>">
+                                    foreach ($site_visitor as $_site_visitor) { ?>
+                                        <tr>
                                             <td><?php echo $i++; ?></td>
-                                            <td><a href="<?php echo SITEURL.$user['user_slug'] ?>" target="_blank"><?php echo ucfirst($user['first_name'].' '.$user['last_name']);  ?></a></td>
-                                            <td><?php echo $user['email']; ?></td>
-                                            <td><?php echo $user['user_gender']; 
-                                                    if($user['user_gender']=="F")
-                                                    { ?>
-                                                            <i class="fa fa-fw fa-female"></i>
-                                                    <?php
-                                                    }
-                                                    if($user['user_gender']=="M"){ ?>
-                                                        <i class="fa fa-fw fa-male"></i>
-                                                        <?php
-                                                    }?>
-                                            </td>
-                                            <td><?php
-                                                if($user['user_image']) 
-                                                { ?>
-                                                    <img src="<?php echo SITEURL . $this->config->item('user_thumb_upload_path') . $user['user_image']; ?>" alt=""  style="height: 50px; width: 50px;"><?php 
-                                                }else{ 
-                                                    if($user['user_gender']=="F")
-                                                    { ?>
-                                                        <img alt="" style="height: 50px; width: 50px;" class="img-circle" src="<?php echo SITEURL.'assets/img/female-user.jpg'; ?>" alt="" />
-                                                    <?php
-                                                    }
-                                                    if($user['user_gender']=="M")
-                                                    { ?>
-                                                        <img alt="" style="height: 50px; width: 50px;" class="img-circle" src="<?php echo SITEURL.'assets/img/man-user.jpg'; ?>" alt="" />
-                                                    <?php
-                                                    }
-                                                } ?>
-                                        </td>
-                    
-                                        <td id="verify-<?php echo $user['user_id']?>">
-                                            <?php
-                                            if ($user['status'] == '1' && $user['is_delete'] == '0') 
-                                            {
-                                                if($user['user_verify'] == '0')
-                                                { ?>
-                                                    <button id="user_verify_mail_<?php echo $user['user_id']; ?>" class="btn btn-info btn-xs" onclick="send_verify_mail_user(<?php echo $user['user_id']; ?>);" title="Send Verify Email">
-                                                        <i class="fa fa-envelope"></i>
-                                                    </button>
-                                                    <button id="user_manual_verify_<?php echo $user['user_id']; ?>" class="btn btn-primary btn-xs" onclick="manual_verify_user(<?php echo $user['user_id']; ?>);" title="Manual Verify">
-                                                        <i class="fa fa-check "></i>
-                                                    </button>
-                                                    <?php
-                                                }
-                                                else
-                                                {
-                                                    echo "Verifed";
-                                                }
-                                            }
-                                            else{
-                                                echo "Deleted";
-                                            } ?>
-                                        </td>
-
-                                        <td><?php echo $user['created_date']; ?></td>
-                                        <td id="action-<?php echo $user['user_id']; ?>">
-                                            <?php
-                                                if ($user['status'] == '1' && $user['is_delete'] == '0') 
-                                                { ?>
-                                                    <button id="user_delete_<?php echo $user['user_id']; ?>" class="btn btn-danger btn-xs" onclick="delete_user(<?php echo $user['user_id']; ?>);">
-                                                        <i class="fa fa-trash-o"></i>
-                                                    </button>
-                                                <?php
-                                                }
-                                                else{
-                                                    echo "Deleted";
-                                                } ?>
-                                                
-                                        </td>
-                                    </tr>
+                                            <td><?php echo $_site_visitor['visit_date']; ?></td>
+                                            <td><?php echo $_site_visitor['visitor']; ?></td>
+                                        </tr>
                                     <?php
                                     }//for loop close
                                 }//if close
                                 else 
                                 { ?>
                                     <tr>
-                                        <td align="center" colspan="11"> Oops! No Data Found</td>
+                                        <td align="center" colspan="3"> Oops! No Data Found</td>
                                         </tr> <?php
                                 } ?>
                             </tbody>
