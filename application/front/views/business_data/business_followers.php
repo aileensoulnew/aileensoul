@@ -33,9 +33,9 @@
                         <div class="bus-inner">
                             <div class="custom-user-list bus-art-cus-left">
                                 <div class="common-form">
-									<div class="tab-add-991">
-										<?php $this->load->view('banner_add'); ?>
-									</div>
+									<!-- <div class="tab-add-991">
+										<?php //$this->load->view('banner_add'); ?>
+									</div> -->
                                     <div class="job-saved-box bus-list-cus">
                                         <h3> Followers</h3>
                                         <div class="contact-frnd-post">
@@ -43,9 +43,9 @@
                                             <div class="col-md-1">
                                             </div>
                                         </div>
-										<div class="banner-add">
-											<?php $this->load->view('banner_add'); ?>
-										</div>
+										<!-- <div class="banner-add">
+											<?php //$this->load->view('banner_add'); ?>
+										</div> -->
                                         <div class="fw" id="loader" style="text-align:center;"><img src="<?php echo base_url('assets/images/loader.gif?ver=' . time()) ?>" alt="Loader"/></div>
                                     </div>
 									

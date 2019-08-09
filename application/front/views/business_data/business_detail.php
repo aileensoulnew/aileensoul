@@ -30,15 +30,15 @@
                 <div class="container mob-plr0 pt20">
                     <div class="all-detail-custom">
                         <div class="custom-user-list">
-							<div class="dtl-add-mob">
+							<!-- <div class="detail-cus dtl-add-mob">
 								<div class="right-add-box">
 									<div class="dtl-box p10 dtl-adv">
 										<?php
-							            $data['data'] = 'dtl-adv';
-							            $this->load->view('ads_box',$data); ?>
+							            // $data['data'] = 'dtl-adv';
+							            // $this->load->view('ads_box',$data); ?>
 									</div> 
 								</div>
-							</div>
+							</div> -->
 							<div class="edit-custom-move">
 								
 							</div>
@@ -49,15 +49,15 @@
 						</div>
 						
 						<!-- 03 blank div  -->
-						<div class="gallery-item tab-add">
+						<!-- <div class="gallery-item tab-add">
 							<div class="right-add-box">
 								<div class="dtl-box p10 dtl-adv">
 									<?php
-									$data['data'] = 'dtl-adv';
-									$this->load->view('ads_box',$data); ?>
+									// $data['data'] = 'dtl-adv';
+									// $this->load->view('ads_box',$data); ?>
 								</div> 
 							</div>
-						</div>
+						</div> -->
 					
 						<!-- 01 Basic information  -->
 						<div class="gallery-item">

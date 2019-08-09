@@ -376,9 +376,9 @@ else
 								</div>
                                 <?php endif; ?>
                                 <div class="right_side_posrt">
-                                    <div class="tab-add">
-                                        <?php $this->load->view('banner_add'); ?>
-                                    </div>
+                                    <!-- <div class="tab-add">
+                                        <?php //$this->load->view('banner_add'); ?>
+                                    </div> -->
                             <?php
                             if ($is_eligable_for_post == 1) { ?>
 
