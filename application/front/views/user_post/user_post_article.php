@@ -93,7 +93,7 @@ else
                             <div class="post-detail">
                                 <div class="fw" ng-if="post.post_data.post_for != 'question'">
                                     <a ng-if="post.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" target="_self" data-popover="true" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a>
-                                    <a ng-if="post.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" target="_self"></a><span class="post-time">{{post.post_data.time_string}}</span>
+                                    <a ng-if="post.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" target="_self" data-popover="true" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a><span class="post-time">{{post.post_data.time_string}}</span>
                                 </div>
                                 
                                 <div class="fw" ng-if="post.post_data.user_type == '1' && post.post_data.post_for != 'question'">

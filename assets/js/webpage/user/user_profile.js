@@ -3508,7 +3508,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
         $scope.old_count_profile = count_profile;
     };
 
-    function getUserDashboardAudio(pagenum) {
+    /*function getUserDashboardAudio(pagenum) {
         $('#loader').show();
         $http.get(base_url + "user_post/getUserDashboardAudio?user_slug=" + user_slug).then(function (success) {
             $('#loader').hide();
@@ -3519,7 +3519,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 getUserDashboardAudio(pagenum);
             },500);
         });
-    }
+    }*/
 
     function getUserDashboardPdf(pagenum) {
         $('#loader').show();
@@ -4591,7 +4591,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             if (data.message == '1') {
                 //$scope.postData.splice(index, 1);
                 getUserDashboardVideo();
-                getUserDashboardAudio();            
+                // getUserDashboardAudio();            
                 getUserDashboardPdf();
                 getUserDashboardImage();
                 getUserDashboardPost();
@@ -5122,7 +5122,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
             
             getUserDashboardImage();
             getUserDashboardArticle();
-            getUserDashboardAudio();
+            // getUserDashboardAudio();
             getUserDashboardVideo();
             getUserDashboardPdf();
             $scope.get_user_links();
@@ -15210,7 +15210,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
             if (data.message == '1') {
                 //$scope.postData.splice(index, 1);
                 getUserDashboardVideo();
-                getUserDashboardAudio();            
+                // getUserDashboardAudio();            
                 getUserDashboardPdf();
                 getUserDashboardImage();
                 getUserDashboardPost();

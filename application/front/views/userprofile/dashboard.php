@@ -214,14 +214,14 @@ else
                     </div>
                 </div>
             </div>
-            <div class="media-box latest_audio">
+            <!-- <div class="media-box latest_audio">
                 <div class="dash-left-title">
                     <h3>
-                        <?php if($user_id != ""): ?>
+                        <?php //if($user_id != ""): ?>
                             <a href="<?php echo base_url(); ?>{{user_slug}}/audios" ng-click='makeActive("dashboard")'>
-                        <?php else: ?>
+                        <?php //else: ?>
                             <a href="#" data-toggle="modal" data-target="#regmodal">
-                        <?php endif; ?>
+                        <?php //endif; ?>
                         <i class="fa fa-music"></i> Audio</a></h3>
                 </div>
                 <div class="media-display">
@@ -231,11 +231,11 @@ else
                             <label dd-text-collapse dd-text-collapse-max-length="30" dd-text-collapse-text="{{post.simple_data.description}}" dd-text-collapse-cond="false" class="audio-title" ng-if="audioData.post_for == 'opportunity'">{{audioData.opportunity}}</label>
                             <div class = "audio_main_div">
                                 <div class = "audio_img">
-                                    <img src = "<?php echo base_url('assets/images/music-icon.png') ?>" alt="music-icon.png">
+                                    <img src = "<?php //echo base_url('assets/images/music-icon.png') ?>" alt="music-icon.png">
                                 </div>
                                 <div class = "audio_source">
                                     <audio id = "audio_player" width = "100%" height = "40" controls>
-                                        <source ng-src="<?php echo USER_POST_MAIN_UPLOAD_URL ?>{{audioData.filename}}" type="audio/mp3">
+                                        <source ng-src="<?php //echo USER_POST_MAIN_UPLOAD_URL ?>{{audioData.filename}}" type="audio/mp3">
                                         Your browser does not support the audio tag.
                                     </audio>
                                 </div>
@@ -243,7 +243,7 @@ else
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="media-box latest_pdf">
                 <div class="dash-left-title">
                     <h3>
@@ -393,7 +393,7 @@ else
         			<ul>
         				<li><a href="{{user_slug}}/photos"><i class="fa fa-camera"></i> Photos</a></li>
         				<li><a href="{{user_slug}}/videos"><i class="fa fa-video-camera"></i> Video</a></li>
-        				<li><a href="{{user_slug}}/audios"><i class="fa fa-music"></i> Audio</a></li>
+        				<!-- <li><a href="{{user_slug}}/audios"><i class="fa fa-music"></i> Audio</a></li> -->
         				<li><a href="{{user_slug}}/pdf"><i class="fa fa-file-pdf-o"></i> PDF</a></li>
         				<li><a href="#"><i class="fa fa-address-card"></i> Article</a></li>
         			</ul>
@@ -1481,7 +1481,7 @@ else
                                 <label for="fileInput1" ng-click="postFiles()">
                                     <i class="fa fa-camera upload_icon" onclick="javascript:$('#fileInput1').attr('accept','image/*');"><span class="upload_span_icon"> Photo </span></i>
                                     <i class="fa fa-video-camera upload_icon" onclick="javascript:$('#fileInput1').attr('accept','video/*');"><span class="upload_span_icon"> Video</span>  </i> 
-                                    <i class="fa fa-music upload_icon" onclick="javascript:$('#fileInput1').attr('accept','audio/*');"> <span class="upload_span_icon">  Audio </span> </i>
+                                    <!-- <i class="fa fa-music upload_icon" onclick="javascript:$('#fileInput1').attr('accept','audio/*');"> <span class="upload_span_icon">  Audio </span> </i> -->
                                     <i class="fa fa-file-pdf-o upload_icon" onclick="javascript:$('#fileInput1').attr('accept','.pdf');"><span class="upload_span_icon"> PDF </span></i>
                                 </label>
                             </div>
@@ -1559,7 +1559,7 @@ else
                                 <label for="fileInput" ng-click="postFiles()">
                                     <i class="fa fa-camera upload_icon" onclick="javascript:$('#fileInput').attr('accept','image/*');"><span class="upload_span_icon"> Photo </span></i>
                                     <i class="fa fa-video-camera upload_icon" onclick="javascript:$('#fileInput').attr('accept','video/*');"><span class="upload_span_icon"> Video</span>  </i> 
-                                    <i class="fa fa-music upload_icon" onclick="javascript:$('#fileInput').attr('accept','audio/*');"> <span class="upload_span_icon">  Audio </span> </i>
+                                    <!-- <i class="fa fa-music upload_icon" onclick="javascript:$('#fileInput').attr('accept','audio/*');"> <span class="upload_span_icon">  Audio </span> </i> -->
                                     <i class="fa fa-file-pdf-o upload_icon" onclick="javascript:$('#fileInput').attr('accept','.pdf');"><span class="upload_span_icon"> PDF </span></i>
                                 </label>
                             </div>
