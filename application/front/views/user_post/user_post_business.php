@@ -50,7 +50,10 @@
                 </div>
             </div>
         </form>
-    </div>    
+    </div>
+    <div class="pull-left pt15">
+        <?php echo $left_footer; ?>
+    </div>
 </div>
 <div class="middle-section">    
     <div ng-if="business_data.length != 0" ng-repeat="business in business_data" ng-init="busIndex=$index">        
@@ -62,11 +65,11 @@
                 </div>
                 <div class="all-job-top bus-search-top">
                     <div class="post-img">
-                        <a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-if="business.business_user_image" target="_self" data-popover="true" data-uid="{{business.user_id}}" data-utype="2"><img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{business.business_user_image}}" on-error-src="<?php echo BASEURL.NOBUSIMAGE ?>"></a>
-                        <a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-if="!business.business_user_image" target="_self" data-popover="true" data-uid="{{business.user_id}}" data-utype="2"><img ng-src="<?php echo BASEURL.NOBUSIMAGE ?>" on-error-src="<?php echo BASEURL.NOBUSIMAGE ?>"></a>
+                        <a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-if="business.business_user_image" target="_self" data-popover data-uid="{{business.user_id}}" data-utype="2"><img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{business.business_user_image}}" on-error-src="<?php echo BASEURL.NOBUSIMAGE ?>"></a>
+                        <a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-if="!business.business_user_image" target="_self" data-popover data-uid="{{business.user_id}}" data-utype="2"><img ng-src="<?php echo BASEURL.NOBUSIMAGE ?>" on-error-src="<?php echo BASEURL.NOBUSIMAGE ?>"></a>
                     </div>
                     <div class="job-top-detail">
-                        <h5><a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-bind="business.company_name" target="_self" data-popover="true" data-uid="{{business.user_id}}" data-utype="2"></a></h5>
+                        <h5><a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-bind="business.company_name" target="_self" data-popover data-uid="{{business.user_id}}" data-utype="2"></a></h5>
                         <h5 class="bus-ind" ng-if="business.industry_name"><a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-bind="business.industry_name" target="_self"></a></h5>
                         <h5 class="bus-ind" ng-if="!business.industry_name"><a href="<?php echo BASEURL ?>company/{{business.business_slug}}" ng-bind="business.other_industrial" target="_self"></a></h5>
                     </div>

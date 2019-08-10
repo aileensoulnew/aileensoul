@@ -354,8 +354,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                         }
                     });
                 }
-
-                // $('body').popover({ selector: '[data-popover]', trigger: 'click hover', placement: 'auto', delay: {show: 50, hide: 400}});
+                
                 var originalLeave = $.fn.popover.Constructor.prototype.leave;
                 $.fn.popover.Constructor.prototype.leave = function(obj){
                     var self = obj instanceof this.constructor ?
@@ -381,7 +380,7 @@ app.controller('postDetailsController', function($scope, $http, $window, $filter
                 $('body').popover({
                     selector: '[data-popover]',
                     animation: true,
-                    trigger: "click hover" ,
+                    trigger: "hover" ,
                     delay: {show: 1000, hide: 50},
                     html: true, 
                     animation:false,

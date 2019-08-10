@@ -476,7 +476,7 @@ else
                                         <div class="all-post-top">
                                             <div class="post-head" ng-class="post.question_data.is_anonymously == '1' ? 'anonymous-que' : ''">
                                                 <div class="post-img" ng-if="post.post_data.post_for == 'question'">
-                                                    <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self" ng-if="post.question_data.is_anonymously == '0'" data-popover="true" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}">
+                                                    <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self" ng-if="post.question_data.is_anonymously == '0'" data-popover data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}">
                                                         <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{post.user_data.business_user_image}}" ng-if="post.user_data.business_user_image != '' && post.question_data.is_anonymously == '0'">
                                                         <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.business_user_image == ''" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
                                                     </a>
@@ -485,13 +485,13 @@ else
                                                 </div>
                                                                 
                                                 <div class="post-img" ng-if="post.post_data.post_for != 'question' && post.user_data.business_user_image">
-                                                    <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self" data-popover="true" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}">
+                                                    <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self" data-popover data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}">
                                                         <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL; ?>{{post.user_data.business_user_image}}">
                                                     </a>
                                                 </div>
 
                                                 <div class="post-img no-profile-pic" ng-if="post.post_data.post_for != 'question' && !post.user_data.business_user_image">
-                                                    <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self" data-popover="true" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}">
+                                                    <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" target="_self" data-popover data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}">
                                                         <img ng-src="<?php echo base_url(NOBUSIMAGE); ?>">
                                                     </a>
                                                 </div>
@@ -500,11 +500,11 @@ else
                                                     <div class="fw" ng-if="post.post_data.post_for == 'question'">
                                                         <a href="javascript:void(0)" class="post-name" ng-if="post.question_data.is_anonymously == '1'">Anonymous</a>
                                                         <span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
-                                                        <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.question_data.is_anonymously == '0'" data-popover="true" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a><span class="post-time">{{post.post_data.time_string}}</span>
+                                                        <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" ng-if="post.question_data.is_anonymously == '0'" data-popover data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a><span class="post-time">{{post.post_data.time_string}}</span>
                                                     </div>
                                                                     
                                                     <div class="fw" ng-if="post.post_data.post_for != 'question'">
-                                                        <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" data-popover="true" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a><span class="post-time">{{post.post_data.time_string}}</span>
+                                                        <a ng-href="<?php echo base_url() ?>company/{{post.user_data.business_slug}}" class="post-name" ng-bind="post.user_data.company_name" data-popover data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a><span class="post-time">{{post.post_data.time_string}}</span>
                                                     </div>
                                                                     
                                                     <div class="fw" ng-if="post.post_data.post_for == 'question'">
@@ -658,7 +658,7 @@ else
                                                     <div class="all-post-top">
                                                         <div class="post-head">
                                                             <div class="post-img" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.post_data.post_for == 'question'">
-                                                                <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" target="_self" ng-if="post.share_data.data.question_data.is_anonymously == '0'" data-popover="true" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}">
+                                                                <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" target="_self" ng-if="post.share_data.data.question_data.is_anonymously == '0'" data-popover data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}">
                                                                     <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.share_data.data.user_data.user_image}}" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image != '' && post.share_data.data.question_data.is_anonymously == '0'">
                                                                     <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image == '' && post.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                                                     <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.user_data.user_image == '' && post.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
@@ -668,20 +668,20 @@ else
                                                             </div>
 
                                                             <div class="post-img" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.post_data.post_for != 'question' && post.share_data.data.user_data.user_image != ''">
-                                                                <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" target="_self" data-popover="true" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}">
+                                                                <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" target="_self" data-popover data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}">
                                                                     <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.share_data.data.user_data.user_image}}">
                                                                 </a>
                                                             </div>
 
                                                             <div class="post-img no-profile-pic" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.post_data.post_for != 'question' && post.share_data.data.user_data.user_image == ''">
-                                                                <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" target="_self" data-popover="true" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}">
+                                                                <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" target="_self" data-popover data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}">
                                                                     <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                                                     <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.share_data.data.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                                                 </a>
                                                             </div>
 
                                                             <div class="post-img" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.post_data.post_for == 'question'">
-                                                                <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" target="_self" ng-if="post.share_data.data.question_data.is_anonymously == '0'" data-popover="true" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}">
+                                                                <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" target="_self" ng-if="post.share_data.data.question_data.is_anonymously == '0'" data-popover data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}">
                                                                     <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL ?>{{post.share_data.data.user_data.business_user_image}}" ng-if="post.share_data.data.user_data.business_user_image && post.share_data.data.question_data.is_anonymously == '0'">
                                                                     <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="!post.share_data.data.user_data.business_user_image" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
                                                                 </a>
@@ -690,13 +690,13 @@ else
                                                             </div>
                                                                             
                                                             <div class="post-img" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.post_data.post_for != 'question' && post.share_data.data.user_data.business_user_image">
-                                                                <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" target="_self" data-popover="true" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}">
+                                                                <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" target="_self" data-popover data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}">
                                                                     <img ng-src="<?php echo BUS_PROFILE_THUMB_UPLOAD_URL; ?>{{post.share_data.data.user_data.business_user_image}}">
                                                                 </a>
                                                             </div>
                                                                             
                                                             <div class="post-img no-profile-pic" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.post_data.post_for != 'question' && !post.share_data.data.user_data.business_user_image">
-                                                                <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" target="_self" data-popover="true" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}">
+                                                                <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" target="_self" data-popover data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}">
                                                                     <img ng-class="post.share_data.data.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo base_url(NOBUSIMAGE); ?>"> 
                                                                 </a>
                                                             </div>
@@ -705,14 +705,14 @@ else
                                                                 <div class="fw" ng-if="post.share_data.data.post_data.post_for == 'question'">
                                                                     <a href="javascript:void(0)" class="post-name" ng-if="post.share_data.data.question_data.is_anonymously == '1'">Anonymous</a>
                                                                     <span class="post-time" ng-if="post.share_data.data.question_data.is_anonymously == '1'"></span>
-                                                                    <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.fullname" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.question_data.is_anonymously == '0'" data-popover="true" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}"></a>
-                                                                    <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.company_name" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.question_data.is_anonymously == '0'" data-popover="true" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}"></a>
+                                                                    <a ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.fullname" ng-if="post.share_data.data.post_data.user_type == '1' && post.share_data.data.question_data.is_anonymously == '0'" data-popover data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}"></a>
+                                                                    <a ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.company_name" ng-if="post.share_data.data.post_data.user_type == '2' && post.share_data.data.question_data.is_anonymously == '0'" data-popover data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}"></a>
                                                                     <!-- <span class="post-time">{{post.share_data.data.post_data.time_string}}</span> -->
                                                                 </div>
                                                                                 
                                                                 <div class="fw" ng-if="post.share_data.data.post_data.post_for != 'question'">
-                                                                    <a ng-if="post.share_data.data.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.fullname" data-popover="true" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}"></a>
-                                                                    <a ng-if="post.share_data.data.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.company_name" data-popover="true" data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}"></a>
+                                                                    <a ng-if="post.share_data.data.post_data.user_type == '1'" ng-href="<?php echo base_url() ?>{{post.share_data.data.user_data.user_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.fullname" data-popover data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}"></a>
+                                                                    <a ng-if="post.share_data.data.post_data.user_type == '2'" ng-href="<?php echo base_url() ?>company/{{post.share_data.data.user_data.business_slug}}" class="post-name" ng-bind="post.share_data.data.user_data.company_name" data-popover data-uid="{{post.share_data.data.user_data.user_id}}" data-utype="{{post.share_data.data.post_data.user_type}}"></a>
                                                                     <!-- <span class="post-time">{{post.share_data.data.post_data.time_string}}</span> -->
                                                                 </div>
 
@@ -1061,19 +1061,19 @@ else
                                                 <div class="post-comment" nf-if="post.post_comment_data.length > 0" ng-repeat="comment in post.post_comment_data" ng-init="commentIndex=$index">
                                                     <div class="post-img">
                                                         <div ng-if="comment.user_image != ''">
-                                                            <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" data-popover="true" data-uid="{{comment.commented_user_id}}" data-utype="1">
+                                                            <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" data-popover data-uid="{{comment.commented_user_id}}" data-utype="1">
                                                                 <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{comment.user_image}}">
                                                             </a>
                                                         </div>
                                                         <div class="post-img" ng-if="comment.user_image == ''">
-                                                            <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" data-popover="true" data-uid="{{comment.commented_user_id}}" data-utype="1">
+                                                            <a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" data-popover data-uid="{{comment.commented_user_id}}" data-utype="1">
                                                                 <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                                                 <img ng-class="comment.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" comment.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                                             </a>
                                                         </div>
                                                     </div>
                                                     <div class="comment-dis">
-                                                        <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" ng-bind="comment.username" data-popover="true" data-uid="{{comment.commented_user_id}}" data-utype="1"></a></div>
+                                                        <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{comment.user_slug}}" class="post-name" target="_self" ng-bind="comment.username" data-popover data-uid="{{comment.commented_user_id}}" data-utype="1"></a></div>
                                                         <div class="comment-dis-inner" id="comment-dis-inner-{{comment.comment_id}}">
                                                             <p dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{comment.comment}}" dd-text-collapse-cond="true">{{comment.comment}}</p>
                                                         </div>
@@ -1114,19 +1114,19 @@ else
                                                     <div class="post-comment reply-comment" nf-if="comment.comment_reply_data.length > 0" ng-repeat="commentreply in comment.comment_reply_data" ng-init="commentReplyIndex=$index">           
                                                         <div class="post-img">
                                                             <div ng-if="commentreply.user_image != ''">
-                                                                <a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self" data-popover="true" data-uid="{{commentreply.commented_user_id}}" data-utype="1">
+                                                                <a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self" data-popover data-uid="{{commentreply.commented_user_id}}" data-utype="1">
                                                                     <img ng-class="commentreply.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{commentreply.user_image}}">
                                                                 </a>
                                                             </div>
                                                             <div class="post-img" ng-if="commentreply.user_image == ''">
-                                                                <a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self" data-popover="true" data-uid="{{commentreply.commented_user_id}}" data-utype="1">
+                                                                <a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self" data-popover data-uid="{{commentreply.commented_user_id}}" data-utype="1">
                                                                     <img ng-class="commentreply.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" commentreply.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                                                     <img ng-class="commentreply.commented_user_id == user_id ? 'login-user-pro-pic' : ''" ng-if=" commentreply.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                                                 </a>
                                                             </div>
                                                         </div>
                                                         <div class="comment-dis">
-                                                            <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self" ng-bind="commentreply.username" data-popover="true" data-uid="{{commentreply.commented_user_id}}" data-utype="1"></a></div>
+                                                            <div class="comment-name"><a ng-href="<?php echo base_url() ?>{{commentreply.user_slug}}" class="post-name" target="_self" ng-bind="commentreply.username" data-popover data-uid="{{commentreply.commented_user_id}}" data-utype="1"></a></div>
                                                             <div class="comment-dis-inner" id="comment-reply-dis-inner-{{commentreply.comment_id}}">
                                                                 <p dd-text-collapse dd-text-collapse-max-length="150" dd-text-collapse-text="{{commentreply.comment}}" dd-text-collapse-cond="true">{{commentreply.comment}}</p>
                                                             </div>
@@ -2549,15 +2549,15 @@ else
                                             </div>
                                         </div>
                                     </div>
-                                    <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image != ''" data-popover="true" data-popover="true" data-uid="{{userlist.user_id}}" data-utype="1">
+                                    <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image != ''" data-popover data-popover data-uid="{{userlist.user_id}}" data-utype="1">
                                         <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{userlist.user_image}}">
                                     </a>
-                                    <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image == '' || userlist.user_image == null" data-popover="true" data-popover="true" data-uid="{{userlist.user_id}}" data-utype="1">
+                                    <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image == '' || userlist.user_image == null" data-popover data-popover data-uid="{{userlist.user_id}}" data-utype="1">
                                         <img ng-if="userlist.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                         <img ng-if="userlist.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                     </a>
                                     <div class="like-detail">
-                                        <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}" data-popover="true" data-popover="true" data-uid="{{userlist.user_id}}" data-utype="1">{{(userlist.user_id == '<?php echo $user_id; ?>' ? 'You' : userlist.fullname)}}</a></h4>
+                                        <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}" data-popover data-popover data-uid="{{userlist.user_id}}" data-utype="1">{{(userlist.user_id == '<?php echo $user_id; ?>' ? 'You' : userlist.fullname)}}</a></h4>
                                         <p ng-if="(userlist.title_name == null) && (userlist.degree_name != null)">{{userlist.degree_name}}</p>
                                         <p ng-if="(userlist.title_name != null) && (userlist.degree_name == null)">{{userlist.title_name}}</p>
                                         <p ng-if="(userlist.title_name == null) && (userlist.degree_name == null)">Current work</p>

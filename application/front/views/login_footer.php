@@ -46,8 +46,6 @@ if ($this->uri->segment(1) == '' || $this->uri->segment(1) == 'main' || $this->u
 					</ul>
 					<ul class="footer-ul pt5 pb10">
 						<li> Aileensoul Ⓒ <?php echo gmdate('Y'); ?> </li>
-                        
-                  
                     </ul>
                 </div>
             

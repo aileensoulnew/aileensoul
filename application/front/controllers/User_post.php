@@ -3524,6 +3524,7 @@ class User_post extends MY_Controller {
 
     public function user_post_people()
     {
+        $this->data['left_footer'] = $this->load->view('leftfooter', $this->data, TRUE);
         $this->load->view('user_post/user_post_people', $this->data);   
     }
 
@@ -3559,6 +3560,7 @@ class User_post extends MY_Controller {
     public function user_post_posts()
     {
         $userid = $this->session->userdata('aileenuser');
+        $this->data['left_footer'] = $this->load->view('leftfooter', $this->data, TRUE);
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->load->view('user_post/user_post_posts', $this->data);   
     }
@@ -3590,6 +3592,7 @@ class User_post extends MY_Controller {
     public function user_post_opportunity()
     {
         $userid = $this->session->userdata('aileenuser');
+        $this->data['left_footer'] = $this->load->view('leftfooter', $this->data, TRUE);
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->load->view('user_post/user_post_opportunity', $this->data);   
     }
@@ -3637,6 +3640,7 @@ class User_post extends MY_Controller {
     public function user_post_article()
     {
         $userid = $this->session->userdata('aileenuser');
+        $this->data['left_footer'] = $this->load->view('leftfooter', $this->data, TRUE);
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->load->view('user_post/user_post_article', $this->data);   
     }
@@ -3669,6 +3673,7 @@ class User_post extends MY_Controller {
     public function user_post_question()
     {
         $userid = $this->session->userdata('aileenuser');
+        $this->data['left_footer'] = $this->load->view('leftfooter', $this->data, TRUE);
         $this->data['leftbox_data'] = $this->user_model->getLeftboxData($userid);
         $this->load->view('user_post/user_post_question', $this->data);   
     }
@@ -3700,6 +3705,7 @@ class User_post extends MY_Controller {
 
     public function user_post_business()
     {
+        $this->data['left_footer'] = $this->load->view('leftfooter', $this->data, TRUE);
         $this->load->view('user_post/user_post_business', $this->data);
     }
 

@@ -5021,7 +5021,7 @@ app.controller('dashboardController', function ($scope, $compile, $http, $locati
                 $('body').popover({
                     selector: '[data-popover]',
                     animation: true,
-                    trigger: "click hover" ,
+                    trigger: "hover" ,
                     delay: {show: 1000, hide: 50},
                     html: true, 
                     animation:false,
@@ -10591,7 +10591,7 @@ app.controller('contactsController', function ($scope, $http, $location, $window
                     $('body').popover({
                         selector: '[data-popover]',
                         animation: true,
-                        trigger: "click hover" ,
+                        trigger: "hover" ,
                         delay: {show: 1000, hide: 50},
                         html: true, 
                         animation:false,
@@ -11173,7 +11173,7 @@ app.controller('followersController', function ($scope, $http, $location, $compi
                     $('body').popover({
                         selector: '[data-popover]',
                         animation: true,
-                        trigger: "click hover" ,
+                        trigger: "hover" ,
                         delay: {show: 1000, hide: 50},
                         html: true, 
                         animation:false,
@@ -11777,7 +11777,7 @@ app.controller('followingController', function ($scope, $http, $location, $compi
                     $('body').popover({
                         selector: '[data-popover]',
                         animation: true,
-                        trigger: "click hover" ,
+                        trigger: "hover" ,
                         delay: {show: 1000, hide: 50},
                         html: true, 
                         animation:false,
@@ -12920,7 +12920,7 @@ app.controller('questionsController', function ($scope, $http, $location, $compi
                     $('body').popover({
                         selector: '[data-popover]',
                         animation: true,
-                        trigger: "click hover" ,
+                        trigger: "hover" ,
                         delay: {show: 1000, hide: 50},
                         html: true, 
                         animation:false,
@@ -15586,7 +15586,7 @@ app.controller('savedpostController', function ($scope, $http, $location, $compi
                 $('body').popover({
                     selector: '[data-popover]',
                     animation: true,
-                    trigger: "click hover" ,
+                    trigger: "hover" ,
                     delay: {show: 1000, hide: 50},
                     html: true, 
                     animation:false,

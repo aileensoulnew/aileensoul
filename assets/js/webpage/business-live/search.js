@@ -487,7 +487,7 @@ app.controller('businessSearchListController', function ($scope, $http,$compile,
                     $('body').popover({
                         selector: '[data-popover]',
                         animation: true,
-                        trigger: "click hover" ,
+                        trigger: "hover" ,
                         delay: {show: 1000, hide: 50},
                         html: true, 
                         animation:false,

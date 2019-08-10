@@ -27,7 +27,7 @@
             <input type="hidden" name="perpage_record" class="perpage_record" ng-class="perpage_record" ng-model="post.perpage_record" ng-value="{{post.page_data.perpage_record}}">
             <div class="all-post-top">
                 <div class="post-head" ng-class="post.question_data.is_anonymously == '1' ? 'anonymous-que' : ''">
-                    <div class="post-img" ng-if="post.post_data.post_for == 'question'" data-popover="true" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}">
+                    <div class="post-img" ng-if="post.post_data.post_for == 'question'" data-popover data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}">
                         <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{post.user_data.user_image}}" ng-if="post.user_data.user_image != '' && post.question_data.is_anonymously == '0'">
                         <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                         <img ng-class="post.post_data.user_id == user_id ? 'login-user-pro-pic' : ''" ng-if="post.user_data.user_image == '' && post.user_data.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
@@ -37,7 +37,7 @@
                     <div class="post-detail">
                         <div class="fw" ng-if="post.post_data.post_for == 'question'">
                             <a href="javascript:void(0)" class="post-name" ng-if="post.question_data.is_anonymously == '1'">Anonymous</a><span class="post-time" ng-if="post.question_data.is_anonymously == '1'"></span>
-                            <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.question_data.is_anonymously == '0'" data-popover="true" data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a><span class="post-time">{{post.post_data.time_string}}</span>
+                            <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname" ng-if="post.question_data.is_anonymously == '0'" data-popover data-uid="{{post.user_data.user_id}}" data-utype="{{post.post_data.user_type}}"></a><span class="post-time">{{post.post_data.time_string}}</span>
                         </div>
                         <div class="fw" ng-if="post.post_data.post_for != 'question'">
                             <a ng-href="<?php echo base_url() ?>{{post.user_data.user_slug}}" class="post-name" ng-bind="post.user_data.fullname"></a><span class="post-time">{{post.post_data.time_string}}</span>
@@ -182,15 +182,15 @@
                         <div class="like-popup-scroll">
                             <ul>
                                 <li class="like-img" ng-repeat="userlist in get_like_user_list">
-                                    <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image != ''" target="_self" data-popover="true" data-uid="{{userlist.user_id}}" data-utype="1">
+                                    <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image != ''" target="_self" data-popover data-uid="{{userlist.user_id}}" data-utype="1">
                                         <img ng-src="<?php echo USER_THUMB_UPLOAD_URL ?>{{userlist.user_image}}">
                                     </a>
-                                      <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image == ''" target="_self" data-popover="true" data-uid="{{userlist.user_id}}" data-utype="1">
+                                      <a class="ripple" href="<?php echo base_url(); ?>{{userlist.user_slug}}" ng-if="userlist.user_image == ''" target="_self" data-popover data-uid="{{userlist.user_id}}" data-utype="1">
                                         <img ng-if="userlist.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                         <img ng-if="userlist.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
                                     </a>
                                     <div class="like-detail">
-                                        <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}" target="_self" data-popover="true" data-uid="{{userlist.user_id}}" data-utype="1">{{(userlist.user_id == <?php echo $user_id; ?> ? 'You' : userlist.fullname)}}</a></h4>
+                                        <h4><a href="<?php echo base_url(); ?>{{userlist.user_slug}}" target="_self" data-popover data-uid="{{userlist.user_id}}" data-utype="1">{{(userlist.user_id == <?php echo $user_id; ?> ? 'You' : userlist.fullname)}}</a></h4>
                                         <p ng-if="(userlist.degree_name != null) && (userlist.title_name == null)">{{userlist.degree_name}}</p>
                                         <p ng-if="(userlist.title_name != null) && (userlist.degree_name == null)">{{userlist.title_name}}</p>
                                         <p ng-if="(userlist.title_name == null) && (userlist.degree_name == null)">Current work</p>

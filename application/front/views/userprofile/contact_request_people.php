@@ -71,7 +71,7 @@
 							</a>
 						</div>
 						<div class="user-pr-img">
-							<a href="<?php echo base_url();?>{{suggest.user_slug}}" target="_self" data-popover="true" data-uid="{{suggest.user_id}}" data-utype="1">
+							<a href="<?php echo base_url();?>{{suggest.user_slug}}" target="_self" data-popover data-uid="{{suggest.user_id}}" data-utype="1">
 								<img ng-src="<?php echo USER_PROFILE_80x80_UPLOAD_URL ?>{{suggest.user_image}}" ng-if="suggest.user_image">
                                 <img ng-if="!suggest.user_image && suggest.user_gender == 'M'" ng-src="<?php echo base_url('assets/img/man-user.jpg') ?>">
                                 <img ng-if="!suggest.user_image && suggest.user_gender == 'F'" ng-src="<?php echo base_url('assets/img/female-user.jpg') ?>">
@@ -79,7 +79,7 @@
 						</div>
 						<div class="user-info-text text-center">
 							<p>
-                                <a href="<?php echo base_url();?>{{suggest.user_slug}}" target="_self" data-popover="true" data-uid="{{suggest.user_id}}" data-utype="1">
+                                <a href="<?php echo base_url();?>{{suggest.user_slug}}" target="_self" data-popover data-uid="{{suggest.user_id}}" data-utype="1">
 									<span title="{{suggest.fullname| capitalize}}" class="user-name main_data_cq" ng-bind="suggest.fullname | capitalize"></span>
                                 </a>
                             </p>    
