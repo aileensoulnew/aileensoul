@@ -290,9 +290,8 @@ else
                                        
                                     </div>
                                 </a>
-                                <div class="left-info-box bus-letf business_data">
-                                   
-                                        <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/audios' ?>">
+                                <!-- <div class="left-info-box bus-letf business_data">
+                                        <a href="<?php //echo base_url('company/' . $business_common_data[0]['business_slug']) . '/audios' ?>">
                                             <div class="dash-left-title">
                                                 <h3>
                                                     <i class="fa fa-music"></i>
@@ -304,8 +303,7 @@ else
                                             <div class="bus_audios"> 
                                             </div>
                                         </table>
-                                   
-                                </div>
+                                </div> -->
                                 <a class="fw" href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/pdf' ?>">
                                     <div class="left-info-box bus-letf business_data">
                                         
@@ -349,11 +347,11 @@ else
                                                 <i class="fa fa-video-camera"></i> Video
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/audios' ?>">
+                                        <!-- <li>
+                                            <a href="<?php //echo base_url('company/' . $business_common_data[0]['business_slug']) . '/audios' ?>">
                                                 <i class="fa fa-music"></i> Audio
                                             </a>
-                                        </li>
+                                        </li> -->
                                         <li>
                                             <a href="<?php echo base_url('company/' . $business_common_data[0]['business_slug']) . '/pdf' ?>">
                                                 <i class="fa fa-file-pdf-o"></i> PDf
@@ -2336,7 +2334,7 @@ else
                                     <label for="fileInput1" ng-click="postFiles()">
                                         <i class="fa fa-camera upload_icon" onclick="javascript:$('#fileInput1').attr('accept','image/*');"><span class="upload_span_icon"> Photo </span></i>
                                         <i class="fa fa-video-camera upload_icon" onclick="javascript:$('#fileInput1').attr('accept','video/*');"><span class="upload_span_icon"> Video</span>  </i> 
-                                        <i class="fa fa-music upload_icon" onclick="javascript:$('#fileInput1').attr('accept','audio/*');"> <span class="upload_span_icon">  Audio </span> </i>
+                                        <!-- <i class="fa fa-music upload_icon" onclick="javascript:$('#fileInput1').attr('accept','audio/*');"> <span class="upload_span_icon">  Audio </span> </i> -->
                                         <i class="fa fa-file-pdf-o upload_icon" onclick="javascript:$('#fileInput1').attr('accept','.pdf');"><span class="upload_span_icon"> PDF </span></i>
                                     </label>
                                 </div>
@@ -2452,7 +2450,7 @@ else
                                     <label for="fileInput" ng-click="postFiles()">
                                         <i class="fa fa-camera upload_icon" onclick="javascript:$('#fileInput').attr('accept','image/*');"><span class="upload_span_icon"> Photo </span></i>
                                         <i class="fa fa-video-camera upload_icon" onclick="javascript:$('#fileInput').attr('accept','video/*');"><span class="upload_span_icon"> Video</span>  </i> 
-                                        <i class="fa fa-music upload_icon" onclick="javascript:$('#fileInput').attr('accept','audio/*');"> <span class="upload_span_icon">  Audio </span> </i>
+                                        <!-- <i class="fa fa-music upload_icon" onclick="javascript:$('#fileInput').attr('accept','audio/*');"> <span class="upload_span_icon">  Audio </span> </i> -->
                                         <i class="fa fa-file-pdf-o upload_icon" onclick="javascript:$('#fileInput').attr('accept','.pdf');"><span class="upload_span_icon"> PDF </span></i>
                                     </label>
                                 </div>
@@ -3024,7 +3022,7 @@ else
                 .autocomplete({
                     appendTo: "."+id,
                     minLength: 0,
-                    create: function (event,ui) {                            
+                    create: function (event,ui) {
                         $("#"+id).data('ui-autocomplete')._renderItem = function (ul, item) {
                             if(item.fullname != undefined)
                             {
@@ -3072,7 +3070,7 @@ else
                             }
                         };
                     },
-                    source: function( request, response ) {                            
+                    source: function( request, response ) {
                         var term = request.term,
                             results = [];
                         if (term.indexOf("@") >= 0) {
