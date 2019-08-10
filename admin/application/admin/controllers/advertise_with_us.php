@@ -28,6 +28,10 @@ class Advertise_with_us extends CI_Controller {
     }
 
     public function index() {
+        redirect(base_url('advertise_with_us/list'));
+    }
+
+    public function list() {
 
         // This is userd for pagination offset and limoi start
         $limit = $this->paging['per_page'];
@@ -48,9 +52,9 @@ class Advertise_with_us extends CI_Controller {
         $this->data['advertise_with_us'] = $this->common->select_data_by_condition('advertise_with_us', $contition_array, $data, $sortby, $orderby, $limit, $offset, $join_str = array(), $groupby = '');
 
         if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
-            $this->paging['base_url'] = site_url("advertise_with_us/" . $short_by . "/" . $order_by);
+            $this->paging['base_url'] = site_url("advertise_with_us/list/" . $short_by . "/" . $order_by);
         } else {
-            $this->paging['base_url'] = site_url("advertise_with_us/");
+            $this->paging['base_url'] = site_url("advertise_with_us/list/");
         }
 
         if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {

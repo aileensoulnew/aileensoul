@@ -181,7 +181,7 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">     
-                   <li><a href="<?php echo base_url('advertise_with_us/'); ?>"><i class="fa fa-line-chart" aria-hidden="true"></i>Advertise With Us List</a></li>
+                   <li><a href="<?php echo base_url('advertise_with_us/list/'); ?>"><i class="fa fa-line-chart" aria-hidden="true"></i>Advertise With Us List</a></li>
                 </ul>
             </li>
            <!--End Advertise With us-->
