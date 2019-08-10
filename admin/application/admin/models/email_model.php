@@ -73,13 +73,18 @@ class Email_model extends CI_Model {
         //Create a new PHPMailer instance
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
+
+        $sql = "SELECT * FROM ailee_email_settings WHERE status = '1'";
+        $email_setting = $this->db->query($sql)->row_array();
         
-        $mail->Username = 'notification.aileensoul@gmail.com';//Amazon SES SMTP user name.        
-        $mail->Password = 'aileensoul@123';//Amazon SES SMTP password.
-        $mail->Host = 'smtp.gmail.com';
-        $mail->setFrom('notification.aileensoul@gmail.com', 'Aileensoul Notification');
+        $mail->Username = $email_setting['user_name'];//'notification.aileensoul@gmail.com';//Amazon SES SMTP user name.        
+        $mail->Password = $email_setting['password'];//'aileensoul@123';//Amazon SES SMTP password.
+        $mail->Host = $email_setting['host_name'];//'smtp.gmail.com';
+        // $mail->setFrom('notification.aileensoul@gmail.com', 'Aileensoul Notification');
+        $mail->setFrom($email_setting['from_email'], ucwords($email_setting['from_name']));
         //Set an alternative reply-to address
-        $mail->addReplyTo('notification.aileensoul@gmail.com', 'Aileensoul Notification');
+        // $mail->addReplyTo('notification.aileensoul@gmail.com', 'Aileensoul Notification');
+        $mail->addReplyTo($email_setting['replyto_email'], ucwords($email_setting['replyto_name']));
         // $mail->addBCC('dm.aileensoul@gmail.com');
         //Set who the message is to be sent to
         $mail->addAddress($to_email);
@@ -90,8 +95,8 @@ class Email_model extends CI_Model {
         $mail->SMTPAuth = true;
 
         // Enable TLS encryption over port 587
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 587;
+        $mail->SMTPSecure = $email_setting['smtp_secure'];//'tls';
+        $mail->Port = $email_setting['out_going_port'];//587;
         // if ($this->email->send()) {
         if ($mail->send()) {
             return true;
@@ -160,16 +165,22 @@ class Email_model extends CI_Model {
                             </table></div></body></html>';
 
         require FCPATH.'../phpmailer/vendor/autoload.php'; 
+
+        $sql = "SELECT * FROM ailee_email_settings WHERE status = '1'";
+        $email_setting = $this->db->query($sql)->row_array();
+
         //Create a new PHPMailer instance
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
         
-        $mail->Username = 'notification.aileensoul@gmail.com';//Amazon SES SMTP user name.        
-        $mail->Password = 'aileensoul@123';//Amazon SES SMTP password.
-        $mail->Host = 'smtp.gmail.com';
-        $mail->setFrom('notification.aileensoul@gmail.com', 'Aileensoul Notification');
+        $mail->Username = $email_setting['user_name'];//'notification.aileensoul@gmail.com';//Amazon SES SMTP user name.        
+        $mail->Password = $email_setting['password'];//'aileensoul@123';//Amazon SES SMTP password.
+        $mail->Host = $email_setting['host_name'];//'smtp.gmail.com';
+        // $mail->setFrom('notification.aileensoul@gmail.com', 'Aileensoul Notification');
+        $mail->setFrom($email_setting['from_email'], ucwords($email_setting['from_name']));
         //Set an alternative reply-to address
-        $mail->addReplyTo('notification.aileensoul@gmail.com', 'Aileensoul Notification');
+        // $mail->addReplyTo('notification.aileensoul@gmail.com', 'Aileensoul Notification');
+        $mail->addReplyTo($email_setting['replyto_email'], ucwords($email_setting['replyto_name']));
         // $mail->addBCC('dm.aileensoul@gmail.com');
         //Set who the message is to be sent to
         $mail->addAddress($to_email);
@@ -180,8 +191,8 @@ class Email_model extends CI_Model {
         $mail->SMTPAuth = true;
 
         // Enable TLS encryption over port 587
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 587;
+        $mail->SMTPSecure = $email_setting['smtp_secure'];//'tls';
+        $mail->Port = $email_setting['out_going_port'];//587;
         // if ($this->email->send()) {
         if ($mail->send()) {
             return true;
@@ -315,15 +326,21 @@ class Email_model extends CI_Model {
         // echo $email_html;exit();
         require FCPATH.'../phpmailer/vendor/autoload.php'; 
         //Create a new PHPMailer instance
+
+        $sql = "SELECT * FROM ailee_email_settings WHERE status = '1'";
+        $email_setting = $this->db->query($sql)->row_array();
+
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
         
-        $mail->Username = 'notification.aileensoul@gmail.com';//Amazon SES SMTP user name.        
-        $mail->Password = 'aileensoul@123';//Amazon SES SMTP password.
-        $mail->Host = 'smtp.gmail.com';
-        $mail->setFrom('notification.aileensoul@gmail.com', 'Aileensoul Notification');
+        $mail->Username = $email_setting['user_name'];//'notification.aileensoul@gmail.com';//Amazon SES SMTP user name.        
+        $mail->Password = $email_setting['password'];//'aileensoul@123';//Amazon SES SMTP password.
+        $mail->Host = $email_setting['host_name'];//'smtp.gmail.com';
+        // $mail->setFrom('notification.aileensoul@gmail.com', 'Aileensoul Notification');
+        $mail->setFrom($email_setting['from_email'], ucwords($email_setting['from_name']));
         //Set an alternative reply-to address
-        $mail->addReplyTo('notification.aileensoul@gmail.com', 'Aileensoul Notification');
+        // $mail->addReplyTo('notification.aileensoul@gmail.com', 'Aileensoul Notification');
+        $mail->addReplyTo($email_setting['replyto_email'], ucwords($email_setting['replyto_name']));
         // $mail->addBCC('dm.aileensoul@gmail.com');
         //Set who the message is to be sent to
         $mail->addAddress($to_email);
@@ -334,8 +351,8 @@ class Email_model extends CI_Model {
         $mail->SMTPAuth = true;
 
         // Enable TLS encryption over port 587
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 587;
+        $mail->SMTPSecure = $email_setting['smtp_secure'];//'tls';
+        $mail->Port = $email_setting['out_going_port'];//587;
         // if ($this->email->send()) {
         if ($mail->send()) {
             return true;
@@ -349,17 +366,22 @@ class Email_model extends CI_Model {
         $this->load->library('email');
 
         require FCPATH.'../phpmailer/vendor/autoload.php'; 
+
+        $sql = "SELECT * FROM ailee_email_settings WHERE status = '1'";
+        $email_setting = $this->db->query($sql)->row_array();
  
         //Create a new PHPMailer instance
         $mail = new PHPMailer\PHPMailer\PHPMailer;
         $mail->isSMTP();
         // $mail->SMTPDebug = 2;
-        $mail->Username = 'notification@messages.aileensoul.com';// 'notification.aileensoul@gmail.com';//'apikey' //Amazon SES SMTP user name.        
-        $mail->Password = 'zxzxZX912912';// 'QAZplm1092';//'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'; //Amazon SES SMTP password.
-        $mail->Host = 'smtpdm-ap-southeast-1.aliyun.com';//'smtp.sendgrid.net';// 'smtp.gmail.com';
-        $mail->setFrom('notification@messages.aileensoul.com', 'Aileensoul Notification');
+        $mail->Username = $email_setting['user_name'];//'notification@messages.aileensoul.com';// 'notification.aileensoul@gmail.com';//'apikey' //Amazon SES SMTP user name.        
+        $mail->Password = $email_setting['password'];//'zxzxZX912912';// 'QAZplm1092';//'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'; //Amazon SES SMTP password.
+        $mail->Host = $email_setting['host_name'];//'smtpdm-ap-southeast-1.aliyun.com';//'smtp.sendgrid.net';// 'smtp.gmail.com';
+        // $mail->setFrom('notification@messages.aileensoul.com', 'Aileensoul Notification');
+        $mail->setFrom($email_setting['from_email'], ucwords($email_setting['from_name']));
         //Set an alternative reply-to address
-        $mail->addReplyTo('notification@messages.aileensoul.com', 'Aileensoul Notification');
+        // $mail->addReplyTo('notification@messages.aileensoul.com', 'Aileensoul Notification');
+        $mail->addReplyTo($email_setting['replyto_email'], ucwords($email_setting['replyto_name']));
         // $mail->addBCC('dm.aileensoul@gmail.com');
         //Set who the message is to be sent to
         $mail->addAddress($to_email);
@@ -371,8 +393,8 @@ class Email_model extends CI_Model {
         $mail->SMTPAuth = true;
 
         // Enable TLS encryption over port 587
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port = 465;// 587;
+        $mail->SMTPSecure = $email_setting['smtp_secure'];//'ssl';
+        $mail->Port = $email_setting['out_going_port'];//465;// 587;
         if ($_SERVER['HTTP_HOST'] == "aileensoul.localhost" || $_SERVER['HTTP_HOST'] == "staging.aileensoul.com") {
             return true;
         }        
