@@ -1300,6 +1300,9 @@ class User_post extends MY_Controller {
     }
 
     public function post_opportunity() {
+
+        set_time_limit(0);
+        ini_set("memory_limit","1024M");
        
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
@@ -1645,6 +1648,9 @@ class User_post extends MY_Controller {
                                 $this->common->createThumbnailHeight($this->config->item('user_post_main_upload_path'),$upload_data['raw_name'].".jpg",$this->config->item('user_post_resize90_upload_path'),92);
 
                                 //$fileName = $response['result'][$i]['file_name'] = $upload_data['raw_name'] . "" . $upload_data['file_ext'];
+
+                                @unlink($this->config->item('user_post_main_upload_path') . $upload_data['raw_name'] . "" . $upload_data['file_ext']);
+
                                 $fileName = $response['result'][$i]['file_name'] = $upload_data['raw_name'] . ".m3u8";
                                 if (IMAGEPATHFROM == 's3bucket') {
                                     //unlink($this->config->item('user_post_main_upload_path') . $upload_data['raw_name'] . "" . $upload_data['file_ext']);
@@ -2187,6 +2193,9 @@ class User_post extends MY_Controller {
 
     public function post_opportunity_business() {
 
+        set_time_limit(0);
+        ini_set("memory_limit","1024M");
+
         $s3 = new S3(awsAccessKey, awsSecretKey);
         $userid = $this->session->userdata('aileenuser');
 
@@ -2489,10 +2498,10 @@ class User_post extends MY_Controller {
                                 exec("ffmpeg -ss 00:00:05 -i " . $upload_data['full_path'] . " -vframes 1 -q:v 2 " . $upload_data['file_path'] . $upload_data['raw_name'] . ".jpg");
                                 //$fileName = $response['result'][$i]['file_name'] = $upload_data['raw_name'] . "1" . $upload_data['file_ext'];
                                 // $fileName = $response['result'][$i]['file_name'] = $upload_data['raw_name'] . "" . $upload_data['file_ext'];
+                                @unlink($this->config->item('user_post_main_upload_path') . $upload_data['raw_name'] . "" . $upload_data['file_ext']);
                                 $fileName = $response['result'][$i]['file_name'] = $upload_data['raw_name'] . ".m3u8";
                                 if (IMAGEPATHFROM == 's3bucket') {
                                     //unlink($this->config->item('user_post_main_upload_path') . $upload_data['raw_name'] . "" . $upload_data['file_ext']);
-                                    $abc = $s3->putObjectFile($fileName, bucket, $fileName, S3::ACL_PUBLIC_READ);
                                 }
                             }                                
 
