@@ -93,7 +93,7 @@ echo $leftmenu;
                                             <td><?php echo $i++; ?></td>
                                             <td><?php echo ucwords($_points_list['first_name'].' '.$_points_list['last_name']); ?></td>
                                             <td><?php echo $_points_list['email']; ?></td>
-                                            <td><a href="<?php echo SITEURL.$_points_list['slug']; ?>"><?php echo $_points_list['title']; ?></a></td>
+                                            <td><a href="<?php echo SITEURL.$_points_list['slug']; ?>"><?php echo htmlentities($_points_list['title']); ?></a></td>
                                             <td><?php 
                                                 if($_points_list['points_for'] == '1')
                                                   echo "Post opportunity";
@@ -108,7 +108,7 @@ echo $leftmenu;
                                                 elseif($_points_list['points_for'] == '6')
                                                   echo "Post Image";
                                                ?></td>
-                                            <td><?php echo substr($_points_list['description'], 0,200); ?></td>
+                                            <td><?php echo substr(htmlentities($_points_list['description']), 0,200); ?></td>
                                          
                                             <td><?php echo $_points_list['created_date']; ?></td>
                                             <td id="status-<?php echo $_points_list['id_user_point_mapper']; ?>">

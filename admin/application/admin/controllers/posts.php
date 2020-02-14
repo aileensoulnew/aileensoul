@@ -36,7 +36,7 @@ class Posts extends CI_Controller
 
     public function list()
     {
-        $limit = $this->paging['per_page'];
+        $limit = 50;//$this->paging['per_page'];
         if ($this->uri->segment(3) != '' && $this->uri->segment(4) != '') {
             $offset = ($this->uri->segment(5) != '') ? $this->uri->segment(5) : 0;
             $sortby = $this->uri->segment(3);
@@ -66,26 +66,110 @@ class Posts extends CI_Controller
         $this->load->view('posts/list', $this->data);
     }
 
+    public function post_delete_get()
+    {
+        if(isset($_GET['id']) && isset($_GET['post_for']) && !empty($_GET['id'])) {
+            $id = $_GET['id'];
+            $post_for = $_GET['post_for'];
+            $conf = isset($_GET['conf']) && $_GET['conf'] == 'y' ? 1 :0;
+            $sql = '';
+            if($post_for == 'opportunity'){
+                $sql = "SELECT * FROM ailee_user_opportunity WHERE oppslug LIKE '".$id."%'";
+            }
+            elseif($post_for == 'simple'){
+                $sql = "SELECT * FROM ailee_user_simple_post WHERE simslug LIKE '".$id."%'";
+            }
+            if($sql != ''){
+                $results_array = $this->db->query($sql)->result_array();
+                // print_r($results_array);
+                if(isset($results_array) && !empty($results_array)){
+                    foreach ($results_array as $_results_array) {
+                        if($post_for == 'opportunity')
+                        {
+                            echo htmlentities($_results_array['opptitle'])."<=====>";
+                            echo htmlentities($_results_array['oppslug'])."<br>";
+                            if($conf == 1){
+                                $del_id = $_results_array['post_id'];
+                                try {                
+                                    $this->searchelastic_model->delete_opportunity_from_id_data($del_id);
+                                } catch (Exception $e) {
+                                    
+                                }
+                                sleep(1);
+                            }
+                        }
+                        elseif($post_for == 'simple')
+                        {
+                            echo htmlentities($_results_array['sim_title'])."<=====>";
+                            echo htmlentities($_results_array['simslug'])."<br>";
+                            if($conf == 1){
+                                $del_id = $_results_array['post_id'];
+                                try {
+                                    $this->searchelastic_model->delete_post_from_id_data($del_id);                
+                                } catch (Exception $e) {
+                                    
+                                }
+                                sleep(1);
+                            }
+                        }
+                        if($conf == 1){
+                            $data = array(
+                                'status'=>'draft',
+                                'is_delete'=>'1'
+                            );
+                            $this->common->update_data($data, 'user_post', 'id', $del_id);
+                            sleep(1);
+                        }
+                    }
+                }
+                if($conf == 1){
+                    echo "Deleted<br>";
+                }
+                else{
+                    echo "<a href='".base_url('posts/post_delete_get?id='.$id.'&post_for='.$post_for.'&conf=y')."'>Click here to delete</a><br>";
+                }
+            }
+        }
+        echo "Done";
+    }
+
     public function post_delete()
     {
+        print_r( $this->input->post('id'));die;
         $id = $this->input->post('id');
         $sql = "SELECT post_for FROM ailee_user_post WHERE id='".$id."'";
         $result_array = $this->db->query($sql)->row_array();
         if($result_array['post_for'] == 'opportunity')
         {
-            $this->searchelastic_model->delete_opportunity_from_id_data($id);
+            try {                
+                $this->searchelastic_model->delete_opportunity_from_id_data($id);
+            } catch (Exception $e) {
+                
+            }
         }
         elseif($result_array['post_for'] == 'simple')
         {
-            $this->searchelastic_model->delete_post_from_id_data($id);
+            try {
+                $this->searchelastic_model->delete_post_from_id_data($id);                
+            } catch (Exception $e) {
+                
+            }
         }
         elseif($result_array['post_for'] == 'question')
         {
-            $this->searchelastic_model->delete_question_from_id_data($id);
+            try {
+                $this->searchelastic_model->delete_question_from_id_data($id);
+            } catch (Exception $e) {
+                
+            }
         }
         elseif($result_array['post_for'] == 'article')
         {
-            $this->searchelastic_model->delete_article_id_data($id);
+            try {                
+                $this->searchelastic_model->delete_article_id_data($id);
+            } catch (Exception $e) {
+                
+            }
         }
 
         $data = array(
@@ -110,19 +194,35 @@ class Posts extends CI_Controller
         $result_array = $this->db->query($sql)->row_array();
         if($result_array['post_for'] == 'opportunity')
         {
-            $this->searchelastic_model->add_edit_single_opportunity_data($id);
+            try {                
+                $this->searchelastic_model->add_edit_single_opportunity_data($id);
+            } catch (Exception $e) {
+                
+            }
         }
         elseif($result_array['post_for'] == 'simple')
         {
-            $this->searchelastic_model->add_edit_single_post_data($id);
+            try {                
+                $this->searchelastic_model->add_edit_single_post_data($id);
+            } catch (Exception $e) {
+                
+            }
         }
         elseif($result_array['post_for'] == 'question')
         {
-            $this->searchelastic_model->add_edit_single_question_data($id);
+            try {                
+                $this->searchelastic_model->add_edit_single_question_data($id);
+            } catch (Exception $e) {
+                
+            }
         }
         elseif($result_array['post_for'] == 'article')
         {
-            $this->searchelastic_model->add_edit_single_article($id);
+            try {
+                $this->searchelastic_model->add_edit_single_article($id);
+            } catch (Exception $e) {
+                
+            }
         }
 
         return true;

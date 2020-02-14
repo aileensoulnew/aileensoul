@@ -1721,12 +1721,12 @@ class User_post extends MY_Controller {
 
             // $this->send_notification($user_post_id);
             
-            $url_add_post = base_url()."user_post/send_notification";
+            /*$url_add_post = base_url()."user_post/send_notification";
             $param_add_post = array(
                 "user_id"=> $userid,
                 "post_id"=> $user_post_id
             );
-            $this->inbackground->do_in_background($url_add_post, $param_add_post);
+            $this->inbackground->do_in_background($url_add_post, $param_add_post);*/
 
             if ($post_for == 'opportunity') {
                 $this->searchelastic_model->add_edit_single_opportunity($user_post_id);
@@ -2536,12 +2536,12 @@ class User_post extends MY_Controller {
 
             // $this->send_notification($user_post_id);
             
-            $url_add_post = base_url()."user_post/send_notification";
+            /*$url_add_post = base_url()."user_post/send_notification";
             $param_add_post = array(
                 "user_id"=> $userid,
                 "post_id"=> $user_post_id
             );
-            $this->inbackground->do_in_background($url_add_post, $param_add_post);
+            $this->inbackground->do_in_background($url_add_post, $param_add_post);*/
 
             if ($post_for == 'opportunity') {
                 $this->searchelastic_model->add_edit_single_opportunity($user_post_id);

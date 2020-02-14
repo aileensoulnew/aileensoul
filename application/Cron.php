@@ -106,13 +106,13 @@ class Cron extends MY_Controller {
     {
         $limit = 10;
         $offset = ($offset ? $offset : 0);
-        $query = $this->db->query("SELECT *  FROM ailee_user_post WHERE post_for IN ('simple', 'opportunity', 'article', 'question', 'share') AND status = 'publish' AND `is_delete` = '0' ORDER BY rand() LIMIT $offset,$limit");
+        $query = $this->db->query("SELECT *  FROM ailee_user_post WHERE post_for IN ('simple', 'opportunity', 'article', 'question', 'share') AND status = 'publish' AND `is_delete` = '0' ORDER BY created_date DESC LIMIT $offset,$limit");
         $result = $query->result_array();
         if($result)
         {            
             foreach ($result as $key => $value) {
                 $post_like_count = $this->user_post_model->likepost_count($value['id']);            
-                if($post_like_count < rand(50,100))
+                if($post_like_count < 91)
                 {
                     gotoRandom:
                     $q_user = $this->db->query("SELECT u.*  FROM ailee_user u LEFT JOIN ailee_user_login ul ON ul.user_id = u.user_id WHERE ul.status = '1' AND ul.is_delete = '0' order by rand() limit 1");

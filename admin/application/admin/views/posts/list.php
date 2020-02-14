@@ -62,6 +62,11 @@ echo $leftmenu;
                         </div><!--box-tools-->
                     </div><!-- box-header -->
                     <div class="box-body table-responsive no-padding">
+                        <div class="col-xs-12">
+                            <a id="del-all-btn" onclick="confirm('Are you sure delete all ?') ? alert(true) : false;" class="btn btn-danger btn-xs pull-right" href="javascript:void(0);" title="Delete All">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                        </div>
                         <table class="table table-hover table-bordered">
                             <tbody>
                                 <tr>
@@ -97,8 +102,10 @@ echo $leftmenu;
                                         <a href="javascript:void(0);">Created Date</a>
                                     </th>
                                     <th><i class=" fa fa-edit"></i> 
-                                        <a href="javascript:void(0);">Action</a>
+                                        <a href="javascript:void(0);">Action
+                                        </a>
                                     </th>
+                                    <th><input type="checkbox" id="select_all_ids" class="select_all_ids" label="check all"  /></th>
                                 </tr>
                                 <?php
                                 if (count($post_list) != 0){
@@ -129,7 +136,7 @@ echo $leftmenu;
                                                     if($_post_list['post_for'] == 'opportunity'){?>
                                                         <a href="<?php echo SITEURL.'o/'.$_post_list['opportunity_data']['oppslug']; ?>" target="_blank">
                                                         <?php
-                                                            echo $_post_list['opportunity_data']['opptitle'];
+                                                            echo htmlentities($_post_list['opportunity_data']['opptitle']);
                                                         ?>
                                                         </a>
                                                     <?php 
@@ -137,7 +144,7 @@ echo $leftmenu;
                                                     elseif($_post_list['post_for'] == 'simple'){ ?>
                                                         <a href="<?php echo SITEURL.'p/'.$_post_list['simple_data']['simslug']; ?>" target="_blank">
                                                         <?php
-                                                            echo $_post_list['simple_data']['sim_title'];
+                                                            echo htmlentities($_post_list['simple_data']['sim_title']);
                                                         ?>
                                                         </a>
                                                     <?php
@@ -147,7 +154,7 @@ echo $leftmenu;
                                                         ?>
                                                         <a href="<?php echo SITEURL.'questions/'.$_post_list['question_data']['id'].'/'.$question_slug; ?>" target="_blank">
                                                         <?php
-                                                        echo $_post_list['question_data']['question'];
+                                                        echo htmlentities($_post_list['question_data']['question']);
                                                         ?>
                                                         </a>
                                                     <?php
@@ -155,7 +162,7 @@ echo $leftmenu;
                                                     elseif($_post_list['post_for'] == 'article'){ ?>
                                                         <a href="<?php echo SITEURL.'article/'.$_post_list['article_data']['article_slug']; ?>" target="_blank">
                                                         <?php
-                                                        echo $_post_list['article_data']['article_title'];
+                                                        echo htmlentities($_post_list['article_data']['article_title']);
                                                         ?>
                                                         </a>
                                                         <?php
@@ -164,7 +171,7 @@ echo $leftmenu;
                                                     ?>
                                                         <a href="<?php echo SITEURL.'shp/'.$_post_list['share_data']['shared_post_slug']; ?>" target="_blank">
                                                         <?php
-                                                        echo $_post_list['share_data']['shared_post_slug'];
+                                                        echo htmlentities($_post_list['share_data']['shared_post_slug']);
                                                         ?>
                                                         </a>
                                                         <?php
@@ -186,9 +193,9 @@ echo $leftmenu;
                                                         $is_promoted = '';
                                                     }
                                                     ?>  
-                                                    <form name="promote-post" id="promote-post" action="<?php echo base_url('posts/promote_post'); ?>" method="post">
-                                                        <input type="hidden" name="post_id" id="post_id" value="<?php echo $_post_list['id'];?>">
-                                                        <input type="checkbox" name="check_post" id="check_post" onChange="this.form.submit()" value="1" <?php echo $is_promoted; ?> style="cursor: pointer;">
+                                                    <form name="promote-post" id="promote-post<?php echo $_post_list['id'];?>" action="<?php echo base_url('posts/promote_post'); ?>" method="post">
+                                                        <input type="hidden" name="post_id" id="post_id<?php echo $_post_list['id'];?>" value="<?php echo $_post_list['id'];?>">
+                                                        <input type="checkbox" name="check_post" id="check_post<?php echo $_post_list['id'];?>" onChange="this.form.submit()" value="1" <?php echo $is_promoted; ?> style="cursor: pointer;">
                                                     </form>
                                                 <?php 
                                                 } ?>
@@ -234,6 +241,10 @@ echo $leftmenu;
                                                     <i class="fa fa-reply"></i>
                                                 </a>
                                             </td>
+                                            <td>
+                                                <form name="delete-post" id="delete-post<?php echo $_post_list['id'];?>" action="<?php echo base_url('posts/post_delete'); ?>" method="post">
+                                                    <input type="checkbox" name="delete_post_ids[]" id="delete_post_ids<?php echo $_post_list['id']; ?>" value="<?php echo $_post_list['id']; ?>" style="cursor: pointer;" class="post_delete_ids" /></td>
+                                                </form>
                                         </tr><?php
                                     }//for loop close
                                 }//if close
@@ -364,4 +375,24 @@ echo $leftmenu;
             }
         });
     }
+    $(document).ready(function(){
+        $('#select_all_ids').on('click',function(){
+            if(this.checked){
+                $('.post_delete_ids').each(function(){
+                    this.checked = true;
+                });
+            }else{
+                 $('.post_delete_ids').each(function(){
+                    this.checked = false;
+                });
+            }
+        });
+        $('.post_delete_ids').on('click',function(){
+            if($('.post_delete_ids:checked').length == $('.post_delete_ids').length){
+                $('#select_all_ids').prop('checked',true);
+            }else{
+                $('#select_all_ids').prop('checked',false);
+            }
+        });
+    });
 </script>
